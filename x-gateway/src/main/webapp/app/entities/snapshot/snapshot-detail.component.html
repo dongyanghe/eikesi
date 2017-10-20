@@ -1,0 +1,85 @@
+
+<div *ngIf="snapshot">
+    <h2><span jhiTranslate="gatewayApp.snapshot.detail.title">Snapshot</span> {{snapshot.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="gatewayApp.snapshot.domainName">Domain Name</span></dt>
+        <dd>
+            <span>{{snapshot.domainName}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.domainPath">Domain Path</span></dt>
+        <dd>
+            <span>{{snapshot.domainPath}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.createSource">Create Source</span></dt>
+        <dd>
+            <span>{{snapshot.createSource}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.dayTime">Day Time</span></dt>
+        <dd>
+            <span>{{snapshot.dayTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.weekTime">Week Time</span></dt>
+        <dd>
+            <span>{{snapshot.weekTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.monthTime">Month Time</span></dt>
+        <dd>
+            <span>{{snapshot.monthTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.yearTime">Year Time</span></dt>
+        <dd>
+            <span>{{snapshot.yearTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.historyTime">History Time</span></dt>
+        <dd>
+            <span>{{snapshot.historyTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.filePath">File Path</span></dt>
+        <dd>
+            <span>{{snapshot.filePath}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.state">State</span></dt>
+        <dd>
+            <span>{{snapshot.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.createBy">Create By</span></dt>
+        <dd>
+            <span>{{snapshot.createBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.createDate">Create Date</span></dt>
+        <dd>
+            <span>{{snapshot.createDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.updateBy">Update By</span></dt>
+        <dd>
+            <span>{{snapshot.updateBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.updateDate">Update Date</span></dt>
+        <dd>
+            <span>{{snapshot.updateDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.remarks">Remarks</span></dt>
+        <dd>
+            <span>{{snapshot.remarks}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshot.delFlag">Del Flag</span></dt>
+        <dd>
+            <span>{{snapshot.delFlag}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'snapshot/'+ snapshot.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

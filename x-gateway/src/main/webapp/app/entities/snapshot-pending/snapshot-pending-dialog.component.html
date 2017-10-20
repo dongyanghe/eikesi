@@ -1,0 +1,90 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySnapshotPendingLabel" jhiTranslate="gatewayApp.snapshotPending.home.createOrEditLabel">Create or edit a Snapshot Pending</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!snapshotPending.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="snapshotPending.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.domainName" for="field_domainName">Domain Name</label>
+            <input type="text" class="form-control" name="domainName" id="field_domainName"
+                [(ngModel)]="snapshotPending.domainName" required />
+            <div [hidden]="!(editForm.controls.domainName?.dirty && editForm.controls.domainName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.domainName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.domainPath" for="field_domainPath">Domain Path</label>
+            <input type="text" class="form-control" name="domainPath" id="field_domainPath"
+                [(ngModel)]="snapshotPending.domainPath"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.createSource" for="field_createSource">Create Source</label>
+            <input type="text" class="form-control" name="createSource" id="field_createSource"
+                [(ngModel)]="snapshotPending.createSource"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.priority" for="field_priority">Priority</label>
+            <input type="text" class="form-control" name="priority" id="field_priority"
+                [(ngModel)]="snapshotPending.priority"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                [(ngModel)]="snapshotPending.state"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.createBy" for="field_createBy">Create By</label>
+            <input type="number" class="form-control" name="createBy" id="field_createBy"
+                [(ngModel)]="snapshotPending.createBy"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.createDate" for="field_createDate">Create Date</label>
+            <div class="d-flex">
+                <input id="field_createDate" type="datetime-local" class="form-control" name="createDate" [(ngModel)]="snapshotPending.createDate"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.updateBy" for="field_updateBy">Update By</label>
+            <input type="number" class="form-control" name="updateBy" id="field_updateBy"
+                [(ngModel)]="snapshotPending.updateBy"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.updateDate" for="field_updateDate">Update Date</label>
+            <div class="d-flex">
+                <input id="field_updateDate" type="datetime-local" class="form-control" name="updateDate" [(ngModel)]="snapshotPending.updateDate"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.remarks" for="field_remarks">Remarks</label>
+            <input type="text" class="form-control" name="remarks" id="field_remarks"
+                [(ngModel)]="snapshotPending.remarks"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="gatewayApp.snapshotPending.delFlag" for="field_delFlag">Del Flag</label>
+            <input type="text" class="form-control" name="delFlag" id="field_delFlag"
+                [(ngModel)]="snapshotPending.delFlag"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,65 @@
+
+<div *ngIf="snapshotPending">
+    <h2><span jhiTranslate="gatewayApp.snapshotPending.detail.title">Snapshot Pending</span> {{snapshotPending.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.domainName">Domain Name</span></dt>
+        <dd>
+            <span>{{snapshotPending.domainName}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.domainPath">Domain Path</span></dt>
+        <dd>
+            <span>{{snapshotPending.domainPath}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.createSource">Create Source</span></dt>
+        <dd>
+            <span>{{snapshotPending.createSource}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.priority">Priority</span></dt>
+        <dd>
+            <span>{{snapshotPending.priority}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.state">State</span></dt>
+        <dd>
+            <span>{{snapshotPending.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.createBy">Create By</span></dt>
+        <dd>
+            <span>{{snapshotPending.createBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.createDate">Create Date</span></dt>
+        <dd>
+            <span>{{snapshotPending.createDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.updateBy">Update By</span></dt>
+        <dd>
+            <span>{{snapshotPending.updateBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.updateDate">Update Date</span></dt>
+        <dd>
+            <span>{{snapshotPending.updateDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.remarks">Remarks</span></dt>
+        <dd>
+            <span>{{snapshotPending.remarks}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.snapshotPending.delFlag">Del Flag</span></dt>
+        <dd>
+            <span>{{snapshotPending.delFlag}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'snapshot-pending/'+ snapshotPending.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

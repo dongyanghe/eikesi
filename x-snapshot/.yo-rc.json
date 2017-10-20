@@ -1,0 +1,81 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.eikesi.snapshot",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "4.8.2",
+    "baseName": "snapshot",
+    "packageName": "com.eikesi.snapshot",
+    "packageFolder": "com/eikesi/snapshot",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "hibernateCache": "hazelcast",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "ca5fa86ea8e17613bcbd663d3fa0e8dbe2d824d0",
+    "enableTranslation": true,
+    "applicationType": "microservice",
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-swagger2markup",
+        "version": "1.2.0"
+      },
+      {
+        "name": "generator-jhipster-nav-element",
+        "version": "1.4.12"
+      },
+      {
+        "name": "generator-jhipster-swagger-api-first",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-pages",
+        "version": "1.0.4"
+      },
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "2.0.5"
+      },
+      {
+        "name": "generator-jhipster-ff4j",
+        "version": "1.6.6"
+      },
+      {
+        "name": "generator-jhipster-primeng",
+        "version": "0.0.52"
+      },
+      {
+        "name": "generator-jhipster-banner",
+        "version": "0.1.0"
+      },
+      {
+        "name": "generator-jhipster-entity-audit-and-delete",
+        "version": "2.2.2"
+      }
+    ],
+    "skipClient": true,
+    "skipUserManagement": true,
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "zh-tw",
+      "en"
+    ],
+    "clientPackageManager": "yarn"
+  }
+}

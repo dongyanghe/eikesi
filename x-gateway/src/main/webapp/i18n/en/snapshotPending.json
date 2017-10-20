@@ -1,0 +1,32 @@
+{
+    "gatewayApp": {
+        "snapshotPending" : {
+            "home": {
+                "title": "Snapshot Pendings",
+                "createLabel": "Create a new Snapshot Pending",
+                "createOrEditLabel": "Create or edit a Snapshot Pending",
+                "search": "Search for Snapshot Pending"
+            },
+            "created": "A new Snapshot Pending is created with identifier {{ param }}",
+            "updated": "A Snapshot Pending is updated with identifier {{ param }}",
+            "deleted": "A Snapshot Pending is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Snapshot Pending {{ id }}?"
+            },
+            "detail": {
+                "title": "Snapshot Pending"
+            },
+            "domainName": "Domain Name",
+            "domainPath": "Domain Path",
+            "createSource": "Create Source",
+            "priority": "Priority",
+            "state": "State",
+            "createBy": "Create By",
+            "createDate": "Create Date",
+            "updateBy": "Update By",
+            "updateDate": "Update Date",
+            "remarks": "Remarks",
+            "delFlag": "Del Flag"
+        }
+    }
+}

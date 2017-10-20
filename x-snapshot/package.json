@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "generator-jhipster-swagger2markup": "1.2.0",
+    "generator-jhipster-nav-element": "1.4.12",
+    "generator-jhipster-swagger-api-first": "1.0.1",
+    "generator-jhipster-pages": "1.0.4",
+    "generator-jhipster-swagger-cli": "2.0.5",
+    "generator-jhipster-ff4j": "1.6.6",
+    "generator-jhipster-primeng": "0.0.52",
+    "generator-jhipster-banner": "0.1.0",
+    "generator-jhipster-entity-audit-and-delete": "2.2.2",
+    "generator-jhipster": "4.8.2"
+  }
+}
