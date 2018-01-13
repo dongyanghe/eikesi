@@ -18,6 +18,7 @@ eureka:
         prefer-ip-address: true
     client:
         service-url:
+#           erureka server也是一个eureka client ,必须要指定一个 server
             defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
 spring:

@@ -1,9 +1,18 @@
+
 # snapshot
 This application was generated using JHipster 4.8.2, you can find documentation and help at [http://www.jhipster.tech/documentation-archive/v4.8.2](http://www.jhipster.tech/documentation-archive/v4.8.2).
 
 This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
 
 This application is configured for Service Discovery and Configuration with the JHipster-Registry. On launch, it will refuse to start if it is not able to connect to the JHipster-Registry at [http://localhost:8761](http://localhost:8761). For more information, read our documentation on [Service Discovery and Configuration with the JHipster-Registry][].
+# IP代理相关网站
+- http://www.66ip.cn/3.html
+- http://www.89ip.cn/tiqv.php?sxb=&tqsl=30000&ports=&ktip=&xl=on&submit=%CC%E1++%C8%A1
+- http://www.kuaidaili.com/free/inha/
+- http://www.goubanjia.com/
+- http://ip.zdaye.com/
+- http://www.xicidaili.com/
+- http://www.xdaili.cn/freeproxy
 
 ## Development
 

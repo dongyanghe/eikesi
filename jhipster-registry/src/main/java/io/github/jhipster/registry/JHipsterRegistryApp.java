@@ -25,6 +25,9 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * 服务注册中心启动
+ */
 @SpringBootApplication
 @EnableEurekaServer
 @EnableConfigServer
