@@ -3,7 +3,6 @@ import { JhiLanguageService } from 'ng-jhipster';
 
 import { Principal } from '../auth/principal.service';
 import { AuthServerProvider } from '../auth/auth-jwt.service';
-import { JhiTrackerService } from '../tracker/tracker.service';
 
 @Injectable()
 export class LoginService {
@@ -11,7 +10,6 @@ export class LoginService {
     constructor(
         private languageService: JhiLanguageService,
         private principal: Principal,
-        private trackerService: JhiTrackerService,
         private authServerProvider: AuthServerProvider
     ) {}
 
@@ -26,7 +24,6 @@ export class LoginService {
                     if (account !== null) {
                         this.languageService.changeLanguage(account.langKey);
                     }
-                    this.trackerService.sendActivity();
                     resolve(data);
                 });
                 return cb();

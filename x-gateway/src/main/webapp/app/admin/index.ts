@@ -20,8 +20,6 @@ export * from './gateway/gateway.component';
 export * from './gateway/gateway-routes.service';
 export * from './gateway/gateway.route';
 export * from './gateway/gateway-route.model';
-export * from './tracker/tracker.component';
-export * from './tracker/tracker.route';
 export * from './metrics/metrics.component';
 export * from './metrics/metrics-modal.component';
 export * from './metrics/metrics.service';

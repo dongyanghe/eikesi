@@ -15,30 +15,21 @@
 # ===================================================================
 
 eureka:
-    # 客戶端配置（提供者和消费者,即注册自身，发现其他服务的微服务）
     client:
         enabled: true
         healthcheck:
             enabled: true
-        #   是否需要同步其它Eureka Server节点的数据,现在是单个注册中心，所以否
         fetch-registry: true
-        #   是否将自己作为客户端注册到注册中心（缺省true）
         register-with-eureka: true
-        #   复制实例变化信息到eureka服务器所需要的时间间隔（s），默认为30秒
         instance-info-replication-interval-seconds: 10
-        #   eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
         registry-fetch-interval-seconds: 10
     instance:
-        #   在eureka服务上注册的应用程序的名字，默认为unknow
         appname: gateway
-        #   实例注册到eureka服务端的唯一的实例ID,其组成为${spring.application.name}:${spring.application.instance_id:${random.value}}
         instanceId: gateway:${spring.application.instance-id:${random.value}}
-        #   AppGroupName：获得在eureka服务上注册的应用程序组的名字，默认为unknow
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.context-path}/info
         health-check-url-path: ${management.context-path}/health
-        #   与此实例相关联的元数据(key,value)。这个信息被发送到eureka服务器，其他实例可以使用。
         metadata-map:
             zone: primary # This is needed for the load balancer
             profile: ${spring.profiles.active}
@@ -67,6 +58,9 @@ management:
     security:
         roles: ADMIN
     context-path: /management
+    info:
+        git:
+            mode: full
     health:
         mail:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
@@ -89,7 +83,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
-
 security:
     basic:
         enabled: false
@@ -117,9 +110,9 @@ jhipster:
     # By default CORS is disabled. Uncomment to enable.
     #cors:
         #allowed-origins: "*"
-        #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        #allowed-methods: "*"
         #allowed-headers: "*"
-        #exposed-headers:
+        #exposed-headers: "Authorization,Link,X-Total-Count"
         #allow-credentials: true
         #max-age: 1800
     mail:

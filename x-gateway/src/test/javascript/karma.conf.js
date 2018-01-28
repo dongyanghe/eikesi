@@ -1,6 +1,6 @@
 const webpackConfig = require('../../../webpack/webpack.test.js');
 
-const WATCH = process.argv.indexOf('--watch') > -1;
+const WATCH = process.argv.includes('--watch');
 
 module.exports = (config) => {
     config.set({
@@ -19,7 +19,7 @@ module.exports = (config) => {
 
 
         // list of files to exclude
-        exclude: ['e2e/**'],
+        exclude: [],
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -46,6 +46,7 @@ module.exports = (config) => {
 
         remapIstanbulReporter: {
             reports: { // eslint-disable-line
+                'lcovonly': 'target/test-results/coverage/report-lcov/lcov.info',
                 'html': 'target/test-results/coverage',
                 'text-summary': null
             }

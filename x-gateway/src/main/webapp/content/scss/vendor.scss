@@ -1,4 +1,4 @@
-/* after changing this file run 'yarn run 'yarn run webpack:build' */
+/* after changing this file run 'yarn run webpack:build' */
 $fa-font-path: '~font-awesome/fonts';
 
 /***************************
@@ -10,3 +10,5 @@ eg $input-color: red;
 // Import Bootstrap source files from node_modules
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/font-awesome/scss/font-awesome';
+
+/* jhipster-needle-scss-add-vendor JHipster will add new css style */

@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+
 import { GatewayTestModule } from '../../../test.module';
 import { PasswordComponent } from '../../../../../../main/webapp/app/account/password/password.component';
 import { PasswordService } from '../../../../../../main/webapp/app/account/password/password.service';
 import { Principal } from '../../../../../../main/webapp/app/shared/auth/principal.service';
 import { AccountService } from '../../../../../../main/webapp/app/shared/auth/account.service';
-import { JhiTrackerService } from '../../../../../../main/webapp/app/shared/tracker/tracker.service';
-import { MockTrackerService } from '../../../helpers/mock-tracker.service';
 
 describe('Component Tests', () => {
 
@@ -23,13 +22,10 @@ describe('Component Tests', () => {
                 providers: [
                     Principal,
                     AccountService,
-                    {
-                        provide: JhiTrackerService,
-                        useClass: MockTrackerService
-                    },
                     PasswordService
                 ]
-            }).overrideTemplate(PasswordComponent, '')
+            })
+            .overrideTemplate(PasswordComponent, '')
             .compileComponents();
         }));
 

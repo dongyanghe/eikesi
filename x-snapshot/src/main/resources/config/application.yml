@@ -45,11 +45,21 @@ ribbon:
 #                isolation:
 #                    thread:
 #                        timeoutInMilliseconds: 10000
+# See https://github.com/spring-cloud/spring-cloud-netflix/issues/1330
+feign:
+    hystrix:
+        enabled: true
+
+hystrix:
+    share-security-context: true
 
 management:
     security:
         roles: ADMIN
     context-path: /management
+    info:
+        git:
+            mode: full
     health:
         mail:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
@@ -72,7 +82,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
-
 security:
     basic:
         enabled: false
@@ -100,9 +109,9 @@ jhipster:
     # By default CORS is disabled. Uncomment to enable.
     #cors:
         #allowed-origins: "*"
-        #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        #allowed-methods: "*"
         #allowed-headers: "*"
-        #exposed-headers:
+        #exposed-headers: "Authorization,Link,X-Total-Count"
         #allow-credentials: true
         #max-age: 1800
     mail:

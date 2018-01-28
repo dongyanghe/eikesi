@@ -1,0 +1,84 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.eikesi.message",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "4.13.3",
+    "baseName": "connectCenter",
+    "packageName": "com.eikesi.connect",
+    "packageFolder": "com/eikesi/connect",
+    "serverPort": "8010",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "0dffd43d0715913049bef061f884803797ce08b5",
+    "enableTranslation": true,
+    "applicationType": "microservice",
+    "testFrameworks": [
+      "gatling"
+    ],
+    "jhiPrefix": "jhi",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-pages",
+        "version": "2.0.2"
+      },
+      {
+        "name": "generator-jhipster-ionic",
+        "version": "3.1.1"
+      },
+      {
+        "name": "generator-jhipster-swagger2markup",
+        "version": "1.2.0"
+      },
+      {
+        "name": "generator-jhipster-swagger-api-first",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "2.0.5"
+      },
+      {
+        "name": "generator-jhipster-nav-element",
+        "version": "1.4.16"
+      },
+      {
+        "name": "generator-jhipster-postgresuuid-converter",
+        "version": "0.2.2"
+      },
+      {
+        "name": "generator-jhipster-entity-audit",
+        "version": "3.1.0"
+      },
+      {
+        "name": "generator-jhipster-angular-datatables",
+        "version": "1.3.10"
+      },
+      {
+        "name": "generator-jhipster-entity-audit-and-delete",
+        "version": "2.2.2"
+      }
+    ],
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "zh-tw",
+      "en"
+    ],
+    "clientPackageManager": "yarn",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

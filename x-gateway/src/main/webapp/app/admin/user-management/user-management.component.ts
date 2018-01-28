@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Response } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JhiEventManager, JhiPaginationUtil, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE, Principal, User, UserService, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
     selector: 'jhi-user-mgmt',
@@ -28,14 +26,12 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     constructor(
         private userService: UserService,
-        private parseLinks: JhiParseLinks,
         private alertService: JhiAlertService,
         private principal: Principal,
-        private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig,
+        private parseLinks: JhiParseLinks,
         private activatedRoute: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
