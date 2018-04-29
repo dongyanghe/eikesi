@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.manage.gateway",
+      "packageName": "com.eikesi.gateway.manage",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "4.14.3",
     "baseName": "manageGateway",
-    "packageName": "com.eikesi.manage.gateway",
-    "packageFolder": "com/eikesi/manage/gateway",
+    "packageName": "com.eikesi.gateway.manage",
+    "packageFolder": "com/eikesi/gateway/manage",
     "serverPort": "8080",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",

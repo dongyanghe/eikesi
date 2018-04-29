@@ -1,7 +1,8 @@
 
 # eikesi
 [安装教程（翻墙）：](http://www.jhipster.tech/)
-
+#### 创建
+使用jhipster创建，修改.yo-rc.json后使用jhipster --force修改创建
 #### 运行：
 ./mvnw（用于Java服务器）和yarn start（用于管理前端）
 #### 配置：

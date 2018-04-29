@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: DEBUG
-        com.eikesi.manage.gateway: DEBUG
+        com.eikesi.gateway.manage: DEBUG
         io.github.jhipster: DEBUG
 
 eureka:
