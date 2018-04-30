@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Entry</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="cancel()">
+                <span color="primary" showWhen="ios">
+                  {{ 'CANCEL_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-close" showWhen="core,android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+                <span color="primary" showWhen="ios">
+                    {{ 'DONE_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="save()">
+        <ion-list>
+            <ion-item [hidden]="!form.id">
+                <ion-label>ID</ion-label>
+                <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input type="text" placeholder="Content" formControlName="content"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Date</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" formControlName="date" id="field_date"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Blog</ion-label>
+                <ion-select id="field_blog" formControlName="blog" [compareWith]="compareBlog">
+                    <ion-option [value]="null"></ion-option>
+                    <ion-option [value]="blogOption" *ngFor="let blogOption of blogs; trackBy: trackBlogById">{{blogOption.id}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

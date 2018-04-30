@@ -1,8 +1,8 @@
-package com.eikesi.gateway.manage.web.rest;
+package com.eikesi.demo.gateway.web.rest;
 
-import com.eikesi.gateway.manage.security.jwt.JWTConfigurer;
-import com.eikesi.gateway.manage.security.jwt.TokenProvider;
-import com.eikesi.gateway.manage.web.rest.vm.LoginVM;
+import com.eikesi.demo.gateway.security.jwt.JWTConfigurer;
+import com.eikesi.demo.gateway.security.jwt.TokenProvider;
+import com.eikesi.demo.gateway.web.rest.vm.LoginVM;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,12 +34,6 @@ public class UserJWTController {
         this.authenticationManager = authenticationManager;
     }
 
-    /**
-     * 获取用户信息
-     * 登录获取token后执行
-     * @param loginVM
-     * @return
-     */
     @PostMapping("/authenticate")
     @Timed
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
