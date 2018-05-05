@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { JhiTrackerService } from './../shared/tracker/tracker.service';
 
 import { GatewaySharedModule } from '../shared';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
@@ -27,7 +26,6 @@ import {
     JhiMetricsService,
     GatewayRoutesService,
     JhiGatewayComponent,
-    JhiTrackerComponent,
     LogsService,
     UserResolvePagingParams,
     UserResolve,
@@ -37,7 +35,7 @@ import {
 @NgModule({
     imports: [
         GatewaySharedModule,
-        RouterModule.forRoot(adminState, { useHash: true }),
+        RouterModule.forChild(adminState),
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     ],
     declarations: [
@@ -54,7 +52,6 @@ import {
         JhiHealthModalComponent,
         JhiDocsComponent,
         JhiGatewayComponent,
-        JhiTrackerComponent,
         JhiMetricsMonitoringComponent,
         JhiMetricsMonitoringModalComponent
     ],
@@ -71,7 +68,6 @@ import {
         JhiMetricsService,
         GatewayRoutesService,
         LogsService,
-        JhiTrackerService,
         UserResolvePagingParams,
         UserResolve,
         UserModalService

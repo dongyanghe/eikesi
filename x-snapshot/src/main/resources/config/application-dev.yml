@@ -13,15 +13,17 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+logging:
+    level:
+        ROOT: DEBUG
+        com.eikesi.snapshot: DEBUG
+        io.github.jhipster: DEBUG
+
 eureka:
     instance:
-        #   微服务调用地址为IP优先（缺省为false）
         prefer-ip-address: true
-        #lease-renewal-interval-in-seconds: 180          # 心跳时间，即服务续约间隔时间（缺省为30s）
-        #lease-expiration-duration-in-seconds: 630      # 发呆时间，即服务续约到期时间（缺省为90s）
     client:
         service-url:
-            #   指定服务注册中心的地址
             defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
 spring:
@@ -100,8 +102,8 @@ liquibase:
 #    ssl:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
-#        keyStoreType: PKCS12
-#        keyAlias: snapshot
+#        key-store-type: PKCS12
+#        key-alias: snapshot
 # ===================================================================
 server:
     port: 8081
@@ -119,13 +121,17 @@ jhipster:
         hazelcast: # Hazelcast distributed cache
             time-to-live-seconds: 3600
             backup-count: 1
+            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
+                enabled: false
+                update-interval: 3
+                url: http://localhost:8180/mancenter
     # CORS is disabled by default on microservices, as you should access them through a gateway.
     # If you want to enable it, please uncomment the configuration below.
     # cors:
         # allowed-origins: "*"
         # allowed-methods: "*"
         # allowed-headers: "*"
-        # exposed-headers: "Authorization"
+        # exposed-headers: "Authorization,Link,X-Total-Count"
         # allow-credentials: true
         # max-age: 1800
     security:
@@ -160,6 +166,7 @@ jhipster:
         spectator-metrics: # Reports Spectator Circuit Breaker metrics in the logs
             enabled: false
             # edit spring.metrics.export.delay-millis to set report frequency
+
 
 # ===================================================================
 # Application specific properties

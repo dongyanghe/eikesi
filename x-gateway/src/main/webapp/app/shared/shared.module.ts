@@ -11,10 +11,9 @@ import {
     StateStorageService,
     LoginService,
     LoginModalService,
+    JhiLoginModalComponent,
     Principal,
-    JhiTrackerService,
     HasAnyAuthorityDirective,
-    JhiLoginModalComponent
 } from './';
 
 @NgModule({
@@ -33,7 +32,6 @@ import {
         StateStorageService,
         Principal,
         CSRFService,
-        JhiTrackerService,
         AuthServerProvider,
         UserService,
         DatePipe

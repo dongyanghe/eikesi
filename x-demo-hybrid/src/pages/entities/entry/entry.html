@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Entries</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="open()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<!-- todo: add elasticsearch support -->
+<ion-content padding>
+    <ion-refresher (ionRefresh)="loadAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let entry of entries; trackBy: trackId" #slidingItem>
+            <button ion-item (click)="detail(entry)">
+                <h2>{{entry.title}}</h2>
+                <p>{{entry.content}}</p>
+                <p>{{entry.date | date:'medium'}}</p>
+            </button>
+            <ion-item-options>
+                <button ion-button color="primary" (click)="open(slidingItem, entry)">
+                    {{ 'EDIT_BUTTON' | translate }}
+                </button>
+                <button ion-button color="danger" (click)="delete(entry)">
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-item *ngIf="!entries?.length">
+        No Entries found.
+    </ion-item>
+</ion-content>

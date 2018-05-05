@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Entry</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>Title</ion-label>
+            <div item-content>
+                <span>{{entry.title}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Content</ion-label>
+            <div item-content>
+                <span>{{entry.content}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Date</ion-label>
+            <div item-content>
+                <span>{{entry.date | date:'medium'}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Blog</ion-label>
+            <div item-content *ngIf="entry.blog">
+                <a>{{entry.blog?.id}}</a>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="open(entry)">{{ 'EDIT_BUTTON' | translate }}</button>
+</ion-content>
