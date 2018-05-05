@@ -1,0 +1,26 @@
+
+{
+    "demoHybridGatewayApp": {
+        "entry" : {
+            "home": {
+                "title": "Entries",
+                "createLabel": "建立一筆新的 Entry",
+                "createOrEditLabel": "建立或編輯 Entry"
+            },
+            "created": "新的 Entry 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Entry 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Entry 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Entry {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Entry"
+            },
+            "title": "Title",
+            "content": "Content",
+            "date": "Date",
+            "blog": "Blog",
+            "tag": "Tag"
+        }
+    }
+}
