@@ -14,6 +14,23 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+mp:
+    log:
+        level: debug
+    core:
+        min-heartbeat: 10s
+        max-heartbeat: 10s
+        compress-threshold: 10k # 启用压缩阀值
+    zk:
+        server-address: "127.0.0.1:2181" # zookeeper地址
+    redis: {
+        nodes:["127.0.0.1:6379"] # 格式是ip:port,密码可以没有ip:port
+    }
+    http:
+        proxy-enabled: true # 启用http代理
+    net:
+        gateway-server-net: udp # 网关服务使用的网络类型tcp/udp
+
 eureka:
     client:
         enabled: true

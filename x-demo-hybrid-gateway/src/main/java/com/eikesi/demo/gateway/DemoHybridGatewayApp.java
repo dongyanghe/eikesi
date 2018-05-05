@@ -3,6 +3,7 @@ package com.eikesi.demo.gateway;
 import com.eikesi.demo.gateway.config.ApplicationProperties;
 import com.eikesi.demo.gateway.config.DefaultProfileUtil;
 
+import com.mpush.bootstrap.ServerLauncher;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.slf4j.Logger;
@@ -89,5 +90,8 @@ public class DemoHybridGatewayApp {
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
+
+//        ServerLauncher serverLauncher = new ServerLauncher();
+//        serverLauncher.start();
     }
 }

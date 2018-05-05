@@ -2,7 +2,11 @@ package com.eikesi.demo.gateway.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 
+import com.eikesi.demo.gateway.domain.Result;
 import com.eikesi.demo.gateway.domain.User;
+import com.eikesi.demo.gateway.mpns.domain.NotifyDO;
+import com.eikesi.demo.gateway.mpns.service.MPushManager;
+import com.eikesi.demo.gateway.mpns.service.PushService;
 import com.eikesi.demo.gateway.repository.UserRepository;
 import com.eikesi.demo.gateway.security.SecurityUtils;
 import com.eikesi.demo.gateway.service.MailService;
@@ -12,6 +16,7 @@ import com.eikesi.demo.gateway.web.rest.errors.*;
 import com.eikesi.demo.gateway.web.rest.vm.KeyAndPasswordVM;
 import com.eikesi.demo.gateway.web.rest.vm.ManagedUserVM;
 
+import io.vertx.ext.web.RoutingContext;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +24,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 
+import com.mpush.bootstrap.ServerLauncher;
 /**
  * REST controller for managing the current user's account.
  */
@@ -36,7 +43,9 @@ public class AccountResource {
     private final UserService userService;
 
     private final MailService mailService;
+    private  PushService pushService;
 
+    private MPushManager mPushManager;
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
@@ -102,9 +111,66 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public UserDTO getAccount() {
-        return userService.getUserWithAuthorities()
+        UserDTO optional = userService.getUserWithAuthorities()
             .map(UserDTO::new)
             .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        String resStr = new Result<>(mPushManager.getConnectServerList()).toString();
+        resStr = new Result<>(mPushManager.getOnlineUserNum("192.168.0.101")).toString();
+        boolean success = pushService.notify(optional.getId() + "",
+            new NotifyDO(optional.getFirstName() + optional.getLastName()));
+        resStr = new Result<>(success).toString();
+        return optional;
+    }
+    /**
+     * GET  /push/server/list : 查询mpush server 列表
+     *
+     * @return
+     * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
+     */
+    @GetMapping("/push/server/list")
+    @Timed
+    public void listMPushServers(HttpServletRequest request, HttpServletResponse response) {
+        String resStr = new Result<>(mPushManager.getConnectServerList()).toString();
+        response.setContentType(resStr);
+    }
+
+    /**
+     * GET  /account/online/num : 查询mpushServer在线用户数
+     *
+     * @return the current user
+     * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
+     */
+    @GetMapping("/account/online/num")
+    @Timed
+    public void getOnlineUserNum(HttpServletRequest request, HttpServletResponse response) {
+        String ip = request.getParameter("ip");
+        if (null == ip || "" == ip) {
+            ip = "192.168.0.101";
+        }
+        String resStr = new Result<>(mPushManager.getOnlineUserNum(ip)).toString();
+        response.setContentType(resStr);
+    }
+
+    /**
+     * GET  /account/push : 模拟给指定用户发送push
+     *
+     * @return
+     * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
+     */
+    @GetMapping("/account/push")
+    @Timed
+    public void sendPush(HttpServletRequest request, HttpServletResponse response) {
+        String userId = request.getParameter("userId");
+        String content = request.getParameter("content");
+        if (null == userId || "" == userId) {
+            userId = "user-0";
+        }
+        if (null == userId || "" == userId) {
+            userId = "Hello MPush";
+        }
+        boolean success = pushService.notify(userId, new NotifyDO(content));
+        String resStr = new Result<>(success).toString();
+        response.setContentType(resStr);
     }
 
     /**

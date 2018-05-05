@@ -15,6 +15,8 @@
         <scala.version>2.12.1</scala.version>
         <node.version>v8.9.4</node.version>
         <yarn.version>v1.3.2</yarn.version>
+        <mpush.version>0.8.0</mpush.version>
+        <vertx.version>3.4.2</vertx.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
@@ -98,6 +100,89 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- jhipster除外的自定义包 -->
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-tools</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-api</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-zk</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-monitor</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-netty</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-cache</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-core</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-common</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-boot</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mpusher</groupId>
+            <artifactId>mpush-client</artifactId>
+            <version>${mpush.version}</version>
+        </dependency>
+        <!-- vertx -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-codegen</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-service-proxy</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-redis-client</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-rx-java</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
