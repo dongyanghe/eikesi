@@ -1,7 +1,6 @@
 package com.eikesi.demo.gateway.domain;
 
 import com.mpush.tools.Jsons;
-import io.vertx.core.json.JsonObject;
 
 /**
  *

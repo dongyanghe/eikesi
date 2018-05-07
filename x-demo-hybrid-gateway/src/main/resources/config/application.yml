@@ -30,7 +30,6 @@ mp:
         proxy-enabled: true # 启用http代理
     net:
         gateway-server-net: udp # 网关服务使用的网络类型tcp/udp
-
 eureka:
     client:
         enabled: true

@@ -27,8 +27,8 @@ import com.mpush.common.router.RemoteRouterManager;
 import com.mpush.common.user.UserManager;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+//import javax.annotation.PostConstruct;
+//import javax.annotation.Resource;
 import java.util.Collection;
 
 /**
@@ -36,18 +36,18 @@ import java.util.Collection;
  *
  * @author ohun@live.cn (夜色)
  */
-@Service
+//@Service
 public class MPushManager {
 
-    @Resource
+//    @Resource
     private ServiceDiscovery serviceDiscovery;
 
     private UserManager userManager;
 
-    @Resource
+//    @Resource
     private MPushClient mPushClient;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
 
 //        userManager = new UserManager(mPushClient.getCachedRemoteRouterManager());

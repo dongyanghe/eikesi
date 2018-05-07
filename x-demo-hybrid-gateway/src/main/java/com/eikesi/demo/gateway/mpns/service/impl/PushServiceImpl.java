@@ -28,7 +28,7 @@ import com.mpush.api.router.ClientLocation;
 import com.mpush.tools.Jsons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.atomic.AtomicLong;
@@ -38,11 +38,11 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * @author ohun@live.cn (夜色)
  */
-@Service
+//@Service
 public class PushServiceImpl implements PushService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Resource
+//    @Resource
     private PushSender mpusher;
 
     private final AtomicLong msgIdSeq = new AtomicLong(1);//TODO业务自己处理
