@@ -2,6 +2,7 @@ package com.eikesi.demo.gateway.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 
+import com.eikesi.demo.gateway.domain.Result;
 import com.eikesi.demo.gateway.domain.User;
 import com.eikesi.demo.gateway.repository.UserRepository;
 import com.eikesi.demo.gateway.security.SecurityUtils;
@@ -23,8 +24,6 @@ import javax.validation.Valid;
 import java.util.*;
 
 import com.eikesi.demo.gateway.mpns.domain.NotifyDO;
-import com.eikesi.demo.gateway.mpns.service.MPushManager;
-import com.eikesi.demo.gateway.mpns.service.PushService;
 /**
  * REST controller for managing the current user's account.
  */
@@ -39,14 +38,17 @@ public class AccountResource {
     private final UserService userService;
 
     private final MailService mailService;
-    private  PushService pushService;
+//    private  PushService pushService;
 
-    private MPushManager mPushManager;
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
-
+//    private MPushManager mPushManager;
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService
+        ) {
+//, PushService pushService, MPushManager mPushManager
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+//        this.pushService = pushService;
+//        this.mPushManager = mPushManager;
     }
 
     /**
@@ -110,11 +112,11 @@ public class AccountResource {
         UserDTO optional = userService.getUserWithAuthorities()
             .map(UserDTO::new)
             .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
-        String resStr = new Result<>(mPushManager.getConnectServerList()).toString();
-        resStr = new Result<>(mPushManager.getOnlineUserNum("192.168.0.101")).toString();
-        boolean success = pushService.notify(optional.getId() + "",
-            new NotifyDO(optional.getFirstName() + optional.getLastName()));
-        resStr = new Result<>(success).toString();
+//        String resStr = new Result<>(mPushManager.getConnectServerList()).toString();
+//        resStr = new Result<>(mPushManager.getOnlineUserNum("192.168.0.101")).toString();
+//        boolean success = pushService.notify(optional.getId() + "",
+//            new NotifyDO(optional.getFirstName() + optional.getLastName()));
+//        resStr = new Result<>(success).toString();
         return optional;
     }
 

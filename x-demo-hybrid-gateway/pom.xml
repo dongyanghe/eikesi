@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <artifactId>eikesi</artifactId>
+        <groupId>com.eikesi</groupId>
+        <version>0.0.1</version>
+    </parent>
     <groupId>com.eikesi.demo.gateway</groupId>
     <artifactId>demo-hybrid-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -136,22 +140,22 @@
             <version>${mpush.version}</version>
         </dependency>
         -->
-        <dependency>
-            <groupId>com.github.mpusher</groupId>
-            <artifactId>mpush-boot</artifactId>
-            <version>${mpush.version}</version>
-        </dependency>
-       <!-- <dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.mpusher</groupId>-->
+            <!--<artifactId>mpush-boot</artifactId>-->
+            <!--<version>${mpush.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>
             <groupId>com.github.mpusher</groupId>
             <artifactId>mpush-api</artifactId>
             <version>${mpush.version}</version>
         </dependency>
-        -->
+
         <dependency>
             <groupId>com.github.mpusher</groupId>
             <artifactId>mpush-client</artifactId>
             <version>${mpush.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
