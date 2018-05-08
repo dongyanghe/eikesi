@@ -1,3 +1,7 @@
 .idea/
 log.home_IS_UNDEFINED/*
 */jhipster-registry.log.1
+target/*
+*/target/*
+mp-mpns/mpns-client/target/mpns-client-1.0-SNAPSHOT.jar
+mp-mpns/mpns-client/target/maven-archiver/pom.properties
