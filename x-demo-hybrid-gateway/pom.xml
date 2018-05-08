@@ -104,6 +104,7 @@
 
     <dependencies>
         <!-- jhipster除外的自定义包 -->
+        <!--start mpush-->
         <!--<dependency>
             <groupId>com.github.mpusher</groupId>
             <artifactId>mpush-tools</artifactId>
@@ -156,6 +157,7 @@
             <artifactId>mpush-client</artifactId>
             <version>${mpush.version}</version>
         </dependency>-->
+        <!--end mpush-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
