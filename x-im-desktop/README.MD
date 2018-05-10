@@ -1,0 +1,48 @@
+# x-im-desktop(form weweChat)
+
+### TODO
+- [ ] Windows support
+- [ ] Linux support
+- [ ] Sticky on top
+- [ ] Delete chat session
+- [ ] Mark as Read
+- [ ] Chat Room
+  - [ ] Show correct contact
+  - [ ] Show members
+  - [ ] Add / Remove member
+  - [ ] Create chat room
+- [ ] Receive message
+  - [ ] Text
+  - [ ] Image
+  - [ ] Voice
+  - [ ] Location
+  - [ ] Sticker
+  - [ ] Contact Card
+  - [ ] Video
+  - [ ] Money Transger
+  - [ ] Location sharing
+  - [ ] Download File
+- [ ] Send message
+  - [ ] Text
+  - [ ] File
+  - [ ] Image
+  - [ ] Video
+  - [ ] Recall
+- [ ] Forward text message
+- [ ] Forward emoji
+- [ ] Forward image
+- [ ] Forward file
+- [ ] Forward video
+- [ ] Show QQ emoji
+- [ ] Search chat set
+- [ ] Search and create chat room
+- [ ] Desktop notification
+- [ ] Keep online
+- [ ] Logout
+- [ ] Autosart at login
+- [ ] Theme
+- [ ] Send image from clipboard
+- [ ] Drag to send file
+- [ ] Batch send message
+- [ ] Mention a user
+- [ ] Chat bot
