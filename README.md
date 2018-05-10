@@ -5,16 +5,24 @@
 使用jhipster创建，修改.yo-rc.json后使用jhipster --force修改创建
 #### 配置：
 gateway和snapshot都会自动注册到jhipster-registry里面，这样gateway就可以调用snapshot里面的接口了
-- 使用dev配置文件将运行JHipster注册表dev和native配置文件。该native配置文件将从文件系统加载Spring Cloud配置，查找central-config与运行目录相关的目录。
-- 使用prod配置文件将运行JHipster注册表prod和git配置文件。该git配置文件将从Git存储库加载Spring Cloud配置，该配置默认为https://github.com/jhipster/jhipster-registry-sample-config。在现实世界的用法中，应通过在src/main/resources/config/bootstrap-prod.yml文件中重新配置该存储库或通过重新配置spring.cloud.config.server.git.uriSpring属性来更改此存储库。
+- 使用dev配置文件将运行JHipster注册表dev和native配置文件。该native配置文件将从文件系统加载Spring Cloud配置，
+查找central-config与运行目录相关的目录。
+- 使用prod配置文件将运行JHipster注册表prod和git配置文件。该git配置文件将从Git存储库加载Spring Cloud配置，
+该配置默认为https://github.com/jhipster/jhipster-registry-sample-config。在现实世界的用法中，
+应通过在src/main/resources/config/bootstrap-prod.yml文件中重新配置该存储库或通过重新配置spring.cloud.config.server.git.uriSpring
+属性来更改此存储库。
 
-JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中检查其配置。请注意，如果您无法登录，可能是因为JWT签名密钥未正确设置，这表示您的配置不好。
+JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中检查其配置。请注意，如果您无法登录，可能是因为JWT签名密钥未正确设置，
+这表示您的配置不好。
 #### 运行：
 后台服务器启动（请按顺序）：
 1. 进入项目根目录使用./mvnw（window使用mvn命令），启动jhipster-registry服务用以实现基于eureka的服务注册中心
-1. 进入zookeeper的bin目录使用zkServer start(window使用zkServer)命令启动zookeeper，用以实现基于zookeeper的服务注册中心。项目端口2181如果不一样请修改对应配置
-1. 进入Redis根目录使用bin/redis-server conf/redis.conf(window使用redis-server.exe redis.windows.conf)命令启动Redis,用以实现数据存储和消息队列。
-1. 进入mpushRelease（根据mpush源码使用mvn clean package -Pzip,pub命令构建后解压得出）目录使用java -Dmp.conf=【mpush绝对路径】\conf\mpush.conf -jar bootstrap.jar命令启动mpush服务，用以实现消息通讯服务。
+1. 进入zookeeper的bin目录使用zkServer start(window使用zkServer)命令启动zookeeper，用以实现基于zookeeper的服务注册中心。
+项目端口2181如果不一样请修改对应配置
+1. 进入Redis根目录使用bin/redis-server conf/redis.conf(window使用redis-server.exe redis.windows.conf)命令启动Redis,
+用以实现数据存储和消息队列。
+1. 进入mpushRelease（根据mpush源码使用mvn clean package -Pzip,pub命令构建后解压得出,也可直接取本项目跟目录的target,需先修改配置）
+的bin目录使用java -Dmp.conf=mpush绝对路径\conf\mpush.conf -jar bootstrap.jar命令启动mpush服务，用以实现消息通讯服务。
 1. 同mpush操作一样，启动alloc服务,用以实现多mpush服务的分布式管理，按需启动。
 1. 自行启动你所需的其他消息通讯服务，比如APNS、JPush、MIPush。
 1. 进入各项目根目录使用./mvnw（window使用mvn命令），先启动网关在启动服务，按需启动。

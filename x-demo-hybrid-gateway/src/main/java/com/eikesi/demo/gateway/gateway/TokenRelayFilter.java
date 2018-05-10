@@ -5,8 +5,7 @@ import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
-//  屏蔽.java使用了未经检 查或不安全的操作。提示
-//@SuppressWarnings("unchecked")
+
 @Component
 public class TokenRelayFilter extends ZuulFilter {
 

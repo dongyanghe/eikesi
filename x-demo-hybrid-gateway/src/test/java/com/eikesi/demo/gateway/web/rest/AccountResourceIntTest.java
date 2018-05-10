@@ -82,20 +82,20 @@ public class AccountResourceIntTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
-        doNothing().when(mockMailService).sendActivationEmail(anyObject());
-        AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
-
-        AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
-        this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
-            .setMessageConverters(httpMessageConverters)
-            .setControllerAdvice(exceptionTranslator)
-            .build();
-        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource)
-            .setControllerAdvice(exceptionTranslator)
-            .build();
+//        MockitoAnnotations.initMocks(this);
+//        doNothing().when(mockMailService).sendActivationEmail(anyObject());
+//        AccountResource accountResource =
+//            new AccountResource(userRepository, userService, mockMailService);
+//
+//        AccountResource accountUserMockResource =
+//            new AccountResource(userRepository, mockUserService, mockMailService);
+//        this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
+//            .setMessageConverters(httpMessageConverters)
+//            .setControllerAdvice(exceptionTranslator)
+//            .build();
+//        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource)
+//            .setControllerAdvice(exceptionTranslator)
+//            .build();
     }
 
     @Test

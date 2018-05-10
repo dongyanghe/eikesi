@@ -27,10 +27,9 @@ mp:
         nodes:["127.0.0.1:6379"] # 格式是ip:port,密码可以没有ip:port
     }
     http:
-        proxy-enabled: true # 启用http代理
+        proxy-enabled: false # 启用http代理
     net:
-        gateway-server-net: udp # 网关服务使用的网络类型tcp/udp
-
+        gateway-server-net: udp # 网关服务使用的网络类型tcp广播/udp组播
 eureka:
     client:
         enabled: true

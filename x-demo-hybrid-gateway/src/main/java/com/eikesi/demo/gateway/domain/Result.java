@@ -1,7 +1,6 @@
 package com.eikesi.demo.gateway.domain;
 
-import com.mpush.tools.Jsons;
-import io.vertx.core.json.JsonObject;
+//import com.mpush.tools.Jsons;
 
 /**
  *
@@ -62,6 +61,8 @@ public class Result<T> {
 
     @Override
     public String toString() {
-        return Jsons.toJson(this);
+
+        return "";
+//            Jsons.toJson(this);
     }
 }
