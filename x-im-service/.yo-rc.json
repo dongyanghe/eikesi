@@ -7,7 +7,7 @@
     "baseName": "imService",
     "packageName": "com.eikesi.im.service",
     "packageFolder": "com/eikesi/im/service",
-    "serverPort": "6001",
+    "serverPort": "6002",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
     "enableHibernateCache": true,
