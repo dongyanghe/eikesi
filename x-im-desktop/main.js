@@ -486,27 +486,35 @@ const createMainWindow = () => {
     });
 
     mainWindow = new BrowserWindow({
+        // title: 'x-im',
         x: mainWindowState.x,
         y: mainWindowState.y,
-        minWidth: 745,
-        minHeight: 450,
-        vibrancy: 'medium-light',
-        transparent: true,
-        titleBarStyle: 'hidden-inset',
-        backgroundColor: 'none',
-        resizable: false,
+        minWidth: 1200,
+        minHeight: 742,
+        vibrancy: 'medium-light',   //  String (可选) - 窗口是否使用 vibrancy 动态效果, 仅 macOS 中有效.
+        transparent: true,  //  Boolean (可选) - 使窗口 透明. 默认值为 false.
+        // maximizable: true,  //  Boolean (可选) - 窗口是否可以最大化动. 在 Linux 中无效. 默认值为 true.
+        // fullscreen: false,   //  Boolean (可选) - 窗口是否可以全屏. 当设置为 false 时，在 macOS 上全屏的按钮将被隐藏或禁用. 默认值为 false.
+        // closable: true, //  Boolean (可选) - 窗口是否可以关闭. 在 Linux 中无效. 默认值为 true.
+        titleBarStyle: 'hidden-inset',  //  String (可选) - 窗口标题栏的样式. 默认值为 default. 可能的值有：
+        backgroundColor: 'none',    //   String (可选) - 窗口的16进制背景颜色, 例如 #66CD00 或 #FFF 或 #80FFFFFF (支持alpha透明度). 默认值为#FFF (白色).
+        resizable: false,   //  Boolean (可选) - 窗口是否可以改变尺寸. 默认值为true.
         webPreferences: {
-            scrollBounce: true
+            // devTools: true, //  Boolean (可选) - 是否开启 DevTools. 如果设置为 false, 则无法使用
+            scrollBounce: true  //  Boolean (可选) - 在 macOS 启用弹力动画 (橡皮筋) 效果. 默认值为 false.
         },
-        frame: !isWin,
+        frame: !isWin,  //   Boolean (可选) - 设置为 false 时可以创建一个Frameless Window. 默认值为 true.
         icon
     });
-
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
     mainWindow.setSize(350, 460);
     mainWindow.loadURL(
         `file://${__dirname}/src/index.html`
     );
-
+    // 打开开发工具
+    mainWindow.openDevTools();
     mainWindow.webContents.on('did-finish-load', () => {
         try {
             mainWindow.show();

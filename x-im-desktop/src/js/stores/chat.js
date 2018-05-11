@@ -452,7 +452,6 @@ class Chat {
         });
         var res = {
             data: response.data,
-
             item: {
                 isme: true,
                 MsgId: response.data.MsgID,

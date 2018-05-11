@@ -41,8 +41,8 @@ export default class Login extends Component {
 
                 <a href={window.location.pathname + '?' + +new Date()}>Refresh the QR Code</a>
 
-                <p>Scan to log in to WeChat</p>
-                <p>Log in on phone to use WeChat on Web</p>
+                <p>扫码登录</p>
+                <p>Log in on phone to use WeChat on Web 啊啊啊</p>
             </div>
         );
     }
