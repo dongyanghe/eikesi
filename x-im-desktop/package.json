@@ -25,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trazyn/weweChat.git"
+    "url": "https://github.com/dongyanghe/eikesi.git"
   },
   "license": "MIT",
   "build": {
-    "productName": "wewechat",
-    "appId": "gh.trazyn.wewechat",
+    "productName": "x-im",
+    "appId": "x.im",
     "compression": "maximum",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "dmg": {
@@ -75,8 +75,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "trazyn",
-        "repo": "weweChat"
+        "owner": "trazyn,hedongyang",
+        "repo": "eikesi"
       }
     ]
   },

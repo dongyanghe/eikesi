@@ -8,51 +8,47 @@ import classes from './style.css';
     avatar: stores.session.avatar,
     code: stores.session.code,
     getCode: stores.session.getCode,
+    login: stores.session.login,
 }))
 @observer
 export default class Login extends Component {
     componentDidMount() {
+        //  获取验证码
         this.props.getCode();
     }
-
-    renderUser() {
-        return (
-            <div className={classes.inner}>
-                {
-                    <img
-                        className="disabledDrag"
-                        src={this.props.avatar} />
-                }
-
-                <p>Scan successful</p>
-                <p>Confirm login on mobile WeChat</p>
-            </div>
-        );
-    }
-
-    renderCode() {
-        var { code } = this.props;
-
-        return (
-            <div className={classes.inner}>
-                {
-                    code && (<img className="disabledDrag" src={`https://login.weixin.qq.com/qrcode/${code}`} />)
-                }
-
-                <a href={window.location.pathname + '?' + +new Date()}>Refresh the QR Code</a>
-
-                <p>扫码登录</p>
-                <p>Log in on phone to use WeChat on Web 啊啊啊</p>
-            </div>
-        );
+    loginClick(e) {
+        let credentials = {
+            username: this.refs.username.value,
+            password: this.refs.password.value,
+            rememberMe: this.refs.rememberMe.value === 'on'
+        };
+        this.props.login(credentials);
     }
 
     render() {
         return (
             <div className={classes.container}>
-                {
-                    this.props.avatar ? this.renderUser() : this.renderCode()
-                }
+                <input
+                    id="username"
+                    value={'admin'}
+                    placeholder="登录名（admin）"
+                    ref="username"
+                    type="text" />
+                <input
+                    id="password"
+                    value={'admin'}
+                    placeholder="密码（admin）"
+                    ref="password"
+                    type="password" />
+                <label htmlFor="rememberMe">
+                    <input
+                        id="rememberMe"
+                        type="checkbox"
+                        ref="rememberMe"
+                        checked={true} />
+                    <span >记住我</span>
+                </label>
+                <button onClick={e => this.loginClick(e)}>登录</button>
             </div>
         );
     }

@@ -17,9 +17,9 @@ export default class Placeholder extends Component {
 
                 <a
                     className={classes.button}
-                    href="https://github.com/trazyn/weweChat"
+                    href="https://github.com/dongyanghe/eikesi"
                     target="_blank">
-                    Fork on Github
+                   访问 Github
                     <i className="icon-ion-social-github" />
                 </a>
             </div>

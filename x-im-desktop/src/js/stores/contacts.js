@@ -66,6 +66,10 @@ class Contacts {
         return user;
     }
 
+    /**
+     * 获取联系人
+     * @returns {Promise<Array>}
+     */
     @action async getContats() {
         self.loading = true;
 

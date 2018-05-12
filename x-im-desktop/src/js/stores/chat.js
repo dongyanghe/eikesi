@@ -349,7 +349,7 @@ class Chat {
             return console.error('Got an invalid message: %o', message);
         }
 
-        // Add the messages of your sent on phone to the chat sets
+        // 将你发送的消息添加到聊天集
         if (sync) {
             list = self.messages.get(message.ToUserName);
             from = message.ToUserName;
@@ -723,13 +723,13 @@ class Chat {
         var showMessage = snackbar.showMessage;
 
         if (!file || file.size === 0) {
-            showMessage('You can\'t send an empty file.');
+            showMessage('你不能发送一个空文件。');
             return false;
         }
 
         if (!file
             || file.size >= 100 * 1024 * 1024) {
-            showMessage('Send file not allowed to exceed 100M.');
+            showMessage('发送文件不允许超过100M.');
             return false;
         }
 

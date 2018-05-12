@@ -3,7 +3,7 @@ import React from 'react';
 import { withRouter, Route } from 'react-router-dom';
 
 import { Layout, Settings, Contacts, Home } from './pages';
-
+//  页面入口
 const Main = withRouter(props => <Layout {...props} />);
 
 export default () => {

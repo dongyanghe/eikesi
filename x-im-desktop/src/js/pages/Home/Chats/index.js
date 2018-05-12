@@ -56,7 +56,7 @@ export default class Chats extends Component {
     showContextMenu(user) {
         var menu = new remote.Menu.buildFromTemplate([
             {
-                label: 'Send Message',
+                label: '发送消息',
                 click: () => {
                     this.props.chatTo(user);
                 }
@@ -65,19 +65,19 @@ export default class Chats extends Component {
                 type: 'separator'
             },
             {
-                label: helper.isTop(user) ? 'Unsticky' : 'Sticky on Top',
+                label: helper.isTop(user) ? '取消置顶' : '置顶',
                 click: () => {
                     this.props.sticky(user);
                 }
             },
             {
-                label: 'Delete',
+                label: '移除',
                 click: () => {
                     this.props.removeChat(user);
                 }
             },
             {
-                label: 'Mark as Read',
+                label: '已读',
                 click: () => {
                     this.props.markedRead(user.UserName);
                 }
@@ -87,6 +87,9 @@ export default class Chats extends Component {
         menu.popup(remote.getCurrentWindow());
     }
 
+    /**
+     * @call: 组件更新结束之后执行，在初始化render时不执行
+     */
     componentDidUpdate() {
         var container = this.refs.container;
         var active = container.querySelector(`.${classes.chat}.${classes.active}`);
