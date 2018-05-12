@@ -506,7 +506,7 @@ const createMainWindow = () => {
         // closable: true, //  Boolean (可选) - 窗口是否可以关闭. 在 Linux 中无效. 默认值为 true.
         titleBarStyle: 'hidden-inset',  //  String (可选) - 窗口标题栏的样式. 默认值为 default. 可能的值有：
         backgroundColor: 'none',    //   String (可选) - 窗口的16进制背景颜色, 例如 #66CD00 或 #FFF 或 #80FFFFFF (支持alpha透明度). 默认值为#FFF (白色).
-        resizable: false,   //  Boolean (可选) - 窗口是否可以改变尺寸. 默认值为true.
+        resizable: true,   //  Boolean (可选) - 窗口是否可以改变尺寸. 默认值为true.
         webPreferences: {
             // devTools: true, //  Boolean (可选) - 是否开启 DevTools. 如果设置为 false, 则无法使用
             scrollBounce: true  //  Boolean (可选) - 在 macOS 启用弹力动画 (橡皮筋) 效果. 默认值为 false.
@@ -517,7 +517,7 @@ const createMainWindow = () => {
     mainWindow.on('closed', () => {
         mainWindow = null
     })
-    mainWindow.setSize(350, 460);
+    // mainWindow.setSize(350, 460);
     mainWindow.loadURL(
         `file://${__dirname}/src/index.html`
     );

@@ -39,7 +39,7 @@ class Session {
      * @param jwt
      * @param rememberMe
      */
-    storeAuthenticationToken(jwt, rememberMe) {
+    @action async storeAuthenticationToken(jwt, rememberMe) {
         if (rememberMe) {
             storage.set('authenticationToken', jwt);
         } else {
@@ -54,22 +54,22 @@ class Session {
      */
     @action async getAccout(force) {
         if (force === true) {
-            this.userIdentity = undefined;
+            self.userIdentity = undefined;
         }
-        if (this.userIdentity) {
-            return this.userIdentity;
+        if (self.userIdentity) {
+            return self.userIdentity;
         }
         var response = await axios.get(config[config.serviceType].requestUrl + 'api/account');
         const account = response.body;
         if (account) {
-            this.userIdentity = account;
+            self.userIdentity = account;
             // this.authenticated = true;
         } else {
-            this.userIdentity = null;
+            self.userIdentity = null;
             // this.authenticated = false;
         }
-        await storage.set('userIdentity', this.userIdentity);
-        return this.userIdentity;
+        await storage.set('userIdentity', self.userIdentity);
+        return self.userIdentity;
     }
     /**
      * 1.发送登录请求
@@ -82,12 +82,12 @@ class Session {
 
         var response = await axios.post(config[config.serviceType].requestUrl + 'api/authenticate', credentials);
         let authAddress = window.redirect_uri;
-        const bearerToken = response.headers.get('Authorization');
+        const bearerToken = response.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-            this.jwt = bearerToken.slice(7, bearerToken.length);
-            this.storeAuthenticationToken(this.jwt, credentials.rememberMe);
+            self.jwt = bearerToken.slice(7, bearerToken.length);
+            await self.storeAuthenticationToken(self.jwt, credentials.rememberMe);
             //  刷新userIdentity
-            this.getAccout(true);
+            await self.getAccout(true);
         }
         // @interrupt: 2018年5月12日 21:47:08
         // Set your weChat network route, otherwise you will got a code '1102'
@@ -300,7 +300,7 @@ class Session {
 
     @action async hasLogin() {
         // var auth = await storage.get('auth');
-        return this.userIdentity;
+        return self.userIdentity;
         // axios.defaults.baseURL = auth.baseURL;
         //
         // self.auth = auth && Object.keys(auth).length ? auth : void 0;
