@@ -1,5 +1,5 @@
 {
-  "name": "wewechat",
+  "name": "x-im",
   "version": "1.1.5",
   "description": "Unofficial WeChat client built with React, MobX and Electron.",
   "main": "main.js",
@@ -21,7 +21,7 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "author": {
-    "email": "var.darling@gmail.com"
+    "email": "var.darling@gmail.com,2732067273@qq.com"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
           "path": "/Applications"
         }
       ],
-      "title": "wewechat ${version}"
+      "title": "x-im ${version}"
     },
     "mac": {
       "icon": "../resource/icon.icns"

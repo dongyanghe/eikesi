@@ -12,7 +12,8 @@ import contacts from './contacts';
 const CancelToken = axios.CancelToken;
 
 class Session {
-    @observable loading = true;
+    //  @debug: 将true改为false
+    @observable loading = false;
     @observable auth;
     @observable code;
     @observable avatar;
@@ -40,10 +41,11 @@ class Session {
      * @param rememberMe
      */
     @action async storeAuthenticationToken(jwt, rememberMe) {
+        self.jwt = jwt;
         if (rememberMe) {
-            storage.set('authenticationToken', jwt);
+            window.localStorage.authenticationToken = self.jwt;
         } else {
-            storage.set('authenticationToken', jwt);
+            window.sessionStorage.authenticationToken = self.jwt;
         }
     }
 
@@ -59,8 +61,9 @@ class Session {
         if (self.userIdentity) {
             return self.userIdentity;
         }
-        var response = await axios.get(config[config.serviceType].requestUrl + 'api/account');
-        const account = response.body;
+        var response = await axios.get(
+            config[config.serviceType].requestUrl + 'api/account');
+        const account = response.data;
         if (account) {
             self.userIdentity = account;
             // this.authenticated = true;
@@ -68,7 +71,9 @@ class Session {
             self.userIdentity = null;
             // this.authenticated = false;
         }
-        await storage.set('userIdentity', self.userIdentity);
+        window.localStorage.userIdentity = self.userIdentity;
+        self.auth = self.userIdentity;
+        await storage.set('auth', self.userIdentity);
         return self.userIdentity;
     }
     /**
@@ -81,31 +86,13 @@ class Session {
         if (self.auth) return;
 
         var response = await axios.post(config[config.serviceType].requestUrl + 'api/authenticate', credentials);
-        let authAddress = window.redirect_uri;
         const bearerToken = response.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-            self.jwt = bearerToken.slice(7, bearerToken.length);
-            await self.storeAuthenticationToken(self.jwt, credentials.rememberMe);
+            const jwt = bearerToken.slice(7, bearerToken.length);
+            await self.storeAuthenticationToken(jwt, credentials.rememberMe);
             //  刷新userIdentity
             await self.getAccout(true);
         }
-        // @interrupt: 2018年5月12日 21:47:08
-        // Set your weChat network route, otherwise you will got a code '1102'
-        axios.defaults.baseURL = authAddress.match(/^https:\/\/(.*?)\//)[0];
-
-        delete window.redirect_uri;
-        delete window.code;
-        delete window.userAvatar;
-        await storage.set('auth', {});
-        // await self.initUser();
-        self.keepalive().catch(ex => self.logout());
-        // switch (200) {
-        //     case 200:
-        //
-        //
-        //     default:
-        //         window.alert('登录异常,错误码：' + window.code);
-        // }
     }
 
     /**
@@ -113,6 +100,10 @@ class Session {
      * @returns {Promise<*>}
      */
     @action async initUser() {
+        /**
+         * 获取用户信息和联系人列表
+         * @type {any}
+         */
         var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxinit?r=${-new Date()}&pass_ticket=${self.auth.passTicket}`, {
             BaseRequest: {
                 Sid: self.auth.wxsid,

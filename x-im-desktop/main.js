@@ -450,8 +450,8 @@ function updateTray(unread = 0) {
 
 async function autostart() {
     var launcher = new AutoLaunch({
-        name: 'weweChat',
-        path: '/Applications/wewechat.app',
+        name: 'x-im',
+        path: '/Applications/x-im.app',
     });
 
     if (settings.startup) {
@@ -487,7 +487,7 @@ function createMenu() {
  * @notice: 开发者工具在小图标菜单可打开
  */
 const createMainWindow = () => {
-    //  主窗口默认配置
+    //  窗口控制默认配置
     var mainWindowState = windowStateKeeper({
         defaultWidth: 1200,
         defaultHeight: 742,
