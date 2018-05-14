@@ -7,3 +7,4 @@ mp-mpns/mpns-client/target/mpns-client-1.0-SNAPSHOT.jar
 mp-mpns/mpns-client/target/maven-archiver/pom.properties
 x-im-desktop/node_modules/*
 xDemoHybrid/ignite/Examples/Containers/xDemoHybrid/node_modules/*
+docs/.vscode/*

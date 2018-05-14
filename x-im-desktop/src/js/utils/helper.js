@@ -34,7 +34,7 @@ const helper = {
     isMuted: (user) => {
         return helper.isChatRoom(user.UserName) ? user.Statues === CHATROOM_NOTIFY_CLOSE : user.ContactFlag & CONTACTFLAG_NOTIFYCLOSECONTACT;
     },
-
+    //  24：第三方服务号  8：公共服务号
     isOfficial: (user) => {
         return !(user.VerifyFlag !== 24 && user.VerifyFlag !== 8 && user.UserName.startsWith('@'));
     },

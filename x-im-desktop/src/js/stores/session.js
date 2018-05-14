@@ -101,7 +101,7 @@ class Session {
      */
     @action async initUser() {
         /**
-         * 获取用户信息和联系人列表
+         * 获取登录用户信息和正在交互的群组+服务的消息列表
          * @type {any}
          */
         var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxinit?r=${-new Date()}&pass_ticket=${self.auth.passTicket}`, {
@@ -111,7 +111,7 @@ class Session {
                 Skey: self.auth.skey,
             }
         });
-
+        //  获取消息通知
         await axios.post(`/cgi-bin/mmwebwx-bin/webwxstatusnotify?lang=en_US&pass_ticket=${self.auth.passTicket}`, {
             BaseRequest: {
                 Sid: self.auth.wxsid,
@@ -123,12 +123,14 @@ class Session {
             FromUserName: response.data.User.UserName,
             ToUserName: response.data.User.UserName,
         });
-
+        //  获取用户信息
         self.user = response.data;
+        //  为头像添加域名
         self.user.ContactList.map(e => {
             e.HeadImgUrl = `${axios.defaults.baseURL}${e.HeadImgUrl.substr(1)}`;
         });
         await contacts.getContats();
+        //  通讯列表的用户id，用“,”分割
         await chat.loadChats(self.user.ChatSet);
 
         return self.user;
