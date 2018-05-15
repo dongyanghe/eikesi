@@ -10,6 +10,13 @@
                 "blog": "Blog",
                 "entry": "Entry",
                 "tag": "Tag",
+                "userRelation": "User Relation",
+                "userFlock": "User Flock",
+                "demoA": "Demo A",
+                "demoB": "Demo B",
+                "demoC": "Demo C",
+                "demoD": "Demo D",
+                "demoE": "Demo E",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -3,6 +3,8 @@
 [安装教程（翻墙）：](http://www.jhipster.tech/)
 #### 创建
 使用jhipster创建，修改.yo-rc.json后使用jhipster --force修改创建
+使用jhipster import-jdl ../docs/jdl/jhipster-jdl.jh --force 覆盖性创建代码
+
 #### 配置：
 gateway和snapshot都会自动注册到jhipster-registry里面，这样gateway就可以调用snapshot里面的接口了
 - 使用dev配置文件将运行JHipster注册表dev和native配置文件。该native配置文件将从文件系统加载Spring Cloud配置，

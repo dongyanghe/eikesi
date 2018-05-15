@@ -1,0 +1,30 @@
+
+<div *ngIf="demoD">
+    <h2><span jhiTranslate="demoHybridGatewayApp.demoD.detail.title">Demo D</span> {{demoD.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="demoHybridGatewayApp.demoD.name" [ngbTooltip]="'demoHybridGatewayApp.demoD.help.name' | translate">Name</span></dt>
+        <dd>
+            <span>{{demoD.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.demoD.status" [ngbTooltip]="'demoHybridGatewayApp.demoD.help.status' | translate">Status</span></dt>
+        <dd>
+            <span>{{demoD.status}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'demo-d/'+ demoD.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

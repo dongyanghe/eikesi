@@ -1,0 +1,117 @@
+<div>
+    <h2>
+        <span jhiTranslate="demoHybridGatewayApp.demoA.home.title">Demo AS</span>
+        <button class="btn btn-primary float-right jh-create-entity create-demo-a" [routerLink]="['/', { outlets: { popup: ['demo-a-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="demoHybridGatewayApp.demoA.home.createLabel">
+            Create new Demo A
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="demoAS">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.name">Name</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.status">Status</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.number">Number</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.bigDecimalNum">Big Decimal Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.floatNum">Float Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.doubleNum">Double Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.languageEnum">Language Enum</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.blobNum">Blob Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.anyBlobNum">Any Blob Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.imageBlobNum">Image Blob Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.textBlobNum">Text Blob Num</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.booleanCheck">Boolean Check</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.localDateWhen">Local Date When</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.dateTimeWhen">Date Time When</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.zonedDateTimeWhen">Zoned Date Time When</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.instantType">Instant Type</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.demoB">Demo B</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.demoE">Demo E</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.demoA.demoD">Demo D</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let demoA of demoAS ;trackBy: trackId">
+                <td><a [routerLink]="['../demo-a', demoA.id ]">{{demoA.id}}</a></td>
+                <td>{{demoA.name}}</td>
+                <td>{{demoA.status}}</td>
+                <td>{{demoA.number}}</td>
+                <td>{{demoA.bigDecimalNum}}</td>
+                <td>{{demoA.floatNum}}</td>
+                <td>{{demoA.doubleNum}}</td>
+                <td jhiTranslate="{{'demoHybridGatewayApp.Language.' + demoA.languageEnum}}">{{demoA.languageEnum}}</td>
+                <td>
+                    <a *ngIf="demoA.blobNum" (click)="openFile(demoA.blobNumContentType, demoA.blobNum)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="demoA.blobNum">{{demoA.blobNumContentType}}, {{byteSize(demoA.blobNum)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="demoA.anyBlobNum" (click)="openFile(demoA.anyBlobNumContentType, demoA.anyBlobNum)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="demoA.anyBlobNum">{{demoA.anyBlobNumContentType}}, {{byteSize(demoA.anyBlobNum)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="demoA.imageBlobNum" (click)="openFile(demoA.imageBlobNumContentType, demoA.imageBlobNum)">
+                        <img [src]="'data:' + demoA.imageBlobNumContentType + ';base64,' + demoA.imageBlobNum" style="max-height: 30px;" alt="demoA image"/>
+                    </a>
+                    <span *ngIf="demoA.imageBlobNum">{{demoA.imageBlobNumContentType}}, {{byteSize(demoA.imageBlobNum)}}</span>
+                </td>
+                <td>{{demoA.textBlobNum}}</td>
+                <td>{{demoA.booleanCheck}}</td>
+                <td>{{demoA.localDateWhen | date:'mediumDate'}}</td>
+                <td>{{demoA.dateTimeWhen | date:'medium'}}</td>
+                <td>{{demoA.zonedDateTimeWhen | date:'medium'}}</td>
+                <td>{{demoA.instantType | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="demoA.demoBId">
+                        <a [routerLink]="['../demo-b', demoA.demoBId  ]" >{{demoA.demoBName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="demoA.demoEId">
+                        <a [routerLink]="['../demo-e', demoA.demoEId  ]" >{{demoA.demoEName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let demoD of demoA.demoDS; let last = last">
+                            <a class="form-control-static" [routerLink]="['../demo-d', demoD?.id ]">{{demoD.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../demo-a', demoA.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'demo-a/'+ demoA.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'demo-a/'+ demoA.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

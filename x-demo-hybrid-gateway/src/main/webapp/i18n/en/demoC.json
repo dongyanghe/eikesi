@@ -1,0 +1,28 @@
+
+{
+    "demoHybridGatewayApp": {
+        "demoC" : {
+            "home": {
+                "title": "Demo CS",
+                "createLabel": "Create a new Demo C",
+                "createOrEditLabel": "Create or edit a Demo C"
+            },
+            "created": "A new Demo C is created with identifier {{ param }}",
+            "updated": "A Demo C is updated with identifier {{ param }}",
+            "deleted": "A Demo C is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Demo C {{ id }}?"
+            },
+            "detail": {
+                "title": "Demo C"
+            },
+            "name": "Name",
+            "status": "Status",
+            "demoB": "Demo B",
+            "help": {
+                "name": "名称",
+                "status": "状态 {0: &#39;状态0&#39;, 1: &#39;状态1&#39;}"
+            }
+        }
+    }
+}

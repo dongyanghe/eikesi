@@ -1,0 +1,46 @@
+DEFAULT_MIN_NAME = 2
+DEFAULT_MAX_NAME = 14
+DEFAULT_MIN_BYTES = 1
+DEFAULT_MAX_BYTES = 2
+DEFAULT_MIN_TEXT = 1
+DEFAULT_MAX_TEXT = 24
+DEFAULT_MIN = 1
+DEFAULT_MAX = 255
+/**
+ * 用户关系表
+ * @author hedongyang
+ * @version 2018-05-14
+ */
+entity UserRelation {
+    /** 用户名备注,默认为用户昵称 */
+    remarkName String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 关系类型 {0: '黑名单', 1: '好友'} */
+    type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES)  //  
+}
+/**
+ * 群组
+ * @author hedongyang
+ * @version 2018-05-14
+ */
+entity UserFlock {
+    name String required minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),
+    headImgUrl String required maxlength(DEFAULT_MAX)
+}
+
+relationship OneToOne {
+  UserRelation{user(firstName)} to User{userRelation(remarkName)},
+  UserFlock{user(firstName)} to User{userFlock(name)}
+}
+relationship OneToMany {
+  User{userRelation(remarkName)} to UserRelation{user(firstName)},
+  UserFlock{user(firstName)} to User{userFlock(name)}
+}
+// relationship ManyToOne {
+//   User{userRelation(remarkName)} to UserRelation{user(firstName)},
+//   UserFlock{user(firstName)} to User{userFlock(name)}
+// }
+// paginate Entry, Tag with infinite-scroll
+dto * with mapstruct
+service * with serviceClass
+
+// microservice UserRelation with userService
