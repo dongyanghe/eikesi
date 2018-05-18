@@ -1,9 +1,9 @@
-package com.eikesi.im.service.service;
+package com.eikesi.im.geteway.service;
 
-import com.eikesi.im.service.domain.CurrentMessage;
-import com.eikesi.im.service.repository.CurrentMessageRepository;
-import com.eikesi.im.service.service.dto.CurrentMessageDTO;
-import com.eikesi.im.service.service.mapper.CurrentMessageMapper;
+import com.eikesi.im.gateway.domain.CurrentMessage;
+import com.eikesi.im.gateway.repository.CurrentMessageRepository;
+import com.eikesi.im.gateway.service.dto.CurrentMessageDTO;
+import com.eikesi.im.gateway.service.mapper.CurrentMessageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

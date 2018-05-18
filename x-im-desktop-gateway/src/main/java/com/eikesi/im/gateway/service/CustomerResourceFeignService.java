@@ -1,11 +1,11 @@
-package com.eikesi.customer.service.web.rest;
+package com.eikesi.im.geteway.service;
 
 import com.codahale.metrics.annotation.Timed;
-import com.eikesi.customer.service.service.CustomerService;
-import com.eikesi.customer.service.web.rest.errors.BadRequestAlertException;
-import com.eikesi.customer.service.web.rest.util.HeaderUtil;
-import com.eikesi.customer.service.web.rest.util.PaginationUtil;
-import com.eikesi.customer.service.service.dto.CustomerDTO;
+import com.eikesi.im.gateway.service.CustomerService;
+import com.eikesi.im.gateway.web.rest.errors.BadRequestAlertException;
+import com.eikesi.im.gateway.web.rest.util.HeaderUtil;
+import com.eikesi.im.gateway.web.rest.util.PaginationUtil;
+import com.eikesi.im.gateway.service.dto.CustomerDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

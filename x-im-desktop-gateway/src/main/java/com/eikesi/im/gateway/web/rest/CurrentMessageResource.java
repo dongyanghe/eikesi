@@ -1,9 +1,9 @@
-package com.eikesi.im.service.web.rest;
+package com.eikesi.im.geteway.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.eikesi.im.service.web.rest.errors.BadRequestAlertException;
-import com.eikesi.im.service.web.rest.util.HeaderUtil;
-import com.eikesi.im.service.service.dto.CurrentMessageDTO;
+import com.eikesi.im.gateway.web.rest.errors.BadRequestAlertException;
+import com.eikesi.im.gateway.web.rest.util.HeaderUtil;
+import com.eikesi.im.gateway.service.dto.CurrentMessageDTO;
 import com.eikesi.im.gateway.service.CurrentMessageFeignService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
