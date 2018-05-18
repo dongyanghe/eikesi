@@ -3,7 +3,7 @@
 [安装教程（翻墙）：](http://www.jhipster.tech/)
 #### 创建
 使用jhipster创建，修改.yo-rc.json后使用jhipster --force修改创建
-使用jhipster import-jdl ../docs/jdl/jhipster-jdl.jh --force 覆盖性创建代码
+使用jhipster import-jdl ../docs/jdl/jhipster-jdl.jh --force 覆盖性生成代码
 
 #### 配置：
 gateway和snapshot都会自动注册到jhipster-registry里面，这样gateway就可以调用snapshot里面的接口了

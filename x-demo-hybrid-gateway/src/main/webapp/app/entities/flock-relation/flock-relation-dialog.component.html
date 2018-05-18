@@ -1,0 +1,128 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myFlockRelationLabel" jhiTranslate="demoHybridGatewayApp.flockRelation.home.createOrEditLabel">Create or edit a Flock Relation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!flockRelation.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="flockRelation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.remarkName" for="field_remarkName" [ngbTooltip]="'demoHybridGatewayApp.flockRelation.help.remarkName' | translate">Remark Name</label>
+            <input type="text" class="form-control" name="remarkName" id="field_remarkName"
+                [(ngModel)]="flockRelation.remarkName" minlength="2" maxlength="14"/>
+            <div [hidden]="!(editForm.controls.remarkName?.dirty && editForm.controls.remarkName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.remarkName?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                   This field is required to be at least 2 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.remarkName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 14 }">
+                   This field cannot be longer than 14 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.py" for="field_py" [ngbTooltip]="'demoHybridGatewayApp.flockRelation.help.py' | translate">Py</label>
+            <input type="text" class="form-control" name="py" id="field_py"
+                [(ngModel)]="flockRelation.py" required minlength="1" maxlength="255"/>
+            <div [hidden]="!(editForm.controls.py?.dirty && editForm.controls.py?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.py?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.py?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.py?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.pinYin" for="field_pinYin" [ngbTooltip]="'demoHybridGatewayApp.flockRelation.help.pinYin' | translate">Pin Yin</label>
+            <input type="text" class="form-control" name="pinYin" id="field_pinYin"
+                [(ngModel)]="flockRelation.pinYin" required minlength="1" maxlength="255"/>
+            <div [hidden]="!(editForm.controls.pinYin?.dirty && editForm.controls.pinYin?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.pinYin?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.pinYin?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.pinYin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.type" for="field_type" [ngbTooltip]="'demoHybridGatewayApp.flockRelation.help.type' | translate">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="flockRelation.type" required minlength="1" maxlength="2"/>
+            <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2 }">
+                   This field cannot be longer than 2 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.createdDate" for="field_createdDate" [ngbTooltip]="'demoHybridGatewayApp.flockRelation.help.createdDate' | translate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="flockRelation.createdDate"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.customer" for="field_customer">Customer</label>
+            <select class="form-control" id="field_customer" name="customer" [(ngModel)]="flockRelation.customerId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="customerOption.id" *ngFor="let customerOption of customers; trackBy: trackCustomerById">{{customerOption.firstName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="demoHybridGatewayApp.flockRelation.customerFlock" for="field_customerFlock">Customer Flock</label>
+            <select class="form-control" id="field_customerFlock" name="customerFlock" [(ngModel)]="flockRelation.customerFlockId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="customerFlockOption.id" *ngFor="let customerFlockOption of customerflocks; trackBy: trackCustomerFlockById">{{customerFlockOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
