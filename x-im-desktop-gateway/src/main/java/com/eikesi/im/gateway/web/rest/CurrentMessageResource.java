@@ -1,4 +1,4 @@
-package com.eikesi.im.geteway.web.rest;
+package com.eikesi.im.gateway.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.eikesi.im.gateway.web.rest.errors.BadRequestAlertException;
@@ -46,7 +46,7 @@ public class CurrentMessageResource {
     @Timed
     public ResponseEntity<CurrentMessageDTO> createCurrentMessage(@Valid @RequestBody CurrentMessageDTO currentMessageDTO) throws URISyntaxException {
         log.debug("REST request to save CurrentMessage : {}", currentMessageDTO);
-        return currentMessageFeignServicecreateCurrentMessage(currentMessageDTO);
+        return currentMessageFeignService.createCurrentMessage(currentMessageDTO);
     }
 
     /**
@@ -62,7 +62,7 @@ public class CurrentMessageResource {
     @Timed
     public ResponseEntity<CurrentMessageDTO> updateCurrentMessage(@Valid @RequestBody CurrentMessageDTO currentMessageDTO) throws URISyntaxException {
         log.debug("REST request to update CurrentMessage : {}", currentMessageDTO);
-        return currentMessageFeignService.(currentMessageDTO);
+        return currentMessageFeignService.updateCurrentMessage(currentMessageDTO);
     }
 
     /**
@@ -72,7 +72,7 @@ public class CurrentMessageResource {
      */
     @GetMapping("/current-messages")
     @Timed
-    public List<CurrentMessageDTO> getAllCurrentMessages() {
+    public ResponseEntity<List<CurrentMessageDTO>> getAllCurrentMessages() {
         log.debug("REST request to get all CurrentMessages");
         return currentMessageFeignService.getAllCurrentMessages();
         }

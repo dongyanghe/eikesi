@@ -1,4 +1,4 @@
-package com.eikesi.customer.gateway.web.rest;
+package com.eikesi.im.gateway.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.eikesi.im.gateway.service.CustomerFeignService;
@@ -80,7 +80,7 @@ public class CustomerResource {
     @Timed
     public ResponseEntity<List<CustomerDTO>> getAllCustomers(Pageable pageable) {
         log.debug("REST request to get a page of Customers");
-        return customerFeignService.getAllCustomers(customerDTO);
+        return customerFeignService.getAllCustomers(pageable);
     }
 
     /**

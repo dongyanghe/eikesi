@@ -1,42 +1,26 @@
-package com.eikesi.im.geteway.service;
+package com.eikesi.im.gateway.service;
 
-import com.codahale.metrics.annotation.Timed;
-import com.eikesi.im.gateway.service.CustomerService;
-import com.eikesi.im.gateway.web.rest.errors.BadRequestAlertException;
-import com.eikesi.im.gateway.web.rest.util.HeaderUtil;
-import com.eikesi.im.gateway.web.rest.util.PaginationUtil;
 import com.eikesi.im.gateway.service.dto.CustomerDTO;
-import io.github.jhipster.web.util.ResponseUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * rpc controller for managing Customer.
  */
 @FeignClient(name = "customerService")
-public class CustomerResourceFeignService {
+public interface CustomerFeignService {
     /**
      * POST  /customers : Create a new customer.
      *
      * @param customerDTO the customerDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new customerDTO, or with status 400 (Bad Request) if the customer has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/customers", method = RequestMethod.Post)
-    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO);
+    @RequestMapping(value = "/customers", method = RequestMethod.POST)
+    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO);
 
     /**
      * PUT  /customers : Updates an existing customer.
@@ -45,10 +29,9 @@ public class CustomerResourceFeignService {
      * @return the ResponseEntity with status 200 (OK) and with body the updated customerDTO,
      * or with status 400 (Bad Request) if the customerDTO is not valid,
      * or with status 500 (Internal Server Error) if the customerDTO couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/customers", method = RequestMethod.Put)
-    public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customerDTO);
+    @RequestMapping(value = "/customers", method = RequestMethod.PUT)
+    public ResponseEntity<CustomerDTO> updateCustomer(CustomerDTO customerDTO);
 
     /**
      * GET  /customers : get all the customers.
@@ -56,7 +39,7 @@ public class CustomerResourceFeignService {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of customers in body
      */
-    @RequestMapping(value = "/customers", method = RequestMethod.Get)
+    @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<List<CustomerDTO>> getAllCustomers(Pageable pageable);
 
     /**
@@ -65,7 +48,7 @@ public class CustomerResourceFeignService {
      * @param id the id of the customerDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the customerDTO, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.Get)
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
     public ResponseEntity<CustomerDTO> getCustomer(@PathVariable Long id);
 
     /**
@@ -74,6 +57,6 @@ public class CustomerResourceFeignService {
      * @param id the id of the customerDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.Delete)
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id);
 }
