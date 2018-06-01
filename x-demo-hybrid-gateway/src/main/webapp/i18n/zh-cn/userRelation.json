@@ -1,0 +1,27 @@
+
+{
+    "demoHybridGatewayApp": {
+        "userRelation" : {
+            "home": {
+                "title": "User Relations",
+                "createLabel": "创建新 User Relation",
+                "createOrEditLabel": "创建或编辑 User Relation"
+            },
+            "created": "User Relation {{ param }} 创建成功",
+            "updated": "User Relation {{ param }} 更新成功",
+            "deleted": "User Relation {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 User Relation {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "User Relation"
+            },
+            "remarkName": "Remark Name",
+            "type": "Type",
+            "help": {
+                "remarkName": "用户名备注,默认为用户昵称",
+                "type": "关系类型 {0: &#39;黑名单&#39;, 1: &#39;好友&#39;}"
+            }
+        }
+    }
+}

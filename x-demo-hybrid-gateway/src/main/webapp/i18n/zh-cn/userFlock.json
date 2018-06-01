@@ -1,0 +1,26 @@
+
+{
+    "demoHybridGatewayApp": {
+        "userFlock" : {
+            "home": {
+                "title": "User Flocks",
+                "createLabel": "创建新 User Flock",
+                "createOrEditLabel": "创建或编辑 User Flock"
+            },
+            "created": "User Flock {{ param }} 创建成功",
+            "updated": "User Flock {{ param }} 更新成功",
+            "deleted": "User Flock {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 User Flock {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "User Flock"
+            },
+            "name": "Name",
+            "headImgUrl": "Head Img Url",
+            "help": {
+                "name": "名称"
+            }
+        }
+    }
+}

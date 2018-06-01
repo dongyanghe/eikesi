@@ -1,0 +1,4 @@
+/**
+ * Spring MVC REST controllers.
+ */
+package com.eikesi.demo.de.service.web.rest;

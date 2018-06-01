@@ -1,0 +1,82 @@
+
+<div *ngIf="customer">
+    <h2><span jhiTranslate="demoHybridGatewayApp.customer.detail.title">Customer</span> {{customer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.mobile" [ngbTooltip]="'demoHybridGatewayApp.customer.help.mobile' | translate">Mobile</span></dt>
+        <dd>
+            <span>{{customer.mobile}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.firstName" [ngbTooltip]="'demoHybridGatewayApp.customer.help.firstName' | translate">First Name</span></dt>
+        <dd>
+            <span>{{customer.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.lastName" [ngbTooltip]="'demoHybridGatewayApp.customer.help.lastName' | translate">Last Name</span></dt>
+        <dd>
+            <span>{{customer.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.py" [ngbTooltip]="'demoHybridGatewayApp.customer.help.py' | translate">Py</span></dt>
+        <dd>
+            <span>{{customer.py}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.pinYin" [ngbTooltip]="'demoHybridGatewayApp.customer.help.pinYin' | translate">Pin Yin</span></dt>
+        <dd>
+            <span>{{customer.pinYin}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.passwordHash" [ngbTooltip]="'demoHybridGatewayApp.customer.help.passwordHash' | translate">Password Hash</span></dt>
+        <dd>
+            <span>{{customer.passwordHash}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.email" [ngbTooltip]="'demoHybridGatewayApp.customer.help.email' | translate">Email</span></dt>
+        <dd>
+            <span>{{customer.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.imageUrl" [ngbTooltip]="'demoHybridGatewayApp.customer.help.imageUrl' | translate">Image Url</span></dt>
+        <dd>
+            <span>{{customer.imageUrl}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.activated" [ngbTooltip]="'demoHybridGatewayApp.customer.help.activated' | translate">Activated</span></dt>
+        <dd>
+            <span>{{customer.activated}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.langKey" [ngbTooltip]="'demoHybridGatewayApp.customer.help.langKey' | translate">Lang Key</span></dt>
+        <dd>
+            <span>{{customer.langKey}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.activationKey" [ngbTooltip]="'demoHybridGatewayApp.customer.help.activationKey' | translate">Activation Key</span></dt>
+        <dd>
+            <span>{{customer.activationKey}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.resetKey" [ngbTooltip]="'demoHybridGatewayApp.customer.help.resetKey' | translate">Reset Key</span></dt>
+        <dd>
+            <span>{{customer.resetKey}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.resetDate" [ngbTooltip]="'demoHybridGatewayApp.customer.help.resetDate' | translate">Reset Date</span></dt>
+        <dd>
+            <span>{{customer.resetDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.createdBy" [ngbTooltip]="'demoHybridGatewayApp.customer.help.createdBy' | translate">Created By</span></dt>
+        <dd>
+            <span>{{customer.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.customer.createdDate" [ngbTooltip]="'demoHybridGatewayApp.customer.help.createdDate' | translate">Created Date</span></dt>
+        <dd>
+            <span>{{customer.createdDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

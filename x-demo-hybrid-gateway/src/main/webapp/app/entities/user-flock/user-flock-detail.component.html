@@ -1,0 +1,30 @@
+
+<div *ngIf="userFlock">
+    <h2><span jhiTranslate="demoHybridGatewayApp.userFlock.detail.title">User Flock</span> {{userFlock.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="demoHybridGatewayApp.userFlock.name" [ngbTooltip]="'demoHybridGatewayApp.userFlock.help.name' | translate">Name</span></dt>
+        <dd>
+            <span>{{userFlock.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="demoHybridGatewayApp.userFlock.headImgUrl">Head Img Url</span></dt>
+        <dd>
+            <span>{{userFlock.headImgUrl}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-flock/'+ userFlock.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

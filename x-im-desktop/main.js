@@ -21,16 +21,17 @@ let isSuspend = false;
 let userData = app.getPath('userData');
 let imagesCacheDir = `${userData}/images`;
 let voicesCacheDir = `${userData}/voices`;
+//  主菜单
 let mainMenu = [
     {
         label: pkg.name,
         submenu: [
             {
-                label: `About ${pkg.name}`,
+                label: `关于 ${pkg.name}`,
                 selector: 'orderFrontStandardAboutPanel:',
             },
             {
-                label: 'Preferences...',
+                label: '预设...',
                 accelerator: 'Cmd+,',
                 click() {
                     mainWindow.show();
@@ -50,7 +51,7 @@ let mainMenu = [
                 role: 'unhide'
             },
             {
-                label: 'Check for updates',
+                label: '更新',
                 accelerator: 'Cmd+U',
                 click() {
                     checkForUpdates();
@@ -60,7 +61,7 @@ let mainMenu = [
                 type: 'separator'
             },
             {
-                label: 'Quit weweChat',
+                label: '退出',
                 accelerator: 'Command+Q',
                 selector: 'terminate:',
                 click() {
@@ -75,7 +76,7 @@ let mainMenu = [
         label: 'File',
         submenu: [
             {
-                label: 'New Chat',
+                label: '新增聊天',
                 accelerator: 'Cmd+N',
                 click() {
                     mainWindow.show();
@@ -83,7 +84,7 @@ let mainMenu = [
                 }
             },
             {
-                label: 'Search...',
+                label: '搜索...',
                 accelerator: 'Cmd+F',
                 click() {
                     mainWindow.show();
@@ -91,7 +92,7 @@ let mainMenu = [
                 }
             },
             {
-                label: 'Batch Send Message',
+                label: '群发消息',
                 accelerator: 'Cmd+B',
                 click() {
                     mainWindow.show();
@@ -102,7 +103,7 @@ let mainMenu = [
                 type: 'separator',
             },
             {
-                label: 'Insert emoji',
+                label: '插入表情',
                 accelerator: 'Cmd+I',
                 click() {
                     mainWindow.show();
@@ -113,7 +114,7 @@ let mainMenu = [
                 type: 'separator',
             },
             {
-                label: 'Next conversation',
+                label: '下一个对话',
                 accelerator: 'Cmd+J',
                 click() {
                     mainWindow.show();
@@ -121,7 +122,7 @@ let mainMenu = [
                 }
             },
             {
-                label: 'Previous conversation',
+                label: '之前的对话',
                 accelerator: 'Cmd+K',
                 click() {
                     mainWindow.show();
@@ -131,7 +132,7 @@ let mainMenu = [
         ]
     },
     {
-        label: 'Conversations',
+        label: '对话',
         submenu: [
             {
                 label: 'Loading...',
@@ -139,7 +140,7 @@ let mainMenu = [
         ],
     },
     {
-        label: 'Contacts',
+        label: '联系人',
         submenu: [
             {
                 label: 'Loading...',
@@ -150,7 +151,7 @@ let mainMenu = [
 
     },
     {
-        label: 'Edit',
+        label: '编辑',
         submenu: [
             {
                 role: 'undo'
@@ -182,7 +183,7 @@ let mainMenu = [
         ]
     },
     {
-        label: 'View',
+        label: '视图',
         submenu: [
             {
                 label: isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen',
@@ -231,42 +232,43 @@ let mainMenu = [
         ]
     },
     {
-        role: 'help',
+        role: '帮助',
         submenu: [
             {
-                label: 'Feedback',
+                label: '反馈',
                 click() {
-                    shell.openExternal('https://github.com/trazyn/weweChat/issues');
+                    shell.openExternal('https://github.com/dongyanghe/eikesi/issues');
                 }
             },
             {
-                label: 'Fork me on Github',
+                label: '访问我们',
                 click() {
-                    shell.openExternal('https://github.com/trazyn/weweChat');
+                    shell.openExternal('https://github.com/dongyanghe/eikesi');
                 }
             },
             {
                 type: 'separator'
             },
-            {
-                label: '💕 Follow me on Twitter 👏',
-                click() {
-                    shell.openExternal('https://twitter.com/var_darling');
-                }
-            }
+            // {
+            //     label: '访问 Twitter',
+            //     click() {
+            //         shell.openExternal('https://twitter.com/var_darling');
+            //     }
+            // }
         ]
     }
 ];
+//  小图标菜单
 let trayMenu = [
     {
-        label: `You have 0 messages`,
+        label: `您有0条消息`,
         click() {
             mainWindow.show();
             mainWindow.webContents.send('show-messages');
         }
     },
     {
-        label: 'Toggle main window',
+        label: '显示界面',
         click() {
             let isVisible = mainWindow.isVisible();
             isVisible ? mainWindow.hide() : mainWindow.show();
@@ -276,7 +278,7 @@ let trayMenu = [
         type: 'separator'
     },
     {
-        label: 'Preferences...',
+        label: '预设...',
         accelerator: 'Cmd+,',
         click() {
             mainWindow.show();
@@ -284,16 +286,16 @@ let trayMenu = [
         }
     },
     {
-        label: 'Fork me on Github',
+        label: '联系我们',
         click() {
-            shell.openExternal('https://github.com/trazyn/weweChat');
+            shell.openExternal('https://github.com/dognyanghe/eikesi');
         }
     },
     {
         type: 'separator'
     },
     {
-        label: 'Toggle DevTools',
+        label: '显示开发工具',
         accelerator: 'Alt+Command+I',
         click() {
             mainWindow.show();
@@ -301,7 +303,7 @@ let trayMenu = [
         }
     },
     {
-        label: 'Hide menu bar icon',
+        label: '隐藏菜单图标',
         click() {
             mainWindow.webContents.send('hide-tray');
         }
@@ -310,14 +312,14 @@ let trayMenu = [
         type: 'separator'
     },
     {
-        label: 'Check for updates',
+        label: '单击更新',
         accelerator: 'Cmd+U',
         click() {
             checkForUpdates();
         }
     },
     {
-        label: 'Quit weweChat',
+        label: '退出',
         accelerator: 'Command+Q',
         selector: 'terminate:',
         click() {
@@ -448,8 +450,8 @@ function updateTray(unread = 0) {
 
 async function autostart() {
     var launcher = new AutoLaunch({
-        name: 'weweChat',
-        path: '/Applications/wewechat.app',
+        name: 'x-im',
+        path: '/Applications/x-im.app',
     });
 
     if (settings.startup) {
@@ -479,34 +481,46 @@ function createMenu() {
     }
 }
 
+/**
+ * 创建主窗口
+ * @call: app.ready事件触发
+ * @notice: 开发者工具在小图标菜单可打开
+ */
 const createMainWindow = () => {
+    //  窗口控制默认配置
     var mainWindowState = windowStateKeeper({
-        defaultWidth: 745,
-        defaultHeight: 500,
+        defaultWidth: 1200,
+        defaultHeight: 742,
     });
 
     mainWindow = new BrowserWindow({
+        // title: 'x-im',
         x: mainWindowState.x,
         y: mainWindowState.y,
-        minWidth: 745,
-        minHeight: 450,
-        vibrancy: 'medium-light',
-        transparent: true,
-        titleBarStyle: 'hidden-inset',
-        backgroundColor: 'none',
-        resizable: false,
+        minWidth: 1200,
+        minHeight: 742,
+        vibrancy: 'medium-light',   //  String (可选) - 窗口是否使用 vibrancy 动态效果, 仅 macOS 中有效.
+        transparent: true,  //  Boolean (可选) - 使窗口 透明. 默认值为 false.
+        // maximizable: true,  //  Boolean (可选) - 窗口是否可以最大化动. 在 Linux 中无效. 默认值为 true.
+        // fullscreen: false,   //  Boolean (可选) - 窗口是否可以全屏. 当设置为 false 时，在 macOS 上全屏的按钮将被隐藏或禁用. 默认值为 false.
+        // closable: true, //  Boolean (可选) - 窗口是否可以关闭. 在 Linux 中无效. 默认值为 true.
+        titleBarStyle: 'hidden-inset',  //  String (可选) - 窗口标题栏的样式. 默认值为 default. 可能的值有：
+        backgroundColor: 'none',    //   String (可选) - 窗口的16进制背景颜色, 例如 #66CD00 或 #FFF 或 #80FFFFFF (支持alpha透明度). 默认值为#FFF (白色).
+        resizable: true,   //  Boolean (可选) - 窗口是否可以改变尺寸. 默认值为true.
         webPreferences: {
-            scrollBounce: true
+            // devTools: true, //  Boolean (可选) - 是否开启 DevTools. 如果设置为 false, 则无法使用
+            scrollBounce: true  //  Boolean (可选) - 在 macOS 启用弹力动画 (橡皮筋) 效果. 默认值为 false.
         },
-        frame: !isWin,
+        frame: !isWin,  //   Boolean (可选) - 设置为 false 时可以创建一个Frameless Window. 默认值为 true.
         icon
     });
-
-    mainWindow.setSize(350, 460);
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
+    // mainWindow.setSize(350, 460);
     mainWindow.loadURL(
         `file://${__dirname}/src/index.html`
     );
-
     mainWindow.webContents.on('did-finish-load', () => {
         try {
             mainWindow.show();
@@ -690,7 +704,7 @@ const createMainWindow = () => {
         app.setAboutPanelOptions({
             applicationName: pkg.name,
             applicationVersion: pkg.version,
-            copyright: 'Made with 💖 by trazyn. \n https://github.com/trazyn/weweChat',
+            copyright: 'Made with 💖 by trazyn. \n https://github.com/dongyanghe/eikesi',
             credits: `With the invaluable help of: \n web.wechat.com`,
             version: pkg.version
         });
@@ -704,7 +718,7 @@ const createMainWindow = () => {
 
     mainWindow.webContents.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.1.2 Safari/603.3.8');
     createMenu();
-};
+};  // -end createMainWindow()
 
 app.setName(pkg.name);
 app.dock && app.dock.setIcon(icon);
@@ -740,10 +754,10 @@ autoUpdater.on('update-available', e => {
 autoUpdater.on('error', err => {
     dialog.showMessageBox({
         type: 'error',
-        buttons: ['Cancel update'],
+        buttons: ['取消更新'],
         title: pkg.name,
-        message: `Failed to update ${pkg.name} :(`,
-        detail: `An error occurred in retrieving update information, Please try again later.`,
+        message: `未能更新 ${pkg.name} :(`,
+        detail: `检索更新信息时发生错误，请稍后再试。`,
     });
 
     downloading = false;
@@ -754,9 +768,9 @@ autoUpdater.on('update-downloaded', info => {
     var { releaseNotes, releaseName } = info;
     var index = dialog.showMessageBox({
         type: 'info',
-        buttons: ['Restart', 'Later'],
+        buttons: ['重启', '稍后'],
         title: pkg.name,
-        message: `The new version has been downloaded. Please restart the application to apply the updates.`,
+        message: `新版本已被下载。请重新启动应用程序以应用更新。`,
         detail: `${releaseName}\n\n${releaseNotes}`
     });
     downloading = false;

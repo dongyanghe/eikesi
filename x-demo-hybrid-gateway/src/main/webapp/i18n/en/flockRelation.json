@@ -1,0 +1,35 @@
+
+{
+    "demoHybridGatewayApp": {
+        "flockRelation" : {
+            "home": {
+                "title": "Flock Relations",
+                "createLabel": "Create a new Flock Relation",
+                "createOrEditLabel": "Create or edit a Flock Relation"
+            },
+            "created": "A new Flock Relation is created with identifier {{ param }}",
+            "updated": "A Flock Relation is updated with identifier {{ param }}",
+            "deleted": "A Flock Relation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Flock Relation {{ id }}?"
+            },
+            "detail": {
+                "title": "Flock Relation"
+            },
+            "remarkName": "Remark Name",
+            "py": "Py",
+            "pinYin": "Pin Yin",
+            "type": "Type",
+            "createdDate": "Created Date",
+            "customer": "Customer",
+            "customerFlock": "Customer Flock",
+            "help": {
+                "remarkName": "群组备注,默认为群组昵称",
+                "py": "拼音首字母",
+                "pinYin": "拼音全拼",
+                "type": "关系类型 {0: &#39;黑名单&#39;, 1: &#39;成员&#39;}",
+                "createdDate": "关系创建时间"
+            }
+        }
+    }
+}

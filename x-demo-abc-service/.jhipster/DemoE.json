@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "demoD",
+            "otherEntityName": "demoD",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "demoA",
+            "otherEntityName": "demoA",
+            "otherEntityRelationshipName": "demoE"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 14
+        },
+        {
+            "fieldName": "status",
+            "javadoc": "状态 {0: '状态0', 1: '状态1'}",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 2
+        }
+    ],
+    "changelogDate": "20180515081535",
+    "javadoc": "示例E\n@author hedongyang\n@version 2018-05-15",
+    "entityTableName": "demo_e",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "demoDeService"
+}
