@@ -1,0 +1,84 @@
+DEFAULT_MIN_NAME = 2
+DEFAULT_MAX_NAME = 14
+DEFAULT_MIN_BYTES = 1
+DEFAULT_MAX_BYTES = 2
+DEFAULT_MIN_TEXT = 1
+DEFAULT_MAX_TEXT = 24
+DEFAULT_MIN = 1
+DEFAULT_MAX = 255
+
+
+
+/**
+ * 用户历史消息
+ * 按天从CurrentMessage获取存储,定期清除 
+ * @wait [2018-05-15 21:01:51]需改为NoSql存储
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity HistoryMessage {
+    /** 消息内容 */
+    content String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 消息状态,历史消息不能有未读 {0: '未读', 1: '已读', 2: '违规'} */
+    status String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //  
+    /** 消息创建时间 */
+    createdDate Instant required ,
+    /** 发消息着id */
+    createdId Long required,
+    /** 接收消息时间 */
+    targetDate Instant required ,
+    /** 接收消息着id */
+    targetId Long required
+}
+/**
+ * 用户当天流通的消息
+ * @wait 当当日无未读消息时转入HistoryMessage
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity CurrentMessage {
+    /** 消息内容 */
+    content String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 消息状态 {0: '未读', 1: '已读', 2: '违规'} */
+    status String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //  
+    /** 数据类型 {0: '文本消息 + 表情 + 图片', 1: '纯表情', 2: '图片', 3: '文件'} */
+    type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //
+    /** 消息创建时间 */
+    createdDate Instant required ,
+    /** 发消息着id */
+    createdId Long required,
+    /** 接收消息时间 */
+    targetDate Instant required ,
+    /** 接收消息着id */
+    targetId Long required
+}
+/**
+ * 用户对话
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity Dialogue {
+    /** 对话创建时间 */
+    createdDate Instant required ,
+    /** 对话所属用户id */
+    createdId Long required,
+    /** 会话目标id（可能是用户,可能是群组） */
+    targetId Long required,
+    /** 目标类型 {0: '用户', 1: '群组'} */
+    targetType String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES)  //  
+}
+relationship OneToMany {
+    /** 一个对话包涵多条当日流通消息 */
+  Dialogue{currentMessage(createdDate)} to CurrentMessage{dialogue(targetId)}
+}
+
+
+paginate HistoryMessage with pagination
+dto * with mapstruct
+service * with serviceClass
+
+// microservice DemoA with demoAbcService
+// microservice DemoB with demoAbcService
+// microservice DemoC with demoAbcService
+// microservice DemoD with demoDeService
+// microservice * with demoDeService except DemoA, DemoB, DemoC, UserFlock, UserRelation

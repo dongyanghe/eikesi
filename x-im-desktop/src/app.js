@@ -11,13 +11,55 @@ import './assets/fonts/icomoon/style.css';
 import 'utils/albumcolors';
 import getRoutes from './js/routes';
 import stores from './js/stores';
+import config from '../config';
+import axios from 'axios/index';
 
 ElectronCookies.enable({
     origin: 'https://wx.qq.com',
+    debugger: 'https://127.0.0.1',
 });
-
+/** ********************************************-start 请求处理******************************************************* **/
+axios.defaults.baseURL = config[config.serviceType].requestUrl;
+axios.defaults.timeout = 8000;
+//  http request 封装请求头拦截器
+axios.interceptors.request.use(
+    config => {
+        const jwt = window.localStorage.authenticationToken || window.sessionStorage.authenticationToken;
+        if (jwt) {
+            config.headers.Authorization = 'Bearer ' + jwt;
+        }
+        return config;
+    }, error => {
+        return Promise.reject(error);
+    }
+);
+//  http response 封装后台返回拦截器
+axios.interceptors.response.use(
+    response => {
+        return response;
+    }, error => {
+        return Promise.reject(error);
+    }
+);
+/** **********************************************- end 请求处理******************************************************* **/
 class App extends Component {
+    canisend() {
+        return this.refs.navigator.history.location.pathname === '/'
+            && stores.chat.user;
+    }
+    /**
+     * @call: 组件准备挂载
+     */
+    // constructor() {
+    //
+    // }
+    /**
+     * 程序初始化
+     * @call: constructor之后，render之前。
+     * @returns {Promise<void>}
+     */
     async componentWillMount() {
+        //  是否联网
         if (window.navigator.onLine) {
             await stores.session.hasLogin();
             await stores.settings.init();
@@ -25,11 +67,19 @@ class App extends Component {
         }
     }
 
-    canisend() {
-        return this.refs.navigator.history.location.pathname === '/'
-            && stores.chat.user;
+    render() {
+        return (
+            <Provider {...stores}>
+                <HashRouter ref="navigator">
+                    {getRoutes()}
+                </HashRouter>
+            </Provider>
+        );
     }
 
+    /**
+     * @call: 组件已经完全挂载到网页
+     */
     componentDidMount() {
         var navigator = this.refs.navigator;
 
@@ -130,16 +180,12 @@ class App extends Component {
             stores.snackbar.showMessage(args.message);
         });
     }
-
-    render() {
-        return (
-            <Provider {...stores}>
-                <HashRouter ref="navigator">
-                    {getRoutes()}
-                </HashRouter>
-            </Provider>
-        );
-    }
+    /**
+     * @call: 组件更新结束之后执行，在初始化render时不执行
+     */
+    // componentDidUpdate() {
+    //
+    // }
 }
 
 render(

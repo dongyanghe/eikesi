@@ -1,5 +1,5 @@
 {
-  "name": "wewechat",
+  "name": "x-im",
   "version": "1.1.5",
   "description": "Unofficial WeChat client built with React, MobX and Electron.",
   "main": "main.js",
@@ -21,16 +21,16 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "author": {
-    "email": "var.darling@gmail.com"
+    "email": "var.darling@gmail.com,2732067273@qq.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trazyn/weweChat.git"
+    "url": "https://github.com/dongyanghe/eikesi.git"
   },
   "license": "MIT",
   "build": {
-    "productName": "wewechat",
-    "appId": "gh.trazyn.wewechat",
+    "productName": "x-im",
+    "appId": "x.im",
     "compression": "maximum",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "dmg": {
@@ -46,7 +46,7 @@
           "path": "/Applications"
         }
       ],
-      "title": "wewechat ${version}"
+      "title": "x-im ${version}"
     },
     "mac": {
       "icon": "../resource/icon.icns"
@@ -75,8 +75,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "trazyn",
-        "repo": "weweChat"
+        "owner": "trazyn,hedongyang",
+        "repo": "eikesi"
       }
     ]
   },
@@ -87,6 +87,7 @@
     "browser-md5-file": "^1.0.0",
     "classname": "^0.0.0",
     "delegate": "^3.1.3",
+    "electron": "^1.8.1",
     "electron-context-menu": "^0.9.1",
     "electron-json-storage": "^4.0.2",
     "electron-window-state": "^4.1.1",
@@ -123,7 +124,7 @@
     "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.4",
-    "electron": "^1.8.1",
+    "devtron": "^1.4.0",
     "electron-builder": "^19.42.2",
     "electron-updater": "^2.15.0",
     "eslint": "^4.10.0",

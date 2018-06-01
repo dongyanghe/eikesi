@@ -89,7 +89,52 @@
       <td></td>
     </tr>
 </table>
-- [ ] 即时通讯系統【hedongyang】:
+- [ ] im桌面端【hedongyang】:
+<table>
+  <tr>
+    <th >功能</th>
+    <th>详细解释</th>
+    <th>负责人</th>
+    <th>后台时间</th>
+    <th>界面时间</th>
+    <th>情况</th>
+    <th>备注</th>
+  </tr>
+  <tr>
+      <td>技术选项</td>
+      <td>
+        1.前端框架确定
+        2.开源项目确定
+      </td>
+      <td>hedongyang</td>
+      <td></td>
+      <td>2018年5月10日</td>
+      <td>100%</td>
+      <td></td>
+    </tr>
+  <tr>
+      <td>梳理所有请求接口</td>
+      <td>
+        得出请求路径、参数、返回，方便建网关和数据表
+      </td>
+      <td>hedongyang</td>
+      <td></td>
+      <td>2018年5月12日</td>
+      <td>0%</td>
+      <td></td>
+    </tr>
+  <tr>
+      <td>微信客户端通讯框架和JPush通讯框架调研 </td>
+      <td>
+      </td>
+      <td>hedongyang</td>
+      <td></td>
+      <td>2018年5月12日</td>
+      <td>0%</td>
+      <td></td>
+    </tr>
+</table>
+- [ ] im网关【hedongyang】:
 <table>
   <tr>
     <th >功能</th>
@@ -113,7 +158,7 @@
       <td></td>
     </tr>
 </table>
-- [ ] 即时通讯服务【hedongyang】:
+- [ ] im服务【hedongyang】:
 <table>
   <tr>
     <th >功能</th>

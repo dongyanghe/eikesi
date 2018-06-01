@@ -164,12 +164,12 @@ export default class SearchBar extends Component {
         return (
             <div>
                 <header>
-                    <h3>History</h3>
+                    <h3>历史</h3>
 
                     <a
                         href=""
                         onClick={e => this.props.clear(e)}>
-                        CLEAR
+                        清除
                     </a>
                 </header>
                 {

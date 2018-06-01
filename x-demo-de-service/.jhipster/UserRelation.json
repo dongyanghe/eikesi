@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "remarkName",
+            "javadoc": "用户名备注,默认为用户昵称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 14
+        },
+        {
+            "fieldName": "type",
+            "javadoc": "关系类型 {0: '黑名单', 1: '好友'}",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 2
+        }
+    ],
+    "changelogDate": "20180515085533",
+    "javadoc": "用户关系表\n@author hedongyang\n@version 2018-05-14",
+    "entityTableName": "user_relation",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

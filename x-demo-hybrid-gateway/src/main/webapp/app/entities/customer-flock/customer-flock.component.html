@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span jhiTranslate="demoHybridGatewayApp.customerFlock.home.title">Customer Flocks</span>
+        <button class="btn btn-primary float-right jh-create-entity create-customer-flock" [routerLink]="['/', { outlets: { popup: ['customer-flock-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="demoHybridGatewayApp.customerFlock.home.createLabel">
+            Create new Customer Flock
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="customerFlocks">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="demoHybridGatewayApp.customerFlock.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="py"><span jhiTranslate="demoHybridGatewayApp.customerFlock.py">Py</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="pinYin"><span jhiTranslate="demoHybridGatewayApp.customerFlock.pinYin">Pin Yin</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="imageUrl"><span jhiTranslate="demoHybridGatewayApp.customerFlock.imageUrl">Image Url</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="demoHybridGatewayApp.customerFlock.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customerFlock of customerFlocks ;trackBy: trackId">
+                <td><a [routerLink]="['../customer-flock', customerFlock.id ]">{{customerFlock.id}}</a></td>
+                <td>{{customerFlock.name}}</td>
+                <td>{{customerFlock.py}}</td>
+                <td>{{customerFlock.pinYin}}</td>
+                <td>{{customerFlock.imageUrl}}</td>
+                <td>{{customerFlock.createdDate | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../customer-flock', customerFlock.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer-flock/'+ customerFlock.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer-flock/'+ customerFlock.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="customerFlocks && customerFlocks.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 /* eslint-disable no-eval */
 import axios from 'axios';
 import { observable, action } from 'mobx';
-
+import config from '../../../config/index';
 import helper from 'utils/helper';
 import storage from 'utils/storage';
 import { normalize } from 'utils/emoji';
@@ -12,11 +12,14 @@ import contacts from './contacts';
 const CancelToken = axios.CancelToken;
 
 class Session {
-    @observable loading = true;
+    //  @debug: 将true改为false
+    @observable loading = false;
     @observable auth;
     @observable code;
     @observable avatar;
     @observable user;
+    @observable userIdentity;
+    @observable jwt;
 
     syncKey;
 
@@ -24,88 +27,83 @@ class Session {
         return (self.syncKey = list.map(e => `${e.Key}_${e.Val}`).join('|'));
     }
 
+    /**
+     * 获取验证码——@wait: 2018年5月12日 21:47:43 暂不添加
+     * @returns {Promise<*>}
+     */
     @action async getCode() {
-        var response = await axios.get('https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=en_US&_=' + +new Date());
-        var code = response.data.match(/[A-Za-z_\-\d]{10}==/)[0];
-
-        self.code = code;
-        self.check();
-        return code;
+        return console.log('获取验证码未实现!');
     }
 
-    @action async check() {
-        // Already logined
-        if (self.auth) return;
-
-        var response = await axios.get('https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login', {
-            params: {
-                loginicon: true,
-                uuid: self.code,
-                tip: 0,
-                r: ~new Date(),
-                _: +new Date(),
-            }
-        });
-
-        eval(response.data);
-
-        switch (window.code) {
-            case 200:
-                let authAddress = window.redirect_uri;
-
-                // Set your weChat network route, otherwise you will got a code '1102'
-                axios.defaults.baseURL = authAddress.match(/^https:\/\/(.*?)\//)[0];
-
-                delete window.redirect_uri;
-                delete window.code;
-                delete window.userAvatar;
-
-                // Login success, create session
-                let response = await axios.get(authAddress, {
-                    params: {
-                        fun: 'new',
-                        version: 'v2',
-                    }
-                });
-                let auth = {};
-
-                try {
-                    auth = {
-                        baseURL: axios.defaults.baseURL,
-                        skey: response.data.match(/<skey>(.*?)<\/skey>/)[1],
-                        passTicket: response.data.match(/<pass_ticket>(.*?)<\/pass_ticket>/)[1],
-                        wxsid: response.data.match(/<wxsid>(.*?)<\/wxsid>/)[1],
-                        wxuin: response.data.match(/<wxuin>(.*?)<\/wxuin>/)[1],
-                    };
-                } catch (ex) {
-                    window.alert('Your login may be compromised. For account security, you cannot log in to Web WeChat. You can try mobile WeChat or Windows WeChat.');
-                    window.location.reload();
-                }
-
-                self.auth = auth;
-                await storage.set('auth', auth);
-                await self.initUser();
-                self.keepalive().catch(ex => self.logout());
-                break;
-
-            case 201:
-                // Confirm to login
-                self.avatar = window.userAvatar;
-                self.check();
-                break;
-
-            case 400:
-                // QR Code has expired
-                window.location.reload();
-                return;
-
-            default:
-                // Continue call server and waite
-                self.check();
+    /**
+     * 存储登录记录
+     * @param jwt
+     * @param rememberMe
+     */
+    @action async storeAuthenticationToken(jwt, rememberMe) {
+        self.jwt = jwt;
+        if (rememberMe) {
+            window.localStorage.authenticationToken = self.jwt;
+        } else {
+            window.sessionStorage.authenticationToken = self.jwt;
         }
     }
 
+    /**
+     * 获取用户信息，如果没有则发送请求后获取
+     * @param force 是否重新从服务器获取
+     * @returns {Promise<*>}
+     */
+    @action async getAccout(force) {
+        if (force === true) {
+            self.userIdentity = undefined;
+        }
+        if (self.userIdentity) {
+            return self.userIdentity;
+        }
+        var response = await axios.get(
+            config[config.serviceType].requestUrl + 'api/account');
+        const account = response.data;
+        if (account) {
+            self.userIdentity = account;
+            // this.authenticated = true;
+        } else {
+            self.userIdentity = null;
+            // this.authenticated = false;
+        }
+        window.localStorage.userIdentity = self.userIdentity;
+        self.auth = self.userIdentity;
+        await storage.set('auth', self.userIdentity);
+        return self.userIdentity;
+    }
+    /**
+     * 1.发送登录请求
+     * 2.保存登录信息
+     * @returns {Promise<void>}
+     */
+    @action async login(credentials) {
+        // Already logined
+        if (self.auth) return;
+
+        var response = await axios.post(config[config.serviceType].requestUrl + 'api/authenticate', credentials);
+        const bearerToken = response.headers.authorization;
+        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+            const jwt = bearerToken.slice(7, bearerToken.length);
+            await self.storeAuthenticationToken(jwt, credentials.rememberMe);
+            //  刷新userIdentity
+            await self.getAccout(true);
+        }
+    }
+
+    /**
+     * 根据用户初始化界面数据
+     * @returns {Promise<*>}
+     */
     @action async initUser() {
+        /**
+         * 获取登录用户信息和正在交互的群组+服务的消息列表
+         * @type {any}
+         */
         var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxinit?r=${-new Date()}&pass_ticket=${self.auth.passTicket}`, {
             BaseRequest: {
                 Sid: self.auth.wxsid,
@@ -113,7 +111,7 @@ class Session {
                 Skey: self.auth.skey,
             }
         });
-
+        //  获取消息通知
         await axios.post(`/cgi-bin/mmwebwx-bin/webwxstatusnotify?lang=en_US&pass_ticket=${self.auth.passTicket}`, {
             BaseRequest: {
                 Sid: self.auth.wxsid,
@@ -125,12 +123,14 @@ class Session {
             FromUserName: response.data.User.UserName,
             ToUserName: response.data.User.UserName,
         });
-
+        //  获取用户信息
         self.user = response.data;
+        //  为头像添加域名
         self.user.ContactList.map(e => {
             e.HeadImgUrl = `${axios.defaults.baseURL}${e.HeadImgUrl.substr(1)}`;
         });
         await contacts.getContats();
+        //  通讯列表的用户id，用“,”分割
         await chat.loadChats(self.user.ChatSet);
 
         return self.user;
@@ -292,20 +292,24 @@ class Session {
     }
 
     @action async hasLogin() {
-        var auth = await storage.get('auth');
-
-        axios.defaults.baseURL = auth.baseURL;
-
-        self.auth = auth && Object.keys(auth).length ? auth : void 0;
-
-        if (self.auth) {
-            await self.initUser().catch(ex => self.logout());
-            self.keepalive().catch(ex => self.logout());
-        }
-
-        return auth;
+        // var auth = await storage.get('auth');
+        return self.userIdentity;
+        // axios.defaults.baseURL = auth.baseURL;
+        //
+        // self.auth = auth && Object.keys(auth).length ? auth : void 0;
+        //
+        // if (self.auth) {
+        //     await self.initUser().catch(ex => self.logout());
+        //     self.keepalive().catch(ex => self.logout());
+        // }
+        //
+        // return auth;
     }
 
+    /**
+     * 退出登录
+     * @returns {Promise<void>}
+     */
     @action async logout() {
         var auth = self.auth;
 

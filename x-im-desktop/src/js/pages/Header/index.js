@@ -7,13 +7,13 @@ export default class Header extends Component {
     getTitle() {
         switch (this.props.location.pathname) {
             case '/contacts':
-                return 'Contacts - WeWeChat';
+                return 'x-im[联系人]';
 
             case '/settings':
-                return 'Settings - WeWeChat';
+                return 'x-im[设置]';
 
             default:
-                return 'WeWeChat';
+                return 'x-im';
         }
     }
 

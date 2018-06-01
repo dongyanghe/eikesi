@@ -1,0 +1,60 @@
+<div>
+    <h2>
+        <span jhiTranslate="demoHybridGatewayApp.userRelation.home.title">User Relations</span>
+        <button class="btn btn-primary float-right jh-create-entity create-user-relation" [routerLink]="['/', { outlets: { popup: ['user-relation-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="demoHybridGatewayApp.userRelation.home.createLabel">
+            Create new User Relation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="userRelations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.userRelation.remarkName">Remark Name</span></th>
+            <th><span jhiTranslate="demoHybridGatewayApp.userRelation.type">Type</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let userRelation of userRelations ;trackBy: trackId">
+                <td><a [routerLink]="['../user-relation', userRelation.id ]">{{userRelation.id}}</a></td>
+                <td>{{userRelation.remarkName}}</td>
+                <td>{{userRelation.type}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../user-relation', userRelation.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'user-relation/'+ userRelation.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'user-relation/'+ userRelation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

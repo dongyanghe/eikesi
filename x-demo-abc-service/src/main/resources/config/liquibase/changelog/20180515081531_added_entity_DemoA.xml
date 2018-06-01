@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity DemoA.
+    -->
+    <changeSet id="20180515081531-1" author="jhipster">
+        <createTable tableName="demo_a">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(14)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="status" type="varchar(2)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jhi_number" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="big_decimal_num" type="decimal(10,2)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="float_num" type="${floatType}">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="double_num" type="double">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="language_enum" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="blob_num" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="blob_num_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="any_blob_num" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="any_blob_num_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="image_blob_num" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="image_blob_num_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="text_blob_num" type="clob">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="boolean_check" type="bit">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="local_date_when" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="zoned_date_time_when" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="instant_type" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="demob_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <column name="demoe_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="demo_a" columnName="zoned_date_time_when" columnDataType="datetime"/>
+        <dropDefaultValue tableName="demo_a" columnName="instant_type" columnDataType="datetime"/>
+        
+        <createTable tableName="demoa_demod">
+            <column name="demods_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="demoas_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="demoas_id, demods_id" tableName="demoa_demod"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

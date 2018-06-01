@@ -19,6 +19,12 @@ class Contacts {
         result: [],
     };
 
+    /**
+     * 根据备注或昵称拼音分组
+     * @param list
+     * @param showall
+     * @returns {Array}
+     */
     @action group(list, showall = false) {
         var mappings = {};
         var sorted = [];
@@ -66,6 +72,10 @@ class Contacts {
         return user;
     }
 
+    /**
+     * 获取联系人列表
+     * @returns {Promise<Array>}
+     */
     @action async getContats() {
         self.loading = true;
 
