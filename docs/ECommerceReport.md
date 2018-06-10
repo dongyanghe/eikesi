@@ -1,0 +1,235 @@
+### 文件路径:
+ - [主目录](  ../README.md)
+ - [项目主目录](  ../../README.md)
+
+# 项目访问路径
+
+## 文档:
+ - [主目录](  ../README.md)
+ - [项目主目录](  ../../README.md)
+ 目标：
+    对市面上各个电子商户系统进行功能和技术上的统计。
+#####字段释义：
+* 功能：一般跟页面或模块名一致
+
+备注：
+
+## 开源系统：
+### 
+
+- 概况
+------
+<table>
+  <tr>
+    <th>名称</th>
+    <th>授权</th>
+    <th>语言</th>
+    <th>文档</th>
+    <th>部署</th>
+    <th>维护</th>
+    <th>地址</th>
+  </tr>
+  <tr>
+      <td>xbin-store</td>
+      <td>开源免费</td>
+      <td>java</td>
+      <td></td>
+      <td>Jenkins</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>zscat-meJava</td>
+      <td>未知</td>
+      <td>java</td>
+      <td>不完整</td>
+      <td></td>
+      <td>2018年2月</td>
+      <td>https://gitee.com/catshen/zscat_sw</td>
+  </tr>
+  <tr>
+      <td>shop++</td>
+      <td>商业购买</td>
+      <td>java</td>
+      <td></td>
+      <td></td>
+      <td>所购版本有限维护</td>
+      <td>http://www.shopxx.net</td>
+  </tr>
+  <tr>
+      <td>WooThemes</td>
+      <td>开源免费，商业插件</td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>CMSWing</td>
+      <td>开源免费</td>
+      <td>NodeJs</td>
+      <td></td>
+      <td></td>
+      <td>2017-09-27@v.1.2.9</td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>Magento</td>
+      <td>开源免费，商业插件</td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td>13万会员</td>
+      <td>https://www.prestashop.com</td>
+  </tr>
+  <tr>
+      <td>PrestaShop</td>
+      <td>开源免费，商业插件</td>
+      <td>PHP5</td>
+      <td></td>
+      <td></td>
+      <td>3万会员</td>
+      <td>https://www.prestashop.com</td>
+  </tr>
+  <tr>
+      <td>Opencart</td>
+      <td>开源免费，商业插件</td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td>4000会员</td>
+      <td>https://www.prestashop.com</td>
+  </tr>
+  <tr>
+      <td>ShopsN</td>
+      <td>开源免费，带商业授权</td>
+      <td>PHP5</td>
+      <td></td>
+      <td></td>
+      <td>4000会员</td>
+      <td>https://www.prestashop.com</td>
+  </tr>
+</table>
+
+- 后端
+------
+<table>
+  <tr>
+    <th>名称</th>
+    <th>架构</th>
+    <th>框架</th>
+    <th>数据库</th>
+    <th>缓存</th>
+    <th>检索</th>
+    <th>消息队列</th>
+    <th>消息通讯</th>
+    <th>权限管理</th>
+    <th>依赖管理</th>
+    <th>分布式通讯</th>
+    <th>注册中心</th>
+    <th>配置中心</th>
+    <th>事物控制</th>
+    <th>任务调度</th>
+    <th>负载均衡</th>
+    <th>接口</th>
+  </tr>
+  <tr>
+      <td>xbin-store</td>
+      <td>开源免费</td>
+      <td>分布式微服务</td>
+      <td>SpringBoot1</td>
+      <td>MySQL</td>
+      <td>Redis</td>
+      <td>Solr</td>
+      <td>RabbitMQ</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Apollo</td>
+      <td>分布式事物TCC</td>
+      <td></td>
+      <td></td>
+      <td>Spring Scheduled</td>
+      <td>Nginx、keepalived</td>
+      <td>Swagger2</td>
+  </tr>
+  <tr>
+      <td>shop++</td>
+      <td></td>
+      <td>Spring、SpringMVC、SpringMobile、JPA</td>
+      <td>MySQL、SQLServer、Oracle</td>
+      <td>Ehcache</td>
+      <td>Lucene</td>
+      <td>RabbitMQ</td>
+      <td></td>
+      <td>Shiro</td>
+      <td></td>
+      <td>Apollo</td>
+      <td>分布式事物TCC</td>
+      <td></td>
+      <td></td>
+      <td>Spring Scheduled</td>
+      <td>Nginx、keepalived</td>
+      <td>Swagger2</td>
+  </tr>
+</table>
+
+- 前端
+------
+<table>
+  <tr>
+    <th>名称</th>
+    <th>pc端页面</th>
+    <th>移动端页面</th>
+    <th>app应用</th>
+    <th>pc端视图框架</th>
+    <th>移动端视图框架</th>
+    <th>app应用框架</th>
+  </tr>
+  <tr>
+      <td>xbin-store</td>
+      <td>
+        1.商城首页
+        2.商品详情页
+        3.加入购物车页
+        4.支付页
+        5.后台管理系统
+      </td>
+      <td>无</td>
+      <td>无</td>
+      <td>Beetl和freemarker、AdminLTE</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>shop++</td>
+      <td>
+        pc端完整的基本功能</td>
+      <td>
+        H5端完整的基本功能</td>
+      <td>
+      </td>
+      <td>无</td>
+      <td>无</td>
+      <td>Freemarker、Bootstrap、JQuery</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>WooCommerce</td>
+      <td>开源免费，商业插件</td>
+      <td>PHP</td>
+      <td>
+        1.商城首页
+        2.商品详情页
+        3.加入购物车页
+      </td>
+      <td>无</td>
+      <td>无</td>
+      <td>Beetl和freemarker、AdminLTE</td>
+      <td></td>
+      <td></td>
+  </tr>
+  
+</table>
