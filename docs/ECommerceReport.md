@@ -76,7 +76,7 @@
   </tr>
   <tr>
       <td>Magento</td>
-      <td>开源免费，商业插件</td>
+      <td>免费版，商业版</td>
       <td>PHP</td>
       <td></td>
       <td></td>
@@ -136,13 +136,14 @@
   </tr>
   <tr>
       <td>xbin-store</td>
-      <td>开源免费</td>
       <td>分布式微服务</td>
       <td>SpringBoot1</td>
       <td>MySQL</td>
       <td>Redis</td>
       <td>Solr</td>
       <td>RabbitMQ</td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -156,7 +157,7 @@
   </tr>
   <tr>
       <td>shop++</td>
-      <td></td>
+      <td>单应用扩展</td>
       <td>Spring、SpringMVC、SpringMobile、JPA</td>
       <td>MySQL、SQLServer、Oracle</td>
       <td>Ehcache</td>
@@ -172,6 +173,29 @@
       <td>Spring Scheduled</td>
       <td>Nginx、keepalived</td>
       <td>Swagger2</td>
+  </tr>
+  <tr>
+      <td>WooCommerce</td>
+      <td>基于WordPress</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
   </tr>
 </table>
 
