@@ -30,8 +30,8 @@
     <th>地址</th>
   </tr>
   <tr>
-      <td>xbin-store</td>
-      <td>开源免费</td>
+      <td>javashop</td>
+      <td>商业购买30万</td>
       <td>java</td>
       <td></td>
       <td>Jenkins</td>
@@ -39,14 +39,134 @@
       <td></td>
   </tr>
   <tr>
+      <td>ECstore</td>
+      <td>8000</td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>http://ecstore.shopex.cn/products/forum</td>
+  </tr>
+  <tr>
+      <td>云EC</td>
+      <td></td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>https://www.yunec.cn/n-yec.html</td>
+  </tr>
+  <tr>
+      <td>ShopEX</td>
+      <td></td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>数商云</td>
+      <td>只接受定制</td>
+      <td>java</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>HiShop</td>
+      <td></td>
+      <td>.net</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>ECShop</td>
+      <td></td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  
+  <tr>
+      <td>mcmore</td>
+      <td></td>
+      <td>java</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  
+  <tr>
+      <td>ISkyShop</td>
+      <td></td>
+      <td>java</td>
+      <td></td>
+      <td>Jenkins</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>shopNC</td>
+      <td>200万</td>
+      <td>java</td>
+      <td></td>
+      <td>Jenkins</td>
+      <td></td>
+      <td>http://www.shopnc.net/index.php?act=solution&op=list</td>
+  </tr>
+  <tr>
+      <td>payshop</td>
+      <td>开源免费</td>
+      <td>java</td>
+      <td>只有pc端</td>
+      <td>Jenkins</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>xbin-store</td>
+      <td>开源免费</td>
+      <td>java</td>
+      <td>只有pc端</td>
+      <td>Jenkins</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>Morning</td>
+      <td>开源免费</td>
+      <td>java</td>
+      <td>只有pc端</td>
+      <td></td>
+      <td></td>
+      <td>https://gitee.com/Morning_/Morning</td>
+  </tr>
+  <tr>
       <td>zscat-meJava</td>
-      <td>未知</td>
+      <td>开源不确定是否免费</td>
       <td>java</td>
       <td>不完整</td>
       <td></td>
       <td>2018年2月</td>
       <td>https://gitee.com/catshen/zscat_sw</td>
   </tr>
+  <tr>
+      <td>jeeshop</td>
+      <td>开源</td>
+      <td>java</td>
+      <td>不完整</td>
+      <td></td>
+      <td>2018年2月</td>
+      <td>https://gitee.com/catshen/zscat_sw</td>
+  </tr>
+  
   <tr>
       <td>shop++</td>
       <td>商业购买</td>
@@ -81,7 +201,7 @@
       <td></td>
       <td></td>
       <td>13万会员</td>
-      <td>https://www.prestashop.com</td>
+      <td>https://www.magentochina.org/</td>
   </tr>
   <tr>
       <td>PrestaShop</td>
@@ -91,6 +211,15 @@
       <td></td>
       <td>3万会员</td>
       <td>https://www.prestashop.com</td>
+  </tr>
+  <tr>
+      <td>yii2_fecshop</td>
+      <td>开源免费</td>
+      <td>PHP</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>https://github.com/fecshop/yii2_fecshop</td>
   </tr>
   <tr>
       <td>Opencart</td>
@@ -223,6 +352,17 @@
       <td>无</td>
       <td>无</td>
       <td>Beetl和freemarker、AdminLTE</td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>yii2_fecshop</td>
+      <td>
+        全部
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
   </tr>
