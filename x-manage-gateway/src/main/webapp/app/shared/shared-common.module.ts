@@ -1,42 +1,10 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { registerLocaleData } from '@angular/common';
-import locale from '@angular/common/locales/zh-Hans';
+import { NgModule } from '@angular/core';
 
-import {
-    ManageGatewaySharedLibsModule,
-    JhiLanguageHelper,
-    FindLanguageFromKeyPipe,
-    JhiAlertComponent,
-    JhiAlertErrorComponent
-} from './';
+import { ManageGatewaySharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent } from './';
 
 @NgModule({
-    imports: [
-        ManageGatewaySharedLibsModule
-    ],
-    declarations: [
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
-    ],
-    providers: [
-        JhiLanguageHelper,
-        Title,
-        {
-            provide: LOCALE_ID,
-            useValue: 'zh-Hans'
-        },
-    ],
-    exports: [
-        ManageGatewaySharedLibsModule,
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
-    ]
+    imports: [ManageGatewaySharedLibsModule],
+    declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent],
+    exports: [ManageGatewaySharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent]
 })
-export class ManageGatewaySharedCommonModule {
-    constructor() {
-        registerLocaleData(locale);
-    }
-}
+export class ManageGatewaySharedCommonModule {}
