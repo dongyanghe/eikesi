@@ -1,6 +1,7 @@
 package com.eikesi.im.gateway.web.rest;
 
-import com.eikesi.im.gateway.ImDesktopGatewayApp;
+import com.eikesi.im.gateway.ImGatewayApp;
+import com.eikesi.im.gateway.config.SecurityBeanOverrideConfiguration;
 import com.eikesi.im.gateway.web.rest.vm.LoggerVM;
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see LogsResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ImDesktopGatewayApp.class)
+@SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, ImGatewayApp.class})
 public class LogsResourceIntTest {
 
     private MockMvc restLogsMockMvc;

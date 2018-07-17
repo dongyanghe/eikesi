@@ -3,8 +3,8 @@
 #
 # This configuration is used for unit/integration tests.
 #
-# More information on profiles: http://www.jhipster.tech/profiles/
-# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 # ===================================================================
@@ -15,21 +15,28 @@
 
 eureka:
     client:
-        enabled: true
+        enabled: false
     instance:
-        appname: imDesktopGateway
-        instanceId: imDesktopGateway:${spring.application.instance-id:${random.value}}
+        appname: imGateway
+        instanceId: imGateway:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: imDesktopGateway
-    jackson:
-        serialization.write_dates_as_timestamps: false
+        name: imGateway
     cache:
         type: simple
+    cloud:
+        stream:
+            kafka:
+                binder:
+                    brokers: localhost
+                    zk-nodes: localhost
+            bindings:
+                output:
+                    destination: topic-jhipster
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:imDesktopGateway;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:imGateway;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
         name:
         username:
         password:
@@ -49,6 +56,8 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
+    liquibase:
+        contexts: test
     mail:
         host: localhost
     messages:
@@ -57,10 +66,8 @@ spring:
         favicon:
             enabled: false
     thymeleaf:
-        mode: XHTML
-
-liquibase:
-    contexts: test
+        mode: HTML
+        
 
 server:
     port: 10344
@@ -73,7 +80,7 @@ info:
 # ===================================================================
 # JHipster specific properties
 #
-# Full reference is available at: http://www.jhipster.tech/common-application-properties/
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 jhipster:
@@ -88,13 +95,10 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
-    mail:
-        from: test@localhost
-        base-url: http://127.0.0.1:8080
     security:
         authentication:
             jwt:
-                secret: 76812201615fd2f1d41a9dc4b9993cf462ae9912
+                secret: 
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
@@ -109,7 +113,7 @@ jhipster:
 # to have type-safe configuration, like in the JHipsterProperties above
 #
 # More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
+# https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:
+# application:

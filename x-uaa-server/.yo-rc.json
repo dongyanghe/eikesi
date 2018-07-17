@@ -11,7 +11,7 @@
     "packageFolder": "com/eikesi/uaa",
     "serverPort": "9999",
     "authenticationType": "uaa",
-    "cacheProvider": "ehcache",
+    "cacheProvider": "hazelcast",
     "enableHibernateCache": true,
     "websocket": false,
     "databaseType": "sql",

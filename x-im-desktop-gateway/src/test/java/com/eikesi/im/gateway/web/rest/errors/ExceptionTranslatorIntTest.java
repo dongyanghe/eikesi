@@ -1,6 +1,7 @@
 package com.eikesi.im.gateway.web.rest.errors;
 
-import com.eikesi.im.gateway.ImDesktopGatewayApp;
+import com.eikesi.im.gateway.ImGatewayApp;
+import com.eikesi.im.gateway.config.SecurityBeanOverrideConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ImDesktopGatewayApp.class)
+@SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, ImGatewayApp.class})
 public class ExceptionTranslatorIntTest {
 
     @Autowired
