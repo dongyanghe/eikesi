@@ -5,17 +5,10 @@
     </div>
 
     <form #form="ngForm" (ngSubmit)="refresh()">
-<!--        <div class="form-group">
-            <label for="application"><strong>Application</strong></label>
-           <select type="text" name="application" id="application" class="form-control" (click)="refresh()"
-                   required [(ngModel)]="application">
-                <option *ngFor="let app of applicationList" [value]="app">{{app}}</option>
-            </select>
-        </div>-->
-
         <div class="form-group">
-            <label for="profile"><strong>app</strong></label>
-            <input type="text" class="form-control" id="application" [(ngModel)]="application" name="application" required>
+            <label for="profile"><strong>Application</strong></label>
+            <input type="text" class="form-control" id="application" [(ngModel)]="application" name="application"
+                   required>
         </div>
 
         <div class="form-group">
@@ -32,25 +25,31 @@
 
     <div *ngIf="configAsYaml">
         <h3>Configuration</h3>
-        <ngb-tabset type="tabs">
+        <ngb-tabset type="pills">
             <ngb-tab title="YAML" id="yaml">
-                <template ngbTabContent>
+                <ng-template ngbTabContent>
                     <pre class="code-block">{{configAsYaml}}</pre>
-                </template>
+                </ng-template>
             </ngb-tab>
             <ngb-tab title="Properties" id="properties">
-                <template ngbTabContent>
+                <ng-template ngbTabContent>
                     <pre class="code-block">{{configAsProperties}}</pre>
-                </template>
+                </ng-template>
             </ngb-tab>
             <ngb-tab title="JSON" id="json">
-                <template ngbTabContent>
+                <ng-template ngbTabContent>
                     <pre class="code-block">{{configAsJson}}</pre>
-                </template>
+                </ng-template>
             </ngb-tab>
             <ngb-tab title="Table" id="table">
-                <template ngbTabContent>
+                <ng-template ngbTabContent>
                     <table class="table table-striped table-bordered table-responsive d-table">
+                        <thead>
+                        <tr>
+                            <th>Properties</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
                         <tbody>
                         <tr *ngFor="let property of configAsKeyValuePairs">
                             <td>{{ property.key }}</td>
@@ -58,29 +57,25 @@
                         </tr>
                         </tbody>
                     </table>
-                </template>
+                </ng-template>
             </ngb-tab>
         </ngb-tabset>
     </div>
 
-    <h3 class="head bottom">Configuration Source Information</h3>
-    <table class="table table-striped ">
+    <h3 class="head bottom">Configuration Sources</h3>
+    <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Type</th>
-            <th *ngIf="!isNative">Repository URI</th>
-            <th>Location</th>
-        </tr>
+            <th>Index</th>
+            <th>Configuration</th>
         </thead>
         <tbody>
-        <tr *ngIf="isNative">
-            <td>Native (Local Filesystem)</td>
-            <td>{{ nativeSearchLocation }}</td>
-        </tr>
-        <tr *ngIf="!isNative">
-            <td>Git</td>
-            <td>{{ gitUri }}</td>
-            <td>/{{ gitSearchLocation }}</td>
+        <tr *ngFor="let source of configurationSources; let index=index">
+            <td>{{ index }}</td>
+            <td>
+                <ul>
+                    <li *ngFor="let prop of getKeys(source)">{{ prop }}: {{ source[prop] | json}}</li>
+                </ul>
+            </td>
         </tr>
         </tbody>
     </table>
