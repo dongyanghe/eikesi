@@ -583,7 +583,7 @@
                     <url>jdbc:mysql://localhost:3306/imGateway</url>
                     <defaultSchemaName>imGateway</defaultSchemaName>
                     <username>root</username>
-                    <password></password>
+                    <password>root</password>
                     <referenceUrl>hibernate:spring:com.eikesi.im.gateway.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
