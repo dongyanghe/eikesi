@@ -43,7 +43,7 @@ spring:
                     destination: topic-jhipster
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/imGateway?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/customer?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: root
         hikari:

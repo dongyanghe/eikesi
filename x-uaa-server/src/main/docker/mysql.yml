@@ -6,7 +6,7 @@ services:
         #     - ~/volumes/jhipster/uaaServer/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_PASSWORD=root
             - MYSQL_DATABASE=uaaserver
         ports:
             - 3306:3306
