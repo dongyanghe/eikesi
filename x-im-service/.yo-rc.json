@@ -23,7 +23,7 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "eb933eb676e665d6c741dc03ebc6fb4de5a04d82",
+    "jwtSecretKey": "eb933eb676e456d6c741dc03ebc6fb4de5a04d11",
     "enableTranslation": true,
     "testFrameworks": [
       "gatling"
