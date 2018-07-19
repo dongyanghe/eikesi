@@ -3,89 +3,54 @@ import './vendor.ts';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
+import { Ng2Webstorage } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
-import { ManageGatewaySharedModule, UserRouteAccessService } from './shared';
-import { ManageGatewayAppRoutingModule} from './app-routing.module';
+import { ManageGatewaySharedModule } from 'app/shared';
+import { ManageGatewayCoreModule } from 'app/core';
+import { ManageGatewayAppRoutingModule } from './app-routing.module';
 import { ManageGatewayHomeModule } from './home/home.module';
-import { ManageGatewayAdminModule } from './admin/admin.module';
 import { ManageGatewayAccountModule } from './account/account.module';
 import { ManageGatewayEntityModule } from './entities/entity.module';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import {
-    JhiMainComponent,
-    NavbarComponent,
-    FooterComponent,
-    ProfileService,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent
-} from './layouts';
+import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
     imports: [
         BrowserModule,
         ManageGatewayAppRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
+        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         ManageGatewaySharedModule,
+        ManageGatewayCoreModule,
         ManageGatewayHomeModule,
-        ManageGatewayAdminModule,
         ManageGatewayAccountModule,
-        ManageGatewayEntityModule,
+        ManageGatewayEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [
-        JhiMainComponent,
-        NavbarComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        ActiveMenuDirective,
-        FooterComponent
-    ],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
-        ProfileService,
-        PaginationConfig,
-        UserRouteAccessService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true,
-            deps: [
-                LocalStorageService,
-                SessionStorageService
-            ]
-        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthExpiredInterceptor,
             multi: true,
-            deps: [
-                Injector
-            ]
+            deps: [Injector]
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorHandlerInterceptor,
             multi: true,
-            deps: [
-                JhiEventManager
-            ]
+            deps: [JhiEventManager]
         },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true,
-            deps: [
-                Injector
-            ]
+            deps: [Injector]
         }
     ],
-    bootstrap: [ JhiMainComponent ]
+    bootstrap: [JhiMainComponent]
 })
 export class ManageGatewayAppModule {}

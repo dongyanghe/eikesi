@@ -83,9 +83,16 @@
                 });
 
                 function addApiKeyAuthorization() {
-                    var authToken = JSON.parse(localStorage.getItem("jhi-authenticationtoken") || sessionStorage.getItem("jhi-authenticationtoken"));
-                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + authToken, "header");
-                    window.swaggerUi.api.clientAuthorizations.add("bearer", apiKeyAuth);
+                    var interceptor = {
+                        requestInterceptor: {
+                            apply: function (requestObj) {
+                                var headers = requestObj.headers || {};
+                                headers['X-XSRF-TOKEN'] = getCSRF();
+                                return requestObj;
+                            }
+                        }
+                    };
+                    window.swaggerUi.options.requestInterceptor = interceptor.requestInterceptor
                 }
 
                 function getCSRF() {

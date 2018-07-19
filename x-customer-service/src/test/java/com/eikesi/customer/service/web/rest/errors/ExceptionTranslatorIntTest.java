@@ -1,6 +1,7 @@
 package com.eikesi.customer.service.web.rest.errors;
 
 import com.eikesi.customer.service.CustomerServiceApp;
+import com.eikesi.customer.service.config.SecurityBeanOverrideConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CustomerServiceApp.class)
+@SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, CustomerServiceApp.class})
 public class ExceptionTranslatorIntTest {
 
     @Autowired

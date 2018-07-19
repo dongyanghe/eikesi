@@ -1,22 +1,12 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ImDesktopGatewaySharedModule } from '../shared';
-
+import { ImGatewaySharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
 
 @NgModule({
-    imports: [
-        ImDesktopGatewaySharedModule,
-        RouterModule.forChild([ HOME_ROUTE ])
-    ],
-    declarations: [
-        HomeComponent,
-    ],
-    entryComponents: [
-    ],
-    providers: [
-    ],
+    imports: [ImGatewaySharedModule, RouterModule.forChild([HOME_ROUTE])],
+    declarations: [HomeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ImDesktopGatewayHomeModule {}
+export class ImGatewayHomeModule {}

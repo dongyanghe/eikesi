@@ -1,6 +1,7 @@
 package com.eikesi.customer.service.web.rest;
 
 import com.eikesi.customer.service.CustomerServiceApp;
+import com.eikesi.customer.service.config.SecurityBeanOverrideConfiguration;
 import com.eikesi.customer.service.web.rest.vm.LoggerVM;
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see LogsResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CustomerServiceApp.class)
+@SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, CustomerServiceApp.class})
 public class LogsResourceIntTest {
 
     private MockMvc restLogsMockMvc;
