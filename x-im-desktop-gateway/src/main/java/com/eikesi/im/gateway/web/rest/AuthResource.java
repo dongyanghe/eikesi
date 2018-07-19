@@ -36,12 +36,14 @@ public class AuthResource {
     }
 
     /**
+     * 校验账号访问设置和刷新cookies令牌
      * Authenticates a user setting the access and refresh token cookies.
-     *
+     *  前端登录调用
      * @param request  the HttpServletRequest holding - among others - the headers passed from the client.
      * @param response the HttpServletResponse getting the cookies set upon successful authentication.
      * @param params   the login params (username, password, rememberMe).
      * @return the access token of the authenticated user. Will return an error code if it fails to authenticate the user.
+     *          返回用户令牌或错误代码
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType
         .APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

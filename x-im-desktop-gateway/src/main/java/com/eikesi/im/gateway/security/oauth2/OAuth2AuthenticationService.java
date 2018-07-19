@@ -49,7 +49,7 @@ public class OAuth2AuthenticationService {
 
     /**
      * Authenticate the user by username and password.
-     *
+     *  登录函数authenticate调用
      * @param request  the request coming from the client.
      * @param response the response going back to the server.
      * @param params   the params holding the username, password and rememberMe.

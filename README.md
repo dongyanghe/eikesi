@@ -6,10 +6,12 @@
 使用jhipster import-jdl ../docs/jdl/jhipster-jdl.jh --force 覆盖性生成代码
 
 #### 环境配置和安装：
+工具版本请参见项目里面的**\src\main\docker\**.yml配置文件
 [redis的安装的教程](http://www.runoob.com/redis/redis-install.html)
-
+[Elasticsearch的安装的教程](https://blog.csdn.net/weidong22/article/details/79062851)
+注：config/jvm.options 文件里把“-Dfile.encoding=UTF-8”改为“-Dfile.encoding=GBK”控制台就不会乱码
 [zookeeper和mpush的安装教程](https://github.com/mywiki/mpush-doc/blob/master/3%E5%AE%89%E8%A3%85zookeeper.md)
-
+注：window系统下新版zookeeper是要把zoo_sample.cfg改为zoo.cfg
 [kafka的安装教程](https://blog.csdn.net/tianmanchn/article/details/78943147)
 ##### 注册配置
 gateway和service都会自动注册到jhipster-registry里面，这样gateway就可以调用service里面的Feign接口了
@@ -22,13 +24,15 @@ gateway和service都会自动注册到jhipster-registry里面，这样gateway就
 JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中检查其配置。请注意，如果您无法登录(网关无法访问其他服务 )，可能是因为JWT签名密钥未正确设置，
 
 #### 运行：
-后台服务器启动（请务必按顺序逐一启动）：
+各服务启动（如果你不了解系统的运作，请务必按顺序全部逐一启动）：
 1. 进入项目根目录使用./mvnw（window使用mvn命令），启动jhipster-registry服务用以实现基于eureka的服务注册中心
 1. 进入zookeeper的bin目录使用zkServer start(window使用zkServer)命令启动zookeeper，用以实现基于zookeeper的服务注册中心。
 项目端口2181如果不一样请修改对应配置
 1. 进入kafka根目录（路径不要有空格）使bin/kafka-server-start.sh config/server.properties（window使用.\bin\windows\kafka-server-start.bat .\config\server.properties）启动kafka。
 1. 进入Redis根目录使用bin/redis-server conf/redis.conf(window使用redis-server.exe redis.windows.conf)命令启动Redis,
 用以实现数据存储和消息队列。
+1. 进入elasticsearch根目录使用./bin/elasticsearch (window使用./bin/elasticsearch.bat )命令启动Redis,
+用以实现检索功能。
 1. 进入mpushRelease（根据mpush源码使用mvn clean package -Pzip,pub命令构建后解压得出,也可直接取本项目跟目录的target,需先修改配置）
 的bin目录使用java -Dmp.conf=mpush绝对路径\conf\mpush.conf -jar bootstrap.jar命令启动mpush服务，用以实现消息通讯服务。
 1. 同mpush操作一样，启动alloc服务,用以实现多mpush服务的分布式管理，按需启动。
@@ -64,11 +68,5 @@ JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中�
 #### customer-server(客户服务)：
 
 ###原则：
-    服务模型的划分及其迭代从数据模型开始；
-    迭代推进，快速实现分阶段改造；
-    性能由缓存解决，应用可靠性由服务器集群化解决，数据存储由数据库集群化解决；
-    
-##数据库设计：
-###原则：
-    每项微服务都应该拥有并控制自己的数据库，且任意两项服务不应共享同一套数据库；
+
     对数据进行定义，在需求人和需求背景的角度提问——明白这类数据是什么、会有什么；
