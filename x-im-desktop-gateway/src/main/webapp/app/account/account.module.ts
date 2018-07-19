@@ -1,14 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ImDesktopGatewaySharedModule } from '../shared';
+import { ImGatewaySharedModule } from 'app/shared';
 
 import {
-    Register,
-    ActivateService,
-    PasswordService,
-    PasswordResetInitService,
-    PasswordResetFinishService,
     PasswordStrengthBarComponent,
     RegisterComponent,
     ActivateComponent,
@@ -20,10 +15,7 @@ import {
 } from './';
 
 @NgModule({
-    imports: [
-        ImDesktopGatewaySharedModule,
-        RouterModule.forChild(accountState)
-    ],
+    imports: [ImGatewaySharedModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
         RegisterComponent,
@@ -33,13 +25,6 @@ import {
         PasswordResetFinishComponent,
         SettingsComponent
     ],
-    providers: [
-        Register,
-        ActivateService,
-        PasswordService,
-        PasswordResetInitService,
-        PasswordResetFinishService
-    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ImDesktopGatewayAccountModule {}
+export class ImGatewayAccountModule {}

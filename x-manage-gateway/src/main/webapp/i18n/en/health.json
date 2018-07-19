@@ -11,12 +11,14 @@
             "error": "Error"
         },
         "indicator": {
+            "binders": "Message broker",
             "discoveryComposite": "Discovery Composite",
             "refreshScope": "Microservice Refresh Scope",
             "configServer": "Microservice Config Server",
             "hystrix": "Hystrix",
             "diskSpace": "Disk space",
             "mail": "Email",
+            "elasticsearch": "Elasticsearch",
             "db": "Database"
         },
         "table": {
@@ -24,6 +26,7 @@
             "status": "Status"
         },
         "status": {
+            "UNKNOWN": "UNKNOWN",
             "UP": "UP",
             "DOWN": "DOWN"
         }
