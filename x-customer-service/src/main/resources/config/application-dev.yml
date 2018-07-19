@@ -114,7 +114,7 @@ spring:
 #        key-alias: customerservice
 # ===================================================================
 server:
-    port: 6002
+    port: 6001
 
 # ===================================================================
 # JHipster specific properties
@@ -150,7 +150,7 @@ jhipster:
             client-secret: internal
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: customerService@localhost
-        base-url: http://127.0.0.1:6002
+        base-url: http://127.0.0.1:6001
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true

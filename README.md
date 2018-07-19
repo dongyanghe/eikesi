@@ -6,12 +6,16 @@
 使用jhipster import-jdl ../docs/jdl/jhipster-jdl.jh --force 覆盖性生成代码
 
 #### 环境配置和安装：
-工具版本请参见项目里面的**\src\main\docker\**.yml配置文件
+工具版本请参见项目里面的**\src\main\docker\**.yml配置文件，或者根据pom.xml配置自行选择兼容版本
+
 [redis的安装的教程](http://www.runoob.com/redis/redis-install.html)
+
 [Elasticsearch的安装的教程](https://blog.csdn.net/weidong22/article/details/79062851)
-注：config/jvm.options 文件里把“-Dfile.encoding=UTF-8”改为“-Dfile.encoding=GBK”控制台就不会乱码
+，config/jvm.options 文件里把“-Dfile.encoding=UTF-8”改为“-Dfile.encoding=GBK”控制台就不会乱码
+
 [zookeeper和mpush的安装教程](https://github.com/mywiki/mpush-doc/blob/master/3%E5%AE%89%E8%A3%85zookeeper.md)
-注：window系统下新版zookeeper是要把zoo_sample.cfg改为zoo.cfg
+，window系统下zookeeper是要把zoo_sample.cfg改为zoo.cfg,不然启动会一闪而过
+
 [kafka的安装教程](https://blog.csdn.net/tianmanchn/article/details/78943147)
 ##### 注册配置
 gateway和service都会自动注册到jhipster-registry里面，这样gateway就可以调用service里面的Feign接口了
@@ -58,15 +62,17 @@ JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中�
 
 ###系统划分
 #### jhipster-registry（微服务注册服务、配置服务）：
-
-#### *-gateway（各应用网关）：
-
+    端口：8761
+#### im-desktop-gateway（桌面端im应用网关）：
+    端口：8001
+#### manage-gateway（web端后台管理系统网关）：
+    端口：8000
 #### uaa-server（账号安全服务）：
-
+    端口：9999
 #### im-server(im服务)：
-
+    端口：6002
 #### customer-server(客户服务)：
-
+    端口：6001
 ###原则：
 
     对数据进行定义，在需求人和需求背景的角度提问——明白这类数据是什么、会有什么；

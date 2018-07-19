@@ -112,7 +112,7 @@ To ensure everything worked, run:
 
     java -jar target/*.war
 
-Then navigate to [http://localhost:80000](http://localhost:80000) in your browser.
+Then navigate to [http://localhost:8000](http://localhost:8000) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 

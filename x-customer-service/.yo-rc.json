@@ -9,7 +9,7 @@
     "baseName": "customerService",
     "packageName": "com.eikesi.customer.service",
     "packageFolder": "com/eikesi/customer/service",
-    "serverPort": "6002",
+    "serverPort": "6001",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
     "cacheProvider": "hazelcast",

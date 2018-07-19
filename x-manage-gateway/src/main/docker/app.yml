@@ -13,7 +13,7 @@ services:
             - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
             - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZK_NODES=zookeeper
         ports:
-            - 80000:80000
+            - 8000:8000
     managegateway-mysql:
         extends:
             file: mysql.yml

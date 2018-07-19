@@ -9,7 +9,7 @@
     "baseName": "manageGateway",
     "packageName": "com.eikesi.manage.gateway",
     "packageFolder": "com/eikesi/manage/gateway",
-    "serverPort": "80000",
+    "serverPort": "8000",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
     "cacheProvider": "hazelcast",
