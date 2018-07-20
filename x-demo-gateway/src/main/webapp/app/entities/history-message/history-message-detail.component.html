@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="historyMessage">
+            <h2><span jhiTranslate="demoGatewayApp.historyMessage.detail.title">History Message</span> {{historyMessage.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.content" [ngbTooltip]="'demoGatewayApp.historyMessage.help.content' | translate">Content</span></dt>
+                <dd>
+                    <span>{{historyMessage.content}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.status" [ngbTooltip]="'demoGatewayApp.historyMessage.help.status' | translate">Status</span></dt>
+                <dd>
+                    <span>{{historyMessage.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.createdDate" [ngbTooltip]="'demoGatewayApp.historyMessage.help.createdDate' | translate">Created Date</span></dt>
+                <dd>
+                    <span>{{historyMessage.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.createdId" [ngbTooltip]="'demoGatewayApp.historyMessage.help.createdId' | translate">Created Id</span></dt>
+                <dd>
+                    <span>{{historyMessage.createdId}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.targetDate" [ngbTooltip]="'demoGatewayApp.historyMessage.help.targetDate' | translate">Target Date</span></dt>
+                <dd>
+                    <span>{{historyMessage.targetDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.historyMessage.targetId" [ngbTooltip]="'demoGatewayApp.historyMessage.help.targetId' | translate">Target Id</span></dt>
+                <dd>
+                    <span>{{historyMessage.targetId}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/history-message', historyMessage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

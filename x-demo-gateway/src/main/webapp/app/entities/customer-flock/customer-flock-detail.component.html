@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="customerFlock">
+            <h2><span jhiTranslate="demoGatewayApp.customerFlock.detail.title">Customer Flock</span> {{customerFlock.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demoGatewayApp.customerFlock.name" [ngbTooltip]="'demoGatewayApp.customerFlock.help.name' | translate">Name</span></dt>
+                <dd>
+                    <span>{{customerFlock.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customerFlock.py" [ngbTooltip]="'demoGatewayApp.customerFlock.help.py' | translate">Py</span></dt>
+                <dd>
+                    <span>{{customerFlock.py}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customerFlock.pinYin" [ngbTooltip]="'demoGatewayApp.customerFlock.help.pinYin' | translate">Pin Yin</span></dt>
+                <dd>
+                    <span>{{customerFlock.pinYin}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customerFlock.imageUrl" [ngbTooltip]="'demoGatewayApp.customerFlock.help.imageUrl' | translate">Image Url</span></dt>
+                <dd>
+                    <span>{{customerFlock.imageUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customerFlock.createdDate" [ngbTooltip]="'demoGatewayApp.customerFlock.help.createdDate' | translate">Created Date</span></dt>
+                <dd>
+                    <span>{{customerFlock.createdDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/customer-flock', customerFlock.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

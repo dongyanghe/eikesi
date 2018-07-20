@@ -1,0 +1,36 @@
+
+{
+    "demoGatewayApp": {
+        "historyMessage" : {
+            "home": {
+                "title": "History Messages",
+                "createLabel": "建立一筆新的 History Message",
+                "createOrEditLabel": "建立或編輯 History Message",
+                "search": "搜尋 History Message"
+            },
+            "created": "新的 History Message 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 History Message 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 History Message 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 History Message {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "History Message"
+            },
+            "content": "Content",
+            "status": "Status",
+            "createdDate": "Created Date",
+            "createdId": "Created Id",
+            "targetDate": "Target Date",
+            "targetId": "Target Id",
+            "help": {
+                "content": "消息内容",
+                "status": "消息状态,历史消息不能有未读 {0: &#39;未读&#39;, 1: &#39;已读&#39;, 2: &#39;违规&#39;}",
+                "createdDate": "消息创建时间",
+                "createdId": "发消息着id",
+                "targetDate": "接收消息时间",
+                "targetId": "接收消息着id"
+            }
+        }
+    }
+}

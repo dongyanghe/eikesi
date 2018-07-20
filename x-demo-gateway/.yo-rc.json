@@ -36,7 +36,7 @@
         "name": "generator-jhipster-nav-element",
         "version": "2.0.2"
       },
-      {
+        {
         "name": "generator-jhipster-docker",
         "version": "2.5.0"
       },

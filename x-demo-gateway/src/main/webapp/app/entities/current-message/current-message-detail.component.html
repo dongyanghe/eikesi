@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="currentMessage">
+            <h2><span jhiTranslate="demoGatewayApp.currentMessage.detail.title">Current Message</span> {{currentMessage.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.content" [ngbTooltip]="'demoGatewayApp.currentMessage.help.content' | translate">Content</span></dt>
+                <dd>
+                    <span>{{currentMessage.content}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.status" [ngbTooltip]="'demoGatewayApp.currentMessage.help.status' | translate">Status</span></dt>
+                <dd>
+                    <span>{{currentMessage.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.type" [ngbTooltip]="'demoGatewayApp.currentMessage.help.type' | translate">Type</span></dt>
+                <dd>
+                    <span>{{currentMessage.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.createdDate" [ngbTooltip]="'demoGatewayApp.currentMessage.help.createdDate' | translate">Created Date</span></dt>
+                <dd>
+                    <span>{{currentMessage.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.createdId" [ngbTooltip]="'demoGatewayApp.currentMessage.help.createdId' | translate">Created Id</span></dt>
+                <dd>
+                    <span>{{currentMessage.createdId}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.targetDate" [ngbTooltip]="'demoGatewayApp.currentMessage.help.targetDate' | translate">Target Date</span></dt>
+                <dd>
+                    <span>{{currentMessage.targetDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.targetId" [ngbTooltip]="'demoGatewayApp.currentMessage.help.targetId' | translate">Target Id</span></dt>
+                <dd>
+                    <span>{{currentMessage.targetId}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.currentMessage.dialogue">Dialogue</span></dt>
+                <dd>
+                    <div *ngIf="currentMessage.dialogueId">
+                        <a [routerLink]="['/dialogue', currentMessage.dialogueId, 'view']">{{currentMessage.dialogueTargetId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/current-message', currentMessage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

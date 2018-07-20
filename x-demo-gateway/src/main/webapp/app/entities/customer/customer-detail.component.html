@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="customer">
+            <h2><span jhiTranslate="demoGatewayApp.customer.detail.title">Customer</span> {{customer.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demoGatewayApp.customer.mobile" [ngbTooltip]="'demoGatewayApp.customer.help.mobile' | translate">Mobile</span></dt>
+                <dd>
+                    <span>{{customer.mobile}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.firstName" [ngbTooltip]="'demoGatewayApp.customer.help.firstName' | translate">First Name</span></dt>
+                <dd>
+                    <span>{{customer.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.lastName" [ngbTooltip]="'demoGatewayApp.customer.help.lastName' | translate">Last Name</span></dt>
+                <dd>
+                    <span>{{customer.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.py" [ngbTooltip]="'demoGatewayApp.customer.help.py' | translate">Py</span></dt>
+                <dd>
+                    <span>{{customer.py}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.pinYin" [ngbTooltip]="'demoGatewayApp.customer.help.pinYin' | translate">Pin Yin</span></dt>
+                <dd>
+                    <span>{{customer.pinYin}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.passwordHash" [ngbTooltip]="'demoGatewayApp.customer.help.passwordHash' | translate">Password Hash</span></dt>
+                <dd>
+                    <span>{{customer.passwordHash}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.email" [ngbTooltip]="'demoGatewayApp.customer.help.email' | translate">Email</span></dt>
+                <dd>
+                    <span>{{customer.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.imageUrl" [ngbTooltip]="'demoGatewayApp.customer.help.imageUrl' | translate">Image Url</span></dt>
+                <dd>
+                    <span>{{customer.imageUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.activated" [ngbTooltip]="'demoGatewayApp.customer.help.activated' | translate">Activated</span></dt>
+                <dd>
+                    <span>{{customer.activated}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.langKey" [ngbTooltip]="'demoGatewayApp.customer.help.langKey' | translate">Lang Key</span></dt>
+                <dd>
+                    <span>{{customer.langKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.activationKey" [ngbTooltip]="'demoGatewayApp.customer.help.activationKey' | translate">Activation Key</span></dt>
+                <dd>
+                    <span>{{customer.activationKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.resetKey" [ngbTooltip]="'demoGatewayApp.customer.help.resetKey' | translate">Reset Key</span></dt>
+                <dd>
+                    <span>{{customer.resetKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.resetDate" [ngbTooltip]="'demoGatewayApp.customer.help.resetDate' | translate">Reset Date</span></dt>
+                <dd>
+                    <span>{{customer.resetDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.createdBy" [ngbTooltip]="'demoGatewayApp.customer.help.createdBy' | translate">Created By</span></dt>
+                <dd>
+                    <span>{{customer.createdBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="demoGatewayApp.customer.createdDate" [ngbTooltip]="'demoGatewayApp.customer.help.createdDate' | translate">Created Date</span></dt>
+                <dd>
+                    <span>{{customer.createdDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/customer', customer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

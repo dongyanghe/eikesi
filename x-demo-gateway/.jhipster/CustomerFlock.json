@@ -1,0 +1,78 @@
+{
+    "name": "CustomerFlock",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "群组名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 14
+        },
+        {
+            "fieldName": "py",
+            "javadoc": "拼音首字母",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "pinYin",
+            "javadoc": "拼音全拼",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "imageUrl",
+            "javadoc": "头像",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "createdDate",
+            "javadoc": "群组创建时间",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "javadoc": "一个群组关联多个群组关系",
+            "relationshipName": "flockRelation",
+            "otherEntityName": "flockRelation",
+            "otherEntityRelationshipName": "customerFlock"
+        }
+    ],
+    "changelogDate": "20180720140752",
+    "javadoc": "群组\n@author hedongyang\n@version 2018-05-14",
+    "entityTableName": "customer_flock",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

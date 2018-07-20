@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FlockRelation.
+    -->
+    <changeSet id="20180720140751-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="flock_relation"
+                                 constraintName="fk_flock_relation_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_flock_id"
+                                 baseTableName="flock_relation"
+                                 constraintName="fk_flock_relation_customer_flock_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer_flock"/>
+
+    </changeSet>
+</databaseChangeLog>

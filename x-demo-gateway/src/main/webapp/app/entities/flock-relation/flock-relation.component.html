@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="demoGatewayApp.flockRelation.home.title">Flock Relations</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-flock-relation" [routerLink]="['/flock-relation/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="demoGatewayApp.flockRelation.home.createLabel">
+            Create new Flock Relation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'demoGatewayApp.flockRelation.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="flockRelations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.remarkName">Remark Name</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.py">Py</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.pinYin">Pin Yin</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.type">Type</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.createdDate">Created Date</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.customer">Customer</span></th>
+            <th><span jhiTranslate="demoGatewayApp.flockRelation.customerFlock">Customer Flock</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let flockRelation of flockRelations ;trackBy: trackId">
+                <td><a [routerLink]="['/flock-relation', flockRelation.id, 'view' ]">{{flockRelation.id}}</a></td>
+                <td>{{flockRelation.remarkName}}</td>
+                <td>{{flockRelation.py}}</td>
+                <td>{{flockRelation.pinYin}}</td>
+                <td>{{flockRelation.type}}</td>
+                <td>{{flockRelation.createdDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="flockRelation.customerId">
+                        <a [routerLink]="['../customer', flockRelation.customerId , 'view' ]" >{{flockRelation.customerFirstName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="flockRelation.customerFlockId">
+                        <a [routerLink]="['../customer-flock', flockRelation.customerFlockId , 'view' ]" >{{flockRelation.customerFlockName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/flock-relation', flockRelation.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/flock-relation', flockRelation.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'flock-relation/'+ flockRelation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
