@@ -1,14 +1,14 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.im.service",
+      "packageName": "com.eikesi.im",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "microservice",
     "baseName": "imService",
-    "packageName": "com.eikesi.im.service",
-    "packageFolder": "com/eikesi/im/service",
+    "packageName": "com.eikesi.im",
+    "packageFolder": "com/eikesi/im",
     "serverPort": "6002",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",

@@ -36,17 +36,15 @@ describe('Component Tests', () => {
         let fixture: ComponentFixture<AuditsComponent>;
         let service: AuditsService;
 
-        beforeEach(
-            async(() => {
-                TestBed.configureTestingModule({
-                    imports: [ImGatewayTestModule],
-                    declarations: [AuditsComponent],
-                    providers: [AuditsService]
-                })
-                    .overrideTemplate(AuditsComponent, '')
-                    .compileComponents();
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [ImGatewayTestModule],
+                declarations: [AuditsComponent],
+                providers: [AuditsService]
             })
-        );
+                .overrideTemplate(AuditsComponent, '')
+                .compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(AuditsComponent);

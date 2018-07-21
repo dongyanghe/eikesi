@@ -1,14 +1,14 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.manage.gateway",
+      "packageName": "com.eikesi.manage",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "gateway",
     "baseName": "manageGateway",
-    "packageName": "com.eikesi.manage.gateway",
-    "packageFolder": "com/eikesi/manage/gateway",
+    "packageName": "com.eikesi.manage",
+    "packageFolder": "com/eikesi/manage",
     "serverPort": "8000",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
