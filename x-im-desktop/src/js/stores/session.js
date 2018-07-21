@@ -85,7 +85,7 @@ class Session {
         // Already logined
         if (self.auth) return;
 
-        var response = await axios.post(config[config.serviceType].requestUrl + 'api/authenticate', credentials);
+        var response = await axios.post(config[config.serviceType].requestUrl + 'auth/login', credentials);
         const bearerToken = response.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
             const jwt = bearerToken.slice(7, bearerToken.length);

@@ -13,19 +13,19 @@ const config = {
     serviceType: 'deBug',
     //  本地服
     deBug: {
-        requestUrl: 'http://127.0.0.1:8072/',
+        requestUrl: 'http://127.0.0.1:8001/',
     },
     //  开发服
     serviceDev: {
-        requestUrl: 'http://127.0.0.1:8072/', //
+        requestUrl: 'http://127.0.0.1:8001/', //
     },
     //  测试服
     serviceTest: {
-        requestUrl: 'http://127.0.0.1:8072/', //
+        requestUrl: 'http://127.0.0.1:8001/', //
     },
     //  生产服（一般有多个备用）
     service1: {
-        requestUrl: 'http://127.0.0.1:8072/', //
+        requestUrl: 'http://127.0.0.1:8001/', //
         backups: []
     },
     client: path.resolve(__dirname, '../src'),

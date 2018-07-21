@@ -7,6 +7,13 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "實體",
+                "customerRelation": "Customer Relation",
+                "flockRelation": "Flock Relation",
+                "customerFlock": "Customer Flock",
+                "customer": "Customer",
+                "historyMessage": "History Message",
+                "currentMessage": "Current Message",
+                "dialogue": "Dialogue",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
