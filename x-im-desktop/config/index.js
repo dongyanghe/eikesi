@@ -13,7 +13,7 @@ const config = {
     serviceType: 'deBug',
     //  本地服
     deBug: {
-        requestUrl: 'http://127.0.0.1:8001/',
+        requestUrl: 'http://127.0.0.1:9000/',
     },
     //  开发服
     serviceDev: {
