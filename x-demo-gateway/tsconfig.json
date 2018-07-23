@@ -1,32 +1,36 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": false,
-        "noImplicitAny": false,
-        "skipLibCheck": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "outDir": "target/www/app",
-        "lib": ["es7", "dom"],
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "baseUrl": "./",
-        "paths": {
-            "app/*": ["src/main/webapp/app/*"]
-        },
-        "importHelpers": true,
-        "allowJs": true
-    },
-    "include": [
-        "src/main/webapp/app",
-        "src/test/javascript/"
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "target/www/app",
+    "lib": ["es2015", "es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
     ],
-    "exclude": [
-        "node_modules"
-    ]
+    "types": ["webpack-env"],
+    "allowJs": true,
+    "checkJs": false,
+    "baseUrl": "./",
+    "paths": {
+        "app/*": ["src/main/webapp/app/*"]
+    },
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/main/webapp/app/typing.d.ts",
+    "src/main/webapp/app/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

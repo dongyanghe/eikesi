@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: INFO
-        com.eikesi.demo.gateway: INFO
+        com.eikesi.demo: INFO
         io.github.jhipster: INFO
 
 eureka:
