@@ -12,7 +12,7 @@ const getTsLoaderRule = env => {
     {
       loader: 'cache-loader',
       options: {
-        cacheDirectory: path.resolve('target/cache-loader')
+        cacheDirectory: path.resolve('build/cache-loader')
       }
     },
     {

@@ -20,7 +20,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     './src/main/webapp/app/index'
   ],
   output: {
-    path: utils.root('target/www'),
+    path: utils.root('build/www'),
     filename: 'app/[name].bundle.js',
     chunkFilename: 'app/[id].chunk.js'
   },
@@ -35,7 +35,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
   devServer: {
     stats: options.stats,
     hot: true,
-    contentBase: './target/www',
+    contentBase: './build/www',
     proxy: [{
       context: [
         '/uaaserver',

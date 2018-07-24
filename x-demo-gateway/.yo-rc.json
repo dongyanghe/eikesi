@@ -17,7 +17,7 @@
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
-    "prodDatabaseType": "mysql",
+    "prodDatabaseTma  kljype": "mysql",
     "searchEngine": "elasticsearch",
     "messageBroker": "kafka",
     "serviceDiscoveryType": "eureka",
