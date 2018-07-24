@@ -1,15 +1,15 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.im.desktop",
+      "packageName": "com.eikesi.im.web",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "gateway",
-    "baseName": "imGateway",
-    "packageName": "com.eikesi.im.desktop",
-    "packageFolder": "com/eikesi/im/desktop",
-    "serverPort": "8001",
+    "baseName": "imWebGateway",
+    "packageName": "com.eikesi.im.web",
+    "packageFolder": "com/eikesi/im/web",
+    "serverPort": "8005",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
     "cacheProvider": "hazelcast",
@@ -23,7 +23,7 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "clientFramework": "angularX",
+    "clientFramework": "react",
     "useSass": true,
     "clientPackageManager": "yarn",
     "testFrameworks": [
