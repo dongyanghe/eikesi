@@ -1,4 +1,3 @@
-
 {
   "name": "im-web-gateway",
   "version": "0.0.0",
@@ -9,9 +8,10 @@
     "node_modules"
   ],
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "5.1.0",
     "@fortawesome/fontawesome-svg-core": "1.2.0",
+    "@fortawesome/free-solid-svg-icons": "5.1.0",
     "@fortawesome/react-fontawesome": "0.1.0",
+    "antd": "^3.7.2",
     "availity-reactstrap-validation": "2.0.2",
     "axios": "0.18.0",
     "bootstrap": "4.1.1",
@@ -124,7 +124,8 @@
     "webpack-merge": "4.1.3",
     "webpack-notifier": "1.6.0",
     "workbox-webpack-plugin": "3.3.1",
-    "write-file-webpack-plugin": "4.3.2"  },
+    "write-file-webpack-plugin": "4.3.2"
+  },
   "resolutions": {
     "@types/react": "16.4.6"
   },
@@ -133,7 +134,10 @@
     "yarn": ">=1.3.2"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,css,scss}": ["prettier --write", "git add"]
+    "src/**/*.{ts,tsx,css,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "scripts": {
     "precommit": "lint-staged",

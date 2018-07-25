@@ -17,7 +17,8 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
-
+import { Affix, Button } from 'antd';
+import 'antd/dist/antd.css';
 export interface IAppProps extends StateProps, DispatchProps {}
 
 export class App extends React.Component<IAppProps> {
@@ -49,6 +50,11 @@ export class App extends React.Component<IAppProps> {
                 <AppRoutes />
               </ErrorBoundary>
             </Card>
+            <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
+              <Button type="danger" shape="circle">
+                <i className="iconfont x-tubiao15" />
+              </Button>
+            </Affix>
             <Footer />
           </div>
         </div>
