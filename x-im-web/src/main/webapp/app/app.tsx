@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
-import { setLocale } from 'app/shared/reducers/locale';
+import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
 import Header from 'app/shared/layout/header/header';
 import Footer from 'app/shared/layout/footer/footer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -26,7 +26,13 @@ export class App extends React.Component<IAppProps> {
     this.props.getSession();
     this.props.getProfile();
   }
-
+  showImWindows = event => {
+    debugger;
+    this.props.setIsShowImWindows(!this.props.isShowImWindows);
+    // this.setState({
+    //   isShowImWindows: !this.props.isShowImWindows,
+    // });
+  };
   render() {
     const paddingTop = '60px';
     return (
@@ -50,11 +56,13 @@ export class App extends React.Component<IAppProps> {
                 <AppRoutes />
               </ErrorBoundary>
             </Card>
-            <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
-              <Button type="danger" shape="circle">
-                <i className="iconfont x-tubiao15" />
-              </Button>
-            </Affix>
+            {this.props.isAuthenticated && (
+              <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
+                <Button type="danger" shape="circle" onClick={this.showImWindows}>
+                  <i className="iconfont x-tubiao15" />
+                </Button>
+              </Affix>
+            )}
             <Footer />
           </div>
         </div>
@@ -69,10 +77,11 @@ const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootSt
   isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
   ribbonEnv: applicationProfile.ribbonEnv,
   isInProduction: applicationProfile.inProduction,
-  isSwaggerEnabled: applicationProfile.isSwaggerEnabled
+  isSwaggerEnabled: applicationProfile.isSwaggerEnabled,
+  isShowImWindows: locale.isShowImWindows
 });
 
-const mapDispatchToProps = { setLocale, getSession, getProfile };
+const mapDispatchToProps = { setLocale, getSession, getProfile, setIsShowImWindows };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

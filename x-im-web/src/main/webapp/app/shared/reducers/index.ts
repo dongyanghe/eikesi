@@ -60,6 +60,7 @@ export interface IRootState {
   readonly flockRelation: FlockRelationState;
   readonly customerFlock: CustomerFlockState;
   readonly customer: CustomerState;
+
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
