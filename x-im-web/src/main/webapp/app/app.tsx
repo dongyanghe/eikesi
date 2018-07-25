@@ -56,15 +56,15 @@ export class App extends React.Component<IAppProps> {
                 <AppRoutes />
               </ErrorBoundary>
             </Card>
-            {this.props.isAuthenticated && (
-              <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
-                <Button type="danger" shape="circle" onClick={this.showImWindows}>
-                  <i className="iconfont x-tubiao15" />
-                </Button>
-              </Affix>
-            )}
             <Footer />
           </div>
+          {this.props.isAuthenticated && (
+            <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
+              <Button type="danger" shape="circle" onClick={this.showImWindows}>
+                <i className="iconfont x-tubiao15" />
+              </Button>
+            </Affix>
+          )}
         </div>
       </Router>
     );
