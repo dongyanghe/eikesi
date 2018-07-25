@@ -62,7 +62,7 @@ class Session {
             return self.userIdentity;
         }
         var response = await axios.get(
-            config[config.serviceType].requestUrl + 'api/account');
+            config[config.serviceType].requestUrl + 'uaaserver/api/account');
         const account = response.data;
         if (account) {
             self.userIdentity = account;
@@ -84,15 +84,25 @@ class Session {
     @action async login(credentials) {
         // Already logined
         if (self.auth) return;
-
-        var response = await axios.post(config[config.serviceType].requestUrl + 'api/authenticate', credentials);
-        const bearerToken = response.headers.authorization;
-        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-            const jwt = bearerToken.slice(7, bearerToken.length);
-            await self.storeAuthenticationToken(jwt, credentials.rememberMe);
-            //  刷新userIdentity
-            await self.getAccout(true);
-        }
+        // access_token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJleHAiOjE1MzIyNDI5OTgsImlhdCI6MTUzMjI0MjY5OCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJqdGkiOiI4YzA1ODBlZi1iZDgwLTRjZWEtOTQ2My02ZTgxODRmOWQ5OTIiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIn0.YoGo42_tankAT0_GTgB4Yx2kf4UOKQ6zb2jPxqIpZNmjJz5DFyAgNMG2rGXYt2z61qyb4EKHjnzXQFQ1W_IwSedaRryccScQeQ-Fd9EBAczJTgA-QTv2VVmEtb2JpCp2qr2zNZSKuLX82HCu-BF7HDr0TpPnVoA66YmERuJryEl7cBmo75EOqCRQpKJXhdXxTrP5fpI2A2h9mD3qi9_dyYA3t6as8YVCN2D9k_rl10CTECTmMrmcKW4Hhenqu5M94bo73_LuxPFZVVx8Cmzc2wAYiVvZJ8HqfOXo5JtL6Php6cVab1TSKVSDJfRc0U4QqyC_Dg9BD8AdDkz0sdNsyw"
+        // expires_in: 298
+        // iat: 1532242698
+        // jti: "8c0580ef-bd80-4cea-9463-6e8184f9d992"
+        // refresh_token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJhdGkiOiI4YzA1ODBlZi1iZDgwLTRjZWEtOTQ2My02ZTgxODRmOWQ5OTIiLCJleHAiOjE1MzI4NDc0OTgsImlhdCI6MTUzMjI0MjY5OCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJqdGkiOiJkOGRjOTJlOS1jOWMyLTRlMGYtYTZjMy01OWNhOGJhYWM4NzEiLCJjbGllbnRfaWQiOiJ3ZWJfYXBwIn0.v0c4xXdtuGrwe7yDSTKOMAsxFMpnTv7Jvr9Qhy4jnhNgdQuO_2X21hTjVvi_j6c1ydO3MTnQvKb6IO_3qs7rDT3g_YE0bfrGTc5U5nS281h_S2OQLcyj8fbQEqAcDXeejurs6a0_Czz3A27590msYoHAgNnGNy-zYZgkUujLbDk-BpzImleI10d8Qjkaxkm-a1GLr00m4lpLmMeNhGBPOSY_bm_ZmBhGW7D65wl2O_GcTts3kUZfz993hgs2mM9aI2lYG2n1W_ReydTo1mTcQFydUFo8OyUdqEt0OrMgJCdN3Lz5XPh8fvxpWW9D7hZe1SaiJdfEb5FWbOiHHiJVqA"
+        // scope: "openid"
+        // token_type: "bearer"
+        var response = await axios.post(config[config.serviceType].requestUrl + 'auth/login', credentials);
+        console.log(response);
+        await self.getAccout();
+        //  跳转到住界面
+        navigator.history.push('/');
+        // const bearerToken = response.headers.authorization;
+        // if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+        //     const jwt = bearerToken.slice(7, bearerToken.length);
+        //     await self.storeAuthenticationToken(jwt, credentials.rememberMe);
+        //     //  刷新userIdentity
+        //     await self.getAccout(true);
+        // }
     }
 
     /**
@@ -101,7 +111,7 @@ class Session {
      */
     @action async initUser() {
         /**
-         * 获取登录用户信息和正在交互的群组+服务的消息列表
+         * 获取登录用户im系统信息和正在交互的群组+服务的消息列表
          * @type {any}
          */
         var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxinit?r=${-new Date()}&pass_ticket=${self.auth.passTicket}`, {

@@ -1,14 +1,14 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.im.gateway",
+      "packageName": "com.eikesi.im.desktop",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "gateway",
     "baseName": "imGateway",
-    "packageName": "com.eikesi.im.gateway",
-    "packageFolder": "com/eikesi/im/gateway",
+    "packageName": "com.eikesi.im.desktop",
+    "packageFolder": "com/eikesi/im/desktop",
     "serverPort": "8001",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",

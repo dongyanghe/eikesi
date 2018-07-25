@@ -115,7 +115,8 @@ relationship OneToMany {
 paginate Customer, CustomerFlock with pagination
 dto * with mapstruct
 service * with serviceClass
-
+skipServer *
+//  skipClient *
 // microservice DemoA with demoAbcService
 // microservice DemoB with demoAbcService
 // microservice DemoC with demoAbcService

@@ -1,6 +1,6 @@
 {
-  "name": "DemoGateway",
-  "short_name": "DemoGateway",
+  "name": "demoGateway",
+  "short_name": "demoGateway",
   "icons": [
       {
           "src": "./content/images/hipster192.png",

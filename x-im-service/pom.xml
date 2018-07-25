@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eikesi.im.service</groupId>
+    <groupId>com.eikesi.im</groupId>
     <artifactId>im-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -563,11 +563,11 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/im</url>
-                    <defaultSchemaName>im</defaultSchemaName>
+                    <url>jdbc:mysql://localhost:3306/imService</url>
+                    <defaultSchemaName>imService</defaultSchemaName>
                     <username>root</username>
-                    <password>root</password>
-                    <referenceUrl>hibernate:spring:com.eikesi.im.service.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                    <password></password>
+                    <referenceUrl>hibernate:spring:com.eikesi.im.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                 </configuration>
@@ -685,8 +685,8 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.eikesi.im.service.web.api</apiPackage>
-                            <modelPackage>com.eikesi.im.service.web.api.model</modelPackage>
+                            <apiPackage>com.eikesi.im.web.api</apiPackage>
+                            <modelPackage>com.eikesi.im.web.api.model</modelPackage>
                             <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                             <configOptions>
                                 <delegatePattern>true</delegatePattern>

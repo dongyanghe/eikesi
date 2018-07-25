@@ -18,6 +18,7 @@ public class OAuth2InterceptedFeignConfiguration {
     }
 
     @Bean(name = "oauth2RequestInterceptor")
+    //  添加到RequestInterceptor的集合中。
     public RequestInterceptor getOAuth2RequestInterceptor() throws IOException {
         return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), loadBalancedResourceDetails);
     }
