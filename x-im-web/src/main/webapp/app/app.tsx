@@ -39,32 +39,21 @@ export class App extends React.Component<IAppProps> {
       <Router>
         <div className="app-container" style={{ paddingTop }}>
           <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-          <ErrorBoundary>
-            <Header
-              isAuthenticated={this.props.isAuthenticated}
-              isAdmin={this.props.isAdmin}
-              currentLocale={this.props.currentLocale}
-              onLocaleChange={this.props.setLocale}
-              ribbonEnv={this.props.ribbonEnv}
-              isInProduction={this.props.isInProduction}
-              isSwaggerEnabled={this.props.isSwaggerEnabled}
-            />
-          </ErrorBoundary>
+
           <div className="container-fluid view-container" id="app-view-container">
             <Card className="jh-card">
               <ErrorBoundary>
                 <AppRoutes />
               </ErrorBoundary>
             </Card>
-            <Footer />
           </div>
-          {this.props.isAuthenticated && (
-            <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>
-              <Button type="danger" shape="circle" onClick={this.showImWindows}>
-                <i className="iconfont x-tubiao15" />
-              </Button>
-            </Affix>
-          )}
+          {/*{this.props.isAuthenticated && (*/}
+            {/*<Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>*/}
+              {/*<Button type="danger" shape="circle" onClick={this.showImWindows}>*/}
+                {/*<i className="iconfont x-tubiao15" />*/}
+              {/*</Button>*/}
+            {/*</Affix>*/}
+          {/*)}*/}
         </div>
       </Router>
     );
@@ -85,7 +74,10 @@ const mapDispatchToProps = { setLocale, getSession, getProfile, setIsShowImWindo
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
-
+/**
+ * 主页面
+ * index.tsx激活render
+ */
 export default connect(
   mapStateToProps,
   mapDispatchToProps

@@ -25,7 +25,7 @@ loadIcons();
 
 const rootEl = document.getElementById('root');
 
-const render = Component =>
+const render = AppComponent =>
   ReactDOM.render(
     <ErrorBoundary>
       <AppContainer>
@@ -33,7 +33,7 @@ const render = Component =>
           <div>
             {/* If this slows down the app in dev disable it and enable when required  */}
             {devTools}
-            <Component />
+            <AppComponent />
           </div>
         </Provider>
       </AppContainer>
