@@ -9,6 +9,8 @@ import PasswordResetInit from 'app/modules/account/password-reset/init/password-
 import PasswordResetFinish from 'app/modules/account/password-reset/finish/password-reset-finish';
 import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
+import Settings from 'app/modules/settings/settings';
+import Contacts from 'app/modules/contacts/contacts';
 import Entities from 'app/entities';
 import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
@@ -35,12 +37,12 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/activate/:key?" component={Activate} />
       <ErrorBoundaryRoute path="/reset/request" component={PasswordResetInit} />
       <ErrorBoundaryRoute path="/reset/finish/:key?" component={PasswordResetFinish} />
+      <ErrorBoundaryRoute path="/" component={Home} />
       <ErrorBoundaryRoute  path="/contacts" component={Contacts} />
       <ErrorBoundaryRoute  path="/settings" component={Settings} />
       {/*<PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />*/}
       {/*<PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />*/}
       {/*<PrivateRoute path="/entity" component={Entities} hasAnyAuthorities={[AUTHORITIES.USER]} />*/}
-      <ErrorBoundaryRoute path="/" component={Home} />
     </Switch>
   </div>
 );
