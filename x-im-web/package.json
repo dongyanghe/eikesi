@@ -15,6 +15,7 @@
     "availity-reactstrap-validation": "2.0.2",
     "axios": "0.18.0",
     "bootstrap": "4.1.1",
+    "classnames": "^2.2.6",
     "loaders.css": "0.1.2",
     "lodash": "4.17.10",
     "moment": "2.22.2",

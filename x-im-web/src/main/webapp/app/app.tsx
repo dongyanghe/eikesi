@@ -32,6 +32,9 @@ export class App extends React.Component<IAppProps> {
     this.props.getSession();
     this.props.getProfile();
   }
+  /**
+   *  1.显示/隐藏窗口弹窗
+   * */
   showImWindows = event => {
     debugger;
     this.props.setIsShowImWindows(!this.props.isShowImWindows);
