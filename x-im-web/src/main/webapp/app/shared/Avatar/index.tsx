@@ -7,7 +7,7 @@ import './avatar.scss';
 export interface IAvatarProps {
     src: string;
     fallback: string;
-    className: string;
+    className?: string;
     onClick: Function;
 }
   export interface IAvatarState {
@@ -17,7 +17,6 @@ export default class Avatar extends React.Component<IAvatarProps, IAvatarState> 
     state: IAvatarState = {
         fallback: 'assets/images/user-fallback.png'
     };
-
     handleError(e) {
         e.target.src = this.props.fallback || this.state.fallback;
     }
