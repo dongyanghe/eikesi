@@ -2,20 +2,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './style.global.css';
+import './avatar.scss';
 
-export default class Avatar extends Component {
-    static propTypes = {
-        src: PropTypes.string,
-        fallback: PropTypes.string,
+export interface IAvatarProps {
+    src: string;
+    fallback: string;
+    className?: string;
+    onClick: Function;
+}
+  export interface IAvatarState {
+    fallback: string;
+}
+export default class Avatar extends React.Component<IAvatarProps, IAvatarState> {
+    state: IAvatarState = {
+        fallback: 'assets/images/user-fallback.png'
     };
-
-    static defaultProps = {
-        fallback: 'assets/images/user-fallback.png',
-    };
-
     handleError(e) {
-        e.target.src = this.props.fallback;
+        e.target.src = this.props.fallback || this.state.fallback;
     }
 
     handleLoad(e) {
