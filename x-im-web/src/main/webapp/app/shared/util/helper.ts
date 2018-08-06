@@ -11,43 +11,28 @@ const CONTACTFLAG_NOTIFYCLOSECONTACT = 512;
 const MM_USERATTRVERIFYFALG_BIZ_BRAND = 8;
 const CONTACTFLAG_TOPCONTACT = 2048;
 const CONTACTFLAG_CONTACT = 1;
-const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
-    account: authentication.account,
-    currentLocale: locale.currentLocale,
-    isAuthenticated: authentication.isAuthenticated,
-    isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
-    ribbonEnv: applicationProfile.ribbonEnv,
-    isInProduction: applicationProfile.inProduction,
-    isSwaggerEnabled: applicationProfile.isSwaggerEnabled
-  });
-type StateProps = ReturnType<typeof mapStateToProps>;
+const authenticationState = { getSession };
 const helper = {
     isContact: (user: any) => {
         if (helper.isFileHelper(user)) return true;
 
         return user.ContactFlag & CONTACTFLAG_CONTACT
-            || (mapStateToProps.account.user && user.UserName === session.user.User.UserName);
+            || (authenticationState.account.user && user.UserName === authenticationState.user.User.UserName);
     },
 
-    isChatRoom: (userid: any) => {
-        return userid && userid.startsWith('@@');
-    },
+    isChatRoom: (userid: any) => userid && userid.startsWith('@@'),
 
-    isChatRoomOwner: (user: any) => {
-        return helper.isChatRoom(user.UserName) && user.IsOwner;
-    },
+    isChatRoomOwner: (user: any) => helper.isChatRoom(user.UserName)
+        && user.IsOwner,
 
-    isChatRoomRemoved: (user: any) => {
-        return helper.isChatRoom(user.UserName) && user.ContactFlag === 0;
-    },
+    isChatRoomRemoved: (user: any) => helper.isChatRoom(user.UserName)
+        && user.ContactFlag === 0,
 
-    isMuted: (user: any) => {
-        return helper.isChatRoom(user.UserName) ? user.Statues === CHATROOM_NOTIFY_CLOSE : user.ContactFlag & CONTACTFLAG_NOTIFYCLOSECONTACT;
-    },
+    isMuted: (user: any) => helper.isChatRoom(user.UserName) ? user.Statues
+        === CHATROOM_NOTIFY_CLOSE : user.ContactFlag & CONTACTFLAG_NOTIFYCLOSECONTACT,
 
-    isOfficial: (user: any) => {
-        return !(user.VerifyFlag !== 24 && user.VerifyFlag !== 8 && user.UserName.startsWith('@'));
-    },
+    isOfficial: (user: any) => !(user.VerifyFlag !== 24 && user.VerifyFlag
+        !== 8 && user.UserName.startsWith('@')),
 
     isFileHelper: (user: any) => user.UserName === 'filehelper',
 
@@ -59,24 +44,23 @@ const helper = {
         return user.ContactFlag & CONTACTFLAG_TOPCONTACT;
     },
 
-    isBrand: (user: any) => {
-        return user.VerifyFlag & MM_USERATTRVERIFYFALG_BIZ_BRAND;
-    },
+    isBrand: (user: any) => user.VerifyFlag & MM_USERATTRVERIFYFALG_BIZ_BRAND,
 
     parseKV: (text: any) => {
         const string = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         const matchs = string.match(/(\w+)="([^\s]+)"/g);
         let res = {};
-
         matchs.map(e => {
             const kv = e.replace(/"/g, '').split('=');
-
             res[kv[0]] = kv[1];
         });
 
         return res;
     },
-
+    /**
+     * 解析xml
+     * @shared: IE浏览器提供了Microsoft.XMLDOM的activex控件来解析xml，非ie浏览器可以使用window.DOMParser来解析xml
+     */
     parseXml: (text, tagName) => {
         const parser = new window.DOMParser();
         const xml = parser.parseFromString(text.replace(/&lt;/g, '<').replace(/&gt;/g, '>'), 'text/xml');
@@ -110,7 +94,7 @@ const helper = {
 
     getMessageContent: (message: any) => {
         const isChatRoom = helper.isChatRoom(message.FromUserName);
-        const content = message.Content;
+        let content = message.Content;
 
         if (isChatRoom && !message.isme) {
             content = message.Content.split(':<br/>')[1];
@@ -152,15 +136,17 @@ const helper = {
             case 49 + 2000:
                 // Transfer
                 return `Money +${message.transfer.money} 💰💰💰`;
+            default:
+                console.error('getMessageContent undefind');
         }
     },
 
-    getCookie: async(name: string) => {
+    getCookie: async (name: string) => {
         window.console.log('getCookie is empty');
         // const value = {
         //     name
         // };
-        // const cookies = remote.getCurrentWindow().webContents.session.cookies;
+        // const cookies = remote.getCurrentWindow().webContents.authenticationState.cookies;
 
         // if (!name) {
         //     return new Promise((resolve, reject) => {
@@ -193,10 +179,10 @@ const helper = {
     },
 
     humanSize: (size: any) => {
-        const value = (size / 1024).toFixed(1);
+        let value = (size / 1024).toFixed(1);
 
         if (size > (1024 << 10)) {
-            value = (value / 1024).toFixed(1);
+            value = (Number(value) / 1024).toFixed(1);
             return `${value} M`;
         } else {
             return `${value} KB`;
@@ -204,7 +190,7 @@ const helper = {
     },
 
     getFiletypeIcon: (extension: any) => {
-        const filename = 'unknow';
+        let filename = 'unknow';
 
         extension = (extension || '').toLowerCase().replace(/^\./, '');
 
@@ -232,34 +218,38 @@ const helper = {
             case ['ai', 'apk', 'exe', 'ipa', 'pdf', 'ppt', 'psd'].includes(extension):
                 filename = extension;
                 break;
+            default:
+                console.error('getFiletypeIcon undefind');
         }
 
         return `${filename}.png`;
     },
 
-    getPallet: (image: any) => {
-        return new Promise((resolve, reject) => {
+    getPallet: (image: any) => new Promise((resolve, reject) => {
+        try {
             new window.AlbumColors(image).getColors((colors, err) => {
                 if (err) {
                     resolve([
                         [0, 0, 0],
                         [0, 0, 0],
-                        [0, 0, 0],
+                        [0, 0, 0]
                     ]);
                 } else {
                     resolve(colors);
                 }
             });
-        });
-    },
+        } catch (error) {
+            reject([
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ]);
+        }
+    }),
 
-    decodeHTML: (text = '') => {
-        return text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-    },
+    decodeHTML: (text = '') => text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
 
-    isImage: (ext) => {
-        return ['bmp', 'gif', 'jpeg', 'jpg', 'png'].includes(ext);
-    },
+    isImage: (ext) => ['bmp', 'gif', 'jpeg', 'jpg', 'png'].includes(ext),
 
     // 3 types supported: pic, video, doc
     getMediaType: (ext = '') => {
@@ -305,13 +295,19 @@ const helper = {
         window.console.log('sendSync is-suspend');
     },
 
-    md5: (file) => {
-        return new Promise((resolve, reject) => {
-            MD5(file, (err, md5) => {
-                resolve(err ? false : md5);
-            });
+    md5: file => new Promise((resolve, reject) => {
+            try {
+                MD5(file, (err, md5) => {
+                    if (err) {
+                        reject(false);
+                    } else {
+                        resolve(err ? false : md5);
+                    }
+                });
+            } catch (error) {
+                reject(false);
+            }
         });
-    }
 };
 
 export default helper;
