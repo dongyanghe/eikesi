@@ -11,6 +11,7 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
+import { Offline } from 'app/shared/Offline';
 import Header from 'app/shared/layout/header/header';
 import Footer from 'app/shared/layout/footer/footer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -19,24 +20,23 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import { Affix, Button } from '_antd@3.7.2@antd';
 import 'antd/dist/antd.css';
-export interface IAppProps extends StateProps, DispatchProps { }
 
+export interface IAppProps extends StateProps, DispatchProps { }
 export class App extends React.Component<IAppProps> {
   /**
    *  1.初始化项目基本信息
    *  2.获取用户信息
    *  @wait: 3.获取消息列表
    *  @wait: 3.获取用户系统设置信息
-   * */
+   */
   componentDidMount() {
     this.props.getSession();
     this.props.getProfile();
   }
   /**
    *  1.显示/隐藏窗口弹窗
-   * */
+   */
   showImWindows = event => {
-    debugger;
     this.props.setIsShowImWindows(!this.props.isShowImWindows);
     // this.setState({
     //   isShowImWindows: !this.props.isShowImWindows,
@@ -44,6 +44,14 @@ export class App extends React.Component<IAppProps> {
   };
   render() {
     const paddingTop = '60px';
+    if (!window.navigator.onLine) {
+      return (
+          <Offline show={true} style={{
+              top: 0,
+              paddingTop: 30
+          }} />
+      );
+  }
     return (
       <Router>
         <div className="app-container" style={{ paddingTop }}>

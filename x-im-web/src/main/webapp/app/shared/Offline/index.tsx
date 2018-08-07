@@ -10,7 +10,7 @@ export interface IProps {
 export interface IState {
     show: PropTypes.bool.isRequired;
   }
-export default class Avatar extends Component<IProps, IState> {
+export default class Offline extends Component<IProps, IState> {
     state: IState = {
         show: false
       };
