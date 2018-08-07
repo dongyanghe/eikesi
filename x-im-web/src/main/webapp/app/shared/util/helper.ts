@@ -249,7 +249,7 @@ const helper = {
 
     decodeHTML: (text = '') => text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
 
-    isImage: (ext) => ['bmp', 'gif', 'jpeg', 'jpg', 'png'].includes(ext),
+    isImage: ext => ['bmp', 'gif', 'jpeg', 'jpg', 'png'].includes(ext),
 
     // 3 types supported: pic, video, doc
     getMediaType: (ext = '') => {
@@ -267,7 +267,7 @@ const helper = {
         }
     },
 
-    getDataURL: (src) => {
+    getDataURL: src => {
         const image = new window.Image();
 
         return new Promise((resolve, reject) => {
@@ -307,7 +307,7 @@ const helper = {
             } catch (error) {
                 reject(false);
             }
-        });
+        })
 };
 
 export default helper;

@@ -19,13 +19,11 @@ export default class Suggestion extends Component<IProps> {
             return false;
         }
 
-        console.log(window.event);
-
         return (
             <div className="Suggestion">
                 {
-                    list.map((e, index) => {
-                        return (
+                    list.map((e, index) =>
+                        (
                             <div
                                 key={index}
                                 className={classnames('Suggestion-item', {
@@ -36,8 +34,8 @@ export default class Suggestion extends Component<IProps> {
                                     <p className="Suggestion-username" dangerouslySetInnerHTML={{__html: e.RemarkName || e.NickName}} />
                                 </div>
                             </div>
-                        );
-                    })
+                        )
+                    )
                 }
             </div>
         );

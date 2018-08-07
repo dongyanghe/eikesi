@@ -1,16 +1,16 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import './style.global.css';
 import TransitionPortal from 'app/shared/TransitionPortal';
 
-export default class Snackbar extends Component {
-    static propTypes = {
-        show: PropTypes.bool.isRequired,
-        text: PropTypes.string.isRequired,
-        close: PropTypes.func.isRequired,
-    };
+import './style.scss';
+
+export interface IProps {
+    show: PropTypes.bool.isRequired;
+    text: PropTypes.string.isRequired;
+    close: PropTypes.func.isRequired;
+  }
+export default class Snackbar extends Component<IProps> {
 
     renderContent() {
         if (!this.props.show) {
@@ -21,7 +21,7 @@ export default class Snackbar extends Component {
             <div className="Snackbar">
                 <div
                     className="Snackbar-text"
-                    dangerouslySetInnerHTML={{__html: this.props.text}} />
+                    dangerouslySetInnerHTML={{ __html: this.props.text }} />
                 <div
                     className="Snackbar-action"
                     onClick={() => this.props.close()}>

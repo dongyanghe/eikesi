@@ -17,6 +17,7 @@
     "bootstrap": "4.1.1",
     "browser-md5-file": "^1.0.0",
     "classnames": "^2.2.6",
+    "delegate": "^3.2.0",
     "loaders.css": "0.1.2",
     "lodash": "4.17.10",
     "moment": "2.22.2",

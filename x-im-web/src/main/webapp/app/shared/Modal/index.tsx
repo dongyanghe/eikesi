@@ -2,13 +2,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-addons-css-transition-group';
-import clazz from 'classname';
+import classnames from 'classnames';
 
-import './style.css';
+import './style.scss';
 import TransitionPortal from 'app/shared/TransitionPortal';
-import { on, off } from 'utils/event';
+import { on, off } from 'app/shared/util/event';
 
-class ModalBody extends Component {
+export interface IModalBodyProps {
+    className?: PropTypes.string;
+    style?: PropTypes.CSSProperties;
+}
+class ModalBody extends Component<IModalBodyProps> {
     render() {
         return (
             <Transition
@@ -16,49 +20,63 @@ class ModalBody extends Component {
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}>
                 <div
-                    className={clazz('Modal-body', this.props.className)}
+                    className={classnames('Modal-body', this.props.className)}
                     style={this.props.style}>
                     {this.props.children}
                 </div>
             </Transition>
         );
     }
-};
+}
 
-class ModalHeader extends Component {
+export interface IModalHeaderProps {
+    className?: PropTypes.string;
+    style?: PropTypes.CSSProperties;
+}
+class ModalHeader extends Component<IModalHeaderProps> {
     render() {
         return (
-            <div className={clazz('Modal-header', this.props.className)}>
+            <div className={classnames('Modal-header', this.props.className)}>
                 {this.props.children}
             </div>
         );
     }
 }
 
-class ModalFooter extends Component {
+export interface IModalFooterProps {
+    className?: PropTypes.string;
+    style?: PropTypes.CSSProperties;
+}
+class ModalFooter extends Component<IModalFooterProps> {
     render() {
         return (
-            <div className={clazz('Modal-footer', this.props.className)}>
+            <div className={classnames('Modal-footer', this.props.className)}>
                 {this.props.children}
             </div>
         );
     }
 }
 
-class Modal extends Component {
-    static propTypes = {
-        show: PropTypes.bool.isRequired,
-        overlay: PropTypes.bool,
-        onCancel: PropTypes.func,
-        transition4overlay: PropTypes.string,
-        transition4body: PropTypes.string
-    };
-
+export interface IModalProps {
+    show: PropTypes.bool.isRequired;
+    overlay: PropTypes.bool;
+    onCancel: PropTypes.func;
+    transition4overlay: PropTypes.string;
+    transition4body: PropTypes.string;
+    className?: PropTypes.string;
+}
+export interface IModalState {
+    overlay: true;
+    transition4overlay: 'Modal-overlay';
+    transition4body: 'Modal-body';
+    onCancel: Function;
+}
+class Modal extends Component<IModalProps, IModalState> {
     static defaultProps = {
         overlay: true,
         transition4overlay: 'Modal-overlay',
         transition4body: 'Modal-body',
-        onCancel: Function,
+        onCancel: Function
     };
 
     renderOverlay() {
@@ -68,7 +86,7 @@ class Modal extends Component {
 
         return (
             <div
-                className={clazz('Modal-overlay', this.props.className)}
+                className={classnames('Modal-overlay', this.props.className)}
                 onClick={this.props.onCancel} />
         );
     }
@@ -79,7 +97,7 @@ class Modal extends Component {
         }
 
         return (
-            <div className={clazz('Modal-content', this.props.className)}>
+            <div className={classnames('Modal-content', this.props.className)}>
                 {this.props.children}
             </div>
         );

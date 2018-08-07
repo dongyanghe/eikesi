@@ -17,7 +17,7 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
-import { Affix, Button } from '../../../../node_modules/_antd@3.7.2@antd';
+import { Affix, Button } from '_antd@3.7.2@antd';
 import 'antd/dist/antd.css';
 export interface IAppProps extends StateProps, DispatchProps { }
 

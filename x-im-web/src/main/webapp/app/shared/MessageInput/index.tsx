@@ -13,8 +13,9 @@ export interface IProps {
     user: PropTypes.array.isRequired;
     confirmSendImage: PropTypes.func.isRequired;
     process: PropTypes.func.isRequired;
+    className?: PropTypes.string;
   }
-  export interface IState {
+export interface IState {
     me: PropTypes.object;
     showEmoji: boolean;
   }

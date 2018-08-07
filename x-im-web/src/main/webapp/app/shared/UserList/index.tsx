@@ -1,35 +1,39 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import clazz from 'classname';
+import classnames from 'classnames';
 
-import classes from './style.css';
+import './style.css';
 
-export default class UserList extends Component {
-    static propTypes = {
-        max: PropTypes.number.isRequired,
-        searching: PropTypes.string.isRequired,
-        search: PropTypes.func.isRequired,
-        getList: PropTypes.func.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
+export interface IProps {
+    max: PropTypes.number.isRequired;
+    searching: PropTypes.string.isRequired;
+    search: PropTypes.func.isRequired;
+    getList: PropTypes.func.isRequired;
+    onChange: PropTypes.func.isRequired;
+  }
+export interface IState {
+    selected: any[];
+    active: string;
+  }
+export default class UserList extends Component<IProps, IState> {
 
-    static defaultProps = {
+    props = {
         max: 20,
+        ...this.props
     };
-
     state = {
         selected: [],
-        active: '',
+        active: ''
     };
 
     highlight(offset) {
-        var scroller = this.refs.list;
-        var users = Array.from(scroller.querySelectorAll('li[data-userid]'));
-        var index = users.findIndex(e => e.classList.contains(classes.active));
+        const scroller = this.refs.list;
+        const users = Array.from(scroller.querySelectorAll('li[data-userid]'));
+        let index = users.findIndex(e => e.classList.contains('active'));
 
         if (index > -1) {
-            users[index].classList.remove(classes.active);
+            users[index].classList.remove('active');
         }
 
         index += offset;
@@ -42,21 +46,21 @@ export default class UserList extends Component {
             index = 0;
         }
 
-        var active = users[index];
+        let active = users[index];
 
         if (active) {
             // Keep active item always in the viewport
-            active.classList.add(classes.active);
+            active.classList.add('active');
             scroller.scrollTop = active.offsetTop + active.offsetHeight - scroller.offsetHeight;
         }
     }
 
     navigation(e) {
-        var keyCode = e.keyCode;
-        var offset = {
+        const keyCode = e.keyCode;
+        const offset = {
             // Up
             '38': -1,
-            '40': 1,
+            '40': 1
         }[keyCode];
 
         if (offset) {
@@ -67,10 +71,10 @@ export default class UserList extends Component {
             return;
         }
 
-        var active = this.refs.list.querySelector(`.${classes.active}`);
+        const active = this.refs.list.querySelector(`.active`);
 
         if (active) {
-            let userid = active.dataset.userid;
+            const userid = active.dataset.userid;
 
             if (!this.state.selected.includes(userid)) {
                 // Add
@@ -94,11 +98,11 @@ export default class UserList extends Component {
     }
 
     addSelected(userid, active = this.state.active) {
-        var selected = [
+        let selected = [
             userid,
             ...this.state.selected,
         ];
-        var max = this.props.max;
+        const max = this.props.max;
 
         if (max > 0) {
             selected = selected.slice(0, this.props.max);
@@ -106,14 +110,14 @@ export default class UserList extends Component {
 
         this.setState({
             active,
-            selected,
+            selected
         });
         setTimeout(() => this.props.onChange(this.state.selected));
     }
 
     removeSelected(userid, active = this.state.active) {
-        var selected = this.state.selected;
-        var index = selected.indexOf(userid);
+        const selected = this.state.selected;
+        const index = selected.indexOf(userid);
 
         this.setState({
             active,
@@ -138,44 +142,44 @@ export default class UserList extends Component {
     }
 
     renderList() {
-        var { searching, getList } = this.props;
-        var list = getList();
+        const { searching, getList } = this.props;
+        const list = getList();
 
         if (searching && list.length === 0) {
             return (
-                <li className={classes.notfound}>
+                <li className={'notfound'}>
                     <img src="assets/images/crash.png" />
                     <h3>Can't find any people matching '{searching}'</h3>
                 </li>
             );
         }
 
-        return list.map((e, index) => {
-            return (
+        return list.map((e, index) =>
+             (
                 <li
-                    className={clazz({
-                        [classes.selected]: this.state.selected.includes(e.UserName),
-                        [classes.active]: this.state.active === e.UserName,
+                    className={classnames({
+                        'selected': this.state.selected.includes(e.UserName),
+                        'active': this.state.active === e.UserName
                     })}
                     data-userid={e.UserName}
                     key={index}
                     onClick={ev => this.toggleSelected(e.UserName)}>
                     <img
-                        className={classes.avatar}
+                        className={'avatar'}
                         src={e.HeadImgUrl} />
                     <span
-                        className={classes.username}
-                        dangerouslySetInnerHTML={{__html: e.RemarkName || e.NickName}} />
+                        className={'username'}
+                        dangerouslySetInnerHTML={{ __html: e.RemarkName || e.NickName }} />
 
                     <i className="icon-ion-android-done-all" />
                 </li>
-            );
-        });
+            )
+        );
     }
 
     render() {
         return (
-            <div className={classes.container}>
+            <div className={'container'}>
                 <input
                     autoFocus={true}
                     onKeyUp={e => this.navigation(e)}
@@ -185,7 +189,7 @@ export default class UserList extends Component {
                     type="text" />
 
                 <ul
-                    className={classes.list}
+                    className={'list'}
                     ref="list">
                     {this.renderList()}
                 </ul>

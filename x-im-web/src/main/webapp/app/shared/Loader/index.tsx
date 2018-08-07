@@ -12,7 +12,6 @@ export interface ILoaderProps {
   className: string;
 }
 
-
 export default class Button extends React.Component<ILoaderProps> {
     renderContent() {
         if (!this.props.show) {

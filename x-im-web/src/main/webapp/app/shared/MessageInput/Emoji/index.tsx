@@ -5,15 +5,18 @@ import classnames from 'classnames';
 import delegate from 'delegate';
 
 import './style.scss';
-import { emoji } from 'utils/emoji';
+import { emoji } from 'app/shared/util/emoji';
 
-export default class Emoji extends Component {
-    static propTypes = {
-        output: PropTypes.func.isRequired,
-        show: PropTypes.bool.isRequired,
-        close: PropTypes.func.isRequired,
-    };
-
+export interface IProps {
+    output: PropTypes.func.isRequired;
+    show: PropTypes.bool.isRequired;
+    close: PropTypes.func.isRequired;
+  }
+  export interface IState {
+    me: PropTypes.object;
+    showEmoji: boolean;
+  }
+export default class Emoji extends Component<IProps, IState> {
     componentDidMount() {
         delegate(this.refs.container, 'a.qqemoji', 'click', e => {
             e.preventDefault();
@@ -30,9 +33,9 @@ export default class Emoji extends Component {
         }
     }
 
-    renderEmoji(emoji) {
-        return emoji.map((e, index) => {
-            var { key, className } = e;
+    renderEmoji(emojiParam) {
+        return emojiParam.map((e, index) => {
+            const { key, className } = e;
             return (
                 <a
                     className={className}
@@ -46,7 +49,7 @@ export default class Emoji extends Component {
         return (
             <div
                 ref="container"
-                tabIndex="-1"
+                tabIndex={-1}
                 className={classnames('container', {
                     'show': this.props.show
                 })}
