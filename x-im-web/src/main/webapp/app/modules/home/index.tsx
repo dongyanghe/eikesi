@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
+import classnames from 'classnames';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
-export class Index extends React.Component<IHomeProp> {
+export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
     this.props.getSession();
   }
@@ -21,17 +22,17 @@ export class Index extends React.Component<IHomeProp> {
     return (
       <Row>
         <Col md="9" className="container">
-          <div className={clazz(classes.inner, {
-            [classes.hideConversation]: !this.props.showConversation
+          <div className={classnames('inner', {
+            'hideConversation': !this.props.showConversation
           })}>
-            <div className={classes.left}>
+            <div className={'left'}>
               <SearchBar />
               <Chats />
 
               {
                 this.props.showRedIcon && (
                   <div
-                    className={classes.addChat}
+                    className={'addChat'}
                     onClick={() => this.props.newChat()}>
                     <i className="icon-ion-android-add" />
                   </div>
@@ -39,7 +40,7 @@ export class Index extends React.Component<IHomeProp> {
               }
             </div>
 
-            <div className={classes.right}>
+            <div className={'right'}>
               <ChatContent />
             </div>
           </div>
@@ -62,4 +63,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Index);
+)(Home);
