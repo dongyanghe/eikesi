@@ -51,9 +51,58 @@ export class App extends React.Component<IAppProps> {
               paddingTop: 30
           }} />
       );
-  }
+    }
+    if (!isLogin()) {
+      return <Login />;
+    }
     return (
       <Router>
+        <div>
+                <Snackbar
+                    close={close}
+                    show={show}
+                    text={message} />
+
+                <Loader show={loading} />
+                <Header location={location} />
+                <div
+                    className={classes.container}
+                    ref="viewport">
+                    {this.props.children}
+                </div>
+                <Footer
+                    location={location}
+                    ref="footer" />
+                <UserInfo />
+                <AddFriend />
+                <NewChat />
+                <Members />
+                <BatchSend />
+                <AddMember />
+                <ConfirmImagePaste />
+                <Forward />
+
+                <Offline show={this.state.offline} />;
+
+                <div
+                    className={classes.dragDropHolder}
+                    ref="holder">
+                    <div className={classes.inner}>
+                        <div>
+                            <img src="assets/images/filetypes/image.png" />
+                            <img src="assets/images/filetypes/word.png" />
+                            <img src="assets/images/filetypes/pdf.png" />
+                            <img src="assets/images/filetypes/archive.png" />
+                            <img src="assets/images/filetypes/video.png" />
+                            <img src="assets/images/filetypes/audio.png" />
+                        </div>
+
+                        <i className="icon-ion-ios-cloud-upload-outline" />
+
+                        <h2>Drop your file here</h2>
+                    </div>
+                </div>
+            </div>
         <div className="app-container" style={{ paddingTop }}>
           <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
 
