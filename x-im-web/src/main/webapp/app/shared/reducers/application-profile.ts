@@ -34,7 +34,9 @@ export default (state: ApplicationProfileState = initialState, action): Applicat
   }
 };
 /**
- * Action 创建函数 就是生成 action 的方法
+ * Action 创建函数
+ * 生成 action的一个方法
+ * 一般用来封装复杂的数据或后台返回的数据
  */
 export const getProfile = () => ({
   type: ACTION_TYPES.GET_PROFILE,
