@@ -55,7 +55,7 @@ export default class MessageInput extends Component<IProps, IState> {
 
         // You can not send message to yourself
         await Promise.all(
-            user.filter(e => e.UserName !== this.props.me.UserName).map(async e => {
+            user.filter(e => e.UserName !== this.props.me.UserName).map(async e => {createStore
                 const res = await this.props.sendMessage(e, {
                     content: message,
                     type: 1
