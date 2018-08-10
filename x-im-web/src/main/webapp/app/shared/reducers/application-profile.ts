@@ -13,7 +13,12 @@ const initialState = {
 };
 
 export type ApplicationProfileState = Readonly<typeof initialState>;
-
+/**
+ * 保持 reducer 纯净非常重要。永远不要在 reducer 里做这些操作：
+ * 修改传入参数；
+ * 执行有副作用的操作，如 API 请求和路由跳转；
+ * 调用非纯函数，如 Date.now() 或 Math.random()。
+ */
 export default (state: ApplicationProfileState = initialState, action): ApplicationProfileState => {
   switch (action.type) {
     case SUCCESS(ACTION_TYPES.GET_PROFILE):
@@ -28,7 +33,9 @@ export default (state: ApplicationProfileState = initialState, action): Applicat
       return state;
   }
 };
-
+/**
+ * Action 创建函数 就是生成 action 的方法
+ */
 export const getProfile = () => ({
   type: ACTION_TYPES.GET_PROFILE,
   payload: axios.get('management/info')

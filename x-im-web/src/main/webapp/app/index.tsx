@@ -29,6 +29,7 @@ const render = Component =>
   ReactDOM.render(
     <ErrorBoundary>
       <AppContainer>
+      {/* 让所有容器组件都可以访问 store */}
         <Provider store={store}>
           <div>
             {/* If this slows down the app in dev disable it and enable when required  */}

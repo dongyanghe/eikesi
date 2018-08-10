@@ -66,9 +66,13 @@ export interface IRootState {
 }
 /**
  * 公共state的reducer
- * @description: 在store中用于创建公共store用以改变公共state
+ * @description: 使用combineReducers合并Reducer生成一个公共函数，
+ * 这个函数来调用你的一系列 reducer，最后会返回一个合并的state。
+ * 在store中用于创建公共store用以改变公共state。
  * 形式为 (state, action) => state 的纯函数。
  * 描述了 action 如何把 state 转变成下一个 state。
+ *
+ * Redux 应用只有一个单一的 store
  *
  * state 的形式取决于你，可以是基本类型、数组、对象、
  * 甚至是 Immutable.js 生成的数据结构。惟一的要点是
@@ -76,6 +80,7 @@ export interface IRootState {
  *
  * 一般使用 `switch` 语句和字符串来做判断，但你可以写帮助类(helper)
  * 根据不同的约定（如方法映射）来判断，只要适用你的项目即可。
+ * 也可以自定义一个 createReducer 函数来接收一个事件处理函数列表
  */
 const rootReducer = combineReducers<IRootState>({
   authentication,

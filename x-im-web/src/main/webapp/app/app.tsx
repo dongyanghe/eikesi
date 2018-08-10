@@ -138,6 +138,7 @@ const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootSt
 
 const mapDispatchToProps = { setLocale, getSession, getProfile, setIsShowImWindows };
 
+//  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 /**
