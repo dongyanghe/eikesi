@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AppContainer } from 'react-hot-loader';
-
 import DevTools from 'app/config/devtools';
 import initStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';

@@ -11,14 +11,25 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
-import { Offline } from 'app/shared/Offline';
-import Header from 'app/shared/layout/header/header';
-import Footer from 'app/shared/layout/footer/footer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import { Affix, Button } from '_antd@3.7.2@antd';
+import Header from 'app/shared/layout/header/header';
+import Footer from 'app/shared/layout/footer/footer';
+import Login from 'app/modules/login/login';
+import UserInfo from 'app/modules/UserInfo';
+import AddFriend from 'app/modules/AddFriend';
+import NewChat from 'app/modules/NewChat';
+import Members from 'app/modules/Members';
+import AddMember from 'app/modules/AddMember';
+import BatchSend from 'app/modules/BatchSend';
+import Forward from 'app/modules/Forward';
+import ConfirmImagePaste from 'app/modules/ConfirmImagePaste';
+import Loader from './shared/Loader';
+import Snackbar from './shared/Snackbar';
+import Offline from './shared/Offline';
 import 'antd/dist/antd.css';
 
 export interface IAppProps extends StateProps, DispatchProps { }
@@ -46,10 +57,10 @@ export class App extends React.Component<IAppProps> {
     const paddingTop = '60px';
     if (!window.navigator.onLine) {
       return (
-          <Offline show={true} style={{
-              top: 0,
-              paddingTop: 30
-          }} />
+        <Offline show={true} style={{
+          top: 0,
+          paddingTop: 30
+        }} />
       );
     }
     if (!isLogin()) {
@@ -58,51 +69,51 @@ export class App extends React.Component<IAppProps> {
     return (
       <Router>
         <div>
-                <Snackbar
-                    close={close}
-                    show={show}
-                    text={message} />
+          <Snackbar
+            close={close}
+            show={show}
+            text={message} />
 
-                <Loader show={loading} />
-                <Header location={location} />
+          <Loader show={loading} />
+          <Header location={location} />
+          <div
+            className={classes.container}
+            ref="viewport">
+            {this.props.children}
+          </div>
+          <Footer
+            location={location}
+            ref="footer" />
+          <UserInfo />
+          <AddFriend />
+          <NewChat />
+          <Members />
+          <BatchSend />
+          <AddMember />
+          <ConfirmImagePaste />
+          <Forward />
+
+          <Offline show={this.state.offline} />;
+
                 <div
-                    className={classes.container}
-                    ref="viewport">
-                    {this.props.children}
-                </div>
-                <Footer
-                    location={location}
-                    ref="footer" />
-                <UserInfo />
-                <AddFriend />
-                <NewChat />
-                <Members />
-                <BatchSend />
-                <AddMember />
-                <ConfirmImagePaste />
-                <Forward />
+            className={classes.dragDropHolder}
+            ref="holder">
+            <div className={classes.inner}>
+              <div>
+                <img src="assets/images/filetypes/image.png" />
+                <img src="assets/images/filetypes/word.png" />
+                <img src="assets/images/filetypes/pdf.png" />
+                <img src="assets/images/filetypes/archive.png" />
+                <img src="assets/images/filetypes/video.png" />
+                <img src="assets/images/filetypes/audio.png" />
+              </div>
 
-                <Offline show={this.state.offline} />;
+              <i className="icon-ion-ios-cloud-upload-outline" />
 
-                <div
-                    className={classes.dragDropHolder}
-                    ref="holder">
-                    <div className={classes.inner}>
-                        <div>
-                            <img src="assets/images/filetypes/image.png" />
-                            <img src="assets/images/filetypes/word.png" />
-                            <img src="assets/images/filetypes/pdf.png" />
-                            <img src="assets/images/filetypes/archive.png" />
-                            <img src="assets/images/filetypes/video.png" />
-                            <img src="assets/images/filetypes/audio.png" />
-                        </div>
-
-                        <i className="icon-ion-ios-cloud-upload-outline" />
-
-                        <h2>Drop your file here</h2>
-                    </div>
-                </div>
+              <h2>Drop your file here</h2>
             </div>
+          </div>
+        </div>
         <div className="app-container" style={{ paddingTop }}>
           <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
 
