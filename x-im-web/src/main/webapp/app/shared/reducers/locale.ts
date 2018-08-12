@@ -9,7 +9,7 @@ export const ACTION_TYPES = {
 
 const initialState = {
   currentLocale: undefined,
-  isShowImWindows: Storage.session.get('isShowImWindows') == 'true' //是否显示im窗口
+  isShowImWindows: Storage.session.get('isShowImWindows') === 'true' //  是否显示im窗口
 };
 
 export type LocaleState = Readonly<typeof initialState>;
@@ -27,7 +27,6 @@ export default (state: LocaleState = initialState, action): LocaleState => {
         isShowImWindows: state.isShowImWindows
       };
     case ACTION_TYPES.SET_IS_SHOW_IM_WINDOWS:
-      debugger;
       const isShowImWindows = action.isShowImWindows;
       if (state.currentLocale !== currentLocale) {
         Storage.session.set('isShowImWindows', isShowImWindows);
@@ -54,6 +53,6 @@ export const setLocale = locale => async dispatch => {
 export const setIsShowImWindows = isShowImWindows => async dispatch => {
   dispatch({
     type: ACTION_TYPES.SET_IS_SHOW_IM_WINDOWS,
-    isShowImWindows: isShowImWindows
+    isShowImWindows
   });
 };
