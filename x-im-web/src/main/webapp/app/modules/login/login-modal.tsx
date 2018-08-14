@@ -5,10 +5,8 @@ import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validatio
 import { Link } from 'react-router-dom';
 
 export interface ILoginModalProps {
-  showModal: boolean;
   loginError: boolean;
   handleLogin: Function;
-  handleClose: Function;
 }
 
 class LoginModal extends React.Component<ILoginModalProps> {
@@ -18,21 +16,18 @@ class LoginModal extends React.Component<ILoginModalProps> {
   };
 
   render() {
-    const { loginError, handleClose } = this.props;
+    const { loginError } = this.props;
 
     return (
-      <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
+      <div id="login-page">
         <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
-            <Translate contentKey="login.title">Sign in</Translate>
-          </ModalHeader>
-          <ModalBody>
+          <div>
             <Row>
               <Col md="12">
                 {loginError ? (
                   <Alert color="danger">
                     <Translate contentKey="login.messages.error.authentication">
-                      <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                      <strong>登录失败！</strong> 请检查您的凭据并再试一次。
                     </Translate>
                   </Alert>
                 ) : null}
@@ -43,8 +38,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
                   label={translate('global.form.username')}
                   placeholder={translate('global.form.username.placeholder')}
                   required
-                  errorMessage="Username cannot be empty!"
-                  autoFocus
+                  errorMessage="用户名不能为空"
+                  autoFocus={false}
                 />
                 <AvField
                   name="password"
@@ -52,11 +47,11 @@ class LoginModal extends React.Component<ILoginModalProps> {
                   label={translate('login.form.password')}
                   placeholder={translate('login.form.password.placeholder')}
                   required
-                  errorMessage="Password cannot be empty!"
+                  errorMessage="密码不能为空"
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>
+                    <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">记住我</Translate>
                   </Label>
                 </AvGroup>
               </Col>
@@ -64,28 +59,25 @@ class LoginModal extends React.Component<ILoginModalProps> {
             <div className="mt-1">&nbsp;</div>
             <Alert color="warning">
               <Link to="/reset/request">
-                <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
+                <Translate contentKey="login.password.forgot">忘记密码？</Translate>
               </Link>
             </Alert>
             <Alert color="warning">
               <span>
-                <Translate contentKey="global.messages.info.register.noaccount">You don't have an account yet?</Translate>
+                <Translate contentKey="global.messages.info.register.noaccount">您没有账号？</Translate>
               </span>{' '}
               <Link to="/register">
-                <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
+                <Translate contentKey="global.messages.info.register.link">注册一个账号</Translate>
               </Link>
             </Alert>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
-              <Translate contentKey="entity.action.cancel">Cancel</Translate>
-            </Button>{' '}
+          </div>
+          <div>
             <Button color="primary" type="submit">
-              <Translate contentKey="login.form.button">Sign in</Translate>
+              <Translate contentKey="login.form.button">登录</Translate>
             </Button>
-          </ModalFooter>
+          </div>
         </AvForm>
-      </Modal>
+      </div>
     );
   }
 }

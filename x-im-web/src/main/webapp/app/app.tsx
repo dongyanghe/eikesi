@@ -18,7 +18,8 @@ import AppRoutes from 'app/routes';
 import { Affix, Button } from '_antd@3.7.2@antd';
 import Header from 'app/shared/layout/header/header';
 import Footer from 'app/shared/layout/footer/footer';
-import Login from 'app/modules/login/login';
+import { login } from 'app/shared/reducers/authentication';
+import LoginModal from 'app/modules/login/login-modal';
 import UserInfo from 'app/modules/UserInfo';
 import AddFriend from 'app/modules/AddFriend';
 import NewChat from 'app/modules/NewChat';
@@ -56,15 +57,17 @@ export class App extends React.Component<IAppProps> {
   render() {
     const paddingTop = '60px';
     if (!window.navigator.onLine) {
+      const show = true;
       return (
-        <Offline show={true} style={{
+        <Offline show={show} style={{
           top: 0,
           paddingTop: 30
         }} />
       );
     }
-    if (!isLogin()) {
-      return <Login />;
+    //  未登录打开登录界面
+    if (!this.props.isAuthenticated) {
+      return <LoginModal showModal={!this.props.isAuthenticated} handleLogin={login}  loginError={this.props.loginError} />;
     }
     return (
       <Router>
@@ -125,7 +128,7 @@ export class App extends React.Component<IAppProps> {
             </Card>
           </div>
           {/*{this.props.isAuthenticated && (*/}
-          {/*<Affix style={{ position: 'absolute', bottom: 30, right: 30 }}>*/}
+          {/* <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}> */}
           {/*<Button type="danger" shape="circle" onClick={this.showImWindows}>*/}
           {/*<i className="iconfont x-tubiao15" />*/}
           {/*</Button>*/}
@@ -139,6 +142,7 @@ export class App extends React.Component<IAppProps> {
 
 const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
   currentLocale: locale.currentLocale,
+  loginError: authentication.loginError,
   isAuthenticated: authentication.isAuthenticated,
   isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
   ribbonEnv: applicationProfile.ribbonEnv,

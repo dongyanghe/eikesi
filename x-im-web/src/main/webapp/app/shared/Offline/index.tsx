@@ -6,6 +6,7 @@ import './style.scss';
 
 export interface IProps {
     show: PropTypes.bool.isRequired;
+    style?: React.CSSProperties;
   }
 export interface IState {
     show: PropTypes.bool.isRequired;

@@ -39,7 +39,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
       return <Redirect to={from} />;
     }
     return (
-      <LoginModal showModal={showModal} handleLogin={this.handleLogin} handleClose={this.handleClose} loginError={this.props.loginError} />
+      <LoginModal handleLogin={this.handleLogin} loginError={this.props.loginError} />
     );
   }
 }
