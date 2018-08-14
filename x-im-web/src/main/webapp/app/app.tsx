@@ -67,7 +67,7 @@ export class App extends React.Component<IAppProps> {
     }
     //  未登录打开登录界面
     if (!this.props.isAuthenticated) {
-      return <LoginModal showModal={!this.props.isAuthenticated} handleLogin={login}  loginError={this.props.loginError} />;
+      return <LoginModal handleLogin={login} loginError={this.props.loginError} />;
     }
     return (
       <Router>
