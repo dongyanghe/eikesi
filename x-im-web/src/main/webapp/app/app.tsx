@@ -8,7 +8,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, login } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -18,7 +18,6 @@ import AppRoutes from 'app/routes';
 import { Affix, Button } from '_antd@3.7.2@antd';
 import Header from 'app/shared/layout/header/header';
 import Footer from 'app/shared/layout/footer/footer';
-import { login } from 'app/shared/reducers/authentication';
 import LoginModal from 'app/modules/login/login-modal';
 import UserInfo from 'app/modules/UserInfo';
 import AddFriend from 'app/modules/AddFriend';
@@ -35,6 +34,11 @@ import 'antd/dist/antd.css';
 
 export interface IAppProps extends StateProps, DispatchProps { }
 export class App extends React.Component<IAppProps> {
+  //  是否展示找不到网络连接页面
+  isOffline = true;
+  state = {
+    isOffline: false
+  };
   /**
    *  1.初始化项目基本信息
    *  2.获取用户信息
@@ -57,9 +61,8 @@ export class App extends React.Component<IAppProps> {
   render() {
     const paddingTop = '60px';
     if (!window.navigator.onLine) {
-      const show = true;
       return (
-        <Offline show={show} style={{
+        <Offline show={this.isOffline} style={{
           top: 0,
           paddingTop: 30
         }} />
@@ -96,7 +99,7 @@ export class App extends React.Component<IAppProps> {
           <ConfirmImagePaste />
           <Forward />
 
-          <Offline show={this.state.offline} />;
+          <Offline show={this.state.isOffline} />;
 
                 <div
             className={classes.dragDropHolder}
