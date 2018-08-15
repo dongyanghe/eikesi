@@ -8,7 +8,9 @@ import Activate from 'app/modules/account/activate/activate';
 import PasswordResetInit from 'app/modules/account/password-reset/init/password-reset-init';
 import PasswordResetFinish from 'app/modules/account/password-reset/finish/password-reset-finish';
 import Logout from 'app/modules/login/logout';
-import Home from 'app/modules/home/home';
+import Home from 'app/modules/home/';
+import Settings from 'app/modules/settings/settings';
+import Contacts from 'app/modules/contacts/contacts';
 import Entities from 'app/entities';
 import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
@@ -30,17 +32,23 @@ const Routes = () => (
   <div className="view-routes">
     <ErrorBoundaryRoute path="/login" component={Login} />
     <Switch>
+      <ErrorBoundaryRoute path="/" component={Home} />
+      <ErrorBoundaryRoute path="/contacts" component={Contacts} />
+      <ErrorBoundaryRoute path="/settings" component={Settings} />
       <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/register" component={Register} />
       <ErrorBoundaryRoute path="/activate/:key?" component={Activate} />
       <ErrorBoundaryRoute path="/reset/request" component={PasswordResetInit} />
       <ErrorBoundaryRoute path="/reset/finish/:key?" component={PasswordResetFinish} />
-      <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
-      <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
-      <PrivateRoute path="/entity" component={Entities} hasAnyAuthorities={[AUTHORITIES.USER]} />
-      <ErrorBoundaryRoute path="/" component={Home} />
+      {/*<PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />*/}
+      {/*<PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />*/}
+      {/*<PrivateRoute path="/entity" component={Entities} hasAnyAuthorities={[AUTHORITIES.USER]} />*/}
     </Switch>
   </div>
 );
 
+/**
+ * 顶级页面路由配置
+ * AppComponent调用
+ */
 export default Routes;

@@ -1,0 +1,72 @@
+{
+    "name": "HistoryMessage",
+    "fields": [
+        {
+            "fieldName": "content",
+            "javadoc": "消息内容",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 14
+        },
+        {
+            "fieldName": "status",
+            "javadoc": "消息状态,历史消息不能有未读 {0: '未读', 1: '已读', 2: '违规'}",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 2
+        },
+        {
+            "fieldName": "createdDate",
+            "javadoc": "消息创建时间",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdId",
+            "javadoc": "发消息着id",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "targetDate",
+            "javadoc": "接收消息时间",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "targetId",
+            "javadoc": "接收消息着id",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180726090508",
+    "javadoc": "用户历史消息\n按天从CurrentMessage获取存储,定期清除\n@wait [2018-05-15 21:01:51]需改为NoSql存储\n@author hedongyang\n@version 2018-05-15",
+    "entityTableName": "history_message",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "skipClient": true
+}

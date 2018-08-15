@@ -98,12 +98,18 @@
   },
   "rules": {
     "class-name": true,
+    "jsx-no-lambda": false,
     "comment-format": [true, "check-space"],
     "eofline": true,
     "forin": true,
+    "notypeof": true,
     "indent": [true, "spaces", 2],
     "label-position": true,
     "max-line-length": [true, 180],
+    "max-classes-per-file": [
+      true,
+      8
+    ],
     "member-access": false,
     "member-ordering": [
       true,

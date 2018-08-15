@@ -3,11 +3,13 @@ import axios from 'axios';
 import { TranslatorContext, Storage } from 'react-jhipster';
 
 export const ACTION_TYPES = {
-  SET_LOCALE: 'locale/SET_LOCALE'
+  SET_LOCALE: 'locale/SET_LOCALE',
+  SET_IS_SHOW_IM_WINDOWS: 'locale/SET_IS_SHOW_IM_WINDOWS'
 };
 
 const initialState = {
-  currentLocale: undefined
+  currentLocale: undefined,
+  isShowImWindows: Storage.session.get('isShowImWindows') === 'true' //  是否显示im窗口
 };
 
 export type LocaleState = Readonly<typeof initialState>;
@@ -21,7 +23,17 @@ export default (state: LocaleState = initialState, action): LocaleState => {
         TranslatorContext.setLocale(currentLocale);
       }
       return {
-        currentLocale
+        currentLocale,
+        isShowImWindows: state.isShowImWindows
+      };
+    case ACTION_TYPES.SET_IS_SHOW_IM_WINDOWS:
+      const isShowImWindows = action.isShowImWindows;
+      if (state.currentLocale !== currentLocale) {
+        Storage.session.set('isShowImWindows', isShowImWindows);
+      }
+      return {
+        currentLocale: state.currentLocale,
+        isShowImWindows
       };
     default:
       return state;
@@ -36,5 +48,11 @@ export const setLocale = locale => async dispatch => {
   dispatch({
     type: ACTION_TYPES.SET_LOCALE,
     locale
+  });
+};
+export const setIsShowImWindows = isShowImWindows => async dispatch => {
+  dispatch({
+    type: ACTION_TYPES.SET_IS_SHOW_IM_WINDOWS,
+    isShowImWindows
   });
 };

@@ -4,7 +4,7 @@ import { Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from 'app/shared/reducers';
 import { login } from 'app/shared/reducers/authentication';
-import LoginModal from './login-modal';
+import LoginModal from 'app/modules/login/login-modal';
 
 export interface ILoginProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -39,7 +39,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
       return <Redirect to={from} />;
     }
     return (
-      <LoginModal showModal={showModal} handleLogin={this.handleLogin} handleClose={this.handleClose} loginError={this.props.loginError} />
+      <LoginModal handleLogin={this.handleLogin} loginError={this.props.loginError} />
     );
   }
 }
