@@ -1,14 +1,14 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.demo.gateway",
+      "packageName": "com.eikesi.demo",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "gateway",
     "baseName": "demoGateway",
-    "packageName": "com.eikesi.demo.gateway",
-    "packageFolder": "com/eikesi/demo/gateway",
+    "packageName": "com.eikesi.demo",
+    "packageFolder": "com/eikesi/demo",
     "serverPort": "80000",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
@@ -17,13 +17,13 @@
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
-    "prodDatabaseType": "mysql",
+    "prodDatabaseTma  kljype": "mysql",
     "searchEngine": "elasticsearch",
     "messageBroker": "kafka",
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "clientFramework": "angularX",
+    "clientFramework": "react",
     "useSass": true,
     "clientPackageManager": "yarn",
     "testFrameworks": [

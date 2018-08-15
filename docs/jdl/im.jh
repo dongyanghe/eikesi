@@ -73,6 +73,8 @@ relationship OneToMany {
 }
 
 
+skipServer *
+//  skipClient *
 paginate HistoryMessage with pagination
 dto * with mapstruct
 service * with serviceClass

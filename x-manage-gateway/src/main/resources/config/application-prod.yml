@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: INFO
-        com.eikesi.manage.gateway: INFO
+        com.eikesi.manage: INFO
         io.github.jhipster: INFO
 
 eureka:
@@ -43,7 +43,7 @@ spring:
                     destination: topic-jhipster
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/manage?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/im_web?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: root
         hikari:

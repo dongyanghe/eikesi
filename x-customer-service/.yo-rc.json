@@ -1,14 +1,14 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.customer.service",
+      "packageName": "com.eikesi.customer",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "5.1.0",
     "applicationType": "microservice",
     "baseName": "customerService",
-    "packageName": "com.eikesi.customer.service",
-    "packageFolder": "com/eikesi/customer/service",
+    "packageName": "com.eikesi.customer",
+    "packageFolder": "com/eikesi/customer",
     "serverPort": "6001",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",

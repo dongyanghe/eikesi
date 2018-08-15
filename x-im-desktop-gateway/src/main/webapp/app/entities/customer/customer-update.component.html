@@ -1,0 +1,285 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-customer-heading" jhiTranslate="imGatewayApp.customer.home.createOrEditLabel">Create or edit a Customer</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!customer.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="customer.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.mobile" for="field_mobile" [ngbTooltip]="'imGatewayApp.customer.help.mobile' | translate">Mobile</label>
+                    <input type="text" class="form-control" name="mobile" id="field_mobile"
+                        [(ngModel)]="customer.mobile" required minlength="6" maxlength="18"/>
+                    <div [hidden]="!(editForm.controls.mobile?.dirty && editForm.controls.mobile?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.mobile?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.mobile?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 6 }">
+                        This field is required to be at least 6 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.mobile?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 18 }">
+                        This field cannot be longer than 18 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.firstName" for="field_firstName" [ngbTooltip]="'imGatewayApp.customer.help.firstName' | translate">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                        [(ngModel)]="customer.firstName" required minlength="2" maxlength="14"/>
+                    <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.firstName?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.firstName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 14 }">
+                        This field cannot be longer than 14 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.lastName" for="field_lastName" [ngbTooltip]="'imGatewayApp.customer.help.lastName' | translate">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                        [(ngModel)]="customer.lastName" required minlength="2" maxlength="14"/>
+                    <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastName?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 14 }">
+                        This field cannot be longer than 14 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.py" for="field_py" [ngbTooltip]="'imGatewayApp.customer.help.py' | translate">Py</label>
+                    <input type="text" class="form-control" name="py" id="field_py"
+                        [(ngModel)]="customer.py" required minlength="1" maxlength="255"/>
+                    <div [hidden]="!(editForm.controls.py?.dirty && editForm.controls.py?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.py?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.py?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.py?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.pinYin" for="field_pinYin" [ngbTooltip]="'imGatewayApp.customer.help.pinYin' | translate">Pin Yin</label>
+                    <input type="text" class="form-control" name="pinYin" id="field_pinYin"
+                        [(ngModel)]="customer.pinYin" required minlength="1" maxlength="255"/>
+                    <div [hidden]="!(editForm.controls.pinYin?.dirty && editForm.controls.pinYin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pinYin?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pinYin?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pinYin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.passwordHash" for="field_passwordHash" [ngbTooltip]="'imGatewayApp.customer.help.passwordHash' | translate">Password Hash</label>
+                    <input type="text" class="form-control" name="passwordHash" id="field_passwordHash"
+                        [(ngModel)]="customer.passwordHash" required minlength="1" maxlength="60"/>
+                    <div [hidden]="!(editForm.controls.passwordHash?.dirty && editForm.controls.passwordHash?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.passwordHash?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.passwordHash?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.passwordHash?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
+                        This field cannot be longer than 60 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.email" for="field_email" [ngbTooltip]="'imGatewayApp.customer.help.email' | translate">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="customer.email" minlength="1" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.imageUrl" for="field_imageUrl" [ngbTooltip]="'imGatewayApp.customer.help.imageUrl' | translate">Image Url</label>
+                    <input type="text" class="form-control" name="imageUrl" id="field_imageUrl"
+                        [(ngModel)]="customer.imageUrl" minlength="1" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.imageUrl?.dirty && editForm.controls.imageUrl?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.imageUrl?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.imageUrl?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.activated" for="field_activated" [ngbTooltip]="'imGatewayApp.customer.help.activated' | translate">Activated</label>
+                    <input type="checkbox" class="form-control" name="activated" id="field_activated"
+                        [(ngModel)]="customer.activated" />
+                    <div [hidden]="!(editForm.controls.activated?.dirty && editForm.controls.activated?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activated?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.langKey" for="field_langKey" [ngbTooltip]="'imGatewayApp.customer.help.langKey' | translate">Lang Key</label>
+                    <input type="text" class="form-control" name="langKey" id="field_langKey"
+                        [(ngModel)]="customer.langKey" required minlength="1" maxlength="6"/>
+                    <div [hidden]="!(editForm.controls.langKey?.dirty && editForm.controls.langKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.langKey?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.langKey?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.langKey?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 6 }">
+                        This field cannot be longer than 6 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.activationKey" for="field_activationKey" [ngbTooltip]="'imGatewayApp.customer.help.activationKey' | translate">Activation Key</label>
+                    <input type="text" class="form-control" name="activationKey" id="field_activationKey"
+                        [(ngModel)]="customer.activationKey" required minlength="1" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.activationKey?.dirty && editForm.controls.activationKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activationKey?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activationKey?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activationKey?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.resetKey" for="field_resetKey" [ngbTooltip]="'imGatewayApp.customer.help.resetKey' | translate">Reset Key</label>
+                    <input type="text" class="form-control" name="resetKey" id="field_resetKey"
+                        [(ngModel)]="customer.resetKey" required minlength="1" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.resetKey?.dirty && editForm.controls.resetKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resetKey?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resetKey?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resetKey?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.resetDate" for="field_resetDate" [ngbTooltip]="'imGatewayApp.customer.help.resetDate' | translate">Reset Date</label>
+                    <div class="d-flex">
+                        <input id="field_resetDate" type="datetime-local" class="form-control" name="resetDate" [(ngModel)]="resetDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.resetDate?.dirty && editForm.controls.resetDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.resetDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.resetDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.createdBy" for="field_createdBy" [ngbTooltip]="'imGatewayApp.customer.help.createdBy' | translate">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                        [(ngModel)]="customer.createdBy" minlength="1" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.createdBy?.dirty && editForm.controls.createdBy?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createdBy?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createdBy?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="imGatewayApp.customer.createdDate" for="field_createdDate" [ngbTooltip]="'imGatewayApp.customer.help.createdDate' | translate">Created Date</label>
+                    <div class="d-flex">
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

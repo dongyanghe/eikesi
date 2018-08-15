@@ -4,7 +4,7 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="com.eikesi.im.gateway" level="INFO"/>
+    <logger name="com.eikesi.im.desktop" level="INFO"/>
 
     <logger name="io.github.jhipster" level="WARN"/>
 

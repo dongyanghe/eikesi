@@ -12,17 +12,15 @@ describe('Component Tests', () => {
         let fixture: ComponentFixture<PasswordComponent>;
         let service: PasswordService;
 
-        beforeEach(
-            async(() => {
-                TestBed.configureTestingModule({
-                    imports: [ImGatewayTestModule],
-                    declarations: [PasswordComponent],
-                    providers: []
-                })
-                    .overrideTemplate(PasswordComponent, '')
-                    .compileComponents();
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [ImGatewayTestModule],
+                declarations: [PasswordComponent],
+                providers: []
             })
-        );
+                .overrideTemplate(PasswordComponent, '')
+                .compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(PasswordComponent);

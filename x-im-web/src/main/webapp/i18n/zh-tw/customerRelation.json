@@ -1,0 +1,35 @@
+
+{
+    "imWebGatewayApp": {
+        "customerRelation" : {
+            "home": {
+                "title": "Customer Relations",
+                "createLabel": "建立一筆新的 Customer Relation",
+                "createOrEditLabel": "建立或編輯 Customer Relation",
+                "search": "搜尋 Customer Relation"
+            },
+            "created": "新的 Customer Relation 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Customer Relation 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Customer Relation 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Customer Relation {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Customer Relation"
+            },
+            "remarkName": "Remark Name",
+            "py": "Py",
+            "pinYin": "Pin Yin",
+            "type": "Type",
+            "createdDate": "Created Date",
+            "customer": "Customer",
+            "help": {
+                "remarkName": "客户名备注,默认为客户昵称",
+                "py": "拼音首字母",
+                "pinYin": "拼音全拼",
+                "type": "关系类型 {0: &#39;黑名单&#39;, 1: &#39;好友&#39;}",
+                "createdDate": "关系创建时间"
+            }
+        }
+    }
+}

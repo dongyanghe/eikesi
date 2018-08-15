@@ -12,17 +12,15 @@ describe('Component Tests', () => {
         let mockAuth: any;
         let mockPrincipal: any;
 
-        beforeEach(
-            async(() => {
-                TestBed.configureTestingModule({
-                    imports: [ImGatewayTestModule],
-                    declarations: [SettingsComponent],
-                    providers: []
-                })
-                    .overrideTemplate(SettingsComponent, '')
-                    .compileComponents();
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [ImGatewayTestModule],
+                declarations: [SettingsComponent],
+                providers: []
             })
-        );
+                .overrideTemplate(SettingsComponent, '')
+                .compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(SettingsComponent);

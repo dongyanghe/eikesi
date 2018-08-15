@@ -61,18 +61,41 @@ JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中�
 ##系统模块设计
 
 ###系统划分
-#### jhipster-registry（微服务注册服务、配置服务）：
-    端口：8761
-#### im-desktop-gateway（桌面端im应用网关）：
-    端口：8001
-#### manage-gateway（web端后台管理系统网关）：
-    端口：8000
-#### uaa-server（账号安全服务）：
-    端口：9999
-#### im-server(im服务)：
-    端口：6002
-#### customer-server(客户服务)：
-    端口：6001
-###原则：
 
-    对数据进行定义，在需求人和需求背景的角度提问——明白这类数据是什么、会有什么；
+#### im-desktop（桌面端im的electron界面）：
+    请求端口：8001
+##### 运行
+    ```
+    $ npm install
+    $ npm run dev
+    ```
+    
+    Generate the binary:
+    * For Linux
+    ```
+    $ npm run package-linux
+    ```
+    Maybe you will install some depends packages.
+    * For Mac
+    ```
+    $ npm run package-mac
+    ```
+    After that, you will see the binary in `./release` folder
+
+#### jhipster-registry（微服务注册服务、配置服务）：
+    服务端口：8761
+#### im-desktop-gateway（桌面端im应用网关）：
+    服务端口：8001
+#### manage-gateway（web端后台管理系统网关）：
+    服务端口：8000
+#### uaa-server（账号安全服务）：
+    服务端口：9999
+#### im-server(im服务)：
+    服务端口：6002
+#### customer-server(客户服务)：
+    服务端口：6001
+    
+技术栈
+======
+- rest请求客户端feign：https://springcloud.cc/spring-cloud-netflix.html#spring-cloud-feign
+- euraka:
