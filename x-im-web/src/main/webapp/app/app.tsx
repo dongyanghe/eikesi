@@ -30,6 +30,7 @@ import ConfirmImagePaste from 'app/modules/ConfirmImagePaste';
 import Loader from './shared/Loader';
 import Snackbar from './shared/Snackbar';
 import Offline from './shared/Offline';
+import { toggle } from 'app/shared/reducers/snackbar';
 import 'antd/dist/antd.css';
 
 export interface IAppProps extends StateProps, DispatchProps { }
@@ -48,6 +49,52 @@ export class App extends React.Component<IAppProps> {
   componentDidMount() {
     this.props.getSession();
     this.props.getProfile();
+
+    window.addEventListener('offline', () => {
+      this.setState({
+        isOffline: true
+      });
+    });
+    window.addEventListener('online', () => {
+      this.setState({
+        offline: false
+      });
+    });
+    //  拖动元素来到放置领域
+    window.ondragover = e => {
+      //  是否有直接发送的对象
+      if (this.props.canidrag()) {
+        this.refs.holder.classList.add(classes.show);
+        this.refs.viewport.classList.add(classes.blur);
+      }
+
+      // If not st as 'copy', electron will open the drop file
+      e.dataTransfer.dropEffect = 'copy';
+      return false;
+    };
+
+    //  文件放弃拖入
+    window.ondragleave = () => {
+      if (!this.props.canidrag()) return false;
+
+      this.refs.holder.classList.remove('show');
+      this.refs.viewport.classList.remove('blur');
+    };
+    //  拖动完毕时触发
+    window.ondragend = e => false;
+    //  可拖动元素放置后
+    window.ondrop = e => {
+      const files = e.dataTransfer.files;
+      e.preventDefault(); //  阻止冒泡
+      e.stopPropagation();
+
+      if (files.length && this.props.canidrag()) {
+        Array.from(files).map(e => this.props.process(e));
+      }
+      this.refs.holder.classList.remove('show');
+      this.refs.viewport.classList.remove('blur');
+      return false;
+    };
   }
   /**
    *  1.显示/隐藏窗口弹窗
@@ -85,7 +132,7 @@ export class App extends React.Component<IAppProps> {
           <div
             className={'container'}
             ref="viewport">
-            {this.props.children}
+            <AppRoutes />
           </div>
           <Footer
             location={location}
@@ -100,8 +147,7 @@ export class App extends React.Component<IAppProps> {
           <Forward />
 
           <Offline show={this.state.isOffline} />;
-
-            <div className={'dragDropHolder'} ref="holder">
+          <div className={'dragDropHolder'} ref="holder">
             <div className={'inner'}>
               <div>
                 <img src="assets/images/filetypes/image.png" />
@@ -118,24 +164,6 @@ export class App extends React.Component<IAppProps> {
             </div>
           </div>
         </div>
-        <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-
-          <div className="container-fluid view-container" id="app-view-container">
-            <Card className="jh-card">
-              <ErrorBoundary>
-                <AppRoutes />
-              </ErrorBoundary>
-            </Card>
-          </div>
-          {/*{this.props.isAuthenticated && (*/}
-          {/* <Affix style={{ position: 'absolute', bottom: 30, right: 30 }}> */}
-          {/*<Button type="danger" shape="circle" onClick={this.showImWindows}>*/}
-          {/*<i className="iconfont x-tubiao15" />*/}
-          {/*</Button>*/}
-          {/*</Affix>*/}
-          {/*)}*/}
-        </div>
       </Router>
     );
   }
@@ -144,6 +172,8 @@ export class App extends React.Component<IAppProps> {
 const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
   message: snackbarState.message,  //  消息提示
   isShow: snackbarState.isShow,
+  close: () => toggle(false),
+  canidrag: () => false,  //  拖入文件是否可以直接发送，否则需暂时复制
   currentLocale: locale.currentLocale,
   loginError: authentication.loginError,
   loading: authentication.loading,
