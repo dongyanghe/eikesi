@@ -8,8 +8,8 @@ import './loader.scss';
 
 export interface ILoaderProps {
   show: boolean;
-  fullscreen: boolean;
-  className: string;
+  fullscreen?: boolean;
+  className?: string;
 }
 
 export default class Button extends React.Component<ILoaderProps> {

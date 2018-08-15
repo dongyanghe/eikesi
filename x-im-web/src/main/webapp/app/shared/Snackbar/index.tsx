@@ -6,14 +6,14 @@ import TransitionPortal from 'app/shared/TransitionPortal';
 import './style.scss';
 
 export interface IProps {
-    show: PropTypes.bool.isRequired;
+    isShow: PropTypes.bool.isRequired;
     text: PropTypes.string.isRequired;
     close: PropTypes.func.isRequired;
   }
 export default class Snackbar extends Component<IProps> {
 
     renderContent() {
-        if (!this.props.show) {
+        if (!this.props.isShow) {
             return false;
         }
 
@@ -25,7 +25,7 @@ export default class Snackbar extends Component<IProps> {
                 <div
                     className="Snackbar-action"
                     onClick={() => this.props.close()}>
-                    DONE
+                    关闭
                 </div>
             </div>
         );
@@ -33,10 +33,7 @@ export default class Snackbar extends Component<IProps> {
 
     render() {
         return (
-            <TransitionPortal
-                transitionEnterTimeout={0}
-                transitionLeaveTimeout={150}
-                transitionName="Snackbar">
+            <TransitionPortal>
                 {this.renderContent()}
             </TransitionPortal>
         );

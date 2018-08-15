@@ -3,6 +3,7 @@ import { loadingBarReducer as loadingBar } from 'react-redux-loading-bar';
 
 import locale, { LocaleState } from 'app/shared/reducers/locale';
 import authentication, { AuthenticationState } from 'app/shared/reducers/authentication';
+import { SnackbarState } from 'app/shared/reducers/snackbar';
 import applicationProfile, { ApplicationProfileState } from 'app/shared/reducers/application-profile';
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
@@ -60,7 +61,7 @@ export interface IRootState {
   readonly flockRelation: FlockRelationState;
   readonly customerFlock: CustomerFlockState;
   readonly customer: CustomerState;
-
+  readonly snackbarState: SnackbarState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -100,6 +101,7 @@ const rootReducer = combineReducers<IRootState>({
   flockRelation,
   customerFlock,
   customer,
+  snackbarState,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

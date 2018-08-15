@@ -77,13 +77,13 @@ export class App extends React.Component<IAppProps> {
         <div>
           <Snackbar
             close={close}
-            show={show}
-            text={message} />
+            isShow={this.props.isShow}
+            text={this.props.message} />
 
-          <Loader show={loading} />
+          <Loader show={this.props.loading} />
           <Header location={location} />
           <div
-            className={classes.container}
+            className={'container'}
             ref="viewport">
             {this.props.children}
           </div>
@@ -101,10 +101,8 @@ export class App extends React.Component<IAppProps> {
 
           <Offline show={this.state.isOffline} />;
 
-                <div
-            className={classes.dragDropHolder}
-            ref="holder">
-            <div className={classes.inner}>
+            <div className={'dragDropHolder'} ref="holder">
+            <div className={'inner'}>
               <div>
                 <img src="assets/images/filetypes/image.png" />
                 <img src="assets/images/filetypes/word.png" />
@@ -116,7 +114,7 @@ export class App extends React.Component<IAppProps> {
 
               <i className="icon-ion-ios-cloud-upload-outline" />
 
-              <h2>Drop your file here</h2>
+              <h2>拖入文件到此</h2>
             </div>
           </div>
         </div>
@@ -143,10 +141,13 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
+const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
+  message: snackbarState.message,  //  消息提示
+  isShow: snackbarState.isShow,
   currentLocale: locale.currentLocale,
   loginError: authentication.loginError,
-  isAuthenticated: authentication.isAuthenticated,
+  loading: authentication.loading,
+  isAuthenticated: authentication.isAuthenticated,  //  未登录为false，登录为身份信息
   isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
   ribbonEnv: applicationProfile.ribbonEnv,
   isInProduction: applicationProfile.inProduction,
