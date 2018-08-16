@@ -31,6 +31,7 @@ import Loader from './shared/Loader';
 import Snackbar from './shared/Snackbar';
 import Offline from './shared/Offline';
 import { toggle } from 'app/shared/reducers/snackbar';
+import classnames from 'classnames';
 import 'antd/dist/antd.css';
 
 export interface IAppProps extends StateProps, DispatchProps { }
@@ -38,7 +39,8 @@ export class App extends React.Component<IAppProps> {
   //  是否展示找不到网络连接页面
   isOffline = true;
   state = {
-    isOffline: false
+    isOffline: false,
+    isOndragleave: false
   };
   /**
    *  1.初始化项目基本信息
@@ -64,8 +66,11 @@ export class App extends React.Component<IAppProps> {
     window.ondragover = e => {
       //  是否有直接发送的对象
       if (this.props.canidrag()) {
-        this.refs.holder.classList.add(classes.show);
-        this.refs.viewport.classList.add(classes.blur);
+        this.setState({
+          isOndragleave: true
+        });
+        // this.refs.holder.classList.add(classes.show);
+        // this.refs.viewport.classList.add(classes.blur);
       }
 
       // If not st as 'copy', electron will open the drop file
@@ -76,9 +81,11 @@ export class App extends React.Component<IAppProps> {
     //  文件放弃拖入
     window.ondragleave = () => {
       if (!this.props.canidrag()) return false;
-
-      this.refs.holder.classList.remove('show');
-      this.refs.viewport.classList.remove('blur');
+      this.setState({
+        isOndragleave: false
+      });
+      // this.refs.holder.classList.remove('show');
+      // this.refs.viewport.classList.remove('blur');
     };
     //  拖动完毕时触发
     window.ondragend = e => false;
@@ -89,10 +96,14 @@ export class App extends React.Component<IAppProps> {
       e.stopPropagation();
 
       if (files.length && this.props.canidrag()) {
-        Array.from(files).map(e => this.props.process(e));
+        //  批量发送文件
+        // Array.from(files).map(e => this.props.process(e));
       }
-      this.refs.holder.classList.remove('show');
-      this.refs.viewport.classList.remove('blur');
+      this.setState({
+        isOndragleave: false
+      });
+      // this.refs.holder.classList.remove('show');
+      // this.refs.viewport.classList.remove('blur');
       return false;
     };
   }
@@ -130,13 +141,11 @@ export class App extends React.Component<IAppProps> {
           <Loader show={this.props.loading} />
           <Header location={location} />
           <div
-            className={'container'}
-            ref="viewport">
+            className={classnames({ 'container': true, 'show': this.state.isOndragleave })}>
             <AppRoutes />
           </div>
           <Footer
-            location={location}
-            ref="footer" />
+            location={location} />
           <UserInfo />
           <AddFriend />
           <NewChat />
@@ -147,7 +156,7 @@ export class App extends React.Component<IAppProps> {
           <Forward />
 
           <Offline show={this.state.isOffline} />;
-          <div className={'dragDropHolder'} ref="holder">
+          <div className={classnames({ 'dragDropHolder': true, 'show': this.state.isOndragleave })}>
             <div className={'inner'}>
               <div>
                 <img src="assets/images/filetypes/image.png" />

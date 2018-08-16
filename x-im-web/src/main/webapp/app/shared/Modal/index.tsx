@@ -59,20 +59,15 @@ class ModalFooter extends Component<IModalFooterProps> {
 
 export interface IModalProps {
     show: PropTypes.bool.isRequired;
-    overlay: PropTypes.bool;
-    onCancel: PropTypes.func;
-    transition4overlay: PropTypes.string;
-    transition4body: PropTypes.string;
+    overlay?: PropTypes.bool;
+    onCancel?: (event: any) => void;
+    transition4overlay?: PropTypes.string;
+    transition4body?: PropTypes.string;
     className?: PropTypes.string;
 }
-export interface IModalState {
-    overlay: true;
-    transition4overlay: 'Modal-overlay';
-    transition4body: 'Modal-body';
-    onCancel: Function;
-}
-class Modal extends Component<IModalProps, IModalState> {
-    static defaultProps = {
+
+class Modal extends React.Component<IModalProps> {
+    defaultProps = {
         overlay: true,
         transition4overlay: 'Modal-overlay',
         transition4body: 'Modal-body',
@@ -124,25 +119,24 @@ class Modal extends Component<IModalProps, IModalState> {
         }
 
         return (
-            <div className="Modal" ref="node">
+            <div className="Modal">
                 <Transition
                     transitionName={this.props.transition4overlay}
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}
-                    ref="overlay">
+                    >
                     {this.renderOverlay()}
                 </Transition>
 
                 <TransitionPortal
                     transitionName={this.props.transition4body}
                     transitionEnterTimeout={200}
-                    transitionLeaveTimeout={140}
-                    ref="content">
+                    transitionLeaveTimeout={140}>
                     {this.renderBody()}
                 </TransitionPortal>
             </div>
         );
     }
-};
+}
 
 export { Modal, ModalBody, ModalHeader, ModalFooter };

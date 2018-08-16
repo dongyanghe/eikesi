@@ -6,9 +6,9 @@ import './avatar.scss';
 
 export interface IAvatarProps {
     src: string;
-    fallback: string;
+    fallback?: string;
     className?: string;
-    onClick: Function;
+    onClick?: (event: any) => void;
 }
   export interface IAvatarState {
     fallback: string;
