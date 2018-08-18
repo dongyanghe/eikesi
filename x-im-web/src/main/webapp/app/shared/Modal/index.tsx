@@ -60,6 +60,7 @@ class ModalFooter extends Component<IModalFooterProps> {
 export interface IModalProps {
     show: PropTypes.bool.isRequired;
     overlay?: PropTypes.bool;
+    fullscreen?: PropTypes.bool;
     onCancel?: (event: any) => void;
     transition4overlay?: PropTypes.string;
     transition4body?: PropTypes.string;

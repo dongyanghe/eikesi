@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { loadingBarReducer as loadingBar } from 'react-redux-loading-bar';
 
+import app, { AppState } from 'app/shared/reducers/app';
 import locale, { LocaleState } from 'app/shared/reducers/locale';
 import authentication, { AuthenticationState } from 'app/shared/reducers/authentication';
 import snackbarState, { SnackbarState } from 'app/shared/reducers/snackbar';
@@ -44,6 +45,7 @@ import customer, {
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
+  readonly app: AppState;
   readonly authentication: AuthenticationState;
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
@@ -84,6 +86,7 @@ export interface IRootState {
  * 也可以自定义一个 createReducer 函数来接收一个事件处理函数列表
  */
 const rootReducer = combineReducers<IRootState>({
+  app,
   authentication,
   locale,
   applicationProfile,

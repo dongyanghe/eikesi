@@ -6,15 +6,14 @@ import { ipcRenderer } from 'electron';
 import helper from '../util/helper';
 import customerRelation from '../../entities/customer-relation/customer-relation.reducer';
 import settings from './settings';
-import authentication from './authentication';
 import members from './members';
 import snackbar from 'app/shared/reducers/snackbar';
 import { authentication } from 'app/shared/reducers/authentication';
 
 async function resolveMessage(message) {
-    var auth = window.localStorage.getItem('auth');
-    var isChatRoom = helper.isChatRoom(message.FromUserName);
-    var content = (isChatRoom && !message.isme) ? message.Content.split(':<br/>')[1] : message.Content;
+    const auth = window.localStorage.getItem('auth');
+    const isChatRoom = helper.isChatRoom(message.FromUserName);
+    const content = (isChatRoom && !message.isme) ? message.Content.split(':<br/>')[1] : message.Content;
 
     switch (message.MsgType) {
         case 1:
@@ -177,11 +176,11 @@ async function resolveMessage(message) {
 }
 
 function hasUnreadMessage(messages) {
-    var counter = 0;
+    const counter = 0;
 
     Array.from(messages.keys()).map(
         e => {
-            var item = messages.get(e);
+            const item = messages.get(e);
             counter += (item.data.length - item.unread);
         }
     );
@@ -221,15 +220,15 @@ class Chat {
     }
 
     @action async loadChats(chatSet) {
-        var list = customerRelation.memberList;
-        var res = [];
-        var temps = [];
-        var sorted = [];
+        const list = customerRelation.memberList;
+        const res = [];
+        const temps = [];
+        const sorted = [];
 
         if (!chatSet) return;
 
         helper.unique(chatSet.split(',')).map(e => {
-            var user = list.find(user => user.UserName === e && !helper.isChatRoom(e));
+            const user = list.find(user => user.UserName === e && !helper.isChatRoom(e));
 
             if (user) {
                 res.push(user);
@@ -243,7 +242,7 @@ class Chat {
             await customerRelation.batch(temps);
 
             temps.map(e => {
-                var user = list.find(user => user.UserName === e);
+                const user = list.find(user => user.UserName === e);
 
                 // Remove all the invalid accounts, eg: Official account
                 if (user) {
@@ -277,8 +276,8 @@ class Chat {
     }
 
     @action chatToPrev() {
-        var sessions = self.sessions;
-        var index = self.user ? sessions.findIndex(e => e.UserName === self.user.UserName) : 0;
+        const sessions = self.sessions;
+        const index = self.user ? sessions.findIndex(e => e.UserName === self.user.UserName) : 0;
 
         --index;
 
@@ -290,8 +289,8 @@ class Chat {
     }
 
     @action chatToNext() {
-        var sessions = self.sessions;
-        var index = self.user ? sessions.findIndex(e => e.UserName === self.user.UserName) : -1;
+        const sessions = self.sessions;
+        const index = self.user ? sessions.findIndex(e => e.UserName === self.user.UserName) : -1;
 
         ++index;
 
@@ -303,10 +302,10 @@ class Chat {
     }
 
     @action chatTo(user, onTop) {
-        var sessions = self.sessions;
-        var stickyed = [];
-        var normaled = [];
-        var index = self.sessions.findIndex(e => e.UserName === user.UserName);
+        const sessions = self.sessions;
+        const stickyed = [];
+        const normaled = [];
+        const index = self.sessions.findIndex(e => e.UserName === user.UserName);
 
         if (index === -1) {
             // User not in chatset
@@ -343,12 +342,12 @@ class Chat {
 
     @action async addMessage(message, sync = false) {
         /* eslint-disable */
-        var from = message.FromUserName;
-        var user = await customerRelation.getUser(from);
-        var list = self.messages.get(from);
-        var sessions = self.sessions;
-        var stickyed = [];
-        var normaled = [];
+        const from = message.FromUserName;
+        const user = await customerRelation.getUser(from);
+        const list = self.messages.get(from);
+        const sessions = self.sessions;
+        const stickyed = [];
+        const normaled = [];
         /* eslint-enable */
 
         if (!user) {
@@ -421,7 +420,7 @@ class Chat {
 
         sessions = sessions.map(e => {
             // Catch the contact update, eg: MsgType = 10000, chat room name has changed
-            var user = customerRelation.memberList.find(user => user.UserName === e.UserName);
+            const user = customerRelation.memberList.find(user => user.UserName === e.UserName);
 
             // Fix sticky bug
             if (helper.isTop(user)) {
@@ -440,7 +439,7 @@ class Chat {
     }
 
     @action async sendTextMessage(auth, message, isForward) {
-        var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendmsg`, {
+        const response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendmsg`, {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -456,7 +455,7 @@ class Chat {
             },
             Scene: isForward ? 2 : 0,
         });
-        var res = {
+        const res = {
             data: response.data,
 
             item: {
@@ -478,7 +477,7 @@ class Chat {
     }
 
     @action async sendEmojiMessage(auth, message) {
-        var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendemoticon?fun=sys&lang=en_US&pass_ticket=${auth.passTicket}`, {
+        const response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendemoticon?fun=sys&lang=en_US&pass_ticket=${auth.passTicket}`, {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -493,7 +492,7 @@ class Chat {
             }, message.file ? { MediaId: message.file.mediaId } : { EMoticonMd5: message.emoji.md5 }),
             Scene: 2,
         });
-        var res = {
+        const res = {
             data: response.data,
 
             item: Object.assign({}, message, {
@@ -519,7 +518,7 @@ class Chat {
     }
 
     @action async sendImageMessage(auth, message, isForward) {
-        var response = await axios.post('/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json', {
+        const response = await axios.post('/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json', {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -536,7 +535,7 @@ class Chat {
             },
             Scene: isForward ? 2 : 0,
         });
-        var res = {
+        const res = {
             data: response.data,
 
             item: Object.assign({}, message, {
@@ -562,7 +561,7 @@ class Chat {
     }
 
     @action async sendFileMessage(auth, message, isForward) {
-        var response = await axios.post('/cgi-bin/mmwebwx-bin/webwxsendappmsg?fun=async&f=json', {
+        const response = await axios.post('/cgi-bin/mmwebwx-bin/webwxsendappmsg?fun=async&f=json', {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -596,7 +595,7 @@ class Chat {
             },
             Scene: isForward ? 2 : 0,
         });
-        var res = {
+        const res = {
             data: response.data,
 
             item: Object.assign({}, message, {
@@ -617,7 +616,7 @@ class Chat {
     }
 
     @action async sendVideoMessage(auth, message, isForward) {
-        var response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendvideomsg?fun=async&f=json&pass_ticket=${auth.passTicket}`, {
+        const response = await axios.post(`/cgi-bin/mmwebwx-bin/webwxsendvideomsg?fun=async&f=json&pass_ticket=${auth.passTicket}`, {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -634,7 +633,7 @@ class Chat {
             },
             Scene: isForward ? 2 : 0,
         });
-        var res = {
+        const res = {
             data: response.data,
 
             item: Object.assign({}, message, {
@@ -667,16 +666,16 @@ class Chat {
     }
 
     @action async sendMessage(user, message, isForward = false, transformMessages = self.transformMessages) {
-        var id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
-        var auth = window.localStorage.getItem('auth');
-        var payload = Object.assign({}, message, {
+        const id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
+        const auth = window.localStorage.getItem('auth');
+        const payload = Object.assign({}, message, {
             content: helper.decodeHTML(message.content),
             from: authentication.user.User.UserName,
             to: user.UserName,
             ClientMsgId: id,
             LocalID: id
         });
-        var res;
+        const res;
 
         try {
             if (message.type === 1) {
@@ -702,7 +701,7 @@ class Chat {
             return false;
         }
 
-        var { data, item } = res;
+        const { data, item } = res;
 
         self.chatTo(user, isForward);
 
@@ -728,7 +727,7 @@ class Chat {
     }
 
     @action async process(file, user = self.user) {
-        var showMessage = snackbar.showMessage;
+        const showMessage = snackbar.showMessage;
 
         if (!file || file.size === 0) {
             showMessage('You can\'t send an empty file.');
@@ -741,8 +740,8 @@ class Chat {
             return false;
         }
 
-        var { mediaId, signature, type, uploaderid } = await self.upload(file, user);
-        var res = await self.sendMessage(user, {
+        const { mediaId, signature, type, uploaderid } = await self.upload(file, user);
+        const res = await self.sendMessage(user, {
             type,
             file: {
                 name: file.name,
@@ -753,8 +752,8 @@ class Chat {
             },
         }, false, (to, messages, message) => {
             // Sent success
-            var list = messages.get(to);
-            var item = list.data.find(e => e.uploaderid === uploaderid);
+            const list = messages.get(to);
+            const item = list.data.find(e => e.uploaderid === uploaderid);
 
             switch (type) {
                 case 3:
@@ -810,20 +809,20 @@ class Chat {
     }
 
     @action async upload(file, user = self.user) {
-        var id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
-        var md5 = await helper.md5(file);
-        var auth = window.localStorage.getItem('auth');
-        var ticket = await helper.getCookie('webwx_data_ticket');
-        var server = axios.defaults.baseURL.replace(/https:\/\//, 'https://file.') + 'cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json';
-        var mediaType = helper.getMediaType(file.name.split('.').slice(-1).pop());
-        var type = {
+        const id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
+        const md5 = await helper.md5(file);
+        const auth = window.localStorage.getItem('auth');
+        const ticket = await helper.getCookie('webwx_data_ticket');
+        const server = axios.defaults.baseURL.replace(/https:\/\//, 'https://file.') + 'cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json';
+        const mediaType = helper.getMediaType(file.name.split('.').slice(-1).pop());
+        const type = {
             'pic': 3,
             'video': 43,
             'doc': 49 + 6,
         }[mediaType];
-        var chunks = Math.ceil(file.size / 524288);
-        var payment = {};
-        var process = async(index) => {
+        const chunks = Math.ceil(file.size / 524288);
+        const payment = {};
+        const process = async(index) => {
             let formdata = new window.FormData();
             let start = index * 524288;
             let end = start + 524288;
@@ -858,7 +857,7 @@ class Chat {
             formdata.append('pass_ticket', auth.passTicket);
             formdata.append('filename', file.slice(start, end <= file.size ? end : file.size));
 
-            var response = await axios.post(server, formdata);
+            const response = await axios.post(server, formdata);
             return response;
         };
 
@@ -866,7 +865,7 @@ class Chat {
         self.upload.counter = self.upload.counter ? self.upload.counter + 1 : 0;
 
         type = file.name.toLowerCase().endsWith('.gif') ? 47 : type;
-        var uploaderid = self.addUploadPreview(file, type, user);
+        const uploaderid = self.addUploadPreview(file, type, user);
 
         if (file.size > 1048576 * 10) {
             let response = await axios.post('/cgi-bin/mmwebwx-bin/webwxcheckupload', {
@@ -891,7 +890,7 @@ class Chat {
             }
         }
 
-        var response;
+        const response;
 
         for (let i = 0; !payment.MediaId && i < chunks; ++i) {
             response = await process(i);
@@ -911,13 +910,13 @@ class Chat {
     }
 
     @action addUploadPreview(file, type, user = self.user) {
-        var uploaderid = Math.random().toString();
-        var to = user.UserName;
-        var list = self.messages.get(to) || {
+        const uploaderid = Math.random().toString();
+        const to = user.UserName;
+        const list = self.messages.get(to) || {
             data: [],
             unread: 0,
         };
-        var item = {
+        const item = {
             isme: true,
             CreateTime: +new Date() / 1000,
             HeadImgUrl: authentication.user.User.HeadImgUrl,
@@ -980,10 +979,10 @@ class Chat {
     }
 
     @action async recallMessage(message) {
-        var id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
-        var auth = window.localStorage.getItem('auth');
-        var to = self.user.UserName;
-        var response = await axios.post('/cgi-bin/mmwebwx-bin/webwxrevokemsg', {
+        const id = (+new Date() * 1000) + Math.random().toString().substr(2, 4);
+        const auth = window.localStorage.getItem('auth');
+        const to = self.user.UserName;
+        const response = await axios.post('/cgi-bin/mmwebwx-bin/webwxrevokemsg', {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -1003,7 +1002,7 @@ class Chat {
     }
 
     @action deleteMessage(userid, messageid) {
-        var list = self.messages.get(userid);
+        const list = self.messages.get(userid);
 
         list.data = list.data.filter(e => e.MsgId !== messageid);
         list.unread = 0;
@@ -1011,7 +1010,7 @@ class Chat {
     }
 
     @action markedRead(userid) {
-        var list = self.messages.get(userid);
+        const list = self.messages.get(userid);
 
         // Update the unread message need the chat in chat list
         if (!self.sessions.map(e => e.UserName).includes(userid)) {
@@ -1031,9 +1030,9 @@ class Chat {
     }
 
     @action async sticky(user) {
-        var auth = window.localStorage.getItem('auth');
-        var sticky = +!helper.isTop(user);
-        var response = await axios.post('/cgi-bin/mmwebwx-bin/webwxoplog', {
+        const auth = window.localStorage.getItem('auth');
+        const sticky = +!helper.isTop(user);
+        const response = await axios.post('/cgi-bin/mmwebwx-bin/webwxoplog', {
             BaseRequest: {
                 Sid: auth.wxsid,
                 Uin: auth.wxuin,
@@ -1044,7 +1043,7 @@ class Chat {
             RemarkName: user.RemarkName || user.NickName,
             UserName: user.UserName
         });
-        var sorted = [];
+        const sorted = [];
 
         if (+response.data.BaseResponse.Ret === 0) {
             self.sessions.find(e => e.UserName === user.UserName).isTop = !!sticky;
@@ -1067,7 +1066,7 @@ class Chat {
     }
 
     @action removeChat(user) {
-        var sessions = self.sessions.filter(e => e.UserName !== user.UserName);
+        const sessions = self.sessions.filter(e => e.UserName !== user.UserName);
         self.sessions.replace(sessions);
 
         updateMenus({
