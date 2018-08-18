@@ -12,7 +12,8 @@ import UserList from 'app/shared/UserList';
 import helper from 'app/shared/util/helper';
 
 import { newChatToogle } from 'app/shared/reducers/app';
-import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset } from 'app/shared/reducers/customer-relation.reducer';
+import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
+import { chatTo } from 'app/shared/reducers/chat';
 import { createEntity as createCustomerFlock } from 'app/shared/reducers/customer-flock.reducer';
 
 export interface IProps extends StateProps, DispatchProps { }
@@ -21,6 +22,7 @@ class NewChat extends React.Component<IProps> {
         query: '',
         selected: []
     };
+    userRef;
     /**
      * 发起单聊或群聊
      */
@@ -44,7 +46,6 @@ class NewChat extends React.Component<IProps> {
      * 关闭窗口并清空数据
      */
     close() {
-        this.props.close();
         this.setState({
             ...this.state,
             query: ''
@@ -72,7 +73,7 @@ class NewChat extends React.Component<IProps> {
         }
         return (
             <UserList {...{
-                ref: 'users',
+                ref: this.userRef,
                 search,
                 getList,
                 query,
@@ -85,7 +86,7 @@ class NewChat extends React.Component<IProps> {
         return (
             <Modal
                 fullscreen={true}
-                onCancel={e => this.props.close()}
+                onCancel={e => this.close()}
                 show={this.props.show}>
                 <ModalBody className={'container'}>
                     New Chat ({this.state.selected.length} / 20)
@@ -93,12 +94,14 @@ class NewChat extends React.Component<IProps> {
                     <div className={'avatars'}>
                         {
                             this.state.selected.map((e, index) => {
-                                const user = this.props.getUser(e);
+                                this.props.getUser(e);
+                                const customerRelation = this.props.customerRelation;
+                                // @wait: customer待级联 customerRelation.customer.HeadImgUrl
                                 return (
                                     <img
                                         key={index}
-                                        onClick={ev => this.refs.users.removeSelected(e)}
-                                        src={user.HeadImgUrl} />
+                                        onClick={ev => this.userRef.removeSelected(e)}
+                                        src={''} />
                                 );
                             })
                         }
@@ -120,13 +123,14 @@ class NewChat extends React.Component<IProps> {
         );
     }
 }
-const mapStateToProps = ({ app, authentication, applicationProfile, snackbarState, chat }: IRootState) => ({
+const mapStateToProps = ({ app, authentication, applicationProfile, snackbarState }: IRootState, { entity }: CustomerRelationState) => ({
     show: app.isNewChatShow,
     getList: () => getEntities,
     getUser: getEntity,
+    customerRelation: entity,
     search: getSearchEntities,
     createChatRoom: createCustomerFlock,
-    chatTo: (user: any) => chat.chatTo(user)
+    chatTo: (user: any) => chatTo(user)
   });
 const mapDispatchToProps = { setLocale, getSession, getProfile };
 //  用于把当前 Redux store state 映射到展示组件的 props 中
