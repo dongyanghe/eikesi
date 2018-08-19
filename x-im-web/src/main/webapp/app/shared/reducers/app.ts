@@ -13,8 +13,15 @@ const initialState = {
 
 export type AppState = Readonly<typeof initialState>;
 
-// Reducer
-
+/**
+ * 首页视图Reducer
+ * state：为当前状态
+ * action:为你要修改的信息类型及其值
+ * 永远不要在 reducer 里做这些操作：
+ * 修改传入参数；
+ * 执行有副作用的操作，如 API 请求和路由跳转；
+ * 调用非纯函数，如 Date.now() 或 Math.random()
+ */
 export default (state: AppState = initialState, action): AppState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.NEW_CHAT_TOOGLE):

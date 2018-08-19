@@ -187,7 +187,7 @@ export const showMessage = (showConversation = !initialState.showConversation) =
 };
 
 export const loadChats = (chatSet: string) => async dispatch => {
-    const { customerRelation }: IRootState;
+    const { customerRelation } = {initialState};
     let { messagesMap, sessions }: ChatState;
     const list = customerRelation.entities;
     const res = [];
@@ -220,7 +220,7 @@ export const loadChats = (chatSet: string) => async dispatch => {
         });
     }
     res.map((e, index) => {
-        messagesMap.set(e.UserName, {
+        initialState.messagesMap.set(e.UserName, {
             data: [],
             unread: 0
         });
@@ -234,7 +234,7 @@ export const loadChats = (chatSet: string) => async dispatch => {
             sorted.push(e);
         }
     });
-    dispatch({
+    await dispatch({
         type: ACTION_TYPES.TOGGLE,
         action: { messagesMap }
     });

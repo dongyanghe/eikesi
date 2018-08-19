@@ -68,7 +68,7 @@ export interface IRootState {
   readonly loadingBar: any;
 }
 /**
- * 公共state的reducer
+ * reducer创建
  * @description: 使用combineReducers合并Reducer生成一个公共函数，
  * 这个函数来调用你的一系列 reducer，最后会返回一个合并的state。
  * 在store中用于创建公共store用以改变公共state。
@@ -84,6 +84,7 @@ export interface IRootState {
  * 一般使用 `switch` 语句和字符串来做判断，但你可以写帮助类(helper)
  * 根据不同的约定（如方法映射）来判断，只要适用你的项目即可。
  * 也可以自定义一个 createReducer 函数来接收一个事件处理函数列表
+ * combineReducers：实现todos功能
  */
 const rootReducer = combineReducers<IRootState>({
   app,
