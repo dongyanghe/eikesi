@@ -45,7 +45,7 @@ class AddFriend extends React.Component<IProps> {
     }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
+const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar }: IRootState) => ({
     sendRequest: createEntity,
     show: false,
     me: authentication.account,

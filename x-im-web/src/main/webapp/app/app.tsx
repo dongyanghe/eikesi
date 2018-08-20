@@ -178,9 +178,9 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
-  message: snackbarState.message,  //  消息提示
-  isShow: snackbarState.isShow,
+const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar }: IRootState) => ({
+  message: snackbar.message,  //  消息提示
+  isShow: snackbar.isShow,
   close: () => toggle(false),
   canidrag: () => false,  //  拖入文件是否可以直接发送，否则需暂时复制
   currentLocale: locale.currentLocale,

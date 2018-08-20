@@ -13,7 +13,6 @@ import { getSession, login } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
-export interface IAppProps extends StateProps, DispatchProps { }
 
 async function resolveMessage(message) {
     const auth = window.localStorage.getItem('auth');
@@ -71,113 +70,113 @@ export type ChatState = Readonly<typeof initialState>;
 export default (state: ChatState = initialState, action): ChatState => {
     switch (action.type) {
         case ACTION_TYPES.TOGGLE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.LOAD_CHATS:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.TO_PREV:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SHOW_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.TO_NEXT:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.TO_USER:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.ADD_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_TEXT_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_EMOJI_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_IMAGE_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_FILE_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_VIDEO_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.SEND_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.PROCESS:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.UPLOAD:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.ADD_UPLOAD_PREVIEW:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.RECALL_MESSAGE:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.MARKED_READ:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.STICKY:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.REMOVE_CHAT:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         case ACTION_TYPES.EMPTY:
-            const isShow = action.isShow;
+
             return {
                 ...state
             };
         default:
             return state;
-    };
+    }
 };
 export const showMessage = (showConversation = !initialState.showConversation) => async dispatch => {
     dispatch({
@@ -186,10 +185,9 @@ export const showMessage = (showConversation = !initialState.showConversation) =
     });
 };
 
-export const loadChats = (chatSet: string) => async dispatch => {
-    const { customerRelation } = {initialState};
-    let { messagesMap, sessions }: ChatState;
-    const list = customerRelation.entities;
+export const loadChats = (chatSet: string, iCustomerRelationList: ICustomerRelation[], messagesMap: Map<string, any>, sessions: String) => async dispatch => {
+
+    const list = iCustomerRelationList;
     const res = [];
     const temps = [];
     const sorted = [];
@@ -249,7 +247,7 @@ export const chatToNext = () => async dispatch => {
     console.warn('UserInfo chatToPrev unrealized：');
 };
 
-export const chatTo = (user, onTop) => async dispatch => {
+export const chatTo = (user, onTop?: boolean) => async dispatch => {
     console.warn('UserInfo chatToPrev unrealized：');
 };
 
@@ -276,7 +274,7 @@ export const sendVideoMessage = (auth: any, message: any, isForward) => dispatch
     console.warn('UserInfo chatToPrev unrealized：');
 };
 
-const transformMessagesDefault = (to, messagesMap, message) => dispatch => {
+const transformMessagesDefault = (to, messagesMap: Map<string, any>, message) => dispatch => {
     console.warn('UserInfo chatToPrev unrealized：');
 };
 
@@ -316,8 +314,7 @@ export const removeChat = user => async dispatch => {
     console.warn('UserInfo chatToPrev unrealized：');
 };
 
-export const empty = user => async dispatch => {
-    let { messagesMap }: ChatState;
+export const empty = (user, messagesMap: Map<string, any>) => async dispatch => {
     // Empty the chat content
     messagesMap.set(user.UserName, {
         data: [],

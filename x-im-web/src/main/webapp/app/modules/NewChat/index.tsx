@@ -9,8 +9,6 @@ import { getProfile } from 'app/shared/reducers/application-profile';
 import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
 import './style.css';
 import UserList from 'app/shared/UserList';
-import helper from 'app/shared/util/helper';
-
 import { newChatToogle } from 'app/shared/reducers/app';
 import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import { chatTo } from 'app/shared/reducers/chat';
@@ -89,7 +87,7 @@ class NewChat extends React.Component<IProps> {
                 onCancel={e => this.close()}
                 show={this.props.show}>
                 <ModalBody className={'container'}>
-                    New Chat ({this.state.selected.length} / 20)
+                    新建聊天 ({this.state.selected.length} / 20)
 
                     <div className={'avatars'}>
                         {
@@ -116,23 +114,19 @@ class NewChat extends React.Component<IProps> {
                             聊天
                         </button>
 
-                        <button onClick={e => this.close()}>Cancel</button>
+                        <button onClick={e => this.close()}>取消</button>
                     </div>
                 </ModalBody>
             </Modal>
         );
     }
 }
-const mapStateToProps = ({ app, authentication, applicationProfile, snackbarState }: IRootState, { entity }: CustomerRelationState) => ({
+const mapStateToProps = ({ app, authentication, applicationProfile, chat }: IRootState, { entity }: CustomerRelationState) => ({
     show: app.isNewChatShow,
-    getList: () => getEntities,
-    getUser: getEntity,
     customerRelation: entity,
-    search: getSearchEntities,
-    createChatRoom: createCustomerFlock,
-    chatTo: (user: any) => chatTo(user)
+    createChatRoom: createCustomerFlock
   });
-const mapDispatchToProps = { setLocale, getSession, getProfile };
+const mapDispatchToProps = { search: getSearchEntities, getList: () => getEntities, getUser: getEntity, chatTo };
 //  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
