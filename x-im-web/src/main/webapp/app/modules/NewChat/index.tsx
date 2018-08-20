@@ -121,9 +121,9 @@ class NewChat extends React.Component<IProps> {
         );
     }
 }
-const mapStateToProps = ({ app, authentication, applicationProfile, chat }: IRootState, { entity }: CustomerRelationState) => ({
+const mapStateToProps = ({ app, authentication, applicationProfile, chat, customerRelation }: IRootState) => ({
     show: app.isNewChatShow,
-    customerRelation: entity,
+    customerRelation: customerRelation.entity,
     createChatRoom: createCustomerFlock
   });
 const mapDispatchToProps = { search: getSearchEntities, getList: () => getEntities, getUser: getEntity, chatTo };

@@ -146,8 +146,11 @@ export class App extends React.Component<IAppProps> {
           </div>
           <Footer
             location={location} />
+          {/* 用户信息 */}
           <UserInfo />
+          {/* 新增好友 */}
           <AddFriend />
+          {/* 新建单聊/群聊 */}
           <NewChat />
           <Members />
           <BatchSend />
