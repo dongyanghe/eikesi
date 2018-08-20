@@ -4,11 +4,13 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 
 export const ACTION_TYPES = {
   NEW_CHAT_TOOGLE: 'app/NEW_CHAT_TOOGLE',
-  NEW_CHAT_TOOGLE_CLOSE: 'app/NEW_CHAT_TOOGLE_CLOSE'
+  NEW_CHAT_TOOGLE_CLOSE: 'app/NEW_CHAT_TOOGLE_CLOSE',
+  MEMBERS_TOOGLE: 'app/MEMBERS_TOOGLE'
 };
 
 const initialState = {
-  isNewChatShow: false //  是否显示新建群窗口
+  isNewChatShow: false, //  是否显示新建群窗口
+  isMembersShow: false
 };
 
 export type AppState = Readonly<typeof initialState>;
@@ -40,4 +42,9 @@ export const newChatToogle = (isNewChatShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.NEW_CHAT_TOOGLE,
     payload: { isNewChatShow }
+  });
+  export const newMemberToogle = (isMembersShow: boolean) => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.MEMBERS_TOOGLE,
+    payload: { isMembersShow }
   });

@@ -59,7 +59,7 @@ export class App extends React.Component<IAppProps> {
     });
     window.addEventListener('online', () => {
       this.setState({
-        offline: false
+        isOffline: false
       });
     });
     //  拖动元素来到放置领域

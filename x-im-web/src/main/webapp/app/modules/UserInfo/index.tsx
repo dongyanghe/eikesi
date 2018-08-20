@@ -187,12 +187,17 @@ export class UserInfo extends React.Component<IProps, IState> {
     }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
+const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
+    pallet: [],
+    user: authentication.account,
+    isme: () => authentication.account.user
+            && authentication.account.UserName === authentication.account.User.UserName
+  });
+
+  const mapDispatchToProps = {
     chatTo: (userId: string) => {
         console.warn('UserInfo chatTo unrealized：', userId);
     },
-    pallet: [],
-    user: authentication.account,
     removeMember: async (user: any) => {
         console.warn('UserInfo removeMember unrealized：', user);
     },
@@ -201,12 +206,8 @@ const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarS
     },
     showAddFriend: (user: any) => {
         console.warn('UserInfo showAddFriend unrealized：', user);
-    },
-    isme: () => authentication.account.user
-            && authentication.account.UserName === authentication.account.User.UserName
-  });
-
-  const mapDispatchToProps = { setLocale, getSession, getProfile };
+    }
+};
   //  用于把当前 Redux store state 映射到展示组件的 props 中
   type StateProps = ReturnType<typeof mapStateToProps>;
   type DispatchProps = typeof mapDispatchToProps;
