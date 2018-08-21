@@ -4,7 +4,7 @@ import { Modal, ModalBody } from 'app/shared/Modal';
 import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
-import { newMemberToogle } from 'app/shared/reducers/app';
+import { memberToogle } from 'app/shared/reducers/app';
 import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import './style.scss';
 import helper from 'app/shared/util/helper';
@@ -27,7 +27,7 @@ class Members extends React.Component<IProps, IState> {
      */
     toggle = (show = this.props.show, user = this.state.user) => {
         let list: [] = [];
-        newMemberToogle(show);
+        memberToogle(show);
         this.setState({
             user
         });
@@ -78,7 +78,25 @@ class Members extends React.Component<IProps, IState> {
             filtered: []
         });
     }
+    showUserinfo = async (user: any) => {
+        const caniremove = helper.isChatRoomOwner(this.props.account);
 
+        if (user.id === this.props.account.id) {
+            user = this.props.account;
+        } else {
+            this.props.customerRelationList.filter(e => {
+                // Try to find contact in contacts
+                if (e.id === user.id) {
+                    return (user = e);
+                }
+            });
+        }
+        stores.userinfo.toggle(true, user, caniremove);
+    },
+    addMember: () => {
+        this.toggle(false);
+        stores.addmember.toggle(true);
+    }
     render() {
         const { user, searching, list, filtered } = this.props;
         if (!this.props.show) {
@@ -158,34 +176,11 @@ class Members extends React.Component<IProps, IState> {
 
 const mapStateToProps = ({ app, authentication, applicationProfile, chat, customerRelation }: IRootState) => ({
     show: app.isMembersShow,
-    account: authentication.account
+    account: authentication.account,
+    customerRelationList: customerRelation.entities
 });
-const mapDispatchToProps = {
-    showUserinfo: async (user: any, account) => {
-        const caniremove = helper.isChatRoomOwner(stores.members.user);
-
-        if (user.UserName === account.UserName) {
-            user = account;
-        } else {
-            stores.contacts.memberList.find(e => {
-                // Try to find contact in contacts
-                if (e.UserName === user.UserName) {
-                    return (user = e);
-                }
-            });
-        }
-
-        stores.userinfo.toggle(true, user, caniremove);
-    },
-    addMember: () => {
-        stores.members.toggle(false);
-        stores.addmember.toggle(true);
-    }
-};
 //  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Members);

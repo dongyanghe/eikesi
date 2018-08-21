@@ -4,13 +4,16 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 
 export const ACTION_TYPES = {
   NEW_CHAT_TOOGLE: 'app/NEW_CHAT_TOOGLE',
-  NEW_CHAT_TOOGLE_CLOSE: 'app/NEW_CHAT_TOOGLE_CLOSE',
-  MEMBERS_TOOGLE: 'app/MEMBERS_TOOGLE'
+  MEMBERS_TOOGLE: 'app/MEMBERS_TOOGLE',
+  ADD_MEMBERS_TOOGLE: 'app/ADD_MEMBERS_TOOGLE',
+  USERINFO_TOOGLE: 'app/USERINFO_TOOGLE'
 };
 
 const initialState = {
   isNewChatShow: false, //  是否显示新建群窗口
-  isMembersShow: false
+  isMembersShow: false, //  是否显示
+  isAddMembersShow: false, //  是否显示
+  isUserInfoShow: false //  是否显示
 };
 
 export type AppState = Readonly<typeof initialState>;
@@ -31,20 +34,43 @@ export default (state: AppState = initialState, action): AppState => {
         ...state,
         isNewChatShow: action.isNewChatShow
       };
+    case REQUEST(ACTION_TYPES.MEMBERS_TOOGLE):
+      return {
+        ...state,
+        isMembersShow: action.isMembersShow
+      };
+    case REQUEST(ACTION_TYPES.ADD_MEMBERS_TOOGLE):
+      return {
+        ...state,
+        isAddMembersShow: action.isAddMembersShow
+      };
+    case REQUEST(ACTION_TYPES.USERINFO_TOOGLE):
+      return {
+        ...state,
+        isUserInfoShow: action.isUserInfoShow
+      };
     default:
       return state;
   }
 };
-
-export const displayAuthError = message => ({ type: ACTION_TYPES.ERROR_MESSAGE, message });
 
 export const newChatToogle = (isNewChatShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.NEW_CHAT_TOOGLE,
     payload: { isNewChatShow }
   });
-  export const newMemberToogle = (isMembersShow: boolean) => dispatch =>
+  export const memberToogle = (isMembersShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.MEMBERS_TOOGLE,
     payload: { isMembersShow }
+  });
+  export const addMemberToogle = (isAddMember: boolean) => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
+    payload: { isAddMember }
+  });
+  export const userInfoToogle = (isUserInfoShow: boolean) => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.USERINFO_TOOGLE,
+    payload: { isUserInfoShow }
   });

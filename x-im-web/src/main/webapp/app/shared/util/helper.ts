@@ -11,13 +11,11 @@ const CONTACTFLAG_NOTIFYCLOSECONTACT = 512;
 const MM_USERATTRVERIFYFALG_BIZ_BRAND = 8;
 const CONTACTFLAG_TOPCONTACT = 2048;
 const CONTACTFLAG_CONTACT = 1;
-const authenticationState = { getSession };
 const helper = {
-    isContact: (user: any) => {
+    isContact: (user: any, account: any) => {
         if (helper.isFileHelper(user)) return true;
-
         return user.ContactFlag & CONTACTFLAG_CONTACT
-            || (authenticationState.account.user && user.UserName === authenticationState.user.User.UserName);
+            || (account.user && user.UserName === user.User.UserName);
     },
 
     isChatRoom: (userid: any) => userid && userid.startsWith('@@'),
