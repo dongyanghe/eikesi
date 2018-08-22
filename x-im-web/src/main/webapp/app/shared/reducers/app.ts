@@ -64,10 +64,10 @@ export const newChatToogle = (isNewChatShow: boolean) => dispatch =>
     type: ACTION_TYPES.MEMBERS_TOOGLE,
     payload: { isMembersShow }
   });
-  export const addMemberToogle = (isAddMember: boolean) => dispatch =>
+  export const addMemberToogle = (isAddMembersShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
-    payload: { isAddMember }
+    payload: { isAddMembersShow }
   });
   export const userInfoToogle = (isUserInfoShow: boolean) => dispatch =>
   dispatch({

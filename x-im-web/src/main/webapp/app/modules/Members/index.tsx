@@ -93,9 +93,9 @@ class Members extends React.Component<IProps, IState> {
         }
         stores.userinfo.toggle(true, user, caniremove);
     },
-    addMember: () => {
+    addMember = () => {
         this.toggle(false);
-        stores.addmember.toggle(true);
+        this.props.addmember.toggle(true);
     }
     render() {
         const { user, searching, list, filtered } = this.props;
