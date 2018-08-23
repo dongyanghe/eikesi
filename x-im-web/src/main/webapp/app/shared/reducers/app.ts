@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { ICustomerRelation, defaultValue } from 'app/shared/model/customer-relation.model';
+import { ACTION_TYPES as CUSTOMER_RELATION_ACTION_TYPES, updateEntity, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 
 export const ACTION_TYPES = {
   NEW_CHAT_TOOGLE: 'app/NEW_CHAT_TOOGLE',
@@ -8,12 +10,17 @@ export const ACTION_TYPES = {
   ADD_MEMBERS_TOOGLE: 'app/ADD_MEMBERS_TOOGLE',
   USERINFO_TOOGLE: 'app/USERINFO_TOOGLE'
 };
-
+/**
+ * 本项目视图数据状态和业务数据状态分开
+ * app.ts只存储公共视图组件的状态，独立的视图组件存储在其自身state里面
+ * 业务数据存储在对应数据领域的reducer里面
+ */
 const initialState = {
   isNewChatShow: false, //  是否显示新建群窗口
   isMembersShow: false, //  是否显示
   isAddMembersShow: false, //  是否显示
-  isUserInfoShow: false //  是否显示
+  isUserInfoShow: false, //  是否显示, //  是否显示
+  isUserInfoDelete: false //  用户是否能能删除
 };
 
 export type AppState = Readonly<typeof initialState>;
@@ -32,22 +39,23 @@ export default (state: AppState = initialState, action): AppState => {
     case REQUEST(ACTION_TYPES.NEW_CHAT_TOOGLE):
       return {
         ...state,
-        isNewChatShow: action.isNewChatShow
+        isNewChatShow: action.payload.isNewChatShow
       };
     case REQUEST(ACTION_TYPES.MEMBERS_TOOGLE):
       return {
         ...state,
-        isMembersShow: action.isMembersShow
+        isMembersShow: action.payload.isMembersShow
       };
     case REQUEST(ACTION_TYPES.ADD_MEMBERS_TOOGLE):
       return {
         ...state,
-        isAddMembersShow: action.isAddMembersShow
+        isAddMembersShow: action.payload.isAddMembersShow
       };
     case REQUEST(ACTION_TYPES.USERINFO_TOOGLE):
       return {
         ...state,
-        isUserInfoShow: action.isUserInfoShow
+        isUserInfoShow: action.payload.isUserInfoShow,
+        isUserInfoDelete: action.payload.isUserInfoDelete
       };
     default:
       return state;
@@ -59,18 +67,32 @@ export const newChatToogle = (isNewChatShow: boolean) => dispatch =>
     type: ACTION_TYPES.NEW_CHAT_TOOGLE,
     payload: { isNewChatShow }
   });
-  export const memberToogle = (isMembersShow: boolean) => dispatch =>
+
+export const memberToogle = (isMembersShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.MEMBERS_TOOGLE,
     payload: { isMembersShow }
   });
-  export const addMemberToogle = (isAddMembersShow: boolean) => dispatch =>
+
+export const addMemberToogle = (isAddMembersShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
     payload: { isAddMembersShow }
   });
-  export const userInfoToogle = (isUserInfoShow: boolean) => dispatch =>
+
+/**
+ * 显示用户信息框，设置用户详情数据
+ * @param isUserInfoShow
+ * @param iCustomerRelation
+ * @param isUserInfoDelete
+ */
+export const userInfoToogle = (isUserInfoShow: boolean, iCustomerRelation, isUserInfoDelete = false) => dispatch => {
+  dispatch({
+    type: CUSTOMER_RELATION_ACTION_TYPES.UPDATE_CUSTOMERRELATION,
+    payload: { data: iCustomerRelation }
+  });
   dispatch({
     type: ACTION_TYPES.USERINFO_TOOGLE,
     payload: { isUserInfoShow }
   });
+};

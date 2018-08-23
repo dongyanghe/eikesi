@@ -20,7 +20,7 @@ const initialState = {
   loading: false,
   errorMessage: null,
   entities: [] as ReadonlyArray<ICustomerRelation>,
-  entity: defaultValue,
+  entity: defaultValue, //  用户详情
   updating: false,
   updateSuccess: false
 };

@@ -1,10 +1,9 @@
-
 import React, { Component } from 'react';
 import { Modal, ModalBody } from 'app/shared/Modal';
 import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
-import { memberToogle } from 'app/shared/reducers/app';
+import { memberToogle, addMemberToogle, userInfoToogle } from 'app/shared/reducers/app';
 import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import './style.scss';
 import helper from 'app/shared/util/helper';
@@ -19,6 +18,7 @@ export interface IState {
     query: string;
   }
 class Members extends React.Component<IProps, IState> {
+    messageInputRef;
     constructor(props) {
         super(props);
       }
@@ -27,7 +27,7 @@ class Members extends React.Component<IProps, IState> {
      */
     toggle = (show = this.props.show, user = this.state.user) => {
         let list: [] = [];
-        memberToogle(show);
+        this.props.memberToogle(show);
         this.setState({
             user
         });
@@ -78,6 +78,7 @@ class Members extends React.Component<IProps, IState> {
             filtered: []
         });
     }
+
     showUserinfo = async (user: any) => {
         const caniremove = helper.isChatRoomOwner(this.props.account);
 
@@ -91,21 +92,23 @@ class Members extends React.Component<IProps, IState> {
                 }
             });
         }
-        stores.userinfo.toggle(true, user, caniremove);
-    },
+        this.props.userInfoToogle(true, user, caniremove);
+    }
+
     addMember = () => {
         this.toggle(false);
-        this.props.addmember.toggle(true);
+        this.props.addMemberToogle(true);
     }
+
     render() {
-        const { user, searching, list, filtered } = this.props;
+        const { account, list, filtered } = this.props;
         if (!this.props.show) {
             return false;
         }
         return (
             <div className={'container'} >
                 <header>
-                    <span dangerouslySetInnerHTML={{ __html: `Group '${user.NickName}' has ${list.length} members` }} />
+                    <span dangerouslySetInnerHTML={{ __html: `Group '${account.NickName}' has ${list.length} members` }} />
 
                     <span>
                         <i
@@ -122,16 +125,16 @@ class Members extends React.Component<IProps, IState> {
 
                 <ul className={'list'}>
                     {
-                        (searching && filtered.length === 0) && (
+                        (this.messageInputRef.value && filtered.length === 0) && (
                             <div className={'notfound'}>
                                 <img src="assets/images/crash.png" />
-                                <h1>找不到匹配的人： '{searching}'</h1>
+                                <h1>找不到匹配的人： '{this.messageInputRef.value}'</h1>
                             </div>
                         )
                     }
 
                     {
-                        (searching ? filtered : list).map((e, index) => {
+                        (this.messageInputRef.value ? filtered : list).map((e, index) => {
                             const pallet = e.pallet || [];
                             const frontColor = pallet[1] || [0, 0, 0];
 
@@ -162,10 +165,11 @@ class Members extends React.Component<IProps, IState> {
 
                 <div className={'footer'}>
                     <input
+                        ref={this.messageInputRef}
                         autoFocus={true}
                         id="messageInput"
                         maxLength={30}
-                        onInput={e => this.search(e.target.value)}
+                        onInput={e => this.search(this.messageInputRef.value)}
                         placeholder="请输入搜索关键字..."
                         type="text" />
                 </div>
@@ -179,8 +183,11 @@ const mapStateToProps = ({ app, authentication, applicationProfile, chat, custom
     account: authentication.account,
     customerRelationList: customerRelation.entities
 });
+const mapDispatchToProps = { memberToogle, addMemberToogle, userInfoToogle };
+
 //  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
 export default connect(
     mapStateToProps
 )(Members);

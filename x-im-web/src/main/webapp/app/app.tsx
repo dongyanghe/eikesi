@@ -32,7 +32,6 @@ import Snackbar from './shared/Snackbar';
 import Offline from './shared/Offline';
 import { toggle } from 'app/shared/reducers/snackbar';
 import classnames from 'classnames';
-import 'antd/dist/antd.css';
 
 export interface IAppProps extends StateProps, DispatchProps { }
 export class App extends React.Component<IAppProps> {
@@ -152,12 +151,17 @@ export class App extends React.Component<IAppProps> {
           <AddFriend />
           {/* 新建单聊/群聊 */}
           <NewChat />
+          {/* 群成员列表 */}
           <Members />
+          {/* 批量发送 */}
           <BatchSend />
+          {/*添加群成员  */}
           <AddMember />
+          {/* 图片发送确认 */}
           <ConfirmImagePaste />
+          {/* 转发消息 */}
           <Forward />
-
+          {/* 断线提示 */}
           <Offline show={this.state.isOffline} />;
           <div className={classnames({ 'dragDropHolder': true, 'show': this.state.isOndragleave })}>
             <div className={'inner'}>
@@ -172,7 +176,7 @@ export class App extends React.Component<IAppProps> {
 
               <i className="icon-ion-ios-cloud-upload-outline" />
 
-              <h2>拖入文件到此</h2>
+              <h2>拖入文件至此</h2>
             </div>
           </div>
         </div>
