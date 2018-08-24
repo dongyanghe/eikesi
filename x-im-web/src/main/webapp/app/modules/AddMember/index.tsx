@@ -1,11 +1,16 @@
-
 import React, { Component } from 'react';
-import { Modal, ModalBody } from 'components/Modal';
-import { inject, observer } from 'mobx-react';
-
-import classes from './style.css';
-import UserList from 'components/UserList';
-import helper from 'utils/helper';
+import { Modal, ModalBody } from 'app/shared/Modal';
+import { connect } from 'react-redux';
+import han from 'han';
+import { IRootState } from 'app/shared/reducers';
+import { showMessage } from 'app/shared/reducers/snackbar';
+import { process, sendMessage } from 'app/shared/reducers/chat';
+import { batchSendToogle } from 'app/shared/reducers/app';
+import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
+import classnames from 'classnames';
+import './style.scss';
+import UserList from 'app/shared/UserList';
+import helper from 'app/shared/util/helper';
 
 @inject(stores => ({
     show: stores.addmember.show,
@@ -37,7 +42,15 @@ import helper from 'utils/helper';
         stores.addmember.toggle(false);
     },
 }))
-@observer
+export interface IProps extends StateProps, DispatchProps { }
+export interface IState {
+    user: { //  群信息
+        MemberList: []
+    };
+    list: [];   //  所有关系成员
+    filtered: [];   //  检索后的关系成员列表
+    selected: [];   //  选择后的关系成员列表
+}
 export default class AddMember extends Component {
     state = {
         selected: [],

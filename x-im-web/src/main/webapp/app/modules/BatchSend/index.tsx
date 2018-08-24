@@ -20,7 +20,6 @@ export interface IState {
     list: [];   //  所有关系成员
     filtered: [];   //  检索后的关系成员列表
     selected: [];   //  选择后的关系成员列表
-    query: string;
 }
 class BatchSend extends React.Component<IProps, IState> {
     timer;
