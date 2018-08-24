@@ -1,138 +1,91 @@
+import helper from 'app/shared/util/helper';
+import axios from 'axios';
+import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { observable, action } from 'mobx';
-import { remote, ipcRenderer } from 'electron';
+import { cleanEntity } from 'app/shared/util/entity-utils';
+import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
-import storage from 'utils/storage';
-import helper from 'utils/helper';
+import { ICustomerRelation, defaultValue } from 'app/shared/model/customer-relation.model';
 
-class Settings {
-    @observable alwaysOnTop = false;
-    @observable showOnTray = false;
-    @observable showNotification = true;
-    @observable confirmImagePaste = true;
-    @observable startup = false;
-    @observable blockRecall = false;
-    @observable remeberConversation = false;
-    @observable showRedIcon = true;
-    @observable downloads = '';
+export const ACTION_TYPES = {
+    SAVE: 'settings/SAVE'
+};
+const initialState = {
+    alwaysOnTop: false,
+    showOnTray: false,
+    showNotification: true,
+    confirmImagePaste: true,
+    startup: false,
+    blockRecall: false,
+    remeberConversation: false,
+    showRedIcon: true,
+    downloads: ''
+};
+export type SettingsState = Readonly<typeof initialState>;
+export default (state: SettingsState = initialState, action): SettingsState => {
+    switch (action.type) {
+        case ACTION_TYPES.SAVE:
+            //  localStorage的值与state必须保持一致所以写在这里
+            window.localStorage.setItem('settings', JSON.stringify({
+                ...state,
+                ...action.payload
+                }));
+            return {
+            ...state,
+            ...action.payload
+            };
+        default:
+          return state;
+      }
+};
 
-    @action setAlwaysOnTop(alwaysOnTop) {
-        self.alwaysOnTop = alwaysOnTop;
-        self.save();
+export const save = (settingsState: {}) => dispatch => {
+    dispatch({
+        type: ACTION_TYPES.SAVE,
+        payload: { settingsState }
+      });
+    //  @wait: 应用新配置
+    // ipcRenderer.send('settings-apply', {
+    //     settings: {
+    //         alwaysOnTop,
+    //         showOnTray,
+    //         showNotification,
+    //         confirmImagePaste,
+    //         startup,
+    //         downloads,
+    //         blockRecall,
+    //         remeberConversation,
+    //         showRedIcon,
+    //     }
+    // });
+};
+export const init = () => dispatch => {
+    const settingsStr = window.localStorage.getItem('settings') || '{}';
+    const settings = JSON.parse(settingsStr);
+    let newState: any = {};
+    if (settings && Object.keys(settings).length) {
+        // Use !! force convert to a bool value
+        newState = {
+            alwaysOnTop: !!settings.alwaysOnTop,
+            showOnTray: !!settings.showOnTray,
+            showNotification: !!settings.showNotification,
+            confirmImagePaste: !!settings.confirmImagePaste,
+            startup: !!settings.startup,
+            blockRecall: !!settings.blockRecall,
+            remeberConversation: !!settings.remeberConversation,
+            showRedIcon: !!settings.showRedIcon,
+            downloads: settings.downloads
+        };
+    }
+    // Alway show the tray icon on windows
+    if (!helper.isOsx) {
+        newState.showOnTray = true;
     }
 
-    @action setShowRedIcon(showRedIcon) {
-        self.showRedIcon = showRedIcon;
-        self.save();
+    if (!newState.downloads
+        || typeof newState.downloads !== 'string') {
+            newState.downloads = window.location.assign;
     }
-
-    @action setRemeberConversation(remeberConversation) {
-        self.remeberConversation = remeberConversation;
-        self.save();
-    }
-
-    @action setBlockRecall(blockRecall) {
-        self.blockRecall = blockRecall;
-        self.save();
-    }
-
-    @action setShowOnTray(showOnTray) {
-        self.showOnTray = showOnTray;
-        self.save();
-    }
-
-    @action setConfirmImagePaste(confirmImagePaste) {
-        self.confirmImagePaste = confirmImagePaste;
-        self.save();
-    }
-
-    @action setShowNotification(showNotification) {
-        self.showNotification = showNotification;
-        self.save();
-    }
-
-    @action setStartup(startup) {
-        self.startup = startup;
-        self.save();
-    }
-
-    @action setDownloads(downloads) {
-        self.downloads = downloads.path;
-        self.save();
-    }
-
-    @action async init() {
-        var settings = await storage.get('settings');
-        var { alwaysOnTop, showOnTray, showNotification, blockRecall, remeberConversation, showRedIcon, startup, downloads } = self;
-
-        if (settings && Object.keys(settings).length) {
-            // Use !! force convert to a bool value
-            self.alwaysOnTop = !!settings.alwaysOnTop;
-            self.showOnTray = !!settings.showOnTray;
-            self.showNotification = !!settings.showNotification;
-            self.confirmImagePaste = !!settings.confirmImagePaste;
-            self.startup = !!settings.startup;
-            self.blockRecall = !!settings.blockRecall;
-            self.remeberConversation = !!settings.remeberConversation;
-            self.showRedIcon = !!settings.showRedIcon;
-            self.downloads = settings.downloads;
-        } else {
-            await storage.set('settings', {
-                alwaysOnTop,
-                showOnTray,
-                showNotification,
-                startup,
-                downloads,
-                blockRecall,
-                remeberConversation,
-                showRedIcon,
-            });
-        }
-
-        // Alway show the tray icon on windows
-        if (!helper.isOsx) {
-            self.showOnTray = true;
-        }
-
-        if (!self.downloads
-            || typeof self.downloads !== 'string') {
-            self.downloads = remote.app.getPath('downloads');
-        }
-
-        self.save();
-        return settings;
-    }
-
-    save() {
-        var { alwaysOnTop, showOnTray, showNotification, confirmImagePaste, blockRecall, remeberConversation, showRedIcon, startup, downloads } = self;
-
-        storage.set('settings', {
-            alwaysOnTop,
-            showOnTray,
-            showNotification,
-            confirmImagePaste,
-            startup,
-            downloads,
-            blockRecall,
-            remeberConversation,
-            showRedIcon,
-        });
-
-        ipcRenderer.send('settings-apply', {
-            settings: {
-                alwaysOnTop,
-                showOnTray,
-                showNotification,
-                confirmImagePaste,
-                startup,
-                downloads,
-                blockRecall,
-                remeberConversation,
-                showRedIcon,
-            }
-        });
-    }
-}
-
-const self = new Settings();
-export default self;
+    save(newState);
+    return settings;
+};

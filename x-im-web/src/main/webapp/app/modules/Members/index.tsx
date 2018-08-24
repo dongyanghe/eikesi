@@ -10,67 +10,67 @@ import helper from 'app/shared/util/helper';
 
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
-    user: {
+    user: { //  群信息
         MemberList: []
     };
-    list: [];
-    filtered: [];
+    list: [];   //  所有群成员
+    filtered: [];   //  检索后的群成员列表
     query: string;
-  }
+}
 class Members extends React.Component<IProps, IState> {
     messageInputRef;
     constructor(props) {
         super(props);
-      }
+    }
+    /**
+     * 插入真实DOM完成
+     * 1.初始化项目基本信息
+     */
+    componentDidMount() {
+        this.setState({
+            user: {
+                MemberList: []
+            },
+            list: [],   //  所有群成员
+            filtered: []   //  检索后的群成员列表
+        });
+        this.messageInputRef.value = '';
+    }
     /**
      * 显示/隐藏用户信息
      */
     toggle = (show = this.props.show, user = this.state.user) => {
-        let list: [] = [];
         this.props.memberToogle(show);
         this.setState({
             user
         });
         if (show === false) {
             this.setState({
-                query: '',
                 filtered: []
             });
+            this.messageInputRef.value = '';
             return;
         }
         this.setState({
             list: user.MemberList
-        });
-        Promise.all(
-            user.MemberList.map(async e => {
-                const pallet = e.pallet;
-                if (!pallet) {
-                    e.pallet = await helper.getPallet(e.HeadImgUrl);
-                }
-                list.push(e);
-            })
-        ).then(() => {
-            this.setState({
-                list
-            });
         });
     }
     /**
      * 快速搜索
      */
     search = (query = '') => {
-        let filtered: [] = [];
+        // let filtered: [] = [];
         this.setState({
             query
         });
 
         if (query) {
-            filtered = this.state.list.filter(e => {
-                return han.letter(e.NickName).toLowerCase().indexOf(han.letter(query.toLocaleLowerCase())) > -1;
-            });
-            this.setState({
-                filtered
-            });
+            // filtered = this.state.list.filter(e => {
+            //     return han.letter(e.NickName).toLowerCase().indexOf(han.letter(query.toLocaleLowerCase())) > -1;
+            // });
+            // this.setState({
+            //     filtered
+            // });
 
             return;
         }
@@ -94,14 +94,16 @@ class Members extends React.Component<IProps, IState> {
         }
         this.props.userInfoToogle(true, user, caniremove);
     }
-
+    /**
+     * 打开新增群员页面
+     */
     addMember = () => {
         this.toggle(false);
         this.props.addMemberToogle(true);
     }
 
     render() {
-        const { account, list, filtered } = this.props;
+        const { account } = this.props;
         if (!this.props.show) {
             return false;
         }
@@ -113,7 +115,7 @@ class Members extends React.Component<IProps, IState> {
                     <span>
                         <i
                             className="icon-ion-android-add"
-                            onClick={e => this.props.addMember()}
+                            onClick={e => this.addMember()}
                             style={{
                                 marginRight: 20
                             }} />
@@ -125,7 +127,7 @@ class Members extends React.Component<IProps, IState> {
 
                 <ul className={'list'}>
                     {
-                        (this.messageInputRef.value && filtered.length === 0) && (
+                        (this.messageInputRef.value && this.state.filtered.length === 0) && (
                             <div className={'notfound'}>
                                 <img src="assets/images/crash.png" />
                                 <h1>找不到匹配的人： '{this.messageInputRef.value}'</h1>
@@ -134,14 +136,14 @@ class Members extends React.Component<IProps, IState> {
                     }
 
                     {
-                        (this.messageInputRef.value ? filtered : list).map((e, index) => {
-                            const pallet = e.pallet || [];
+                        (this.messageInputRef.value ? this.state.filtered : this.state.list).map((e, index) => {
+                            const pallet = [];  //  e.pallet ||
                             const frontColor = pallet[1] || [0, 0, 0];
 
                             return (
                                 <li
                                     key={index}
-                                    onClick={ev => this.props.showUserinfo(e)}
+                                    onClick={ev => this.showUserinfo(e)}
                                     style={{
                                         color: `rgb(
                                             ${frontColor[0]},
@@ -152,11 +154,11 @@ class Members extends React.Component<IProps, IState> {
                                     <div
                                         className={'cover'}
                                         style={{
-                                            backgroundImage: `url(${e.HeadImgUrl})`,
+                                            // backgroundImage: `url(${e.HeadImgUrl})`
                                         }} />
                                     <span
                                         className={'username'}
-                                        dangerouslySetInnerHTML={{ __html: e.NickName }} />
+                                        dangerouslySetInnerHTML={{ __html: 'e.NickName' }} />
                                 </li>
                             );
                         })
@@ -189,5 +191,6 @@ const mapDispatchToProps = { memberToogle, addMemberToogle, userInfoToogle };
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Members);
