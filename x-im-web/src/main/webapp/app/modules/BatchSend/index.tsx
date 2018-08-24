@@ -3,25 +3,14 @@ import { Modal, ModalBody } from 'app/shared/Modal';
 import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
-import { memberToogle, addMemberToogle, userInfoToogle, batchSendToogle } from 'app/shared/reducers/app';
+import { showMessage } from 'app/shared/reducers/snackbar';
+import { sendMessage } from 'app/shared/reducers/chat';
 import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import classnames from 'classnames';
 import './style.scss';
 import MessageInput from 'app/shared/MessageInput';
+import { toggle as imagePasteConfirmToogle } from 'app/shared/reducers/ImagePasteConfirm';
 
-@inject(stores => ({
-    sendMessage: stores.chat.sendMessage,
-    showMessage: stores.snackbar.showMessage,
-    me: stores.session.user,
-    confirmSendImage: async(image) => {
-        if (!stores.settings.confirmImagePaste) {
-            return true;
-        }
-        let confirmed = await stores.confirmImagePaste.toggle(true, image);
-        return confirmed;
-    },
-    process: stores.chat.process
-}))
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
     user: { //  群信息
@@ -32,26 +21,18 @@ export interface IState {
     selected: [];   //  选择后的关系成员列表
     query: string;
 }
-const mapStateToProps = ({ app, authentication, applicationProfile, chat, customerRelation, snackbar }: IRootState) => ({
-    show: app.isBatchsendShow,
-    account: authentication.account,
-    customerRelationList: customerRelation.entities,
-    snackbar,
-    
-});
-const mapDispatchToProps = { memberToogle, addMemberToogle, userInfoToogle, batchSendToogle };
-
-//  用于把当前 Redux store state 映射到展示组件的 props 中
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(BatchSend);
 class BatchSend extends React.Component<IProps, IState> {
     timer;
+    searchInput;
     constructor(props) {
         super(props);
+    }
+    confirmSendImage = image => {
+        if (!this.props.confirmImagePaste) {
+            return true;
+        }
+        const confirmed = this.props.imagePasteConfirmToogle(true, image);
+        return confirmed;
     }
     /**
      * 插入真实DOM完成
@@ -131,7 +112,7 @@ class BatchSend extends React.Component<IProps, IState> {
     }
 
     render() {
-        let { contacts, searching, filtered, showMessage, sendMessage, me = {}, confirmSendImage, process } = this.props;
+        let { contacts, searching, filtered, showMessage, sendMessage, confirmSendImage, process } = this.props;
 
         if (!this.props.show) {
             return false;
@@ -142,7 +123,8 @@ class BatchSend extends React.Component<IProps, IState> {
                 <header>
                     <input
                         autoFocus={true}
-                        onInput={e => this.search(e.target.value)}
+                        ref = {this.searchInput}
+                        onInput={e => this.search(this.searchInput.value)}
                         placeholder="Batch to send message, Choose one or more user."
                         type="text" />
 
@@ -153,7 +135,7 @@ class BatchSend extends React.Component<IProps, IState> {
                             })}
                             onClick={() => this.selectAll()}
                             style={{
-                                marginRight: 20,
+                                marginRight: 20
                             }} />
                         <i
                             className="icon-ion-android-close"
@@ -200,15 +182,36 @@ class BatchSend extends React.Component<IProps, IState> {
                 <div className={'footer'}>
                     <MessageInput {...{
                         className: 'input',
-                        me: me.User,
+                        me: this.props.account,
                         sendMessage,
                         showMessage,
                         user: this.state.selected,
                         confirmSendImage,
-                        process,
+                        process
                     }} />
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = ({ app, authentication, settings, customerRelation }: IRootState) => ({
+    show: app.isBatchsendShow,
+    account: authentication.account,
+    customerRelationList: customerRelation.entities,
+    confirmImagePaste: settings.confirmImagePaste
+});
+const mapDispatchToProps = {
+    sendMessage,
+    showMessage,
+    process,
+    imagePasteConfirmToogle
+};
+
+//  用于把当前 Redux store state 映射到展示组件的 props 中
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(BatchSend);

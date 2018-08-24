@@ -7,7 +7,7 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { locales } from 'app/config/translation';
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
-import { saveAccountSettings, reset } from 'app/modules/account/settings/settings.reducer';
+import { saveAccountSettings, reset } from 'app/shared/reducers/settings';
 
 export interface IUserSettingsProps extends StateProps, DispatchProps {}
 
@@ -43,7 +43,7 @@ export class SettingsPage extends React.Component<IUserSettingsProps, IUserSetti
           <Col md="8">
             <h2 id="settings-title">
               <Translate contentKey="settings.title" interpolate={{ username: account.login }}>
-                User settings for {account.login}
+                {account.login} 用户设置
               </Translate>
             </h2>
             <AvForm id="settings-form" onValidSubmit={this.handleValidSubmit}>
@@ -105,7 +105,7 @@ export class SettingsPage extends React.Component<IUserSettingsProps, IUserSetti
                 ))}
               </AvField>
               <Button color="primary" type="submit">
-                <Translate contentKey="settings.form.button">Save</Translate>
+                <Translate contentKey="settings.form.button">修改</Translate>
               </Button>
             </AvForm>
           </Col>

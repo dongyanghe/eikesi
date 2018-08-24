@@ -1,16 +1,18 @@
 import helper from 'app/shared/util/helper';
 import axios from 'axios';
-import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
-
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { translate } from 'react-jhipster';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-
-import { ICustomerRelation, defaultValue } from 'app/shared/model/customer-relation.model';
-
+import { getSession } from 'app/shared/reducers/authentication';
 export const ACTION_TYPES = {
+    UPDATE_ACCOUNT: 'account/UPDATE_ACCOUNT',
+    RESET: 'account/RESET',
     SAVE: 'settings/SAVE'
 };
 const initialState = {
+    loading: false,
+    errorMessage: null,
+    updateSuccess: false,
+    updateFailure: false,
     alwaysOnTop: false,
     showOnTray: false,
     showNotification: true,
@@ -29,21 +31,46 @@ export default (state: SettingsState = initialState, action): SettingsState => {
             window.localStorage.setItem('settings', JSON.stringify({
                 ...state,
                 ...action.payload
-                }));
+            }));
             return {
-            ...state,
-            ...action.payload
+                ...state,
+                ...action.payload
+            };
+        case REQUEST(ACTION_TYPES.UPDATE_ACCOUNT):
+            return {
+                ...state,
+                errorMessage: null,
+                updateSuccess: false,
+                loading: true
+            };
+        case FAILURE(ACTION_TYPES.UPDATE_ACCOUNT):
+            return {
+                ...state,
+                loading: false,
+                updateSuccess: false,
+                updateFailure: true
+            };
+        case SUCCESS(ACTION_TYPES.UPDATE_ACCOUNT):
+            return {
+                ...state,
+                loading: false,
+                updateSuccess: true,
+                updateFailure: false
+            };
+        case ACTION_TYPES.RESET:
+            return {
+                ...initialState
             };
         default:
-          return state;
-      }
+            return state;
+    }
 };
 
 export const save = (settingsState: {}) => dispatch => {
     dispatch({
         type: ACTION_TYPES.SAVE,
         payload: { settingsState }
-      });
+    });
     //  @wait: 应用新配置
     // ipcRenderer.send('settings-apply', {
     //     settings: {
@@ -84,8 +111,25 @@ export const init = () => dispatch => {
 
     if (!newState.downloads
         || typeof newState.downloads !== 'string') {
-            newState.downloads = window.location.assign;
+        newState.downloads = window.location.assign;
     }
     save(newState);
     return settings;
 };
+// Actions
+const apiUrl = 'uaaserver/api/account';
+
+export const saveAccountSettings = account => async dispatch => {
+    await dispatch({
+        type: ACTION_TYPES.UPDATE_ACCOUNT,
+        payload: axios.post(apiUrl, account),
+        meta: {
+            successMessage: translate('settings.messages.success')
+        }
+    });
+    dispatch(getSession());
+};
+
+export const reset = () => ({
+    type: ACTION_TYPES.RESET
+});

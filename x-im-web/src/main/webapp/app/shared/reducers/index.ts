@@ -7,13 +7,14 @@ import authentication, { AuthenticationState } from 'app/shared/reducers/authent
 import snackbar, { SnackbarState } from 'app/shared/reducers/snackbar';
 import applicationProfile, { ApplicationProfileState } from 'app/shared/reducers/application-profile';
 import chat, { ChatState } from 'app/shared/reducers/chat';
+import imagePasteConfirm, { ImagePasteConfirmState } from 'app/shared/reducers/ImagePasteConfirm';
+import settings, { SettingsState } from 'app/shared/reducers/settings';
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
 import activate, { ActivateState } from 'app/modules/account/activate/activate.reducer';
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
-import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
 // prettier-ignoreD:\XWorkplace\eikesiFeature\x-im-web\src\main\webapp\app\shared\reducers\current-message.reducer.ts
 import historyMessage, {
@@ -57,6 +58,7 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly imagePasteConfirm: ImagePasteConfirmState;
   readonly historyMessage: HistoryMessageState;
   readonly currentMessage: CurrentMessageState;
   readonly dialogue: DialogueState;
@@ -100,6 +102,7 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  imagePasteConfirm,
   historyMessage,
   currentMessage,
   dialogue,

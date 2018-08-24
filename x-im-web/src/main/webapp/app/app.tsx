@@ -26,7 +26,7 @@ import Members from 'app/modules/Members';
 import AddMember from 'app/modules/AddMember';
 import BatchSend from 'app/modules/BatchSend';
 import Forward from 'app/modules/Forward';
-import ConfirmImagePaste from 'app/modules/ConfirmImagePaste';
+import ImagePasteConfirm from 'app/modules/ImagePasteConfirm';
 import Loader from './shared/Loader';
 import Snackbar from './shared/Snackbar';
 import Offline from './shared/Offline';
@@ -158,7 +158,7 @@ export class App extends React.Component<IAppProps> {
           {/*添加群成员  */}
           <AddMember />
           {/* 图片发送确认 */}
-          <ConfirmImagePaste />
+          <ImagePasteConfirm />
           {/* 转发消息 */}
           <Forward />
           {/* 断线提示 */}
