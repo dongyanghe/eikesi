@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
 import { showMessage } from 'app/shared/reducers/snackbar';
-import { sendMessage } from 'app/shared/reducers/chat';
+import { process, sendMessage } from 'app/shared/reducers/chat';
+import { batchSendToogle } from 'app/shared/reducers/app';
 import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity, reset, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import classnames from 'classnames';
 import './style.scss';
@@ -77,9 +78,8 @@ class BatchSend extends React.Component<IProps, IState> {
     }
 
     handleSelected(user) {
-        let selected = this.state.selected;
+        /* let selected = this.state.selected;
         let index = selected.findIndex(e => e.UserName === user.UserName);
-
         if (index === -1) {
             selected.push(user);
         } else {
@@ -90,40 +90,35 @@ class BatchSend extends React.Component<IProps, IState> {
         }
 
         this.setState({
-            selected,
-        });
+            selected
+        }); */
     }
 
     selectAll() {
-        let contacts = this.props.contacts;
-        let selected = this.state.selected;
-        let isall = contacts.length === selected.length;
-
-        if (isall) {
-            // Unselected all user
-            selected = [];
-        } else {
-            selected = contacts.map(e => Object.assign({}, e));
-        }
-
-        this.setState({
-            selected,
-        });
+        /*  const contacts = this.props.customerRelationList;
+         let selected = this.state.selected;
+         const isAll = contacts.length === selected.length;
+         if (isAll) {
+             // Unselected all user
+             selected = [];
+         } else {
+             selected = contacts.map(e => Object.assign({}, e));
+         }
+         this.setState({
+             selected
+         }); */
     }
 
     render() {
-        let { contacts, searching, filtered, showMessage, sendMessage, confirmSendImage, process } = this.props;
-
-        if (!this.props.show) {
+        if (!this.props.isBatchsendShow) {
             return false;
         }
-
         return (
             <div className={'container'}>
                 <header>
                     <input
                         autoFocus={true}
-                        ref = {this.searchInput}
+                        ref={this.searchInput}
                         onInput={e => this.search(this.searchInput.value)}
                         placeholder="Batch to send message, Choose one or more user."
                         type="text" />
@@ -131,7 +126,7 @@ class BatchSend extends React.Component<IProps, IState> {
                     <span>
                         <i
                             className={classnames('icon-ion-android-done-all', {
-                                ['active']: this.state.selected.length === contacts.length
+                                ['active']: this.state.selected.length === this.props.customerRelationList.length
                             })}
                             onClick={() => this.selectAll()}
                             style={{
@@ -145,37 +140,36 @@ class BatchSend extends React.Component<IProps, IState> {
 
                 <ul className={'list'}>
                     {
-                        (searching && filtered.length === 0) && (
+                        (this.searchInput.value && this.state.filtered.length === 0) && (
                             <div className={'notfound'}>
                                 <img src="assets/images/crash.png" />
-                                <h1>Can't find any people matching '{searching}'</h1>
+                                <h1>找不到用户 '{this.searchInput.value}'</h1>
                             </div>
                         )
                     }
 
                     {
-                        (searching ? filtered : contacts).map((e, index) => {
-                            return (
+                        (this.searchInput.value ? this.state.filtered : this.props.customerRelationList).map((e, index) => (
                                 <li
                                     key={index}
                                     onClick={() => this.handleSelected(e)}>
                                     <div
                                         className={'cover'}
                                         style={{
-                                            backgroundImage: `url(${e.HeadImgUrl})`,
+                                            backgroundImage: `url(${'e.HeadImgUrl'})`
                                         }} />
                                     <span
                                         className={'username'}
-                                        dangerouslySetInnerHTML={{ __html: e.RemarkName || e.NickName }} />
+                                        dangerouslySetInnerHTML={{ __html: e.remarkName || e.customerFirstName }} />
 
                                     {
-                                        this.state.selected.find(user => user.UserName === e.UserName) && (
+                                        /* this.state.selected.find(user => user.id === e.id) && (
                                             <i className="icon-ion-android-done" />
-                                        )
+                                        ) */
                                     }
                                 </li>
-                            );
-                        })
+                            )
+                        )
                     }
                 </ul>
 
@@ -183,10 +177,10 @@ class BatchSend extends React.Component<IProps, IState> {
                     <MessageInput {...{
                         className: 'input',
                         me: this.props.account,
-                        sendMessage,
-                        showMessage,
+                        sendMessage: this.props.sendMessage,
+                        showMessage: this.props.showMessage,
                         user: this.state.selected,
-                        confirmSendImage,
+                        confirmSendImage: this.confirmSendImage,
                         process
                     }} />
                 </div>
@@ -196,7 +190,7 @@ class BatchSend extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = ({ app, authentication, settings, customerRelation }: IRootState) => ({
-    show: app.isBatchsendShow,
+    isBatchsendShow: app.isBatchsendShow,
     account: authentication.account,
     customerRelationList: customerRelation.entities,
     confirmImagePaste: settings.confirmImagePaste
@@ -205,7 +199,8 @@ const mapDispatchToProps = {
     sendMessage,
     showMessage,
     process,
-    imagePasteConfirmToogle
+    imagePasteConfirmToogle,
+    batchSendToogle
 };
 
 //  用于把当前 Redux store state 映射到展示组件的 props 中

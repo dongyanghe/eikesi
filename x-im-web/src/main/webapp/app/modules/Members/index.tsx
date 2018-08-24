@@ -110,7 +110,7 @@ class Members extends React.Component<IProps, IState> {
         return (
             <div className={'container'} >
                 <header>
-                    <span dangerouslySetInnerHTML={{ __html: `Group '${account.NickName}' has ${list.length} members` }} />
+                    <span dangerouslySetInnerHTML={{ __html: `群【'${account.NickName}'】有 ${this.state.list.length} 成员` }} />
 
                     <span>
                         <i
