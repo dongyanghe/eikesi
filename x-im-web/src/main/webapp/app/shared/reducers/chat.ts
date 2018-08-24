@@ -56,12 +56,14 @@ export const ACTION_TYPES = {
 };
 
 const initialState: {
-    user: boolean;
+    user: boolean | any;    //  当前对话的成员
+    selectedMmessage: any;
     showConversation: Boolean;
     sessions: String;
     messagesMap: Map<string, any>;
 } = {
     user: false,
+    selectedMmessage: {},
     showConversation: true,
     sessions: '[]',
     messagesMap: new Map()

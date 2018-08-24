@@ -3,14 +3,13 @@ import { Modal, ModalBody } from 'app/shared/Modal';
 import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
-import { showMessage } from 'app/shared/reducers/snackbar';
-import { process, sendMessage } from 'app/shared/reducers/chat';
-import { addMemberToogle } from 'app/shared/reducers/app';
-import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity as createFlockRelation, reset } from 'app/shared/reducers/flock-relation.reducer';
-import { getSearchEntities as getSearchCustomerRelation, updateEntity as updateCustomerRelation, resetSerchEntitieList } from 'app/shared/reducers/customer-relation.reducer';
-import classnames from 'classnames';
 import './style.scss';
+import { forwardToogle } from 'app/shared/reducers/app';
+import { sendMessage } from 'app/shared/reducers/chat';
 import UserList from 'app/shared/UserList';
+import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity as createFlockRelation, reset } from 'app/shared/reducers/flock-relation.reducer';
+import { getSearchEntities as getSearchCustomerRelation, getEntity as getCustomerRelation, resetSerchEntitieList } from 'app/shared/reducers/customer-relation.reducer';
+import classnames from 'classnames';
 import helper from 'app/shared/util/helper';
 
 export interface IProps extends StateProps, DispatchProps { }
@@ -18,7 +17,7 @@ export interface IState {
     searching: '';
     selected: [];   //  选择后的关系成员列表
 }
-class AddMember extends React.Component<IProps, IState> {
+class Forward extends React.Component<IProps, IState> {
     userListRef;
     getList = () => {
         //  如果有查询直接读取查询列表
@@ -32,37 +31,31 @@ class AddMember extends React.Component<IProps, IState> {
                 && e.id !== this.props.account.id
         );
     }
-    /**
-     * 将选中的用户列表加入该群
-     * @defect: userids是数组
-     */
-    addMember = async (userids: any) => {
-        // const roomid = this.props.chatMember.id;
-
-        // return this.props.createFlockRelation({ customerFlockId: this.props.chatMember.id, customerId: userids }, userids);
-    }
 
     getUser = (userId: number) => this.props.customerRelationList.find(e => e.id === userId);
 
     close = () => {
-        this.userListRef.value = '';
-        this.props.resetSerchEntitieList();
-        this.props.addMemberToogle(false);
+        this.props.forwardToogle(false);
         this.setState({
             searching: '',
             selected: []
         });
     }
 
-    async add(userids) {
-        await this.addMember(userids);
-        this.close();
+    send = (userids: []) => {
+        userids.map(e => {
+            const message = this.props.selectedMmessage;
+            const user = { id: e };
+            this.props.sendMessage(user, message, true);
+        });
+        this.props.forwardToogle(false);
     }
 
-    renderList = () => {
-        if (!this.props.isAddMembersShow) {
+    renderList() {
+        if (!this.props.isForwardShow) {
             return false;
         }
+
         return (
             <UserList {...{
                 ref: this.userListRef,
@@ -84,10 +77,10 @@ class AddMember extends React.Component<IProps, IState> {
         return (
             <Modal
                 fullscreen={true}
-                onCancel={e => this.close()}
-                show={this.props.isAddMembersShow}>
+                onCancel={e => this.props.forwardToogle(false)}
+                show={this.props.isForwardShow}>
                 <ModalBody className={'container'}>
-                    添加群成员
+                    转发消息
 
                     <div className={'avatars'}>
                         {
@@ -108,30 +101,31 @@ class AddMember extends React.Component<IProps, IState> {
                     <div>
                         <button
                             disabled={!this.state.selected.length}
-                            onClick={e => this.add(this.state.selected)}>
-                            添加
+                            onClick={e => this.send(this.state.selected)}>
+                            发送
                         </button>
 
-                        <button onClick={e => this.close()}>取消</button>
+                        <button onClick={e => this.props.forwardToogle(false)}>取消</button>
                     </div>
                 </ModalBody>
             </Modal>
         );
     }
 }
-
 const mapStateToProps = ({ app, authentication, chat, customerRelation, flockRelation }: IRootState) => ({
     account: authentication.account,
-    isAddMembersShow: app.isAddMembersShow,
+    isForwardShow: app.isForwardShow,
+    selectedMmessage: chat.selectedMmessage,
     customerRelationList: customerRelation.entities,    //  用户所有关系成员列表
     serchCustomerRelationList: customerRelation.serchEntitieList, //  用户检索后的关系成员列表
     chatMember: chat.user
 });
 const mapDispatchToProps = {
-    createFlockRelation,
+    getCustomerRelation,
     getSearchCustomerRelation,
-    addMemberToogle,
-    resetSerchEntitieList
+    forwardToogle,
+    resetSerchEntitieList,
+    sendMessage
 };
 //  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -139,4 +133,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddMember);
+)(Forward);

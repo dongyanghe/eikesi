@@ -19,6 +19,7 @@ export const ACTION_TYPES = {
 const initialState = {
   loading: false,
   errorMessage: null,
+  serchEntitieList: [] as ReadonlyArray<IFlockRelation>,
   entities: [] as ReadonlyArray<IFlockRelation>,
   entity: defaultValue,
   updating: false,
@@ -66,7 +67,7 @@ export default (state: FlockRelationState = initialState, action): FlockRelation
       return {
         ...state,
         loading: false,
-        entities: action.payload.data
+        serchEntitieList: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_FLOCKRELATION_LIST):
       return {

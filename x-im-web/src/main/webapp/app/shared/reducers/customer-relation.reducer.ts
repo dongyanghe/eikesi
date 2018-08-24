@@ -13,12 +13,14 @@ export const ACTION_TYPES = {
   CREATE_CUSTOMERRELATION: 'customerRelation/CREATE_CUSTOMERRELATION',
   UPDATE_CUSTOMERRELATION: 'customerRelation/UPDATE_CUSTOMERRELATION',
   DELETE_CUSTOMERRELATION: 'customerRelation/DELETE_CUSTOMERRELATION',
-  RESET: 'customerRelation/RESET'
+  RESET: 'customerRelation/RESET',
+  RESET__SEARCH_CUSTOMERRELATION: 'customerRelation/RESET__SEARCH_CUSTOMERRELATION'
 };
 
 const initialState = {
   loading: false,
   errorMessage: null,
+  serchEntitieList: [] as ReadonlyArray<ICustomerRelation>,
   entities: [] as ReadonlyArray<ICustomerRelation>,
   entity: defaultValue, //  用户详情
   updating: false,
@@ -66,7 +68,7 @@ export default (state: CustomerRelationState = initialState, action): CustomerRe
       return {
         ...state,
         loading: false,
-        entities: action.payload.data
+        serchEntitieList: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_CUSTOMERRELATION_LIST):
       return {
@@ -98,6 +100,11 @@ export default (state: CustomerRelationState = initialState, action): CustomerRe
     case ACTION_TYPES.RESET:
       return {
         ...initialState
+      };
+    case ACTION_TYPES.RESET__SEARCH_CUSTOMERRELATION:
+      return {
+        ...initialState,
+        serchEntitieList: initialState.serchEntitieList
       };
     default:
       return state;
@@ -144,7 +151,6 @@ export const updateEntity: ICrudPutAction<ICustomerRelation> = entity => async d
   dispatch(getEntities());
   return result;
 };
-
 export const deleteEntity: ICrudDeleteAction<ICustomerRelation> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({
@@ -154,7 +160,9 @@ export const deleteEntity: ICrudDeleteAction<ICustomerRelation> = id => async di
   dispatch(getEntities());
   return result;
 };
-
+export const resetSerchEntitieList = () => ({
+  type: ACTION_TYPES.RESET__SEARCH_CUSTOMERRELATION
+});
 export const reset = () => ({
   type: ACTION_TYPES.RESET
 });

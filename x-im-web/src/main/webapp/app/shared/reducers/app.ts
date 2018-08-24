@@ -10,7 +10,8 @@ export const ACTION_TYPES = {
   MEMBERS_TOOGLE: 'app/MEMBERS_TOOGLE',
   ADD_MEMBERS_TOOGLE: 'app/ADD_MEMBERS_TOOGLE',
   USERINFO_TOOGLE: 'app/USERINFO_TOOGLE',
-  BATCHSEND_TOOGLE: 'app/USERINFO_TOOGLE'
+  BATCHSEND_TOOGLE: 'app/USERINFO_TOOGLE',
+  FORWARD_TOOGLE: 'app/FORWARD_TOOGLE'
 };
 /**
  * 本项目视图数据状态和业务数据状态分开
@@ -23,7 +24,8 @@ const initialState = {
   isAddMembersShow: false, //  是否显示
   isUserInfoShow: false, //  是否显示, //  是否显示
   isUserInfoDelete: false, //  用户是否能能删除
-  isBatchsendShow: false //  用户是否能能删除
+  isBatchsendShow: false,  //  用户是否能能删除
+  isForwardShow: false
 };
 
 export type AppState = Readonly<typeof initialState>;
@@ -64,6 +66,11 @@ export default (state: AppState = initialState, action): AppState => {
       return {
         ...state,
         isBatchsendShow: action.payload.isBatchsendShow
+      };
+    case ACTION_TYPES.FORWARD_TOOGLE:
+      return {
+        ...state,
+        isForwardShow: action.payload.isForwardShow
       };
     default:
       return state;
@@ -109,4 +116,10 @@ export const batchSendToogle = (isBatchsendShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
     payload: { isBatchsendShow }
+  });
+
+export const forwardToogle = (isForwardShow: boolean) => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
+    payload: { isForwardShow }
   });

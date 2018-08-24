@@ -148,7 +148,7 @@ export default class UserList extends Component<IProps, IState> {
             return (
                 <li className={'notfound'}>
                     <img src="assets/images/crash.png" />
-                    <h3>Can't find any people matching '{searching}'</h3>
+                    <h3>找不到好友 '{searching}'</h3>
                 </li>
             );
         }
