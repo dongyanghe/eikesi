@@ -1,12 +1,9 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'reactstrap';
 import { HashRouter as Router } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-
 import { IRootState } from 'app/shared/reducers';
 import { getSession, login } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
