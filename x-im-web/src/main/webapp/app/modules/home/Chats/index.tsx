@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { remote } from 'electron';
-import clazz from 'classname';
+import classnames from 'classnames';
 import moment from 'moment';
 
-import classes from './style.css';
+import './style.scss';
 import helper from 'utils/helper';
 
 moment.updateLocale('en', {
@@ -33,6 +33,7 @@ moment.updateLocale('en', {
 }))
 @observer
 export default class Chats extends Component {
+    containerRef;
     getTheLastestMessage(userid) {
         var list = this.props.messages.get(userid);
         var res;
@@ -112,7 +113,7 @@ export default class Chats extends Component {
             <div className={classes.container}>
                 <div
                     className={classes.chats}
-                    ref="container">
+                    ref={this.containerRef}>
                     {
                         !searching && chats.map((e, index) => {
                             var message = this.getTheLastestMessage(e.UserName) || {};
@@ -121,7 +122,7 @@ export default class Chats extends Component {
 
                             return (
                                 <div
-                                    className={clazz(classes.chat, {
+                                    className={classnames(classes.chat, {
                                         [classes.sticky]: isTop,
                                         [classes.active]: selected && selected.UserName === e.UserName
                                     })}
@@ -129,7 +130,7 @@ export default class Chats extends Component {
                                     onContextMenu={ev => this.showContextMenu(e)}
                                     onClick={ev => chatTo(e)}>
                                     <div className={classes.inner}>
-                                        <div className={clazz(classes.dot, {
+                                        <div className={classnames(classes.dot, {
                                             [classes.green]: !muted && this.hasUnreadMessage(e.UserName),
                                             [classes.red]: muted && this.hasUnreadMessage(e.UserName)
                                         })}>

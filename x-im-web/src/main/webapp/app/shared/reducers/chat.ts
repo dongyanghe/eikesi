@@ -180,7 +180,7 @@ export default (state: ChatState = initialState, action): ChatState => {
             return state;
     }
 };
-export const showMessage = (showConversation = !initialState.showConversation) => async dispatch => {
+export const toggleConversation = (showConversation = !initialState.showConversation) => async dispatch => {
     dispatch({
         type: ACTION_TYPES.TOGGLE,
         action: { showConversation }
