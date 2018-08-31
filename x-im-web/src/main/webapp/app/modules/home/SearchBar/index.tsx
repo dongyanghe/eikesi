@@ -1,15 +1,18 @@
 
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import classes from './style.css';
+import './style.scss';
 
-@inject(stores => ({
+const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar }: IRootState) => ({
     history: stores.search.history,
     searching: stores.search.searching,
     toggle: stores.search.toggle,
     filter: stores.search.filter,
-    result: stores.search.result,
+    result: stores.search.result
+  });
+
+  const mapDispatchToProps = {
     getPlaceholder: () => {
         stores.contacts.filter('', true);
         return stores.contacts.filtered.result;
@@ -25,10 +28,11 @@ import classes from './style.css';
 
         stores.search.clearHistory();
         stores.search.reset();
-    }
-}))
-@observer
-export default class SearchBar extends Component {
+    } 
+};
+
+export interface IProps extends StateProps, DispatchProps { }
+export default class SearchBar extends React.Component<IProps> {
     timer;
 
     filter(text = '') {
@@ -230,3 +234,15 @@ export default class SearchBar extends Component {
         );
     }
 }
+  
+  //  用于把当前 Redux store state 映射到展示组件的 props 中
+  type StateProps = ReturnType<typeof mapStateToProps>;
+  type DispatchProps = typeof mapDispatchToProps;
+  /**
+   * 主页面
+   * index.tsx激活render
+   */
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SearchBar);
