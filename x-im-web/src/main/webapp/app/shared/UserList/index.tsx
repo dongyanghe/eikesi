@@ -17,7 +17,9 @@ export interface IState {
     active: string;
   }
 export default class UserList extends Component<IProps, IState> {
-
+    timer: any;
+    listRef: any;
+    inputRef: any;
     props = {
         max: 20,
         ...this.props
@@ -28,8 +30,7 @@ export default class UserList extends Component<IProps, IState> {
     };
 
     highlight(offset) {
-        const scroller = this.refs.list;
-        const users = Array.from(scroller.querySelectorAll('li[data-userid]'));
+        let users = Array.from(this.listRef.querySelectorAll('li[data-userid]'));
         let index = users.findIndex(e => e.classList.contains('active'));
 
         if (index > -1) {
@@ -71,7 +72,7 @@ export default class UserList extends Component<IProps, IState> {
             return;
         }
 
-        const active = this.refs.list.querySelector(`.active`);
+        const active = this.listRef.querySelector(`.active`);
 
         if (active) {
             const userid = active.dataset.userid;
@@ -87,8 +88,6 @@ export default class UserList extends Component<IProps, IState> {
         }
     }
 
-    timer;
-
     search(text) {
         clearTimeout(this.timer);
 
@@ -100,7 +99,7 @@ export default class UserList extends Component<IProps, IState> {
     addSelected(userid, active = this.state.active) {
         let selected = [
             userid,
-            ...this.state.selected,
+            ...this.state.selected
         ];
         const max = this.props.max;
 
@@ -138,7 +137,7 @@ export default class UserList extends Component<IProps, IState> {
             this.removeSelected(userid);
         }
 
-        setTimeout(() => this.refs.input.focus());
+        setTimeout(() => this.inputRef.focus());
     }
 
     renderList() {
@@ -149,7 +148,7 @@ export default class UserList extends Component<IProps, IState> {
             return (
                 <li className={'notfound'}>
                     <img src="assets/images/crash.png" />
-                    <h3>Can't find any people matching '{searching}'</h3>
+                    <h3>找不到好友 '{searching}'</h3>
                 </li>
             );
         }
@@ -185,12 +184,12 @@ export default class UserList extends Component<IProps, IState> {
                     onKeyUp={e => this.navigation(e)}
                     onInput={e => this.search(e.target.value)}
                     placeholder="Type to Search..."
-                    ref="input"
+                    ref={this.inputRef}
                     type="text" />
 
                 <ul
                     className={'list'}
-                    ref="list">
+                    ref={this.listRef}>
                     {this.renderList()}
                 </ul>
             </div>

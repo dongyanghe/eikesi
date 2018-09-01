@@ -1,9 +1,15 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Transition from 'react-addons-css-transition-group';
 
-export default class TransitionPortal extends Component {
+export interface IProps {
+    transitionName?: PropTypes.string;
+    transitionEnterTimeout?: PropTypes.number;
+    transitionLeaveTimeout?: PropTypes.number;
+}
+export default class TransitionPortal extends Component<IProps> {
     ele;
 
     componentDidMount() {

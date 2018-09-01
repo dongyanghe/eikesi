@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import sinon from 'sinon';
 
-import account, { ACTION_TYPES, saveAccountSettings } from 'app/modules/account/settings/settings.reducer';
+import account, { ACTION_TYPES, saveAccountSettings } from 'app/shared/reducers/settings';
 import { ACTION_TYPES as authActionTypes } from 'app/shared/reducers/authentication';
 
 describe('Settings reducer tests', () => {

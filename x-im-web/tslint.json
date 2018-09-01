@@ -210,7 +210,7 @@
     "object-curly-spacing": [true, "always"],
     "space-in-parens": [true, "never"],
 
-    "jsx-boolean-value": [true, "never"],
+    "jsx-boolean-value": [false, "never"],
     "jsx-no-multiline-js": false,
     "jsx-alignment": false
 
