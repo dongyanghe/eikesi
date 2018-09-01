@@ -9,30 +9,31 @@ import './style.scss';
 import ErrorBoundary from './../../../shared/error/error-boundary';
 
 const mapStateToProps = ({ app, applicationProfile, locale, snackbar }: IRootState) => ({
-    searching: app.isSearchShow
+    searching: app.isSearchShow,
+    result: {   //  后台检索返回
+        query: '',
+        friend: [],
+        groups: []
+    }
   });
 
   const mapDispatchToProps = {
     searchToogle,
-    getPlaceholder: () => {
-        stores.contacts.filter('', true);
-        return stores.contacts.filtered.result;
-    },
-    chat: async(user) => {
+    getPlaceholder: () => [],
+    chat: (user: any) => {
         chatTo(user);
         searchToogle(false);
-        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
-        let searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList') || '[]';
+        const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
         searchChatHistoryList.push(user);
         localStorage.setItem('searchChatHistoryList', JSON.stringify(searchChatHistoryList));
     },
-    clear: (e) => {
+    clear: (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         e.stopPropagation();
-
-        stores.search.clearHistory();
-        stores.search.reset();
-    } 
+        localStorage.setItem('searchChatHistoryList', null);
+        searchToogle(false);
+    }
 };
 
 export interface IProps extends StateProps, DispatchProps { }
@@ -59,12 +60,12 @@ export class SearchBar extends React.Component<IProps> {
     }
 
     highlight(offset) {
-        console.warn('SearchBar filter unrealized：', text);
+        console.warn('SearchBar filter unrealized：', offset);
     }
 
     navigation(e) {
         const { result, getPlaceholder } = this.props;
-        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList') || '[]';
         const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
         // User press ESC
         if (e.keyCode === 27) {
@@ -132,13 +133,11 @@ export class SearchBar extends React.Component<IProps> {
                     <h3>{title}</h3>
                 </header>
                 {
-                    list.map((e, index) => {
-                        return (
-                            <div key={index}>
-                                {this.renderUser(e)}
-                            </div>
-                        );
-                    })
+                    list.map((e, index) => (
+                        <div key={index}>
+                            {this.renderUser(e)}
+                        </div>
+                    ))
                 }
             </div>
         );
@@ -157,34 +156,30 @@ export class SearchBar extends React.Component<IProps> {
                     </a>
                 </header>
                 {
-                    list.map((e, index) => {
-                        return (
-                            <div key={index}>
-                                {this.renderUser(e)}
-                            </div>
-                        );
-                    })
+                    list.map((e, index) => (
+                        <div key={index}>
+                            {this.renderUser(e)}
+                        </div>
+                    ))
                 }
             </div>
         );
     }
 
     renderPlaceholder() {
-        var list = this.props.getPlaceholder();
+        const list = this.props.getPlaceholder();
 
-        return list.map((e, index) => {
-            return (
-                <div key={index}>
-                    {this.renderList(e.list, e.prefix)}
-                </div>
-            );
-        });
+        return list.map((e, index) => (
+            <div key={index}>
+                {this.renderList(e.list, e.prefix)}
+            </div>
+        ));
     }
 
     render() {
-        const { searching,  result } = this.props;
+        const { searching, result } = this.props;
 
-        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList') || '[]';
         const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
         return (
             <div className={'container'}>
@@ -216,7 +211,7 @@ export class SearchBar extends React.Component<IProps> {
         );
     }
 }
-  
+
   //  用于把当前 Redux store state 映射到展示组件的 props 中
   type StateProps = ReturnType<typeof mapStateToProps>;
   type DispatchProps = typeof mapDispatchToProps;
