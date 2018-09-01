@@ -4,6 +4,7 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 import { ICustomerRelation, defaultValue } from 'app/shared/model/customer-relation.model';
 import { ACTION_TYPES as CUSTOMER_RELATION_ACTION_TYPES, updateEntity, CustomerRelationState } from 'app/shared/reducers/customer-relation.reducer';
 import { ACTION_TYPES as FLOCK_RELATION_ACTION_TYPES, updateEntity as updateFlockRelationState, FlockRelationState } from 'app/shared/reducers/flock-relation.reducer';
+import { ACTION_TYPES as ACTION_TYPES_CHAT } from 'app/shared/reducers/chat';
 
 export const ACTION_TYPES = {
   NEW_CHAT_TOOGLE: 'app/NEW_CHAT_TOOGLE',
@@ -12,7 +13,9 @@ export const ACTION_TYPES = {
   USERINFO_TOOGLE: 'app/USERINFO_TOOGLE',
   BATCHSEND_TOOGLE: 'app/USERINFO_TOOGLE',
   FORWARD_TOOGLE: 'app/FORWARD_TOOGLE',
-  SEARCH_TOOGLE: 'app/SEARCH_TOOGLE'
+  SEARCH_TOOGLE: 'app/SEARCH_TOOGLE',
+  ADD_FRIEND_TOOGLE: 'app/ADD_FRIEND_TOOGLE',
+  UPDATE_MEMBER: 'app/UPDATE_MEMBER'
 };
 /**
  * 本项目视图数据状态和业务数据状态分开
@@ -27,7 +30,9 @@ const initialState = {
   isUserInfoDelete: false, //  用户是否能能删除
   isBatchsendShow: false,  //  用户是否能能删除
   isForwardShow: false,
-  isSearchShow: false
+  isSearchShow: false,
+  isAddFriendShow: false,
+  Member: {} as any
 };
 
 export type AppState = Readonly<typeof initialState>;
@@ -77,7 +82,12 @@ export default (state: AppState = initialState, action): AppState => {
     case ACTION_TYPES.SEARCH_TOOGLE:
       return {
         ...state,
-        isForwardShow: action.payload.isSearchShow
+        isSearchShow: action.payload.isSearchShow
+      };
+    case ACTION_TYPES.ADD_FRIEND_TOOGLE:
+      return {
+        ...state,
+        isAddFriendShow: action.payload.isAddFriendShow
       };
     default:
       return state;
@@ -90,11 +100,13 @@ export const newChatToogle = (isNewChatShow: boolean) => dispatch =>
     payload: { isNewChatShow }
   });
 
-export const memberToogle = (isMembersShow: boolean) => dispatch =>
+export const memberToogle = (isMembersShow: boolean, member: any) => dispatch => {
+  updateMember(member);
   dispatch({
     type: ACTION_TYPES.MEMBERS_TOOGLE,
     payload: { isMembersShow }
   });
+};
 
 export const addMemberToogle = (isAddMembersShow: boolean) => dispatch =>
   dispatch({
@@ -108,11 +120,8 @@ export const addMemberToogle = (isAddMembersShow: boolean) => dispatch =>
  * @param iCustomerRelation
  * @param isUserInfoDelete
  */
-export const userInfoToogle = (isUserInfoShow: boolean, iCustomerRelation, isUserInfoDelete = false) => dispatch => {
-  dispatch({
-    type: CUSTOMER_RELATION_ACTION_TYPES.UPDATE_CUSTOMERRELATION,
-    payload: { data: iCustomerRelation }
-  });
+export const userInfoToogle = (isUserInfoShow: boolean, member: any, isUserInfoDelete = false) => dispatch => {
+  updateMember(member);
   dispatch({
     type: ACTION_TYPES.USERINFO_TOOGLE,
     payload: { isUserInfoShow }
@@ -125,14 +134,32 @@ export const batchSendToogle = (isBatchsendShow: boolean) => dispatch =>
     payload: { isBatchsendShow }
   });
 
-  export const forwardToogle = (isForwardShow: boolean) => dispatch =>
+export const forwardToogle = (isForwardShow: boolean, selectedMessage: any) => dispatch => {
+  dispatch({
+    type: ACTION_TYPES_CHAT.UPDATE_SELECTED_MESSAGE,
+    payload: { selectedMessage }
+  });
   dispatch({
     type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
     payload: { isForwardShow }
   });
+};
 
 export const searchToogle = (isSearchShow: boolean) => dispatch =>
   dispatch({
     type: ACTION_TYPES.ADD_MEMBERS_TOOGLE,
     payload: { isSearchShow }
+  });
+export const addFriendToogle = (isAddFriendShow: boolean, member: any) => dispatch => {
+  updateMember(member);
+  dispatch({
+    type: ACTION_TYPES.ADD_FRIEND_TOOGLE,
+    payload: { isAddFriendShow }
+  });
+};
+
+  export const updateMember = (member: any) => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.UPDATE_MEMBER,
+    payload: { member }
   });

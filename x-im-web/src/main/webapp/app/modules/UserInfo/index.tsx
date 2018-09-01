@@ -52,7 +52,7 @@ export class UserInfo extends React.Component<IProps, IState> {
 
     render() {
         const { UserName, HeadImgUrl, NickName, RemarkName, Signature, City, Province } = this.props.user;
-        const isFriend = helper.isContact(this.props.user);
+        const isFriend = false; //  helper.isContact(this.props.user);
         const pallet = this.props.pallet;
         const isme = this.props.isme();
         let background = pallet[0];

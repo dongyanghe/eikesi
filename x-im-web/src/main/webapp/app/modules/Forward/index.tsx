@@ -44,7 +44,7 @@ class Forward extends React.Component<IProps, IState> {
 
     send = (userids: []) => {
         userids.map(e => {
-            const message = this.props.selectedMmessage;
+            const message = this.props.selectedMessage;
             const user = { id: e };
             this.props.sendMessage(user, message, true);
         });
@@ -115,7 +115,7 @@ class Forward extends React.Component<IProps, IState> {
 const mapStateToProps = ({ app, authentication, chat, customerRelation, flockRelation }: IRootState) => ({
     account: authentication.account,
     isForwardShow: app.isForwardShow,
-    selectedMmessage: chat.selectedMmessage,
+    selectedMessage: chat.selectedMessage,
     customerRelationList: customerRelation.entities,    //  用户所有关系成员列表
     serchCustomerRelationList: customerRelation.serchEntitieList, //  用户检索后的关系成员列表
     chatMember: chat.user

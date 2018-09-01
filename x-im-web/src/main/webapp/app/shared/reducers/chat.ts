@@ -33,6 +33,7 @@ async function updateMenus({ conversations = [], customerRelation = [] }) {
 }
 export const ACTION_TYPES = {
     TOGGLE: 'chat/TOGGLE_CONVERSATION',
+    UPDATE_SELECTED_MESSAGE: 'chat/UPDATE_SELECTED_MESSAGE',
     LOAD_CHATS: 'chat/LOAD_CHATS',
     TO_PREV: 'chat/TO_PREV',
     SHOW_MESSAGE: 'chat/SHOW_MESSAGE',
@@ -52,20 +53,21 @@ export const ACTION_TYPES = {
     MARKED_READ: 'chat/MARKED_READ',
     STICKY: 'chat/STICKY',
     REMOVE_CHAT: 'chat/REMOVE_CHAT',
+    RESET: 'chat/RESET',
     EMPTY: 'chat/EMPTY'
 };
 
 const initialState: {
     user: boolean | any;    //  当前对话的成员
-    selectedMmessage: any;
+    selectedMessage: any;
     showConversation: Boolean;
-    sessions: String;
+    sessions: any[];
     messagesMap: Map<string, any>;
 } = {
     user: false,
-    selectedMmessage: {},
+    selectedMessage: {},
     showConversation: true,
-    sessions: '[]',
+    sessions: [],
     messagesMap: new Map()
 };
 export type ChatState = Readonly<typeof initialState>;
@@ -75,6 +77,12 @@ export default (state: ChatState = initialState, action): ChatState => {
 
             return {
                 ...state
+            };
+        case ACTION_TYPES.UPDATE_SELECTED_MESSAGE:
+
+            return {
+                ...state,
+                selectedMessage: action.payload.selectedMessage
             };
         case ACTION_TYPES.LOAD_CHATS:
 
@@ -171,10 +179,17 @@ export default (state: ChatState = initialState, action): ChatState => {
             return {
                 ...state
             };
+        case ACTION_TYPES.RESET:
+
+            return {
+                ...state,
+                user: action.payload.user
+            };
         case ACTION_TYPES.EMPTY:
 
             return {
-                ...state
+                ...state,
+                messagesMap: action.payload.messagesMap
             };
         default:
             return state;
@@ -242,78 +257,85 @@ export const loadChats = (chatSet: string, iCustomerRelationList: ICustomerRelat
 };
 
 export const chatToPrev = () => async dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const chatToNext = () => async dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const chatTo = (user, onTop?: boolean) => async dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const addMessage = (message: any, sync = false) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：', dispatch);
+    console.warn('chat function unrealized：', dispatch);
 };
 
 export const sendTextMessage = (auth: any, message: any, isForward) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const sendEmojiMessage = (auth: any, message) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const sendImageMessage = (auth: any, message: any, isForward) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 export const sendFileMessage = (auth: any, message: any, isForward) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const sendVideoMessage = (auth: any, message: any, isForward) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 const transformMessagesDefault = (to, messagesMap: Map<string, any>, message) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const sendMessage = (user, message: any, isForward = false, transformMessages = transformMessagesDefault) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const process = (file, user = initialState.user) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const upload = (file, user = initialState.user) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const addUploadPreview = (file, type, user = initialState.user) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const recallMessage = message => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const deleteMessage = (userid, messageid) => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const markedRead = userid => dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const sticky = user => async dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
 };
 
 export const removeChat = user => async dispatch => {
-    console.warn('UserInfo chatToPrev unrealized：');
+    console.warn('chat function unrealized：');
+};
+
+export const reset = () => async dispatch => {
+    dispatch({
+        type: ACTION_TYPES.RESET,
+        payload: { user: false }
+      });
 };
 
 export const empty = (user, messagesMap: Map<string, any>) => async dispatch => {

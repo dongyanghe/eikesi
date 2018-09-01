@@ -15,7 +15,7 @@ const helper = {
     isContact: (user: any, account: any) => {
         if (helper.isFileHelper(user)) return true;
         return user.ContactFlag & CONTACTFLAG_CONTACT
-            || (account.user && user.UserName === user.User.UserName);
+            || (account && user.UserName === user.User.UserName);
     },
 
     isChatRoom: (userid: any) => userid && userid.startsWith('@@'),

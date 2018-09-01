@@ -1,15 +1,18 @@
 
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { remote } from 'electron';
+import React from 'react';
+import { connect } from 'react-redux';
+import { HashRouter as Router } from 'react-router-dom';
+import { IRootState } from 'app/shared/reducers';
+import { chatTo, markedRead, sticky, removeChat } from 'app/shared/reducers/chat';
 import classnames from 'classnames';
 import moment from 'moment';
 
 import './style.scss';
-import helper from 'utils/helper';
+import helper from 'app/shared/util/helper';
 
-moment.updateLocale('en', {
+moment.updateLocale('zh-cn', {
     relativeTime: {
+        future: 'dans %s',
         past: '%s',
         m: '1 min',
         mm: '%d mins',
@@ -17,26 +20,20 @@ moment.updateLocale('en', {
         hh: '%d h',
         s: 'now',
         ss: '%d s',
-    },
+        d: 'un jour',
+        dd: '%d jours',
+        M: 'un mois',
+        MM: '%d mois',
+        y: 'un an',
+        yy: '%d ans'
+    }
 });
-
-@inject(stores => ({
-    chats: stores.chat.sessions,
-    chatTo: stores.chat.chatTo,
-    selected: stores.chat.user,
-    messages: stores.chat.messages,
-    markedRead: stores.chat.markedRead,
-    sticky: stores.chat.sticky,
-    removeChat: stores.chat.removeChat,
-    loading: stores.session.loading,
-    searching: stores.search.searching,
-}))
-@observer
-export default class Chats extends Component {
+export interface IProps extends StateProps, DispatchProps { }
+export class Chats extends React.Component<IProps> {
     containerRef;
     getTheLastestMessage(userid) {
-        var list = this.props.messages.get(userid);
-        var res;
+        const list = this.props.messages.get(userid);
+        let res;
 
         if (list) {
             // Make sure all chatset has be loaded
@@ -47,7 +44,7 @@ export default class Chats extends Component {
     }
 
     hasUnreadMessage(userid) {
-        var list = this.props.messages.get(userid);
+        const list = this.props.messages.get(userid);
 
         if (list) {
             return list.data.length !== (list.unread || 0);
@@ -55,46 +52,15 @@ export default class Chats extends Component {
     }
 
     showContextMenu(user) {
-        var menu = new remote.Menu.buildFromTemplate([
-            {
-                label: 'Send Message',
-                click: () => {
-                    this.props.chatTo(user);
-                }
-            },
-            {
-                type: 'separator'
-            },
-            {
-                label: helper.isTop(user) ? 'Unsticky' : 'Sticky on Top',
-                click: () => {
-                    this.props.sticky(user);
-                }
-            },
-            {
-                label: 'Delete',
-                click: () => {
-                    this.props.removeChat(user);
-                }
-            },
-            {
-                label: 'Mark as Read',
-                click: () => {
-                    this.props.markedRead(user.UserName);
-                }
-            },
-        ]);
-
-        menu.popup(remote.getCurrentWindow());
+        console.error('Chats showContextMenu unrealized：', user);
     }
 
     componentDidUpdate() {
-        var container = this.refs.container;
-        var active = container.querySelector(`.${classes.chat}.${classes.active}`);
+        const active = this.containerRef.querySelector(`.chat .active`);
 
         if (active) {
-            let rect4active = active.getBoundingClientRect();
-            let rect4viewport = container.getBoundingClientRect();
+            const rect4active = active.getBoundingClientRect();
+            const rect4viewport = this.containerRef.getBoundingClientRect();
 
             // Keep the conversation always in the viewport
             if (!(rect4active.top >= rect4viewport.top
@@ -105,52 +71,52 @@ export default class Chats extends Component {
     }
 
     render() {
-        var { loading, chats, selected, chatTo, searching } = this.props;
+        const { loading, chats, selected, searching } = this.props;
 
         if (loading) return false;
 
         return (
-            <div className={classes.container}>
+            <div className={'container'}>
                 <div
-                    className={classes.chats}
+                    className={'chats'}
                     ref={this.containerRef}>
                     {
                         !searching && chats.map((e, index) => {
-                            var message = this.getTheLastestMessage(e.UserName) || {};
-                            var muted = helper.isMuted(e);
-                            var isTop = helper.isTop(e);
+                            const message = this.getTheLastestMessage(e.UserName) || {};
+                            const muted = helper.isMuted(e);
+                            const isTop = helper.isTop(e);
 
                             return (
                                 <div
-                                    className={classnames(classes.chat, {
-                                        [classes.sticky]: isTop,
-                                        [classes.active]: selected && selected.UserName === e.UserName
+                                    className={classnames('chat', {
+                                        ['sticky']: isTop,
+                                        ['active']: selected && selected.UserName === e.UserName
                                     })}
                                     key={index}
                                     onContextMenu={ev => this.showContextMenu(e)}
-                                    onClick={ev => chatTo(e)}>
-                                    <div className={classes.inner}>
-                                        <div className={classnames(classes.dot, {
-                                            [classes.green]: !muted && this.hasUnreadMessage(e.UserName),
-                                            [classes.red]: muted && this.hasUnreadMessage(e.UserName)
+                                    onClick={ev => this.props.chatTo(e)}>
+                                    <div className={'inner'}>
+                                        <div className={classnames('dot', {
+                                            ['green']: !muted && this.hasUnreadMessage(e.UserName),
+                                            ['red']: muted && this.hasUnreadMessage(e.UserName)
                                         })}>
                                             <img
                                                 className="disabledDrag"
                                                 src={e.HeadImgUrl} />
                                         </div>
 
-                                        <div className={classes.info}>
+                                        <div className={'info'}>
                                             <p
-                                                className={classes.username}
-                                                dangerouslySetInnerHTML={{__html: e.RemarkName || e.NickName}} />
+                                                className={'username'}
+                                                dangerouslySetInnerHTML={{ __html: e.RemarkName || e.NickName }} />
 
                                             <span
-                                                className={classes.message}
-                                                dangerouslySetInnerHTML={{__html: helper.getMessageContent(message) || 'No Message'}} />
+                                                className={'message'}
+                                                dangerouslySetInnerHTML={{ __html: helper.getMessageContent(message) || 'No Message' }} />
                                         </div>
                                     </div>
 
-                                    <span className={classes.times}>
+                                    <span className={'times'}>
                                         {
                                             message.CreateTime ? moment(message.CreateTime * 1000).fromNow() : ''
                                         }
@@ -164,3 +130,25 @@ export default class Chats extends Component {
         );
     }
 }
+
+const mapStateToProps = ({ authentication, customerRelation, chat, app }: IRootState) => ({
+    chats: chat.sessions,
+    selected: chat.user,
+    messages: chat.messagesMap,
+    loading: customerRelation.loading,
+    searching: app.isSearchShow
+});
+
+const mapDispatchToProps = { chatTo, markedRead, sticky, removeChat };
+
+//  用于把当前 Redux store state 映射到展示组件的 props 中
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+/**
+ * 主页面
+ * index.tsx激活render
+ */
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Chats);
