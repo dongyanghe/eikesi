@@ -2,25 +2,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { IRootState } from 'app/shared/reducers';
+import { searchToogle } from 'app/shared/reducers/app';
+import { chatTo } from 'app/shared/reducers/chat';
 import './style.scss';
+import ErrorBoundary from './../../../shared/error/error-boundary';
 
-const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar }: IRootState) => ({
-    history: stores.search.history,
-    searching: stores.search.searching,
-    toggle: stores.search.toggle,
-    filter: stores.search.filter,
-    result: stores.search.result
+const mapStateToProps = ({ app, applicationProfile, locale, snackbar }: IRootState) => ({
+    searching: app.isSearchShow
   });
 
   const mapDispatchToProps = {
+    searchToogle,
     getPlaceholder: () => {
         stores.contacts.filter('', true);
         return stores.contacts.filtered.result;
     },
     chat: async(user) => {
-        stores.chat.chatTo(user);
-        stores.search.reset();
-        await stores.search.addHistory(user);
+        chatTo(user);
+        searchToogle(false);
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
+        let searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
+        searchChatHistoryList.push(user);
+        localStorage.setItem('searchChatHistoryList', JSON.stringify(searchChatHistoryList));
     },
     clear: (e) => {
         e.preventDefault();
@@ -32,63 +36,36 @@ const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar 
 };
 
 export interface IProps extends StateProps, DispatchProps { }
-export default class SearchBar extends React.Component<IProps> {
+export class SearchBar extends React.Component<IProps> {
     timer;
-
+    searchRef;
+    dropdownRef;
     filter(text = '') {
-        text = text.trim();
-
-        clearTimeout(this.filter.timer);
-        this.filter.timer = setTimeout(() => {
-            this.props.filter(text);
-        }, 300);
+        console.warn('SearchBar filter unrealized：', text);
     }
 
     handleBlur(value) {
         setTimeout(() => {
             if (!value) {
-                this.props.toggle(false);
+                this.props.searchToogle(false);
             }
         }, 500);
     }
 
     chatTo(user) {
         this.props.chat(user);
-        this.refs.search.value = '';
+        this.searchRef.value = '';
         document.querySelector('#messageInput').focus();
     }
 
     highlight(offset) {
-        var scroller = this.refs.dropdown;
-        var users = Array.from(scroller.querySelectorAll(`.${classes.user}`));
-        var index = users.findIndex(e => e.classList.contains(classes.active));
-
-        if (index > -1) {
-            users[index].classList.remove(classes.active);
-        }
-
-        index += offset;
-
-        if (index < 0) {
-            // Fallback to the last element
-            index = users.length - 1;
-        } else if (index > users.length - 1) {
-            // Fallback to the 1th element
-            index = 0;
-        }
-
-        var active = users[index];
-
-        if (active) {
-            // Keep active item always in the viewport
-            active.classList.add(classes.active);
-            scroller.scrollTop = active.offsetTop + active.offsetHeight - scroller.offsetHeight;
-        }
+        console.warn('SearchBar filter unrealized：', text);
     }
 
     navigation(e) {
-        var { result, history, getPlaceholder } = this.props;
-
+        const { result, getPlaceholder } = this.props;
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
+        const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
         // User press ESC
         if (e.keyCode === 27) {
             e.target.blur();
@@ -97,7 +74,7 @@ export default class SearchBar extends React.Component<IProps> {
         if (![
             38, // Up
             40, // Down
-            13, // Enter
+            13 // Enter
         ].includes(e.keyCode)) {
             return;
         }
@@ -114,30 +91,33 @@ export default class SearchBar extends React.Component<IProps> {
                 break;
 
             case 13:
-                let active = this.refs.dropdown.querySelector(`.${classes.user}.${classes.active}`);
+                const active = this.dropdownRef.querySelector(`.${'user'}.${'active'}`);
 
                 if (!active) {
                     break;
                 }
-                this.chatTo([...result.friend, ...result.groups, ...history, ...getPlaceholder()].find(e => e.UserName === active.dataset.userid));
-        }
+                this.chatTo([...result.friend, ...result.groups, ...searchChatHistoryList, ...getPlaceholder()].find(user => user.UserName === active.dataset.userid));
+                break;
+            default:
+                    console.error('SearchBar switch unrealized：', e.keyCode);
+            }
     }
 
     renderUser(user) {
         return (
             <div
-                className={classes.user}
+                className={'user'}
                 onClick={e => this.chatTo(user)} data-userid={user.UserName}>
                 <img src={user.HeadImgUrl} />
 
-                <div className={classes.info}>
+                <div className={'info'}>
                     <p
-                        className={classes.username}
-                        dangerouslySetInnerHTML={{__html: user.RemarkName || user.NickName}} />
+                        className={'username'}
+                        dangerouslySetInnerHTML={{ __html: user.RemarkName || user.NickName }} />
 
                     <span
-                        className={classes.signature}
-                        dangerouslySetInnerHTML={{__html: user.Signature || 'No Signature'}} />
+                        className={'signature'}
+                        dangerouslySetInnerHTML={{ __html: user.Signature || 'No Signature' }} />
                 </div>
             </div>
         );
@@ -202,27 +182,29 @@ export default class SearchBar extends React.Component<IProps> {
     }
 
     render() {
-        var { searching, history, result } = this.props;
+        const { searching,  result } = this.props;
 
+        const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList');
+        const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
         return (
-            <div className={classes.container}>
+            <div className={'container'}>
                 <i className="icon-ion-ios-search-strong" />
                 <input
                     id="search"
                     onBlur={e => this.handleBlur(e.target.value)}
                     onFocus={e => this.filter(e.target.value)}
-                    onInput={e => this.filter(e.target.value)}
+                    onInput={e => this.filter(this.searchRef.value)}
                     onKeyUp={e => this.navigation(e)}
                     placeholder="Search ..."
-                    ref="search"
+                    ref={this.searchRef}
                     type="text" />
                 {
                     searching && (
                         <div
-                            className={classes.dropdown}
-                            ref="dropdown">
+                            className={'dropdown'}
+                            ref={this.dropdownRef}>
                             {
-                                !result.query && (history.length ? this.renderHistory(history) : this.renderPlaceholder())
+                                !result.query && (searchChatHistoryList.length ? this.renderHistory(searchChatHistoryList) : this.renderPlaceholder())
                             }
 
                             {this.renderList(result.friend, 'Friend')}
