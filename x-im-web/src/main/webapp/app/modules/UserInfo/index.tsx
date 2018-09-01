@@ -1,113 +1,68 @@
 
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
+import { withRouter } from 'react-router-dom';
 import pinyin from 'han';
-import clazz from 'classname';
+import classnames from 'classnames';
 
-import classes from './style.css';
-import Avatar from 'components/Avatar';
-import { Modal, ModalBody } from 'components/Modal';
-import helper from 'utils/helper';
+import { connect } from 'react-redux';
+import { IRootState } from 'app/shared/reducers';
+import { getSession, login } from 'app/shared/reducers/authentication';
+import { getProfile } from 'app/shared/reducers/application-profile';
+import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
+import './style.scss';
+import Avatar from 'app/shared/Avatar';
+import { Modal, ModalBody } from 'app/shared/Modal';
+import helper from 'app/shared/util/helper';
+import showMessage from 'app/shared/reducers/snackbar';
 
-@inject(stores => ({
-    chatTo: (userid) => {
-        var user = stores.contacts.memberList.find(e => e.UserName === userid);
-        stores.chat.chatTo(user);
-    },
-    pallet: stores.userinfo.pallet,
-    show: stores.userinfo.show,
-    user: stores.userinfo.user,
-    remove: stores.userinfo.remove,
-    toggle: stores.userinfo.toggle,
-    setRemarkName: stores.userinfo.setRemarkName,
-    removeMember: async(user) => {
-        var roomid = (stores.members.show && stores.members.user.UserName)
-            || stores.chat.user.UserName;
-
-        await stores.userinfo.removeMember(roomid, user.UserName);
-        stores.userinfo.toggle(false);
-    },
-    refreshContacts: async(user) => {
-        var { updateUser, filter, filtered } = stores.contacts;
-
-        stores.userinfo.updateUser(user);
-        updateUser(user);
-        filter(filtered.query);
-    },
-    showAddFriend: (user) => stores.addfriend.toggle(true, user),
-    showMessage: stores.snackbar.showMessage,
-    isme: () => {
-        return stores.session.user
-            && stores.userinfo.user.UserName === stores.session.user.User.UserName;
-    },
-}))
-@observer
-class UserInfo extends Component {
-    state = {
-        showEdit: false,
-    };
-
+export interface IProps extends StateProps, DispatchProps { }
+export interface IState {
+    isShow: boolean;
+    remove: boolean;
+    showEdit: boolean;
+  }
+export class UserInfo extends React.Component<IProps, IState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShow: false,
+            remove: false,
+            showEdit: false
+        };
+    }
     toggleEdit(showEdit = !this.state.showEdit) {
         this.setState({ showEdit });
     }
 
-    handleClose() {
-        this.toggleEdit(false);
-        this.props.toggle(false);
-    }
+    toggle = () => console.warn('UserInfo toggle unrealized：');
+
+    handleClose = () => console.warn('UserInfo handleClose unrealized：');
 
     handleError(e) {
         e.target.src = 'http://i.pravatar.cc/200';
     }
 
     async handleEnter(e) {
-        if (e.charCode !== 13) return;
-
-        var value = e.target.value.trim();
-        var res = await this.props.setRemarkName(value, this.props.user.UserName);
-
-        if (res) {
-            this.props.refreshContacts({
-                ...this.props.user,
-                RemarkName: value,
-                RemarkPYInitial: value ? (pinyin.letter(value)[0]).toUpperCase() : value,
-            });
-            this.toggleEdit(false);
-        } else {
-            this.props.showMessage('Failed to set remark name.');
-        }
+        console.warn('UserInfo handleEnter unrealized：', e);
     }
 
     handleAction(user) {
-        if (this.props.history.location.pathname !== '/') {
-            this.props.history.push('/');
-        }
-
-        setTimeout(() => {
-            if (helper.isContact(user) || helper.isChatRoom(user.UserName)) {
-                this.props.toggle(false);
-                this.props.chatTo(user.UserName);
-                document.querySelector('#messageInput').focus();
-            } else {
-                this.props.showAddFriend(user);
-            }
-        });
+        console.warn('UserInfo handleEnter unrealized：', user);
     }
 
     render() {
-        var { UserName, HeadImgUrl, NickName, RemarkName, Signature, City, Province } = this.props.user;
-        var isFriend = helper.isContact(this.props.user);
-        var pallet = this.props.pallet;
-        var isme = this.props.isme();
-        var background = pallet[0];
-        var gradient = 'none';
-        var fontColor = '#777';
-        var buttonColor = '#777';
+        const { UserName, HeadImgUrl, NickName, RemarkName, Signature, City, Province } = this.props.user;
+        const isFriend = false; //  helper.isContact(this.props.user);
+        const pallet = this.props.pallet;
+        const isme = this.props.isme();
+        let background = pallet[0];
+        let gradient = 'none';
+        let fontColor = '#777';
+        let buttonColor = '#777';
 
         if (background) {
-            let pallet4font = pallet[1] || [0, 0, 0];
-            let pallet4button = pallet[2] || [0, 0, 0];
+            const pallet4font = pallet[1] || [0, 0, 0];
+            const pallet4button = pallet[2] || [0, 0, 0];
 
             gradient = `
                 -webkit-linear-gradient(top, rgb(${background[0]}, ${background[1]}, ${background[2]}) 5%, rgba(${background[0]}, ${background[1]}, ${background[2]}, 0) 15%),
@@ -132,39 +87,39 @@ class UserInfo extends Component {
 
         return (
             <Modal
-                onCancel={() => this.handleClose()}
-                show={this.props.show}>
-                <ModalBody className={classes.container}>
+                onCancel={ this.handleClose }
+                show={ this.state.isShow }>
+                <ModalBody className={'container'}>
                     <div
-                        className={clazz(classes.hero, {
-                            [classes.showEdit]: this.state.showEdit,
-                            [classes.large]: !this.props.remove,
-                            [classes.isme]: isme,
+                        className={classnames('hero', {
+                            ['showEdit']: this.state.showEdit,
+                            ['large']: !this.state.remove,
+                            ['isme']: isme
                         })}
                         onClick={() => {
-                            var showEdit = this.state.showEdit;
+                            const showEdit = this.state.showEdit;
 
                             if (showEdit) {
                                 this.toggleEdit();
                             }
                         }} style={{
                             background,
-                            color: fontColor,
+                            color: fontColor
                         }}>
 
                         {
                             (!isme && isFriend) && (
                                 <div
-                                    className={classes.edit}
+                                    className={'edit'}
                                     onClick={() => this.toggleEdit()}>
                                     <i className="icon-ion-edit" />
                                 </div>
                             )
                         }
 
-                        <div className={classes.inner}>
+                        <div className={'inner'}>
                             <div
-                                className={classes.mask}
+                                className={'mask'}
                                 style={{
                                     background: gradient
                                 }} />
@@ -172,15 +127,15 @@ class UserInfo extends Component {
                         </div>
 
                         <div
-                            className={classes.username}
-                            dangerouslySetInnerHTML={{__html: NickName}} />
+                            className={'username'}
+                            dangerouslySetInnerHTML={{ __html: NickName }} />
 
                         {
-                            !this.props.remove ? (
-                                <div className={classes.wrap}>
-                                    <p dangerouslySetInnerHTML={{__html: Signature || 'No Signature'}} />
+                            !this.state.remove ? (
+                                <div className={'wrap'}>
+                                    <p dangerouslySetInnerHTML={{ __html: Signature || 'No Signature' }} />
 
-                                    <div className={classes.address}>
+                                    <div className={'address'}>
                                         <i
                                             className="icon-ion-android-map"
                                             style={{ color: fontColor }} />
@@ -190,13 +145,13 @@ class UserInfo extends Component {
                                 </div>
                             ) : (
                                 <div
-                                    className={classes.action}
+                                    className={'action'}
                                     onClick={() => this.props.removeMember(this.props.user)}
                                     style={{
                                         color: buttonColor,
                                         opacity: .6,
                                         marginTop: 20,
-                                        marginBottom: -30,
+                                        marginBottom: -30
                                     }}>
                                     Delete
                                 </div>
@@ -204,11 +159,11 @@ class UserInfo extends Component {
                         }
 
                         <div
-                            className={classes.action}
+                            className={'action'}
                             onClick={() => this.handleAction(this.props.user)}
                             style={{
                                 color: buttonColor,
-                                opacity: .6,
+                                opacity: .6
                             }}>
                             {helper.isChatRoom(UserName) || isFriend ? 'Send Message' : 'Add Friend'}
                         </div>
@@ -222,7 +177,6 @@ class UserInfo extends Component {
                                 defaultValue={RemarkName}
                                 onKeyPress={e => this.handleEnter(e)}
                                 placeholder="Type the remark name"
-                                ref="input"
                                 type="text" />
                         )
                         /* eslint-enable */
@@ -233,4 +187,32 @@ class UserInfo extends Component {
     }
 }
 
-export default withRouter(UserInfo);
+const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootState) => ({
+    pallet: [],
+    user: authentication.account,
+    isme: () => authentication.account.user
+            && authentication.account.UserName === authentication.account.User.UserName
+  });
+
+  const mapDispatchToProps = {
+    chatTo: (userId: string) => {
+        console.warn('UserInfo chatTo unrealized：', userId);
+    },
+    removeMember: async (user: any) => {
+        console.warn('UserInfo removeMember unrealized：', user);
+    },
+    refreshContacts: async (user: any) => {
+        console.warn('UserInfo refreshContacts unrealized：', user);
+    },
+    showAddFriend: (user: any) => {
+        console.warn('UserInfo showAddFriend unrealized：', user);
+    }
+};
+  //  用于把当前 Redux store state 映射到展示组件的 props 中
+  type StateProps = ReturnType<typeof mapStateToProps>;
+  type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UserInfo);

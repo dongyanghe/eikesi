@@ -1,12 +1,9 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'reactstrap';
 import { HashRouter as Router } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-
 import { IRootState } from 'app/shared/reducers';
 import { getSession, login } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
@@ -26,19 +23,20 @@ import Members from 'app/modules/Members';
 import AddMember from 'app/modules/AddMember';
 import BatchSend from 'app/modules/BatchSend';
 import Forward from 'app/modules/Forward';
-import ConfirmImagePaste from 'app/modules/ConfirmImagePaste';
+import ImagePasteConfirm from 'app/modules/ImagePasteConfirm';
 import Loader from './shared/Loader';
 import Snackbar from './shared/Snackbar';
 import Offline from './shared/Offline';
 import { toggle } from 'app/shared/reducers/snackbar';
-import 'antd/dist/antd.css';
+import classnames from 'classnames';
 
 export interface IAppProps extends StateProps, DispatchProps { }
 export class App extends React.Component<IAppProps> {
   //  是否展示找不到网络连接页面
   isOffline = true;
   state = {
-    isOffline: false
+    isOffline: false,
+    isOndragleave: false
   };
   /**
    *  1.初始化项目基本信息
@@ -57,15 +55,18 @@ export class App extends React.Component<IAppProps> {
     });
     window.addEventListener('online', () => {
       this.setState({
-        offline: false
+        isOffline: false
       });
     });
     //  拖动元素来到放置领域
     window.ondragover = e => {
       //  是否有直接发送的对象
       if (this.props.canidrag()) {
-        this.refs.holder.classList.add(classes.show);
-        this.refs.viewport.classList.add(classes.blur);
+        this.setState({
+          isOndragleave: true
+        });
+        // this.refs.holder.classList.add(classes.show);
+        // this.refs.viewport.classList.add(classes.blur);
       }
 
       // If not st as 'copy', electron will open the drop file
@@ -76,9 +77,11 @@ export class App extends React.Component<IAppProps> {
     //  文件放弃拖入
     window.ondragleave = () => {
       if (!this.props.canidrag()) return false;
-
-      this.refs.holder.classList.remove('show');
-      this.refs.viewport.classList.remove('blur');
+      this.setState({
+        isOndragleave: false
+      });
+      // this.refs.holder.classList.remove('show');
+      // this.refs.viewport.classList.remove('blur');
     };
     //  拖动完毕时触发
     window.ondragend = e => false;
@@ -89,10 +92,14 @@ export class App extends React.Component<IAppProps> {
       e.stopPropagation();
 
       if (files.length && this.props.canidrag()) {
-        Array.from(files).map(e => this.props.process(e));
+        //  批量发送文件
+        // Array.from(files).map(e => this.props.process(e));
       }
-      this.refs.holder.classList.remove('show');
-      this.refs.viewport.classList.remove('blur');
+      this.setState({
+        isOndragleave: false
+      });
+      // this.refs.holder.classList.remove('show');
+      // this.refs.viewport.classList.remove('blur');
       return false;
     };
   }
@@ -130,24 +137,30 @@ export class App extends React.Component<IAppProps> {
           <Loader show={this.props.loading} />
           <Header location={location} />
           <div
-            className={'container'}
-            ref="viewport">
+            className={classnames({ 'container': true, 'show': this.state.isOndragleave })}>
             <AppRoutes />
           </div>
           <Footer
-            location={location}
-            ref="footer" />
+            location={location} />
+          {/* 用户信息 */}
           <UserInfo />
+          {/* 新增好友 */}
           <AddFriend />
+          {/* 新建单聊/群聊 */}
           <NewChat />
+          {/* 群成员列表 */}
           <Members />
+          {/* 批量发送 */}
           <BatchSend />
+          {/*添加群成员  */}
           <AddMember />
-          <ConfirmImagePaste />
+          {/* 图片发送确认 */}
+          <ImagePasteConfirm />
+          {/* 转发消息 */}
           <Forward />
-
+          {/* 断线提示 */}
           <Offline show={this.state.isOffline} />;
-          <div className={'dragDropHolder'} ref="holder">
+          <div className={classnames({ 'dragDropHolder': true, 'show': this.state.isOndragleave })}>
             <div className={'inner'}>
               <div>
                 <img src="assets/images/filetypes/image.png" />
@@ -160,7 +173,7 @@ export class App extends React.Component<IAppProps> {
 
               <i className="icon-ion-ios-cloud-upload-outline" />
 
-              <h2>拖入文件到此</h2>
+              <h2>拖入文件至此</h2>
             </div>
           </div>
         </div>
@@ -169,9 +182,9 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile, locale, snackbarState }: IRootState) => ({
-  message: snackbarState.message,  //  消息提示
-  isShow: snackbarState.isShow,
+const mapStateToProps = ({ authentication, applicationProfile, locale, snackbar }: IRootState) => ({
+  message: snackbar.message,  //  消息提示
+  isShow: snackbar.isShow,
   close: () => toggle(false),
   canidrag: () => false,  //  拖入文件是否可以直接发送，否则需暂时复制
   currentLocale: locale.currentLocale,

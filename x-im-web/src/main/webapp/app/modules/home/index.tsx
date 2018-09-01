@@ -1,24 +1,24 @@
 import './home.scss';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
+import { IRootState } from 'app/shared/reducers';
+import { getSession, login } from 'app/shared/reducers/authentication';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
 import classnames from 'classnames';
-
-import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
+import { newChatToogle } from 'app/shared/reducers/app';
+import { toggleConversation } from 'app/shared/reducers/chat';
+import ChatContent from 'app/modules/home/ChatContent';
+import Chats from 'app/modules/home/Chats';
+import SearchBar from 'app/modules/home/SearchBar';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
 export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
-    this.props.getSession();
   }
 
   render() {
-    const { account } = this.props;
     return (
       <Row>
         <Col md="9" className="container">
@@ -33,7 +33,7 @@ export class Home extends React.Component<IHomeProp> {
                 this.props.showRedIcon && (
                   <div
                     className={'addChat'}
-                    onClick={() => this.props.newChat()}>
+                    onClick={() => this.props.newChatToogle(true)}>
                     <i className="icon-ion-android-add" />
                   </div>
                 )
@@ -50,12 +50,13 @@ export class Home extends React.Component<IHomeProp> {
   }
 }
 
-const mapStateToProps = storeState => ({
-  account: storeState.authentication.account,
-  isAuthenticated: storeState.authentication.isAuthenticated
+const mapStateToProps = ({ settings, chat, app }: IRootState) => ({
+  showConversation: chat.showConversation,
+  showRedIcon: settings.showRedIcon,
+  toggle: () => app.isNewChatShow
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { newChatToogle, toggleConversation };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
