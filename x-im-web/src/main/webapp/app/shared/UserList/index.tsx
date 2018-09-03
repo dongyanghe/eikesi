@@ -30,6 +30,7 @@ export default class UserList extends Component<IProps, IState> {
     };
 
     highlight(offset) {
+        let scroller = this.listRef;
         let users = Array.from(this.listRef.querySelectorAll('li[data-userid]'));
         let index = users.findIndex(e => e.classList.contains('active'));
 
@@ -180,11 +181,11 @@ export default class UserList extends Component<IProps, IState> {
         return (
             <div className={'container'}>
                 <input
+                    ref={this.inputRef}
                     autoFocus={true}
                     onKeyUp={e => this.navigation(e)}
-                    onInput={e => this.search(e.target.value)}
+                    onInput={e => this.search(this.inputRef.value)}
                     placeholder="Type to Search..."
-                    ref={this.inputRef}
                     type="text" />
 
                 <ul

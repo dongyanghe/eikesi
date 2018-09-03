@@ -287,7 +287,7 @@ const helper = {
         });
     },
 
-    isOsx: window.process.platform === 'darwin',
+    isOsx: false,
 
     isSuspend: () => {
         window.console.log('sendSync is-suspend');
