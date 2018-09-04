@@ -107,7 +107,7 @@
     "generator-jhipster-docker": "2.5.0",
     "generator-jhipster-audit-helper": "1.0.3",
     "generator-jhipster-uaa-security-authority": "1.0.1",
-    "generator-jhipster-obfuscation-at-rest": "0.3.0",
+    "generator-jhipster-obfuscation-at-rest": "0.2.2",
     "generator-jhipster-feign-client": "1.0.6",
     "generator-jhipster-cockroachdb": "0.0.10",
     "generator-jhipster-file2url": "0.0.0",
