@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
-import './style.csss';
+import './style.scss';
 
 export interface IProps {
   max: PropTypes.number.isRequired;
