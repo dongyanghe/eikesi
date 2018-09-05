@@ -3,12 +3,8 @@ import { Modal, ModalBody } from 'app/shared/Modal';
 import { connect } from 'react-redux';
 import han from 'han';
 import { IRootState } from 'app/shared/reducers';
-import { showMessage } from 'app/shared/reducers/snackbar';
-import { process, sendMessage } from 'app/shared/reducers/chat';
 import { addMemberToogle } from 'app/shared/reducers/app';
-import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity as createFlockRelation, reset } from 'app/shared/reducers/flock-relation.reducer';
 import { getSearchEntities as getSearchCustomerRelation, updateEntity as updateCustomerRelation, resetSerchEntitieList } from 'app/shared/reducers/customer-relation.reducer';
-import classnames from 'classnames';
 import './style.scss';
 import UserList from 'app/shared/UserList';
 import helper from 'app/shared/util/helper';
@@ -16,11 +12,11 @@ import helper from 'app/shared/util/helper';
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
     searching: '';
-    selected: [];   //  选择后的关系成员列表
+    selected: any[];   //  选择后的关系成员列表
 }
 class AddMember extends React.Component<IProps, IState> {
     userListRef;
-    getList = () => {
+    getList = (): ReadonlyArray<any> => {
         //  如果有查询直接读取查询列表
         if (this.props.serchCustomerRelationList && this.props.serchCustomerRelationList.length) {
             return this.props.serchCustomerRelationList;
@@ -44,7 +40,7 @@ class AddMember extends React.Component<IProps, IState> {
 
     getUser = (userId: number) => this.props.customerRelationList.find(e => e.id === userId);
 
-    close = () => {
+    close = (): void => {
         this.userListRef.value = '';
         this.props.resetSerchEntitieList();
         this.props.addMemberToogle(false);
@@ -128,7 +124,7 @@ const mapStateToProps = ({ app, authentication, chat, customerRelation, flockRel
     chatMember: chat.user
 });
 const mapDispatchToProps = {
-    createFlockRelation,
+    // createFlockRelation,
     getSearchCustomerRelation,
     addMemberToogle,
     resetSerchEntitieList

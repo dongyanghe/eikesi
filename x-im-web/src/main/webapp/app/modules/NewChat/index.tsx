@@ -44,7 +44,7 @@ class NewChat extends React.Component<IProps> {
 
     this.close();
     setTimeout(() => {
-      document.querySelector('#messageInput').focus();
+      (document.querySelector('#messageInput') as HTMLInputElement).focus();
     });
   }
   /**
@@ -67,7 +67,7 @@ class NewChat extends React.Component<IProps> {
   renderList = () => {
     const { show, search, getList } = this.props;
     const { query } = this.state;
-    const onChange = (selected: []) => {
+    const onChange = (selected: any[]) => {
       this.setState({
         query,
         selected

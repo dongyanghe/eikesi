@@ -47,7 +47,7 @@ const helper = {
     parseKV: (text: any) => {
         const string = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         const matchs = string.match(/(\w+)="([^\s]+)"/g);
-        let res = {};
+        const res = {};
         matchs.map(e => {
             const kv = e.replace(/"/g, '').split('=');
             res[kv[0]] = kv[1];
@@ -59,19 +59,19 @@ const helper = {
      * 解析xml
      * @shared: IE浏览器提供了Microsoft.XMLDOM的activex控件来解析xml，非ie浏览器可以使用window.DOMParser来解析xml
      */
-    parseXml: (text, tagName) => {
-        const parser = new window.DOMParser();
-        const xml = parser.parseFromString(text.replace(/&lt;/g, '<').replace(/&gt;/g, '>'), 'text/xml');
-        const value = {};
+    // parseXml: (text, tagName) => {
+    //     const parser = new window.DOMParser();
+    //     const xml = parser.parseFromString(text.replace(/&lt;/g, '<').replace(/&gt;/g, '>'), 'text/xml');
+    //     const value = {};
 
-        tagName = Array.isArray(tagName) ? tagName : [tagName];
+    //     tagName = Array.isArray(tagName) ? tagName : [tagName];
 
-        tagName.map(e => {
-            value[e] = xml.getElementsByTagName(e)[0].childNodes[0].nodeValue;
-        });
+    //     tagName.map(e => {
+    //         value[e] = xml.getElementsByTagName(e)[0].childNodes[0].nodeValue;
+    //     });
 
-        return { xml, value };
-    },
+    //     return { xml, value };
+    // },
 
     unique: (arr: any) => {
         const mappings = {};
@@ -223,27 +223,27 @@ const helper = {
         return `${filename}.png`;
     },
 
-    getPallet: (image: any) => new Promise((resolve, reject) => {
-        try {
-            new window.AlbumColors(image).getColors((colors, err) => {
-                if (err) {
-                    resolve([
-                        [0, 0, 0],
-                        [0, 0, 0],
-                        [0, 0, 0]
-                    ]);
-                } else {
-                    resolve(colors);
-                }
-            });
-        } catch (error) {
-            reject([
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0]
-            ]);
-        }
-    }),
+    // getPallet: (image: any) => new Promise((resolve, reject) => {
+    //     try {
+    //         new window.AlbumColors(image).getColors((colors, err) => {
+    //             if (err) {
+    //                 resolve([
+    //                     [0, 0, 0],
+    //                     [0, 0, 0],
+    //                     [0, 0, 0]
+    //                 ]);
+    //             } else {
+    //                 resolve(colors);
+    //             }
+    //         });
+    //     } catch (error) {
+    //         reject([
+    //             [0, 0, 0],
+    //             [0, 0, 0],
+    //             [0, 0, 0]
+    //         ]);
+    //     }
+    // }),
 
     decodeHTML: (text = '') => text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
 
@@ -265,27 +265,27 @@ const helper = {
         }
     },
 
-    getDataURL: src => {
-        const image = new window.Image();
+    // getDataURL: src => {
+    //     const image = new window.Image();
 
-        return new Promise((resolve, reject) => {
-            image.src = src;
-            image.onload = () => {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
+    //     return new Promise((resolve, reject) => {
+    //         image.src = src;
+    //         image.onload = () => {
+    //             const canvas = document.createElement('canvas');
+    //             const context = canvas.getContext('2d');
 
-                canvas.width = image.width;
-                canvas.height = image.height;
+    //             canvas.width = image.width;
+    //             canvas.height = image.height;
 
-                context.drawImage(image, 0, 0, image.width, image.height);
-                resolve(canvas.toDataURL('image/png'));
-            };
+    //             context.drawImage(image, 0, 0, image.width, image.height);
+    //             resolve(canvas.toDataURL('image/png'));
+    //         };
 
-            image.onerror = () => {
-                resolve('');
-            };
-        });
-    },
+    //         image.onerror = () => {
+    //             resolve('');
+    //         };
+    //     });
+    // },
 
     isOsx: false,
 

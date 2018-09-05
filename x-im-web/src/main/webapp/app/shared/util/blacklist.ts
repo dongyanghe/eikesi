@@ -1,6 +1,6 @@
 
 export default function blacklist(src, ...args) {
-    let copy = {};
+    const copy = {};
     const ignore = Array.from(args);
 
     for (const key in src) {

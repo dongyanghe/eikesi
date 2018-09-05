@@ -56,7 +56,7 @@ export class SearchBar extends React.Component<IProps> {
     chatTo(user) {
         this.props.chat(user);
         this.searchRef.value = '';
-        document.querySelector('#messageInput').focus();
+        (document.querySelector('#messageInput') as HTMLInputElement).focus();
     }
 
     highlight(offset) {

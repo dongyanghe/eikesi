@@ -15,7 +15,7 @@ import helper from 'app/shared/util/helper';
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
     searching: '';
-    selected: [];   //  选择后的关系成员列表
+    selected: any[];   //  选择后的关系成员列表
 }
 class Forward extends React.Component<IProps, IState> {
     userListRef;
@@ -42,7 +42,7 @@ class Forward extends React.Component<IProps, IState> {
         });
     }
 
-    send = (userids: []) => {
+    send = (userids: any[]) => {
         userids.map(e => {
             const message = this.props.selectedMessage;
             const user = { id: e };

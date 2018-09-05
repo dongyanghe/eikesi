@@ -28,9 +28,9 @@ export default class UserList extends Component<IProps, IState> {
   };
 
   highlight(offset) {
-    let scroller = this.listRef;
-    let users = Array.from(this.listRef.querySelectorAll('li[data-userid]'));
-    let index = users.findIndex(e => e.classList.contains('active'));
+    const scroller = this.listRef;
+    const users: Element[] = Array.from(this.listRef.querySelectorAll('li[data-userid]'));
+    let index = users.findIndex(value => value.classList.contains('active'));
 
     if (index > -1) {
       users[index].classList.remove('active');
@@ -46,12 +46,12 @@ export default class UserList extends Component<IProps, IState> {
       index = 0;
     }
 
-    let active = users[index];
+    const active: Element = users[index];
 
     if (active) {
       // Keep active item always in the viewport
       active.classList.add('active');
-      scroller.scrollTop = active.offsetTop + active.offsetHeight - scroller.offsetHeight;
+      scroller.scrollTop = active.clientTop + active.clientHeight - scroller.clientHeight;
     }
   }
 
