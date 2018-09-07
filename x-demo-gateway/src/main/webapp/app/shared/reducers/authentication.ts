@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { setLocale } from 'app/shared/reducers/locale';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
@@ -18,7 +19,8 @@ const initialState = {
   showModalLogin: false,
   account: {} as any,
   errorMessage: null as string, // Errors returned from server side
-  redirectMessage: null as string
+  redirectMessage: null as string,
+  sessionHasBeenFetched: false
 };
 
 export type AuthenticationState = Readonly<typeof initialState>;
@@ -45,6 +47,7 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...state,
         loading: false,
         isAuthenticated: false,
+        sessionHasBeenFetched: true,
         showModalLogin: true,
         errorMessage: action.payload
       };
@@ -67,6 +70,7 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...state,
         isAuthenticated,
         loading: false,
+        sessionHasBeenFetched: true,
         account: action.payload.data
       };
     }
@@ -101,7 +105,12 @@ export const login = (username, password, rememberMe = false) => async (dispatch
     type: ACTION_TYPES.LOGIN,
     payload: axios.post('auth/login', { username, password })
   });
-  dispatch(getSession());
+  await dispatch(getSession());
+
+  const account = getState().authentication.account;
+  if (account && account.langKey) {
+    await dispatch(setLocale(account.langKey));
+  }
 };
 
 export const logout = () => async dispatch => {
