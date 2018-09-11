@@ -10,8 +10,8 @@ import chat, { ChatState } from 'app/shared/reducers/chat';
 import imagePasteConfirm, { ImagePasteConfirmState } from 'app/shared/reducers/ImagePasteConfirm';
 import settings, { SettingsState } from 'app/shared/reducers/settings';
 
-import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
-import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
+// import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
+// import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
 import activate, { ActivateState } from 'app/modules/account/activate/activate.reducer';
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
@@ -51,8 +51,8 @@ export interface IRootState {
   readonly authentication: AuthenticationState;
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
-  readonly administration: AdministrationState;
-  readonly userManagement: UserManagementState;
+  // readonly administration: AdministrationState;
+  // readonly userManagement: UserManagementState;
   readonly register: RegisterState;
   readonly activate: ActivateState;
   readonly passwordReset: PasswordResetState;
@@ -95,8 +95,8 @@ const rootReducer = combineReducers<IRootState>({
   authentication,
   locale,
   applicationProfile,
-  administration,
-  userManagement,
+  // administration,
+  // userManagement,
   register,
   activate,
   passwordReset,

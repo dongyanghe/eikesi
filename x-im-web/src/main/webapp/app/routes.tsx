@@ -17,15 +17,15 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import { AUTHORITIES } from 'app/config/constants';
 
 // tslint:disable:space-in-parens
-const Account = Loadable({
-  loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
-  loading: () => <div>loading ...</div>
-});
+// const Account = Loadable({
+//   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
+//   loading: () => <div>loading ...</div>
+// });
 
-const Admin = Loadable({
-  loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/administration'),
-  loading: () => <div>loading ...</div>
-});
+// const Admin = Loadable({
+//   loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/administration'),
+//   loading: () => <div>loading ...</div>
+// });
 // tslint:enable
 
 const Routes = () => (

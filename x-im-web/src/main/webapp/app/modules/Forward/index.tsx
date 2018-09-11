@@ -7,7 +7,7 @@ import './style.scss';
 import { forwardToogle } from 'app/shared/reducers/app';
 import { sendMessage } from 'app/shared/reducers/chat';
 import UserList from 'app/shared/UserList';
-import { getSearchEntities, getEntity, getEntities, updateEntity, createEntity as createFlockRelation, reset } from 'app/shared/reducers/flock-relation.reducer';
+import { ICustomerRelation } from 'app/shared/model/customer-relation.model';
 import { getSearchEntities as getSearchCustomerRelation, getEntity as getCustomerRelation, resetSerchEntitieList } from 'app/shared/reducers/customer-relation.reducer';
 import classnames from 'classnames';
 import helper from 'app/shared/util/helper';
@@ -19,7 +19,7 @@ export interface IState {
 }
 class Forward extends React.Component<IProps, IState> {
     userListRef;
-    getList = () => {
+    getList = (): ReadonlyArray<ICustomerRelation> => {
         //  如果有查询直接读取查询列表
         if (this.props.serchCustomerRelationList && this.props.serchCustomerRelationList.length) {
             return this.props.serchCustomerRelationList;
@@ -63,9 +63,9 @@ class Forward extends React.Component<IProps, IState> {
                 getList: this.getList,
                 searching: this.state.searching,
                 max: -1,
-
                 onChange(selected) {
                     this.setState({
+                        ...this.state,
                         selected
                     });
                 }

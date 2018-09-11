@@ -11,7 +11,7 @@ import { clearAuthentication } from 'app/shared/reducers/authentication';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import AppComponent from 'app/app';
 import { loadIcons } from 'app/config/icon-loader';
-
+debugger;
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 
 const store = initStore();

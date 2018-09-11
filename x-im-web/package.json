@@ -161,11 +161,12 @@
     "webpack:prod:main": "yarn run webpack --config webpack/webpack.prod.js --profile",
     "webpack:prod": "yarn run cleanup && yarn run webpack:prod:main",
     "webpack:test": "yarn run test",
-    "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+    "webpack-dev-server": "node --max_old_space_size=14096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "webpack": "node --max_old_space_size=14096 node_modules/webpack/bin/webpack.js"
   },
   "jestSonar": {
     "reportPath": "build/test-results/jest",
     "reportFile": "TESTS-results-sonar.xml"
-  }
+  },
+  "__npminstall_done": false
 }

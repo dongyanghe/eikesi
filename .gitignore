@@ -128,3 +128,5 @@ Desktop.ini
 ######################
 .eslintcache
 .vs/
+*.history/*
+*/.history/*
