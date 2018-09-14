@@ -61,7 +61,7 @@ export interface IModalProps {
     show: PropTypes.bool.isRequired;
     overlay?: PropTypes.bool;
     fullscreen?: PropTypes.bool;
-    onCancel?: (event: any) => void;
+    onCancel?: PropTypes.func;
     transition4overlay?: PropTypes.string;
     transition4body?: PropTypes.string;
     className?: PropTypes.string;

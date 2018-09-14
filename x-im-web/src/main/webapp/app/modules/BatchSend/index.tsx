@@ -15,11 +15,11 @@ import { toggle as imagePasteConfirmToogle } from 'app/shared/reducers/ImagePast
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
     user: { //  群信息
-        MemberList: []
+        MemberList: any[]
     };
-    list: [];   //  所有关系成员
-    filtered: [];   //  检索后的关系成员列表
-    selected: [];   //  选择后的关系成员列表
+    list: any[];   //  所有关系成员
+    filtered: any[];   //  检索后的关系成员列表
+    selected: any[];   //  选择后的关系成员列表
 }
 class BatchSend extends React.Component<IProps, IState> {
     timer;
@@ -40,6 +40,7 @@ class BatchSend extends React.Component<IProps, IState> {
      */
     componentDidMount() {
         this.setState({
+            ...this.state,
             selected: []
         });
         this.search();
@@ -66,17 +67,19 @@ class BatchSend extends React.Component<IProps, IState> {
             }
         }, 300);
         this.setState({
+            ...this.state,
             filtered: []
         });
     }
-    close() {
+
+    close = () => {
         this.setState({
             selected: []
         });
         this.props.batchSendToogle(false);
     }
 
-    handleSelected(user) {
+    handleSelected = (user: any) => {
         /* let selected = this.state.selected;
         let index = selected.findIndex(e => e.UserName === user.UserName);
         if (index === -1) {
@@ -148,27 +151,27 @@ class BatchSend extends React.Component<IProps, IState> {
                     }
 
                     {
-                        (this.searchInput.value ? this.state.filtered : this.props.customerRelationList).map((e, index) => (
-                                <li
-                                    key={index}
-                                    onClick={() => this.handleSelected(e)}>
-                                    <div
-                                        className={'cover'}
-                                        style={{
-                                            backgroundImage: `url(${'e.HeadImgUrl'})`
-                                        }} />
-                                    <span
-                                        className={'username'}
-                                        dangerouslySetInnerHTML={{ __html: e.remarkName || e.customerFirstName }} />
+                        // (this.searchInput.value ? this.state.filtered : this.props.customerRelationList).map((e, index) => (
+                        //         <li
+                        //             key={index}
+                        //             onClick={() => this.handleSelected(e)}>
+                        //             <div
+                        //                 className={'cover'}
+                        //                 style={{
+                        //                     backgroundImage: `url(${'e.HeadImgUrl'})`
+                        //                 }} />
+                        //             <span
+                        //                 className={'username'}
+                        //                 dangerouslySetInnerHTML={{ __html: e.remarkName || e.customerFirstName }} />
 
-                                    {
-                                        /* this.state.selected.find(user => user.id === e.id) && (
-                                            <i className="icon-ion-android-done" />
-                                        ) */
-                                    }
-                                </li>
-                            )
-                        )
+                        //             {
+                        //                 /* this.state.selected.find(user => user.id === e.id) && (
+                        //                     <i className="icon-ion-android-done" />
+                        //                 ) */
+                        //             }
+                        //         </li>
+                        //     )
+                        // )
                     }
                 </ul>
 

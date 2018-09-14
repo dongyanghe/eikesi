@@ -2,8 +2,8 @@
  - [主目录](  ../README.md)
  - [项目主目录](  ../../README.md)
 
-#项目搭建
-  用git克隆本项目，从命令行进入进入项目根目录，依次执行以下命令：
+#angularX项目搭建
+  用git克隆本项目，从命令行进入项目根目录，依次执行以下命令：
 ```cmd
 	npm i -g cnpm
 	cnpm i -g @angular/cli

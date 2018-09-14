@@ -1,4 +1,4 @@
-import './home.scss';
+import './index.scss';
 
 import React from 'react';
 import { IRootState } from 'app/shared/reducers';
@@ -15,29 +15,26 @@ import SearchBar from 'app/modules/home/SearchBar';
 export interface IHomeProp extends StateProps, DispatchProps {}
 
 export class Home extends React.Component<IHomeProp> {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <Row>
         <Col md="9" className="container">
-          <div className={classnames('inner', {
-            'hideConversation': !this.props.showConversation
-          })}>
+          <div
+            className={classnames('inner', {
+              hideConversation: !this.props.showConversation
+            })}
+          >
             <div className={'left'}>
               <SearchBar />
               <Chats />
 
-              {
-                this.props.showRedIcon && (
-                  <div
-                    className={'addChat'}
-                    onClick={() => this.props.newChatToogle(true)}>
-                    <i className="icon-ion-android-add" />
-                  </div>
-                )
-              }
+              {this.props.showRedIcon && (
+                <div className={'addChat'} onClick={() => this.props.newChatToogle(true)}>
+                  <i className="icon-ion-android-add" />
+                </div>
+              )}
             </div>
 
             <div className={'right'}>

@@ -82,9 +82,8 @@
                 });
 
                 function addApiKeyAuthorization() {
-                    var authToken = JSON.parse(localStorage.getItem("jhi-authenticationToken") || sessionStorage.getItem("jhi-authenticationToken"));
-                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + authToken, "header");
-                    window.swaggerUi.api.clientAuthorizations.add("bearer", apiKeyAuth);
+                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("X-XSRF-TOKEN", getCSRF(), "header");
+                    window.swaggerUi.api.clientAuthorizations.add("key", apiKeyAuth);
                 }
 
                 function getCSRF() {
@@ -92,8 +91,8 @@
                     var ca = document.cookie.split(';');
                     for(var i=0; i<ca.length; i++) {
                         var c = ca[i];
-                        while (c.charAt(0)==' ') c = c.substring(1);
-                        if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+                        while (c.charAt(0)===' ') c = c.substring(1);
+                        if (c.indexOf(name) !== -1) return c.substring(name.length,c.length);
                     }
                     return "";
                 }
@@ -115,7 +114,7 @@
                     var security = {};
                     window.springfox.securityConfig(function(data) {
                         security = data;
-                        if (typeof initOAuth == "function" && oAuthIsDefined(security)) {
+                        if (typeof initOAuth === "function" && oAuthIsDefined(security)) {
                             initOAuth(security);
                         }
                     });

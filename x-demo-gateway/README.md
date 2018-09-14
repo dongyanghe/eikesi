@@ -1,5 +1,5 @@
 # demoGateway
-This application was generated using JHipster 5.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.1.0](https://www.jhipster.tech/documentation-archive/v5.1.0).
+This application was generated using JHipster 5.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.3.1](https://www.jhipster.tech/documentation-archive/v5.3.1).
 
 This is a "gateway" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
 
@@ -90,7 +90,7 @@ To ensure everything worked, run:
 
     java -jar target/*.war
 
-Then navigate to [http://localhost:80000](http://localhost:80000) in your browser.
+Then navigate to [http://localhost:80080](http://localhost:80080) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
@@ -115,6 +115,22 @@ Performance tests are run by [Gatling][] and written in Scala. They're located i
 To use those tests, you must install Gatling from [https://gatling.io/](https://gatling.io/).
 
 For more information, refer to the [Running tests page][].
+
+### Code quality
+
+Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
+
+```
+docker-compose -f src/main/docker/sonar.yml up -d
+```
+
+Then, run a Sonar analysis:
+
+```
+./mvnw -Pprod clean test sonar:sonar
+```
+
+For more information, refer to the [Code quality page][].
 
 ## Using Docker to simplify development (optional)
 
@@ -144,14 +160,15 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
 [JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[JHipster 5.1.0 archive]: https://www.jhipster.tech/documentation-archive/v5.1.0
-[Doing microservices with JHipster]: https://www.jhipster.tech/documentation-archive/v5.1.0/microservices-architecture/
-[Using JHipster in development]: https://www.jhipster.tech/documentation-archive/v5.1.0/development/
-[Service Discovery and Configuration with the JHipster-Registry]: https://www.jhipster.tech/documentation-archive/v5.1.0/microservices-architecture/#jhipster-registry
-[Using Docker and Docker-Compose]: https://www.jhipster.tech/documentation-archive/v5.1.0/docker-compose
-[Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v5.1.0/production/
-[Running tests page]: https://www.jhipster.tech/documentation-archive/v5.1.0/running-tests/
-[Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v5.1.0/setting-up-ci/
+[JHipster 5.3.1 archive]: https://www.jhipster.tech/documentation-archive/v5.3.1
+[Doing microservices with JHipster]: https://www.jhipster.tech/documentation-archive/v5.3.1/microservices-architecture/
+[Using JHipster in development]: https://www.jhipster.tech/documentation-archive/v5.3.1/development/
+[Service Discovery and Configuration with the JHipster-Registry]: https://www.jhipster.tech/documentation-archive/v5.3.1/microservices-architecture/#jhipster-registry
+[Using Docker and Docker-Compose]: https://www.jhipster.tech/documentation-archive/v5.3.1/docker-compose
+[Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v5.3.1/production/
+[Running tests page]: https://www.jhipster.tech/documentation-archive/v5.3.1/running-tests/
+[Code quality page]: https://www.jhipster.tech/documentation-archive/v5.3.1/code-quality/
+[Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v5.3.1/setting-up-ci/
 
 [Gatling]: http://gatling.io/
 [Node.js]: https://nodejs.org/
@@ -166,4 +183,4 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [DefinitelyTyped]: http://definitelytyped.org/
 [OpenAPI-Generator]: https://openapi-generator.tech
 [Swagger-Editor]: http://editor.swagger.io
-[Doing API-First development]: https://www.jhipster.tech/documentation-archive/v5.1.0/doing-api-first-development/
+[Doing API-First development]: https://www.jhipster.tech/documentation-archive/v5.3.1/doing-api-first-development/

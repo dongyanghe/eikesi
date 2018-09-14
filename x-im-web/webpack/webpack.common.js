@@ -89,6 +89,7 @@ module.exports = options => ({
     }
   },
   plugins: [
+    //  创建可在配置全局常量的编译时间。这对于允许开发构建和发布构建之间的不同行为非常有用
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `'${options.env}'`,

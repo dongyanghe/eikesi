@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Ref, Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -20,6 +20,8 @@ export interface IState {
     showEmoji: boolean;
   }
 export default class MessageInput extends Component<IProps, IState> {
+    inputRef;   //  : Ref<HTMLInputElement>
+    uploaderRef;
     state: IState = {
         me: {},
         showEmoji: false
@@ -43,7 +45,7 @@ export default class MessageInput extends Component<IProps, IState> {
     }
 
     async handleEnter(e) {
-        const message = this.refs.input.value.trim();
+        const message = this.inputRef.value.trim();
         const user = this.props.user;
         const batch = user.length > 1;
 
@@ -55,16 +57,16 @@ export default class MessageInput extends Component<IProps, IState> {
 
         // You can not send message to yourself
         await Promise.all(
-            user.filter(e => e.UserName !== this.props.me.UserName).map(async e => {createStore
-                const res = await this.props.sendMessage(e, {
+            user.filter(value => value.UserName !== this.props.me.UserName).map(async value => {
+                const res = await this.props.sendMessage(value, {
                     content: message,
                     type: 1
                 }, true);
 
-                this.refs.input.value = '';
+                this.inputRef.value = '';
 
                 if (!res) {
-                    await this.props.showMessage(batch ? `无法给 ${e.NickName} 发送消息!` : '消息发送失败');
+                    await this.props.showMessage(batch ? `无法给 ${value.NickName} 发送消息!` : '消息发送失败');
                 }
 
                 return true;
@@ -80,8 +82,7 @@ export default class MessageInput extends Component<IProps, IState> {
     }
 
     writeEmoji(emoji) {
-        const input = this.refs.input;
-
+        const input = this.inputRef;
         input.value += `[${emoji}]`;
         input.focus();
     }
@@ -157,14 +158,14 @@ export default class MessageInput extends Component<IProps, IState> {
                     onKeyPress={e => this.handleEnter(e)}
                     placeholder="Type something to send..."
                     readOnly={!canisend}
-                    ref="input"
+                    ref={this.inputRef}
                     type="text" />
 
                 <div className={'action'}>
                     <i
                         className="icon-ion-android-attach"
                         id="showUploader"
-                        onClick={e => canisend && this.refs.uploader.click()} />
+                        onClick={e => canisend && this.uploaderRef.click()} />
                     <i
                         className="icon-ion-ios-heart"
                         id="showEmoji"
@@ -178,7 +179,7 @@ export default class MessageInput extends Component<IProps, IState> {
                             this.batchProcess(e.target.files[0]);
                             e.target.value = '';
                         }}
-                        ref="uploader"
+                        ref={this.uploaderRef}
                         style={{
                             display: 'none'
                         }}

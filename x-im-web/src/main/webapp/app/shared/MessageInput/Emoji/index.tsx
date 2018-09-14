@@ -17,8 +17,9 @@ export interface IProps {
     showEmoji: boolean;
   }
 export default class Emoji extends Component<IProps, IState> {
+    containerRef;
     componentDidMount() {
-        delegate(this.refs.container, 'a.qqemoji', 'click', e => {
+        delegate(this.containerRef, 'a.qqemoji', 'click', e => {
             e.preventDefault();
             e.stopPropagation();
 
@@ -29,7 +30,7 @@ export default class Emoji extends Component<IProps, IState> {
 
     componentDidUpdate() {
         if (this.props.show) {
-            this.refs.container.focus();
+            this.containerRef.focus();
         }
     }
 
@@ -48,7 +49,7 @@ export default class Emoji extends Component<IProps, IState> {
     render() {
         return (
             <div
-                ref="container"
+                ref={this.containerRef}
                 tabIndex={-1}
                 className={classnames('container', {
                     'show': this.props.show

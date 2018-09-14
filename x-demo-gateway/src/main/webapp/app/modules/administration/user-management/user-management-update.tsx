@@ -6,8 +6,7 @@ import { AvForm, AvGroup, AvInput, AvField, AvFeedback } from 'availity-reactstr
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { locales } from 'app/config/translation';
-import { IUser } from 'app/shared/model/user.model';
+import { locales, languages } from 'app/config/translation';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { IRootState } from 'app/shared/reducers';
 
@@ -171,10 +170,10 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                   <Label for="langKey">
                     <Translate contentKey="userManagement.langKey">Language Key</Translate>
                   </Label>
-                  <AvField type="select" className="form-control" name="langKey" defaultValue={locales[0]}>
-                    {locales.map(lang => (
-                      <option value={lang} key={lang}>
-                        {lang}
+                  <AvField type="select" className="form-control" name="langKey" value={user.langKey}>
+                    {locales.map(locale => (
+                      <option value={locale} key={locale}>
+                        {languages[locale].name}
                       </option>
                     ))}
                   </AvField>
@@ -192,14 +191,16 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                   </AvInput>
                 </AvGroup>
                 <Button tag={Link} to="/admin/user-management" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" type="submit" disabled={isInvalid || updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>
