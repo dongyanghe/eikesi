@@ -21,7 +21,8 @@ import MessageInput from 'app/shared/MessageInput';
 import { toggle as imagePasteConfirmToogle } from 'app/shared/reducers/ImagePasteConfirm';
 
 export interface IProps extends StateProps, DispatchProps {}
-
+let a = new Map();
+a[Symbol];
 export interface IState {
   user: {
     //  群信息
@@ -214,7 +215,6 @@ const mapDispatchToProps = {
   imagePasteConfirmToogle,
   batchSendToogle
 };
-
 //  用于把当前 Redux store state 映射到展示组件的 props 中
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
