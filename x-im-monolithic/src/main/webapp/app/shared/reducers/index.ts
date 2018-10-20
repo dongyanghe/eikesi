@@ -12,6 +12,34 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import customerRelation, {
+  CustomerRelationState
+} from 'app/entities/customer-relation/customer-relation.reducer';
+// prettier-ignore
+import flockRelation, {
+  FlockRelationState
+} from 'app/entities/flock-relation/flock-relation.reducer';
+// prettier-ignore
+import customerFlock, {
+  CustomerFlockState
+} from 'app/entities/customer-flock/customer-flock.reducer';
+// prettier-ignore
+import customer, {
+  CustomerState
+} from 'app/entities/customer/customer.reducer';
+// prettier-ignore
+import historyMessage, {
+  HistoryMessageState
+} from 'app/entities/history-message/history-message.reducer';
+// prettier-ignore
+import currentMessage, {
+  CurrentMessageState
+} from 'app/entities/current-message/current-message.reducer';
+// prettier-ignore
+import dialogue, {
+  DialogueState
+} from 'app/entities/dialogue/dialogue.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -25,6 +53,13 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly customerRelation: CustomerRelationState;
+  readonly flockRelation: FlockRelationState;
+  readonly customerFlock: CustomerFlockState;
+  readonly customer: CustomerState;
+  readonly historyMessage: HistoryMessageState;
+  readonly currentMessage: CurrentMessageState;
+  readonly dialogue: DialogueState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -40,6 +75,13 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  customerRelation,
+  flockRelation,
+  customerFlock,
+  customer,
+  historyMessage,
+  currentMessage,
+  dialogue,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

@@ -73,11 +73,11 @@ relationship OneToMany {
 }
 
 
-skipServer *
+//  skipServer *
 //  skipClient *
 paginate HistoryMessage with pagination
-dto * with mapstruct
-service * with serviceClass
+//	dto * with mapstruct
+//  service * with serviceClass
 
 // microservice DemoA with demoAbcService
 // microservice DemoB with demoAbcService
