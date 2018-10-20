@@ -4,7 +4,7 @@
       "packageName": "com.eikesi.demo",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "5.1.0",
+    "jhipsterVersion": "5.5.0",
     "applicationType": "gateway",
     "baseName": "demoGateway",
     "packageName": "com.eikesi.demo",
@@ -23,7 +23,7 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "clientFramework": "react",
+    "clientFramework": "angularX",
     "useSass": true,
     "clientPackageManager": "yarn",
     "testFrameworks": [

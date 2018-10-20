@@ -21,8 +21,6 @@ import MessageInput from 'app/shared/MessageInput';
 import { toggle as imagePasteConfirmToogle } from 'app/shared/reducers/ImagePasteConfirm';
 
 export interface IProps extends StateProps, DispatchProps {}
-let a = new Map();
-a[Symbol];
 export interface IState {
   user: {
     //  群信息
