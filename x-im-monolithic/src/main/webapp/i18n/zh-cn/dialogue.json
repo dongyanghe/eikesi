@@ -1,0 +1,32 @@
+
+{
+    "imApp": {
+        "dialogue" : {
+            "home": {
+                "title": "Dialogues",
+                "createLabel": "创建新 Dialogue",
+                "createOrEditLabel": "创建或编辑 Dialogue"
+            },
+            "created": "Dialogue {{ param }} 创建成功",
+            "updated": "Dialogue {{ param }} 更新成功",
+            "deleted": "Dialogue {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Dialogue {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Dialogue"
+            },
+            "createdDate": "Created Date",
+            "createdId": "Created Id",
+            "targetId": "Target Id",
+            "targetType": "Target Type",
+            "currentMessage": "Current Message",
+            "help": {
+                "createdDate": "对话创建时间",
+                "createdId": "对话所属用户id",
+                "targetId": "会话目标id（可能是用户,可能是群组）",
+                "targetType": "目标类型 {0: &#39;用户&#39;, 1: &#39;群组&#39;}"
+            }
+        }
+    }
+}

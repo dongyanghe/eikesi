@@ -1,0 +1,35 @@
+
+{
+    "imApp": {
+        "flockRelation" : {
+            "home": {
+                "title": "Flock Relations",
+                "createLabel": "创建新 Flock Relation",
+                "createOrEditLabel": "创建或编辑 Flock Relation"
+            },
+            "created": "Flock Relation {{ param }} 创建成功",
+            "updated": "Flock Relation {{ param }} 更新成功",
+            "deleted": "Flock Relation {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Flock Relation {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Flock Relation"
+            },
+            "remarkName": "Remark Name",
+            "py": "Py",
+            "pinYin": "Pin Yin",
+            "type": "Type",
+            "createdDate": "Created Date",
+            "customer": "Customer",
+            "customerFlock": "Customer Flock",
+            "help": {
+                "remarkName": "群组备注,默认为群组昵称",
+                "py": "拼音首字母",
+                "pinYin": "拼音全拼",
+                "type": "关系类型 {0: &#39;黑名单&#39;, 1: &#39;成员&#39;}",
+                "createdDate": "关系创建时间"
+            }
+        }
+    }
+}

@@ -16,6 +16,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
   devtool: 'cheap-module-source-map', // https://reactjs.org/docs/cross-origin-errors.html
   mode: ENV,
   entry: [
+     //入口文件 需要处理的文件
     'react-hot-loader/patch',
     './src/main/webapp/app/index'
   ],
@@ -25,6 +26,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     chunkFilename: 'app/[id].chunk.js'
   },
   module: {
+    //配置文件使用什么loader加载
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
@@ -32,6 +34,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
       },
     ]
   },
+  //  配置开发服映射
   devServer: {
     stats: options.stats,
     hot: true,
