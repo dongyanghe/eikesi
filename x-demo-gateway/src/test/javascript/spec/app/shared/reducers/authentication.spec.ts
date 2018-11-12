@@ -5,7 +5,8 @@ import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 import promiseMiddleware from 'redux-promise-middleware';
 
-import authentication, { ACTION_TYPES, getSession, login } from 'app/shared/reducers/authentication';
+import authentication, { ACTION_TYPES, getSession, login, clearAuthentication, logout } from 'app/shared/reducers/authentication';
+import { ACTION_TYPES as localeActionTypes } from 'app/shared/reducers/locale';
 
 describe('Authentication reducer tests', () => {
   function isAccountEmpty(state): boolean {
@@ -145,7 +146,7 @@ describe('Authentication reducer tests', () => {
     const resolvedObject = { value: 'whatever' };
     beforeEach(() => {
       const mockStore = configureStore([thunk, promiseMiddleware()]);
-      store = mockStore({});
+      store = mockStore({ authentication: { account: { langKey: 'zh-cn' } } });
       axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
     });
 
@@ -160,6 +161,68 @@ describe('Authentication reducer tests', () => {
         }
       ];
       await store.dispatch(getSession()).then(() => expect(store.getActions()).toEqual(expectedActions));
+    });
+
+    it('dispatches LOGOUT actions', async () => {
+      axios.post = sinon.stub().returns(Promise.resolve({}));
+      const expectedActions = [
+        {
+          type: REQUEST(ACTION_TYPES.LOGOUT)
+        },
+        {
+          payload: {},
+          type: SUCCESS(ACTION_TYPES.LOGOUT)
+        },
+        {
+          type: REQUEST(ACTION_TYPES.GET_SESSION)
+        },
+        {
+          payload: resolvedObject,
+          type: SUCCESS(ACTION_TYPES.GET_SESSION)
+        }
+      ];
+      await store.dispatch(logout());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('dispatches CLEAR_AUTH actions', async () => {
+      const expectedActions = [
+        {
+          message: 'message',
+          type: ACTION_TYPES.ERROR_MESSAGE
+        },
+        {
+          type: ACTION_TYPES.CLEAR_AUTH
+        }
+      ];
+      await store.dispatch(clearAuthentication('message'));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('dispatches LOGIN, GET_SESSION and SET_LOCALE success and request actions', async () => {
+      const loginResponse = { value: 'any' };
+      axios.post = sinon.stub().returns(Promise.resolve(loginResponse));
+      const expectedActions = [
+        {
+          type: REQUEST(ACTION_TYPES.LOGIN)
+        },
+        {
+          type: SUCCESS(ACTION_TYPES.LOGIN),
+          payload: loginResponse
+        },
+        {
+          type: REQUEST(ACTION_TYPES.GET_SESSION)
+        },
+        {
+          type: SUCCESS(ACTION_TYPES.GET_SESSION),
+          payload: resolvedObject
+        },
+        {
+          type: localeActionTypes.SET_LOCALE,
+          locale: 'zh-cn'
+        }
+      ];
+      await store.dispatch(login('test', 'test')).then(() => expect(store.getActions()).toEqual(expectedActions));
     });
   });
 });

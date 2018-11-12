@@ -9,7 +9,7 @@ import { ICurrentMessage } from 'app/shared/model/current-message.model';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity, deleteEntity } from 'app/entities/current-message/current-message.reducer';
 
-export interface ICurrentMessageDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICurrentMessageDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id?: number }> {}
 
 export class CurrentMessageDeleteDialog extends React.Component<ICurrentMessageDeleteDialogProps> {
   componentDidMount() {

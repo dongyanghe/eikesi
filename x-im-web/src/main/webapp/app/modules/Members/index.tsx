@@ -11,10 +11,10 @@ import helper from 'app/shared/util/helper';
 export interface IProps extends StateProps, DispatchProps { }
 export interface IState {
     user: { //  群信息
-        MemberList: []
+        MemberList: any[]
     };
-    list: [];   //  所有群成员
-    filtered: [];   //  检索后的群成员列表
+    list: any[];   //  所有群成员
+    filtered: any[];   //  检索后的群成员列表
     query: string;
 }
 class Members extends React.Component<IProps, IState> {
@@ -28,6 +28,7 @@ class Members extends React.Component<IProps, IState> {
      */
     componentDidMount() {
         this.setState({
+            ...this.state,
             user: {
                 MemberList: []
             },
@@ -40,12 +41,13 @@ class Members extends React.Component<IProps, IState> {
      * 显示/隐藏用户信息
      */
     toggle = (show = this.props.show, user = this.state.user) => {
-        this.props.memberToogle(show);
+        this.props.memberToogle(show, user);
         this.setState({
             user
         });
         if (show === false) {
             this.setState({
+                ...this.state,
                 filtered: []
             });
             this.messageInputRef.value = '';
@@ -59,12 +61,12 @@ class Members extends React.Component<IProps, IState> {
      * 快速搜索
      */
     search = (query = '') => {
-        // let filtered: [] = [];
+        // let filtered: any[] = [];
         this.setState({
             query
         });
 
-        if (query) {
+        // if (query) {
             // filtered = this.state.list.filter(e => {
             //     return han.letter(e.NickName).toLowerCase().indexOf(han.letter(query.toLocaleLowerCase())) > -1;
             // });
@@ -73,7 +75,7 @@ class Members extends React.Component<IProps, IState> {
             // });
 
             return;
-        }
+        // }
         this.setState({
             filtered: []
         });

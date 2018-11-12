@@ -31,7 +31,7 @@ export default class Suggestion extends Component<IProps> {
                                 })}>
                                 <img src={e.HeadImgUrl} />
                                 <div className="Suggestion-user">
-                                    <p className="Suggestion-username" dangerouslySetInnerHTML={{__html: e.RemarkName || e.NickName}} />
+                                    <p className="Suggestion-username" dangerouslySetInnerHTML={{ __html: e.RemarkName || e.NickName }} />
                                 </div>
                             </div>
                         )

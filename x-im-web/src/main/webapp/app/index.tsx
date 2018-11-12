@@ -11,7 +11,6 @@ import { clearAuthentication } from 'app/shared/reducers/authentication';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import AppComponent from 'app/app';
 import { loadIcons } from 'app/config/icon-loader';
-
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 
 const store = initStore();
@@ -33,6 +32,7 @@ const render = Component =>
           <div>
             {/* If this slows down the app in dev disable it and enable when required  */}
             {devTools}
+            {/* app.ts布局页 */}
             <Component />
           </div>
         </Provider>

@@ -134,7 +134,7 @@ export const batchSendToogle = (isBatchsendShow: boolean) => dispatch =>
     payload: { isBatchsendShow }
   });
 
-export const forwardToogle = (isForwardShow: boolean, selectedMessage: any) => dispatch => {
+export const forwardToogle = (isForwardShow: boolean, selectedMessage: any = {}) => dispatch => {
   dispatch({
     type: ACTION_TYPES_CHAT.UPDATE_SELECTED_MESSAGE,
     payload: { selectedMessage }

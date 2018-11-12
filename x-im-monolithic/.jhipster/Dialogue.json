@@ -1,0 +1,60 @@
+{
+    "name": "Dialogue",
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "javadoc": "对话创建时间",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdId",
+            "javadoc": "对话所属用户id",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "targetId",
+            "javadoc": "会话目标id（可能是用户,可能是群组）",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "targetType",
+            "javadoc": "目标类型 {0: '用户', 1: '群组'}",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 1,
+            "fieldValidateRulesMaxlength": 2
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "javadoc": "一个对话包涵多条当日流通消息",
+            "relationshipName": "currentMessage",
+            "otherEntityName": "currentMessage",
+            "otherEntityRelationshipName": "dialogue"
+        }
+    ],
+    "changelogDate": "20181020063736",
+    "javadoc": "用户对话\n@author hedongyang\n@version 2018-05-15",
+    "entityTableName": "dialogue",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

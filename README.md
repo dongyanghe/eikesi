@@ -63,7 +63,7 @@ JHipster注册表运行后，您可以在Configuration > Cloud Config菜单中�
 ###系统划分
 
 #### im-desktop（桌面端im的electron界面）：
-    请求端口：8001
+    服务端口：8001
 ##### 运行
     ```
     $ npm install
