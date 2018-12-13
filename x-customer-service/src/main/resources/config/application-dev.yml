@@ -29,29 +29,25 @@ eureka:
 spring:
     profiles:
         active: dev
-        include: swagger
+        include:
+            - swagger
+            # Uncomment to activate TLS for the dev profile
+            #- tls
     devtools:
         restart:
             enabled: true
         livereload:
             enabled: false # we use Webpack dev server + BrowserSync for livereload
     jackson:
-        serialization.indent_output: true
-    cloud:
-        stream:
-            kafka:
-                binder:
-                    brokers: localhost
-                    zk-nodes: localhost
-            bindings:
-                output:
-                    destination: topic-jhipster
+        serialization:
+            indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/customerService?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/customerService?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false
         username: root
         password:
         hikari:
+            auto-commit: false
             data-source-properties:
                 cachePrepStmts: true
                 prepStmtCacheSize: 250
@@ -63,21 +59,10 @@ spring:
         show-sql: true
         properties:
             hibernate.id.new_generator_mappings: true
-            hibernate.cache.use_second_level_cache: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-            hibernate.cache.hazelcast.instance_name: customerService
-            hibernate.cache.use_minimal_puts: true
-            hibernate.cache.hazelcast.use_lite_member: true
-    data:
-        elasticsearch:
-            cluster-name:
-            cluster-nodes: localhost:9300
-            properties:
-                path:
-                    logs: target/elasticsearch/log
-                    data: target/elasticsearch/data
     liquibase:
         contexts: dev
     mail:
@@ -89,6 +74,9 @@ spring:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
         cache: false
+    sleuth:
+        sampler:
+            probability: 1 # report 100% of traces
     zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
         base-url: http://localhost:9411
         enabled: false
@@ -96,25 +84,8 @@ spring:
             discovery:
                 enabled: true
 
-# ===================================================================
-# To enable SSL, generate a certificate using:
-# keytool -genkey -alias customerservice -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
-#
-# You can also use Let's Encrypt:
-# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
-#
-# Then, modify the server.ssl properties so your "server" configuration looks like:
-#
-# server:
-#    port: 8443
-#    ssl:
-#        key-store: keystore.p12
-#        key-store-password: <your-password>
-#        key-store-type: PKCS12
-#        key-alias: customerservice
-# ===================================================================
 server:
-    port: 6001
+    port: 6000
 
 # ===================================================================
 # JHipster specific properties
@@ -124,15 +95,7 @@ server:
 
 jhipster:
     http:
-        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
-    cache: # Cache configuration
-        hazelcast: # Hazelcast distributed cache
-            time-to-live-seconds: 3600
-            backup-count: 1
-            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
-                enabled: false
-                update-interval: 3
-                url: http://localhost:8180/mancenter
+        version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
     # CORS is disabled by default on microservices, as you should access them through a gateway.
     # If you want to enable it, please uncomment the configuration below.
     # cors:
@@ -143,17 +106,21 @@ jhipster:
         # allow-credentials: true
         # max-age: 1800
     security:
-        client-authorization:
-            access-token-uri: http://uaaserver/oauth/token
-            token-service-id: uaaserver
-            client-id: internal
-            client-secret: internal
+        authentication:
+            jwt:
+                # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+                base64-secret: M2MwYzg5YTc5ZWUyNDk4NTVjMTA5MDczZTA2MjlkOGVlMzBmOGFlZjVlMzg1MTY5OTQ5MzIxZGNjMzZiNWZhMWI5MzMzNTNmNWMxZmE5OWZhNzJiOWZmMThkYzhkZGZhMWM4MjFhNDdjM2MxY2YwNDZkZjEwOTVjYWQ3NWMzZDU=
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+                token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: customerService@localhost
-        base-url: http://127.0.0.1:6001
+        base-url: http://127.0.0.1:6000
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
+        prometheus:
+            enabled: false #expose metrics via prometheus
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
             report-frequency: 60 # in seconds
@@ -163,17 +130,6 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
-oauth2:
-    signature-verification:
-        public-key-endpoint-uri: http://uaaserver/oauth/token_key
-        #ttl for public keys to verify JWT tokens (in ms)
-        ttl: 3600000
-        #max. rate at which public keys will be fetched (in ms)
-        public-key-refresh-rate-limit: 10000
-    web-client-configuration:
-        #keep in sync with UAA configuration
-        client-id: web_app
-        secret: changeit
 
 # ===================================================================
 # Application specific properties

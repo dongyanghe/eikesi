@@ -12,9 +12,9 @@ ADD entrypoint.sh entrypoint.sh
 RUN chmod 755 entrypoint.sh && chown jhipster:jhipster entrypoint.sh
 USER jhipster
 
-ADD *.war app.war
-
 ENTRYPOINT ["./entrypoint.sh"]
 
-EXPOSE 6001 5701/udp
+EXPOSE 6000
+
+ADD *.war app.war
 

@@ -24,8 +24,8 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
     instance:
-        appname: customerService
-        instanceId: customerService:${spring.application.instance-id:${random.value}}
+        appname: customerservice
+        instanceId: customerservice:${spring.application.instance-id:${random.value}}
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.endpoints.web.base-path}/info
@@ -66,10 +66,10 @@ management:
         web:
             base-path: /management
             exposure:
-                include: ["configprops", "env", "health", "info", "threaddump"]
+                include: ["configprops", "env", "health", "info", "threaddump", "logfile" ]
     endpoint:
         health:
-            show-details: when_authorized
+            show-details: when-authorized
     info:
         git:
             mode: full
@@ -84,6 +84,8 @@ spring:
         name: customerService
     jpa:
         open-in-view: false
+        properties:
+            hibernate.jdbc.time_zone: UTC
         hibernate:
             ddl-auto: none
             naming:
@@ -96,10 +98,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
-security:
-    oauth2:
-        resource:
-            filter-order: 3
 
 server:
     servlet:

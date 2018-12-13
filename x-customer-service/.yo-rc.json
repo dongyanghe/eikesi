@@ -4,72 +4,44 @@
       "packageName": "com.eikesi.customer",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "5.1.0",
+    "jhipsterVersion": "5.7.0",
     "applicationType": "microservice",
     "baseName": "customerService",
     "packageName": "com.eikesi.customer",
     "packageFolder": "com/eikesi/customer",
-    "serverPort": "6001",
-    "authenticationType": "uaa",
-    "uaaBaseName": "uaaServer",
-    "cacheProvider": "hazelcast",
-    "enableHibernateCache": true,
+    "serverPort": "6000",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
     "prodDatabaseType": "mysql",
-    "searchEngine": "elasticsearch",
-    "messageBroker": "kafka",
+    "searchEngine": false,
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "eb933eb676e123d6c741dc03ebc6fb4de5a04d24",
-    "enableTranslation": true,
-    "testFrameworks": [
-      "gatling"
-    ],
+    "jwtSecretKey": "M2MwYzg5YTc5ZWUyNDk4NTVjMTA5MDczZTA2MjlkOGVlMzBmOGFlZjVlMzg1MTY5OTQ5MzIxZGNjMzZiNWZhMWI5MzMzNTNmNWMxZmE5OWZhNzJiOWZmMThkYzhkZGZhMWM4MjFhNDdjM2MxY2YwNDZkZjEwOTVjYWQ3NWMzZDU=",
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
     "otherModules": [
       {
-        "name": "generator-jhipster-nav-element",
-        "version": "2.0.2"
-      },
-      {
-        "name": "generator-jhipster-docker",
-        "version": "2.5.0"
-      },
-      {
-        "name": "generator-jhipster-audit-helper",
-        "version": "1.0.3"
-      },
-      {
-        "name": "generator-jhipster-uaa-security-authority",
-        "version": "1.0.1"
-      },
-      {
-        "name": "generator-jhipster-obfuscation-at-rest",
-        "version": "0.3.0"
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
       },
       {
         "name": "generator-jhipster-feign-client",
         "version": "1.0.6"
-      },
-      {
-        "name": "generator-jhipster-cockroachdb",
-        "version": "0.0.10"
-      },
-      {
-        "name": "generator-jhipster-file2url",
-        "version": "0.0.0"
       }
     ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
     "nativeLanguage": "zh-cn",
     "languages": [
       "zh-cn",
       "zh-tw",
       "en"
     ],
-    "clientPackageManager": "yarn",
     "skipClient": true,
     "skipUserManagement": true
   }

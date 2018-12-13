@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -23,11 +22,9 @@ public class LiquibaseConfiguration {
 
     private final Environment env;
 
-    private final CacheManager cacheManager;
 
-    public LiquibaseConfiguration(Environment env, CacheManager cacheManager) {
+    public LiquibaseConfiguration(Environment env) {
         this.env = env;
-        this.cacheManager = cacheManager;
     }
 
     @Bean
@@ -41,6 +38,7 @@ public class LiquibaseConfiguration {
         liquibase.setContexts(liquibaseProperties.getContexts());
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
+        liquibase.setChangeLogParameters(liquibaseProperties.getParameters());
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE)) {
             liquibase.setShouldRun(false);
         } else {

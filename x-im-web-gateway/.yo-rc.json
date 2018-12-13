@@ -9,7 +9,7 @@
     "baseName": "imWebGateway",
     "packageName": "com.eikesi.web",
     "packageFolder": "com/eikesi/web",
-    "serverPort": "6000",
+    "serverPort": "8000",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
     "enableHibernateCache": true,

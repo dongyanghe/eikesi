@@ -8,15 +8,9 @@
     "node_modules"
   ],
   "devDependencies": {
-    "generator-jhipster-nav-element": "2.0.2",
-    "generator-jhipster-docker": "2.5.0",
-    "generator-jhipster-audit-helper": "1.0.3",
-    "generator-jhipster-uaa-security-authority": "1.0.1",
-    "generator-jhipster-obfuscation-at-rest": "0.3.0",
+    "generator-jhipster-swagger-cli": "3.0.1",
     "generator-jhipster-feign-client": "1.0.6",
-    "generator-jhipster-cockroachdb": "0.0.10",
-    "generator-jhipster-file2url": "0.0.0",
-    "generator-jhipster": "5.1.0"
+    "generator-jhipster": "5.7.0"
   },
   "engines": {
     "node": ">=8.9.0"
