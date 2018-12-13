@@ -10,7 +10,7 @@ services:
             - SPRING_DATASOURCE_URL=jdbc:mysql://imwebgateway-mysql:3306/imwebgateway?useUnicode=true&characterEncoding=utf8&useSSL=false
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
         ports:
-            - 6000:6000
+            - 8000:8000
     imwebgateway-mysql:
         extends:
             file: mysql.yml

@@ -89,7 +89,7 @@ spring:
                 enabled: true
 
 server:
-    port: 6000
+    port: 8000
 
 # ===================================================================
 # JHipster specific properties
@@ -133,7 +133,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: imWebGateway@localhost
-        base-url: http://127.0.0.1:6000
+        base-url: http://127.0.0.1:8000
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
