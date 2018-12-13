@@ -24,8 +24,8 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
     instance:
-        appname: imWebGateway
-        instanceId: imWebGateway:${spring.application.instance-id:${random.value}}
+        appname: imwebgateway
+        instanceId: imwebgateway:${spring.application.instance-id:${random.value}}
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.endpoints.web.base-path}/info
@@ -42,6 +42,7 @@ ribbon:
         enabled: true
 # See http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
 zuul: # those values must be configured depending on the application specific needs
+    sensitive-headers: Cookie,Set-Cookie #see https://github.com/spring-cloud/spring-cloud-netflix/issues/3126
     host:
         max-total-connections: 1000
         max-per-route-connections: 100
@@ -62,10 +63,10 @@ management:
         web:
             base-path: /management
             exposure:
-                include: ["configprops", "env", "health", "info", "threaddump"]
+                include: ["configprops", "env", "health", "info", "threaddump", "logfile" ]
     endpoint:
         health:
-            show-details: when_authorized
+            show-details: when-authorized
     info:
         git:
             mode: full
@@ -80,6 +81,8 @@ spring:
         name: imWebGateway
     jpa:
         open-in-view: false
+        properties:
+            hibernate.jdbc.time_zone: UTC
         hibernate:
             ddl-auto: none
             naming:
@@ -92,10 +95,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
-security:
-    oauth2:
-        resource:
-            filter-order: 3
 
 server:
     servlet:

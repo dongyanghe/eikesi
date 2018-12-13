@@ -1,68 +1,41 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.im.web",
+      "packageName": "com.eikesi.web",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "5.1.0",
+    "jhipsterVersion": "5.7.0",
     "applicationType": "gateway",
     "baseName": "imWebGateway",
-    "packageName": "com.eikesi.im.web",
-    "packageFolder": "com/eikesi/im/web",
-    "serverPort": "8005",
-    "authenticationType": "uaa",
-    "uaaBaseName": "uaaServer",
+    "packageName": "com.eikesi.web",
+    "packageFolder": "com/eikesi/web",
+    "serverPort": "6000",
+    "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
     "enableHibernateCache": true,
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
     "prodDatabaseType": "mysql",
-    "searchEngine": "elasticsearch",
-    "messageBroker": "kafka",
+    "searchEngine": false,
+    "messageBroker": false,
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
+    "jwtSecretKey": "MzkxZjBkYzA0Y2U2YmQ5M2QxMjhjZWI4MTNiMzA3Yjk3NjQxMDBlNWFjNWY4YjlhMGU5NmE1MTY0Njc1MzY3ZmIyZjEyYjhmZmUzNmFlYTIxNGY5N2U1Zjk1ZWQwMzlkODBkZmNmNTc3ZTc3YmRiMTZkZDM0YWNlNmZhZGY3ODU=",
     "clientFramework": "react",
     "useSass": true,
-    "clientPackageManager": "yarn",
-    "testFrameworks": [
-      "gatling",
-      "protractor"
-    ],
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
     "otherModules": [
       {
-        "name": "generator-jhipster-nav-element",
-        "version": "2.0.2"
-      },
-      {
-        "name": "generator-jhipster-docker",
-        "version": "2.5.0"
-      },
-      {
-        "name": "generator-jhipster-audit-helper",
-        "version": "1.0.3"
-      },
-      {
-        "name": "generator-jhipster-uaa-security-authority",
-        "version": "1.0.1"
-      },
-      {
-        "name": "generator-jhipster-obfuscation-at-rest",
-        "version": "0.3.0"
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
       },
       {
         "name": "generator-jhipster-feign-client",
         "version": "1.0.6"
-      },
-      {
-        "name": "generator-jhipster-cockroachdb",
-        "version": "0.0.10"
-      },
-      {
-        "name": "generator-jhipster-file2url",
-        "version": "0.0.0"
       }
     ],
     "enableTranslation": true,

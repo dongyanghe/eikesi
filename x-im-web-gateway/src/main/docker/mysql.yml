@@ -6,7 +6,7 @@ services:
         #     - ~/volumes/jhipster/imWebGateway/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
-            - MYSQL_PASSWORD=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=imwebgateway
         ports:
             - 3306:3306
