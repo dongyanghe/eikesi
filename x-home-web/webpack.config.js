@@ -21,9 +21,15 @@ module.exports = {
         //     'lodash'
         // ],
 		lodash: 'lodash',
-		jquery: 'jquery',
+        index: path.join(dirApp, 'index'),
         // bundle: path.join(dirApp, 'index'), //  每个依赖最后的输出位置
     },
+	output: {
+		path:path.resolve(__dirname, 'dist'),
+		// 打包多出口文件
+		// 生成 index.bundle.js  jquery.bundle.js
+		filename: './js/[name].bundle-[hash].js'
+	},
     resolve: {
         modules: [
             dirNode,
@@ -41,8 +47,8 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
 		}),
-        new HtmlWebpackPlugin({
-			chunks: ["jquery"],  // 按需引入对应名字的js文件
+        new HtmlWebpackPlugin({     //  依据一个简单的html模板，生成一个自动引用你打包后的JS文件的新index.html
+			chunks: ["index"],  // 按需引入对应名字的js文件
             template: path.join(__dirname, 'index.ejs'),
             title: appHtmlTitle
         })
@@ -51,9 +57,10 @@ module.exports = {
         rules: [
             // BABEL
             {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /(node_modules)/,
+                test: /\.js$/,  //  匹配loaders所处理文件的拓展名的正则表达式
+                loader: 'babel-loader', //  插件名称
+                // include: 正则表达式, 必须包括的文件/文件夹
+                exclude: /(node_modules)/,  //  排除的文件/文件夹
                 options: {
                     compact: true
                 }
@@ -63,11 +70,13 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    'style-loader', //  将所有的计算后的样式加入页面中
                     {
-                        loader: 'css-loader',
+                        loader: 'css-loader',   //  能够使用类似@import 和 url(...)的方法实现 require()的功能
                         options: {
-                            sourceMap: IS_DEV
+                            sourceMap: IS_DEV,
+                            // modules: true, // 指定启用css modules划分，防止类名冲突
+                            // localIdentName: '[name]__[local]--[hash:base64:5]' // 指定css的类名格式
                         }
                     },
                 ]
@@ -81,7 +90,9 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: IS_DEV
+                            sourceMap: IS_DEV,
+                            // modules: true, // 指定启用css modules划分，防止类名冲突
+                            // localIdentName: '[name]__[local]--[hash:base64:5]' // 指定css的类名格式
                         }
                     },
                     {
