@@ -14,9 +14,14 @@
     "url": "https://github.com/dongyanghe/eikesi.git"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^4.6.0",
     "expose-loader": "^0.7.5",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-withimg-loader": "^0.1.16",
     "jquery": "1.9.1",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
@@ -33,6 +38,9 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
+    "ts-loader": "^5.3.2",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2",
     "url-loader": "1.1.2",
     "webpack": "4.28.2",
     "webpack-cli": "3.1.2",

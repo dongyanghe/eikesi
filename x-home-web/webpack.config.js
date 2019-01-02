@@ -1,12 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const glob = require("glob");
+//消除冗余的css
+const purifyCssWebpack = require("purifycss-webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+// const extractTextPlugin = require("extract-text-webpack-plugin");
+//静态资源输出
+const copyWebpackPlugin = require("copy-webpack-plugin");
 // Is the current build a development build
 const IS_DEV = (process.env.NODE_ENV === 'dev');
 
 const dirNode = 'node_modules';
-const dirApp = path.join(__dirname, 'app');
+const dirSrc = path.join(__dirname, 'src');
 const dirAssets = path.join(__dirname, 'assets');
 
 const appHtmlTitle = 'Eikesi官网';
@@ -15,25 +22,29 @@ const appHtmlTitle = 'Eikesi官网';
  * Webpack 基本配置
  */
 module.exports = {
+    // target: 'web',  告知 webpack 为目标(target)指定一个环境，默认是 'web'，可省略
     // mode: 'production',
     entry: {    //  入口
         // vendor: [
         //     'lodash'
         // ],
-		lodash: 'lodash',
-        index: path.join(dirApp, 'index'),
-        // bundle: path.join(dirApp, 'index'), //  每个依赖最后的输出位置
+        lodash: 'lodash',
+        jquery: 'jquery',   //  通过HtmlWebpackPlugin.chunks导入jquery
+        index: path.join(dirSrc, 'index'),
     },
-	output: {
-		path:path.resolve(__dirname, 'dist'),
-		// 打包多出口文件
-		// 生成 index.bundle.js  jquery.bundle.js
-		filename: './js/[name].bundle-[hash].js'
-	},
+	// output: {
+	// 	path:path.resolve(__dirname, 'dist'),
+	// 	// 打包多出口文件
+	// 	// 生成 index.bundle.js  jquery.bundle.js
+	// 	filename: './js/[name].bundle-[hash].js'
+	// },
     resolve: {
+        alias: {    //  导入JS插件
+            jquery: path.resolve(__dirname, "src/vendor/jquery-1.9.1.min.js"),
+        },
         modules: [
             dirNode,
-            dirApp,
+            dirSrc,
             dirAssets
         ]
     },
@@ -41,31 +52,33 @@ module.exports = {
         new webpack.DefinePlugin({
             IS_DEV: IS_DEV
         }),
-		// 全局暴露统一入口
-		new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
+        // 消除冗余的css代码
+		new purifyCssWebpack({
+			// glob为扫描模块，使用其同步方法（请谨慎使用异步方法）
+			paths: glob.sync(path.join(__dirname, "src/*.html"))
 		}),
+		// 全局暴露统一入口
+		// new webpack.ProvidePlugin({
+        //     $: 'jquery',
+        //     jQuery: 'jquery',
+        //     'window.jQuery': 'jquery',
+		// }),
         new HtmlWebpackPlugin({     //  依据一个简单的html模板，生成一个自动引用你打包后的JS文件的新index.html
-			chunks: ["index"],  // 按需引入对应名字的js文件
-            template: path.join(__dirname, 'index.ejs'),
-            title: appHtmlTitle
+			chunks: ["jquery","index"],  // 按需引入对应名字的js文件
+            template: path.join(__dirname, 'src/index.ejs'),
+            title: appHtmlTitle,
+            minify: {
+                removeAttributeQuotes: true // 移除属性的引号
+            }
         })
     ],
     module: {   //  使用对应loader进行转换某个或某些文件
         rules: [
-            // BABEL
             {
-                test: /\.js$/,  //  匹配loaders所处理文件的拓展名的正则表达式
-                loader: 'babel-loader', //  插件名称
-                // include: 正则表达式, 必须包括的文件/文件夹
-                exclude: /(node_modules)/,  //  排除的文件/文件夹
-                options: {
-                    compact: true
-                }
+              test: /\.ts?$/,
+              use: 'ts-loader',
+              exclude: /node_modules/
             },
-
             // STYLES
             {
                 test: /\.css$/,
@@ -99,15 +112,19 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: IS_DEV,
-                            includePaths: [dirAssets]
+                            // includePaths: [dirAssets]
                         }
                     }
                 ]
             },
-
+			{
+				test: /\.(html|htm|ejs)$/,
+				// html中的img标签
+				use: ["html-withimg-loader"]
+			},
             // IMAGES
             {
-                test: /\.(jpe?g|png|gif)$/,
+                test: /\.(jpe?g|png|gif|svg|woff2?|ttf|ttc|eot)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]'
