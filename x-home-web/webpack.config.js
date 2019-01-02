@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const path = require('path');
-const webpack = require('webpack');
 const glob = require("glob");
 //消除冗余的css
 const purifyCssWebpack = require("purifycss-webpack");
@@ -65,7 +63,7 @@ module.exports = {
 		// }),
         new HtmlWebpackPlugin({     //  依据一个简单的html模板，生成一个自动引用你打包后的JS文件的新index.html
 			chunks: ["jquery","index"],  // 按需引入对应名字的js文件
-            template: path.join(__dirname, 'src/index.ejs'),
+            template: path.join(__dirname, 'src/index.html'),
             title: appHtmlTitle,
             minify: {
                 removeAttributeQuotes: true // 移除属性的引号
