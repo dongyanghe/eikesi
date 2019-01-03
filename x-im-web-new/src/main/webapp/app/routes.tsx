@@ -9,6 +9,7 @@ import PasswordResetInit from 'app/modules/account/password-reset/init/password-
 import PasswordResetFinish from 'app/modules/account/password-reset/finish/password-reset-finish';
 import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
+import Contacts from 'app/modules/contacts/contacts';
 import Entities from 'app/entities';
 import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
@@ -30,6 +31,7 @@ const Routes = () => (
   <div className="view-routes">
     <ErrorBoundaryRoute path="/login" component={Login} />
     <Switch>
+      <ErrorBoundaryRoute path="/contacts" component={Contacts} />
       <ErrorBoundaryRoute path="/logout" component={Logout} />
       <ErrorBoundaryRoute path="/register" component={Register} />
       <ErrorBoundaryRoute path="/activate/:key?" component={Activate} />
