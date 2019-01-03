@@ -1,0 +1,45 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.eikesi.im",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "5.7.2",
+    "applicationType": "gateway",
+    "baseName": "imWeb",
+    "packageName": "com.eikesi.im",
+    "packageFolder": "com/eikesi/im",
+    "serverPort": "8000",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MTQyOGM0NzI1MjFhZjU5ZGQ4OTliNmRhOTc0OWMzMWYxMTJiOWNhNDQ1MmE4ZjY4OWE3NDQ1YTUzOGM0NWY4MmQwZWRjNzc3NzJhOGJjZDFhZGMwY2U0YzkwYjVjN2FlYTNlNDIzOTM3ZjYxNWEyNDlmY2YxMzY3MjllYTQzMmY=",
+    "clientFramework": "react",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
+      },
+      {
+        "name": "generator-jhipster-feign-client",
+        "version": "1.0.6"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "zh-cn",
+    "languages": ["zh-cn", "zh-tw", "en"]
+  }
+}
