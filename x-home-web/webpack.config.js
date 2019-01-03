@@ -37,13 +37,18 @@ module.exports = {
 	// 	filename: './js/[name].bundle-[hash].js'
 	// },
     resolve: {
+        extensions: [
+          '.js', '.jsx', '.ts', '.tsx', '.json'
+        ],
         alias: {    //  导入JS插件
             jquery: path.resolve(__dirname, "src/vendor/jquery-1.9.1.min.js"),
+            app: path.resolve(__dirname, "src/"),
         },
         modules: [
             dirNode,
             dirSrc,
-            dirAssets
+            dirAssets,
+            'node_modules'
         ]
     },
     plugins: [  //  用来处理各种各样的任务,包括打包优化和压缩、重新定义环境中的变量
