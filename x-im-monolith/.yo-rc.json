@@ -1,0 +1,55 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.eikesi.im",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "5.8.1",
+    "applicationType": "monolith",
+    "baseName": "imMonolith",
+    "packageName": "com.eikesi.im",
+    "packageFolder": "com/eikesi/im",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "ZTE3ZTM0ZDNlNGZjYjhmZjIyYTdmMzliMTU0ODdiZjdkNjRjOWU5MGFlNGEzMTRhMzRjNmFlM2FkOWI1MzE2Yzc3MWExMmZkMTRkZmM3NTlhODAzNWQxMjY0N2RjN2FjYWFhODUwN2RiMDUwNDJkYTVlNTQwMjY0OGQ0YTlkZGY=",
+    "clientFramework": "react",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-docker",
+        "version": "2.5.0"
+      },
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
+      },
+      {
+        "name": "generator-jhipster-audit-helper",
+        "version": "1.0.3"
+      },
+      {
+        "name": "generator-jhipster-file2url",
+        "version": "0.0.0"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "zh-cn",
+    "languages": ["zh-cn", "zh-tw", "en"]
+  }
+}
