@@ -8,16 +8,17 @@
     <modules>
         <module>jhipster-registry</module>
         <!--manage-->
-        <module>x-manage-gateway</module>
-        <module>x-connect-service</module>
+        <module>manage-gateway</module>
+        <module>im-gateway</module>
+        <module>demo-gateway</module>
         <!--im-->
-        <module>x-im-desktop-gateway</module>
-        <module>x-im-service</module>
-        <module>x-customer-service</module>
+        <module>im-service</module>
+        <module>customer-service</module>
+        <module>connect-service</module>
         <!--demo-->
-        <module>x-demo-hybrid-gateway</module>
-        <module>x-demo-abc-service</module>
-        <module>x-demo-de-service</module>
+        <module>demo-hybrid-gateway</module>
+        <module>demo-abc-service</module>
+        <module>demo-de-service</module>
         <!--mpush-->
         <module>mp-alloc</module>
         <module>mp-mpns</module>
