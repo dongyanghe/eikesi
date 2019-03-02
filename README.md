@@ -67,29 +67,33 @@ JHipster注册表运行后，您可以在前端页面的Configuration > Cloud Co
  
 
 ## 系统模块设计
-
 ### 系统划分
-
-#### im-desktop（桌面端im的electron界面）：
-    服务端口：8001
-
 #### jhipster-registry（微服务注册服务、配置服务）：
     服务端口：8761
 
-#### im-desktop-gateway（桌面端im应用网关）：
-    服务端口：8001
-
-#### manage-gateway（web端后台管理系统网关）：
-    服务端口：8000
-
-#### uaa-server（账号安全服务）：
+#### uaa-server（用户认证服务）：
     服务端口：9999
 
-#### im-server(im服务)：
-    服务端口：6002
+#### im-web（通讯系统React电脑端页面）：
+    页面端口：4000
+    
+#### customer-gateway（客户系统总网关）：
+    服务端口：8000
 
 #### customer-server(客户服务)：
-    服务端口：6001
+    服务端口：6000
+    
+#### message-server(message服务)：
+    服务端口：6010
+
+
+@wait
+#### manage-web（后台管理系统Angular电脑端页面）：
+    页面端口：4200
+@wait
+#### manage-gateway（后台管理系统网关）：
+    服务端口：8010
+
 
 技术栈
 ======
