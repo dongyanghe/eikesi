@@ -1,23 +1,27 @@
 {
-  "name": "uaa-server",
-  "version": "0.0.0",
-  "description": "Description for uaaServer",
-  "private": true,
-  "license": "UNLICENSED",
-  "cacheDirectories": [
-    "node_modules"
-  ],
-  "devDependencies": {
-    "generator-jhipster-nav-element": "2.0.2",
-    "generator-jhipster-docker": "2.5.0",
-    "generator-jhipster-audit-helper": "1.0.3",
-    "generator-jhipster-uaa-security-authority": "1.0.1",
-    "generator-jhipster-feign-client": "1.0.6",
-    "generator-jhipster-cockroachdb": "0.0.10",
-    "generator-jhipster-file2url": "0.0.0",
-    "generator-jhipster": "5.1.0"
-  },
-  "engines": {
-    "node": ">=8.9.0"
-  }
+    "name": "uaa-server",
+    "version": "0.0.0",
+    "description": "Description for uaaServer",
+    "private": true,
+    "license": "UNLICENSED",
+    "cacheDirectories": [
+        "node_modules"
+    ],
+    "devDependencies": {
+        "generator-jhipster-swagger-cli": "3.0.1",
+        "generator-jhipster-spring-cloud-stream": "1.0.0",
+        "generator-jhipster-audit-helper": "1.0.3",
+        "generator-jhipster-quota": "1.0.3",
+        "generator-jhipster-uaa-security-authority": "1.0.1",
+        "generator-jhipster-administration-database": "1.0.4",
+        "generator-jhipster-database-backup": "1.0.7",
+        "generator-jhipster-translation": "1.0.4",
+        "generator-jhipster-feign-client": "1.0.6",
+        "generator-jhipster-aeropost": "1.10.0",
+        "generator-jhipster-file2url": "0.0.0",
+        "generator-jhipster": "5.8.2"
+    },
+    "engines": {
+        "node": ">=8.9.0"
+    }
 }
