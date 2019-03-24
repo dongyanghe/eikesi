@@ -7,16 +7,16 @@
     <packaging>pom</packaging>
     <modules>
         <module>jhipster-registry</module>
+        <module>uaa-server</module>
         <!--manage-->
         <module>manage-gateway</module>
         <module>im-gateway</module>
-        <module>demo-gateway</module>
+        <module>customer-gateway</module>
         <!--im-->
-        <module>im-service</module>
-        <module>customer-service</module>
-        <module>connect-service</module>
+        <module>im-message-server</module>
+        <module>im-customer-server</module>
         <!--demo-->
-        <module>demo-hybrid-gateway</module>
+        <module>demo-gateway</module>
         <module>demo-abc-service</module>
         <module>demo-de-service</module>
         <!--mpush-->
