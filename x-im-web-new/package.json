@@ -128,7 +128,11 @@
     "webpack-notifier": "1.7.0",
     "workbox-webpack-plugin": "3.4.1",
     "write-file-webpack-plugin": "4.3.2",
-    "xml2js": "0.4.19"
+    "xml2js": "0.4.19",
+    "browser-md5-file": "^1.1.1",
+    "classnames": "^2.2.6",
+    "delegate": "^3.2.0",
+    "han": "^0.0.7"
   },
   "resolutions": {
     "@types/react": "16.4.12"
@@ -163,8 +167,8 @@
     "webpack:prod:main": "npm run webpack -- --config webpack/webpack.prod.js --profile",
     "webpack:prod": "npm run cleanup && npm run webpack:prod:main",
     "webpack:test": "npm run test",
-    "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+    "webpack-dev-server": "node --max_old_space_size=14096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "webpack": "node --max_old_space_size=14096 node_modules/webpack/bin/webpack.js"
   },
   "jestSonar": {
     "reportPath": "target/test-results/jest",
