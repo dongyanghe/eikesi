@@ -17,7 +17,16 @@ registry=https://registry.npm.taobao.org
 运行npm rebuild node-sass，再重新npm update
 
 # 后端错误
-## 启动项目报：[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.0.8.RELEASE:run (default-cli) on project uaa-server: Could not exec java: Cannot run program "C:\Java\jdk1.8\jre\bin\java.exe": CreateProcess error=206, 文件名或扩展名太长。 -> [Help 1]
+## 启动项目报：[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.0.8.RELEASE:run (default-cli) on project XXX: Could not exec java: Cannot run program "C:\Java\jdk1.8\jre\bin\java.exe": CreateProcess error=206, 文件名或扩展名太长。
+反编译之后的路径太长，window系统的命令工具不支持长路径
+1.將maven仓库的路径改短，直接放在磁盘跟目录上（我改短后就可以运行了）
+2.idea中的workspace.xml添加配置：（未必有效）
+```xml
+  <component name="PropertiesComponent">
+<!--  此处添加-->
+    <property name="dynamic.classpath" value="true" />
+  </component>
+```
 ### 
 # git错误
 ## soucetree无法提交本地仓库——pre-commit hook failed (add --no-verify to bypass)：
