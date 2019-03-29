@@ -593,7 +593,7 @@
                         <url>jdbc:mysql://localhost:3306/imMessageServer</url>
                         <defaultSchemaName>imMessageServer</defaultSchemaName>
                         <username>root</username>
-                        <password></password>
+                        <password>123456</password>
                         <referenceUrl>hibernate:spring:com.eikesi.im.message.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>

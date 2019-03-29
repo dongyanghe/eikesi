@@ -563,10 +563,10 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/demo.abcService</url>
-                    <defaultSchemaName>demo.abcService</defaultSchemaName>
+                    <url>jdbc:mysql://localhost:3306/demoABCServer</url>
+                    <defaultSchemaName>demoABCServer</defaultSchemaName>
                     <username>root</username>
-                    <password></password>
+                    <password>123456</password>
                     <referenceUrl>hibernate:spring:com.eikesi.demoABC.service.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
