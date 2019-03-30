@@ -21,6 +21,11 @@ registry=https://registry.npm.taobao.org
 反编译之后的路径太长，window系统的命令工具不支持长路径
 1.將maven仓库的路径改短，直接放在磁盘跟目录上（我改短后就可以运行了）
 2.idea中的workspace.xml添加配置：（未必有效）
+## kafka启动报错：找不到或无法加载主类 Files\java\jdk-9.0.1\lib;C:\Program
+在kafka安装目录中找到bin\windows目录中的kafka-run-class.bat为%CLASSPATH%加上双引号(可用Matlab打开，并进行搜索)
+
+   修改前：setCOMMAND=%JAVA%%KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS%%KAFKA_LOG4J_OPTS% -cp%CLASSPATH% %KAFKA_OPTS% %*   
+   修改后：SetCOMMAND=%JAVA%%KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS%%KAFKA_LOG4J_OPTS% -cp"%CLASSPATH%"%KAFKA_OPTS% %*
 ```xml
   <component name="PropertiesComponent">
 <!--  此处添加-->

@@ -13,7 +13,7 @@
 1. [zookeeper和mpush的安装教程](https://github.com/mywiki/mpush-doc/blob/master/3%E5%AE%89%E8%A3%85zookeeper.md)
 ：window系统下zookeeper是要把zoo_sample.cfg改为zoo.cfg,不然启动会一闪而过
 
-1. [kafka的安装教程](https://blog.csdn.net/tianmanchn/article/details/78943147)
+1. [kafka和zookeeper、Java JDK的安装教程](https://blog.csdn.net/tianmanchn/article/details/78943147)
 
 1. [Jhipster注册中心](https://github.com/jhipster/jhipster-registry)：本项目已自带，如果你需要下载新版请注意版本发布说明里面的兼容问题。
 1. [Nodejs](http://nodejs.cn/)：请下载LTS版本，nodejs自带npm，建议运行npm i cnpm -g安装淘宝的镜像来代替npm，或者使用yarn。
@@ -31,13 +31,13 @@ gateway和service都会自动注册到jhipster-registry里面，这样gateway就
 JHipster注册表运行后，您可以在前端页面的Configuration > Cloud Config菜单中检查其配置。请注意，如果您无法登录(网关无法访问其他服务 )，可能是因为JWT签名密钥未正确设置。
 - 注意修改数据库连接账号名和密码、库名
 #### 运行：
-##### 后端各服务启动（如果您不了解系统的运作，请务必按顺序全部逐一启动）：
+##### 后端各服务启动（如果您不了解系统的运作，请务必按顺序全部以管理员身份运行cmd逐一启动）：
 1. 进入项目根目录使用./mvnw（window使用mvn命令），启动jhipster-registry服务，这是启动基于eureka的服务注册中心。
 1. 进入zookeeper的bin目录使用zkServer start(window使用zkServer)命令启动zookeeper，这是启动基于zookeeper的服务注册中心。
 1. 进入kafka根目录使bin/kafka-server-start.sh config/server.properties（window使用.\bin\windows\kafka-server-start.bat .\config\server.properties）启动kafka。这是启动分布式发布订阅消息服务。
 1. 进入Redis根目录使用bin/redis-server conf/redis.conf(window使用redis-server.exe redis.windows.conf)命令启动Redis,
 这是启动数据存储和消息队列服务。
-1. 进入elasticsearch根目录使用./bin/elasticsearch (window使用./bin/elasticsearch.bat )命令启动Redis,
+1. 进入elasticsearch根目录使用./bin/elasticsearch (window使用./bin/elasticsearch.bat )命令启动elasticsearch,
 这是启动分布式数据检索服务。
 1. 进入mpushRelease（根据mpush源码使用mvn clean package -Pzip,pub命令构建后解压得出,也可直接取本项目跟目录的target,需先修改配置）
 的bin目录使用java -Dmp.conf=mpush绝对路径\conf\mpush.conf -jar bootstrap.jar命令启动mpush服务，这是启动消息通讯服务。
