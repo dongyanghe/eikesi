@@ -9,7 +9,7 @@ import classnames from 'classnames';
 // import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import SearchBar from 'app/modules/home/SearchBar';
-import Chats from 'app/modules/home/Chats';
+// import Chats from 'app/modules/home/Chats';
 import ChatContent from 'app/modules/home/ChatContent';
 import { newChatToogle } from 'app/shared/reducers/app';
 import { toggleConversation } from 'app/shared/reducers/chat';
@@ -29,7 +29,7 @@ export class Home extends React.Component<IHomeProp> {
           })}>
               <div className={'left'}>
                   <SearchBar />
-                  <Chats />
+                  {/* <Chats /> */}
 
                   {this.props.showRedIcon && (
                       <div className={'addChat'} onClick={this.props.newChatToogle(true)}>

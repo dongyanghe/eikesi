@@ -7,7 +7,9 @@ import errorMiddleware from './error-middleware';
 import notificationMiddleware from './notification-middleware';
 import loggerMiddleware from './logger-middleware';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
-
+// if (!process.env.NODE_ENV) {
+//   process.env.NODE_ENV = 'development';
+// }
 const defaultMiddlewares = [
   thunkMiddleware,
   errorMiddleware,
@@ -17,7 +19,8 @@ const defaultMiddlewares = [
   loggerMiddleware
 ];
 const composedMiddlewares = middlewares =>
-  process.env.NODE_ENV === 'development'
+// process.env.NODE_ENV === 'development'
+  true
     ? compose(
         applyMiddleware(...defaultMiddlewares, ...middlewares),
         DevTools.instrument()

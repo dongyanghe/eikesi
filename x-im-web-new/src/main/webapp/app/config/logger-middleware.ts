@@ -1,5 +1,6 @@
 export default () => next => action => {
-  if (process.env.NODE_ENV !== 'production') {
+  // process.env.NODE_ENV !== 'production'
+  if (true) {
     const { type, payload, meta } = action;
 
     console.groupCollapsed(type);

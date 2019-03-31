@@ -21,8 +21,9 @@ export default () => next => action => {
    * The error middleware serves to dispatch the initial pending promise to
    * the promise middleware, but adds a `catch`.
    * It need not run in production
+   * process.env.NODE_ENV === 'development'
    */
-  if (process.env.NODE_ENV === 'development') {
+  if (true) {
     // Dispatch initial pending promise, but catch any errors
     return next(action).catch(error => {
       console.error(`${action.type} caught at middleware with reason: ${JSON.stringify(error.message)}.`);

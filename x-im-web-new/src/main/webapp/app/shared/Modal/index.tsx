@@ -101,7 +101,7 @@ class Modal extends React.Component<IModalProps> {
 
     handleEscKey(e) {
         if (e.keyCode === 27 && this.props.show) {
-            this.props.onCancel();
+            this.props.onCancel(null);
         }
     }
 

@@ -158,8 +158,11 @@ export const addFriendToogle = (isAddFriendShow: boolean, member: any) => dispat
   });
 };
 
-  export const updateMember = (member: any) => dispatch =>
-  dispatch({
-    type: ACTION_TYPES.UPDATE_MEMBER,
-    payload: { member }
-  });
+  export const updateMember = (member: any) => dispatch => {
+    window.console.log('member：');
+    window.console.log(member);
+    dispatch({
+      type: ACTION_TYPES.UPDATE_MEMBER,
+      payload: { member }
+    });
+  };
