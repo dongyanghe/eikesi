@@ -14,7 +14,7 @@ export const NavDropdown = props => (
       <span>{props.name}</span>
     </DropdownToggle>
     <DropdownMenu right style={props.style}>
-      {props.children}
+      {props.children || ''}
     </DropdownMenu>
   </UncontrolledDropdown>
 );

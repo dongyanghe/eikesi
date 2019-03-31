@@ -12,6 +12,16 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+import imagePasteConfirm, {ImagePasteConfirmState} from "app/shared/reducers/imagePasteConfirm";
+import historyMessage, {HistoryMessageState} from "app/shared/reducers/history-message.reducer";
+import currentMessage, {CurrentMessageState} from "app/shared/reducers/current-message.reducer";
+import dialogue, {DialogueState} from "app/shared/reducers/dialogue.reducer";
+import customerRelation, {CustomerRelationState} from "app/shared/reducers/customer-relation.reducer";
+import flockRelation, {FlockRelationState} from "app/shared/reducers/flock-relation.reducer";
+import customerFlock, {CustomerFlockState} from "app/shared/reducers/customer-flock.reducer";
+import customer, {CustomerState} from "app/shared/reducers/customer.reducer";
+import snackbar, {SnackbarState} from "app/shared/reducers/snackbar";
+import chat, {ChatState} from "app/shared/reducers/chat";
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -25,6 +35,16 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+    readonly imagePasteConfirm: ImagePasteConfirmState;
+    readonly historyMessage: HistoryMessageState;
+    readonly currentMessage: CurrentMessageState;
+    readonly dialogue: DialogueState;
+    readonly customerRelation: CustomerRelationState;
+    readonly flockRelation: FlockRelationState;
+    readonly customerFlock: CustomerFlockState;
+    readonly customer: CustomerState;
+    readonly snackbar: SnackbarState;
+    readonly chat: ChatState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -40,6 +60,16 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+    imagePasteConfirm,
+    historyMessage,
+    currentMessage,
+    dialogue,
+    customerRelation,
+    flockRelation,
+    customerFlock,
+    customer,
+    snackbar,
+    chat,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

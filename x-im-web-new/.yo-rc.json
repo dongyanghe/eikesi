@@ -9,7 +9,7 @@
     "baseName": "imGateway",
     "packageName": "com.eikesi.im",
     "packageFolder": "com/eikesi/im",
-    "serverPort": "8000",
+    "serverPort": "8010",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
     "cacheProvider": "hazelcast",
