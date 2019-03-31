@@ -12,7 +12,7 @@ import { ICustomerFlock } from 'app/shared/model/customer-flock.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface ICustomerFlockDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICustomerFlockDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class CustomerFlockDetail extends React.Component<ICustomerFlockDetailProps> {
   componentDidMount() {

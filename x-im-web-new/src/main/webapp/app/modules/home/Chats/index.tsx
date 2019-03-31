@@ -43,7 +43,7 @@ export class Chats extends React.Component<IProps> {
         return res;
     }
 
-    hasUnreadMessage(userid) {
+    hasUnreadMessage = userid => {
         const list = this.props.messages.get(userid);
 
         if (list) {
@@ -51,7 +51,7 @@ export class Chats extends React.Component<IProps> {
         }
     }
 
-    showContextMenu(user) {
+    showContextMenu = user => () => {
         console.error('Chats showContextMenu unrealized：', user);
     }
 
@@ -93,8 +93,8 @@ export class Chats extends React.Component<IProps> {
                                         ['active']: selected && selected.UserName === e.UserName
                                     })}
                                     key={index}
-                                    onContextMenu={ev => this.showContextMenu(e)}
-                                    onClick={ev => this.props.chatTo(e)}>
+                                    onContextMenu={this.showContextMenu(e)}
+                                    onClick={this.props.chatTo(e)}>
                                     <div className={'inner'}>
                                         <div className={classnames('dot', {
                                             ['green']: !muted && this.hasUnreadMessage(e.UserName),

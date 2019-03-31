@@ -8,6 +8,7 @@
     "indent": [true, "spaces", 2],
     "label-position": true,
     "max-line-length": [true, 180],
+    "max-classes-per-file": [false, 10],
     "member-access": false,
     "member-ordering": [true, "static-before-instance", "variables-before-functions"],
     "no-arg": true,
@@ -74,6 +75,7 @@
     "comment-format": [true, "check-space"],
     "eofline": true,
     "forin": true,
+    "max-classes-per-file": [false, 10],
     "indent": [true, "spaces", 2],
     "label-position": true,
     "max-line-length": [true, 180],
@@ -162,7 +164,7 @@
     "object-curly-spacing": [true, "always"],
     "space-in-parens": [true, "never"],
 
-    "jsx-boolean-value": [true, "never"],
+    "jsx-boolean-value": [false, "never"],
     "jsx-no-multiline-js": false,
     "jsx-alignment": false
   },

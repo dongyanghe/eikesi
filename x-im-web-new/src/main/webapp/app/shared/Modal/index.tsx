@@ -9,8 +9,8 @@ import TransitionPortal from 'app/shared/TransitionPortal';
 import { on, off } from 'app/shared/util/event';
 
 export interface IModalBodyProps {
-    className?: PropTypes.string;
-    style?: PropTypes.CSSProperties;
+    className?: string;
+    style?: any;
 }
 class ModalBody extends Component<IModalBodyProps> {
     render() {
@@ -30,8 +30,8 @@ class ModalBody extends Component<IModalBodyProps> {
 }
 
 export interface IModalHeaderProps {
-    className?: PropTypes.string;
-    style?: PropTypes.CSSProperties;
+    className?: string;
+    style?: any;
 }
 class ModalHeader extends Component<IModalHeaderProps> {
     render() {
@@ -44,8 +44,8 @@ class ModalHeader extends Component<IModalHeaderProps> {
 }
 
 export interface IModalFooterProps {
-    className?: PropTypes.string;
-    style?: PropTypes.CSSProperties;
+    className?: string;
+    style?: any;
 }
 class ModalFooter extends Component<IModalFooterProps> {
     render() {
@@ -58,13 +58,13 @@ class ModalFooter extends Component<IModalFooterProps> {
 }
 
 export interface IModalProps {
-    show: PropTypes.bool.isRequired;
-    overlay?: PropTypes.bool;
-    fullscreen?: PropTypes.bool;
-    onCancel?: PropTypes.func;
-    transition4overlay?: PropTypes.string;
-    transition4body?: PropTypes.string;
-    className?: PropTypes.string;
+    show: boolean;
+    overlay?: boolean;
+    fullscreen?: boolean;
+    onCancel?: (event: any) => void;
+    transition4overlay?: string;
+    transition4body?: string;
+    className?: string;
 }
 
 class Modal extends React.Component<IModalProps> {

@@ -32,8 +32,8 @@ export default class Avatar extends React.Component<IAvatarProps, IAvatarState> 
             <img
                 className={`Avatar fade fadein ${this.props.className}`}
                 onClick={this.props.onClick}
-                onError={e => this.handleError(e)}
-                onLoad={e => this.handleLoad(e)}
+                onError={this.handleError}
+                onLoad={this.handleLoad}
                 src={this.props.src} />
         );
     }

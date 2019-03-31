@@ -6,14 +6,14 @@ import TransitionPortal from 'app/shared/TransitionPortal';
 import './style.scss';
 
 export interface IProps {
-    isShow: PropTypes.bool.isRequired;
-    text: PropTypes.string.isRequired;
-    close: PropTypes.func.isRequired;
+    isShow: boolean;
+    text: string;
+    close: (event: any) => void;
   }
 
 /**
  * 顶部消息提示
-  */
+ */
 export default class Snackbar extends Component<IProps> {
 
     renderContent() {
@@ -28,7 +28,7 @@ export default class Snackbar extends Component<IProps> {
                     dangerouslySetInnerHTML={{ __html: this.props.text }} />
                 <div
                     className="Snackbar-action"
-                    onClick={() => this.props.close()}>
+                    onClick={this.props.close}>
                     关闭
                 </div>
             </div>

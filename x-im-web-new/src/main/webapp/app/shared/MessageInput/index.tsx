@@ -7,16 +7,16 @@ import './style.scss';
 import Emoji from 'app/shared/MessageInput/Emoji';
 
 export interface IProps {
-    me?: PropTypes.object;
-    sendMessage: PropTypes.func.isRequired;
-    showMessage: PropTypes.func.isRequired;
-    user: PropTypes.array.isRequired;
-    confirmSendImage: PropTypes.func.isRequired;
-    process: PropTypes.func.isRequired;
-    className?: PropTypes.string;
+    me?: any;
+    sendMessage: Function;
+    showMessage: Function;
+    user: any[];
+    confirmSendImage: Function;
+    process: Function;
+    className?: string;
   }
 export interface IState {
-    me: PropTypes.object;
+    me: any;
     showEmoji: boolean;
   }
 export default class MessageInput extends Component<IProps, IState> {
@@ -75,7 +75,13 @@ export default class MessageInput extends Component<IProps, IState> {
         this.blocking = false;
     }
 
-    toggleEmoji(show = !this.state.showEmoji) {
+    toggleEmoji = (show = !this.state.showEmoji) => () => {
+      if (!show) {
+        setTimeout(() => this.setState({
+          showEmoji: show
+        }), 100);
+        return;
+      }
         this.setState({
             showEmoji: show
         });
@@ -87,10 +93,12 @@ export default class MessageInput extends Component<IProps, IState> {
         input.focus();
     }
 
-    async batchProcess(file) {
+    async batchProcess(e) {
+      e.target.value = '';
+      const file = e.target.files[0];
         let message;
         const batch = this.props.user.length > 1;
-        const receiver = this.props.user.filter(e => e.UserName !== this.props.me.UserName);
+        const receiver = this.props.user.filter(event => event.UserName !== this.props.me.UserName);
         const showMessage = this.props.showMessage;
 
         if (this.canisend() === false) {
@@ -154,39 +162,36 @@ export default class MessageInput extends Component<IProps, IState> {
                 </div>
                 <input
                     id="messageInput"
-                    onPaste={e => this.handlePaste(e)}
-                    onKeyPress={e => this.handleEnter(e)}
+                    onPaste={this.handlePaste}
+                    onKeyPress={this.handleEnter}
                     placeholder="Type something to send..."
                     readOnly={!canisend}
                     ref={this.inputRef}
                     type="text" />
 
                 <div className={'action'}>
-                    <i
+                    {canisend && <i
                         className="icon-ion-android-attach"
                         id="showUploader"
-                        onClick={e => canisend && this.uploaderRef.click()} />
-                    <i
+                    onClick={this.uploaderRef.click()} /> }
+                    {canisend && <i
                         className="icon-ion-ios-heart"
                         id="showEmoji"
-                        onClick={e => canisend && this.toggleEmoji(true)}
+                        onClick={this.toggleEmoji(true)}
                         style={{
                             color: 'red'
-                        }} />
+                        }} /> }
 
                     <input
-                        onChange={e => {
-                            this.batchProcess(e.target.files[0]);
-                            e.target.value = '';
-                        }}
+                        onChange={this.batchProcess}
                         ref={this.uploaderRef}
                         style={{
                             display: 'none'
                         }}
                         type="file" />
                     <Emoji
-                        close={e => setTimeout(() => this.toggleEmoji(false), 100)}
-                        output={emoji => this.writeEmoji(emoji)}
+                        close={this.toggleEmoji(false)}
+                        output={this.writeEmoji}
                         show={this.state.showEmoji} />
                 </div>
             </div>

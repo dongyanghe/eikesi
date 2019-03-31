@@ -12,7 +12,7 @@ import { IFlockRelation } from 'app/shared/model/flock-relation.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface IFlockRelationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface IFlockRelationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class FlockRelationDetail extends React.Component<IFlockRelationDetailProps> {
   componentDidMount() {

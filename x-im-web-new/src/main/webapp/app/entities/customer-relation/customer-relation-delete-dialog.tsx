@@ -9,7 +9,7 @@ import { ICustomerRelation } from 'app/shared/model/customer-relation.model';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity, deleteEntity } from 'app/entities/customer-relation/customer-relation.reducer';
 
-export interface ICustomerRelationDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICustomerRelationDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class CustomerRelationDeleteDialog extends React.Component<ICustomerRelationDeleteDialogProps> {
   componentDidMount() {

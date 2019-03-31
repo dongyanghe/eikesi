@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 export interface IProps {
-    show: PropTypes.bool.isRequired;
+    show: boolean;
     style?: React.CSSProperties;
   }
 export interface IState {
-    show: PropTypes.bool.isRequired;
+    show: boolean;
   }
 export default class Offline extends Component<IProps, IState> {
     state: IState = {
         show: false
       };
-
+      reload = () => {
+        window.location.reload();
+      }
     render() {
         if (!this.props.show) return false;
 
@@ -30,7 +32,7 @@ export default class Offline extends Component<IProps, IState> {
 
                     <h1>无法连接服务器!</h1>
 
-                    <button onClick={e => window.location.reload()}>刷新</button>
+                    <button onClick={this.reload}>刷新</button>
                 </div>
             </div>
         );

@@ -12,7 +12,7 @@ import { ICurrentMessage } from 'app/shared/model/current-message.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface ICurrentMessageDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICurrentMessageDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class CurrentMessageDetail extends React.Component<ICurrentMessageDetailProps> {
   componentDidMount() {

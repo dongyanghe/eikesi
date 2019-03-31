@@ -15,12 +15,12 @@ import Avatar from 'app/shared/Avatar';
 import { parser as emojiParse } from 'app/shared/util/emoji';
 import { on, off } from 'app/shared/util/event';
 
-const mapStateToProps = ({ settings, customerRelation, authentication, currentMessage, chat, app }: IRootState) => ({
+const mapStateToProps = ({ settings2, customerRelation, authentication, currentMessage, chat }: IRootState) => ({
     user: chat.user,
     messages: chat.messagesMap,
     loading: currentMessage.loading,
-    downloads: settings.downloads,
-    remeberConversation: settings.remeberConversation,
+    downloads: settings2.downloads,
+    remeberConversation: settings2.remeberConversation,
     showConversation: chat.showConversation,
     account: authentication.account,
     chatUser: authentication.account,
@@ -48,7 +48,7 @@ export class ChatContent extends React.Component<IProps> {
     tipRef;
     scrollTop;
     isFriend = (id: string) => true;
-    showUserinfo = async (isme, user) => {
+    showUserinfo = (isme, user) => async () => {
         const caniremove = helper.isChatRoomOwner(this.props.chatUser);
 
         if (isme) {
@@ -72,7 +72,7 @@ export class ChatContent extends React.Component<IProps> {
     deleteMessage = (messageid: any) => {
         this.props.deleteMessage(this.props.chatUser.UserName, messageid);
     };
-    showMembers = (user: any) => {
+    showMembers = (user: any) => () => {
         if (helper.isChatRoom(user.UserName)) {
             this.props.memberToogle(true, user);
         }
@@ -321,13 +321,13 @@ export class ChatContent extends React.Component<IProps> {
                         <Avatar
                             src={message.isme ? message.HeadImgUrl : user.HeadImgUrl}
                             className={'avatar'}
-                            onClick={ev => this.showUserinfo(message.isme, user)} />
+                            onClick={this.showUserinfo(message.isme, user)} />
 
                         <p className={'username'} dangerouslySetInnerHTML={{ __html: user.NickName }} />
 
                         <div className={'content'}>
                             <p
-                                onContextMenu={() => this.showMessageAction(message)}
+                                onContextMenu={this.showMessageAction(message)}
                                 dangerouslySetInnerHTML={{ __html: this.getMessageContent(message) }} />
 
                             <span className={'times'}>{ moment(message.CreateTime * 1000).fromNow() }</span>
@@ -449,7 +449,7 @@ export class ChatContent extends React.Component<IProps> {
         // menu.popup(remote.getCurrentWindow());
     }
 
-    showMessageAction(message) {
+    showMessageAction = message => () => {
         const caniforward = [1, 3, 47, 43, 49 + 6].includes(message.MsgType);
         const templates = [
             {
@@ -524,7 +524,7 @@ export class ChatContent extends React.Component<IProps> {
         // menu.popup(remote.getCurrentWindow());
     }
 
-    handleScroll(e) {
+    handleScroll = e => {
         const tips = this.refs.tips;
         const viewport = e.target;
         const unread = viewport.querySelectorAll(`.${'message'}.unread`);
@@ -638,7 +638,7 @@ export class ChatContent extends React.Component<IProps> {
                 className={classnames('container', {
                     ['hideConversation']: !showConversation
                 })}
-                onClick={e => this.handleClick(e)}>
+                onClick={this.handleClick}>
                 {
                     user ? (
                         <div>
@@ -651,18 +651,18 @@ export class ChatContent extends React.Component<IProps> {
                                     <span
                                         className={'signature'}
                                         dangerouslySetInnerHTML={{ __html: signature || 'No Signature' }}
-                                        onClick={e => this.showMembers(user)}
+                                        onClick={this.showMembers(user)}
                                         title={signature} />
                                 </div>
 
                                 <i
                                     className="icon-ion-android-more-vertical"
-                                    onClick={() => this.showMenu()} />
+                                    onClick={this.showMenu} />
                             </header>
 
                             <div
                                 className={'messages'}
-                                onScroll={e => this.handleScroll(e)}
+                                onScroll={this.handleScroll}
                                 ref={this.viewportRef}>
                                 {
                                     this.renderMessages(messages.get(user.UserName), user)

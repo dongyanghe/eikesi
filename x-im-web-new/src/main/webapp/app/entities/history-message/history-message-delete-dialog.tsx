@@ -9,7 +9,7 @@ import { IHistoryMessage } from 'app/shared/model/history-message.model';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity, deleteEntity } from 'app/entities/history-message/history-message.reducer';
 
-export interface IHistoryMessageDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface IHistoryMessageDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class HistoryMessageDeleteDialog extends React.Component<IHistoryMessageDeleteDialogProps> {
   componentDidMount() {

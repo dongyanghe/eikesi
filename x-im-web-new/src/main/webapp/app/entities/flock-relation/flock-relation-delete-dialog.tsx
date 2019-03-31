@@ -9,7 +9,7 @@ import { IFlockRelation } from 'app/shared/model/flock-relation.model';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity, deleteEntity } from 'app/entities/flock-relation/flock-relation.reducer';
 
-export interface IFlockRelationDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface IFlockRelationDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class FlockRelationDeleteDialog extends React.Component<IFlockRelationDeleteDialogProps> {
   componentDidMount() {

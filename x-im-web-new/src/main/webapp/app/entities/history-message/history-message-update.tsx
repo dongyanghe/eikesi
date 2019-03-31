@@ -12,9 +12,9 @@ import { getEntity, updateEntity, createEntity, reset } from 'app/entities/histo
 import { IHistoryMessage } from 'app/shared/model/history-message.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
-import { keysToValues } from 'app/shared/util/entity-utils';
+// import { keysToValues } from 'app/shared/util/entity-utils';
 
-export interface IHistoryMessageUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface IHistoryMessageUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export interface IHistoryMessageUpdateState {
   isNew: boolean;

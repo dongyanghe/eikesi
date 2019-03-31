@@ -1,18 +1,17 @@
-
-import axios from 'axios';
-import React from 'react';
-import { connect } from 'react-redux';
+// import axios from 'axios';
+// import React from 'react';
+// import { connect } from 'react-redux';
 import helper from '../util/helper';
-import CustomerRelation from '../../entities/customer-relation/customer-relation.reducer';
+// import CustomerRelation from '../../entities/customer-relation/customer-relation.reducer';
 import { ICustomerRelation, defaultValue } from 'app/shared/model/customer-relation.model';
-import settings from './settings';
+// import settings from './settings';
 // import members from './members';
-import snackbar from 'app/shared/reducers/snackbar';
-import { IRootState } from 'app/shared/reducers';
-import { getSession, login } from 'app/shared/reducers/authentication';
-import { getProfile } from 'app/shared/reducers/application-profile';
-import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
-import { hasAnyAuthority } from 'app/shared/auth/private-route';
+// import snackbar from 'app/shared/reducers/snackbar';
+// import { IRootState } from 'app/shared/reducers';
+// import { getSession, login } from 'app/shared/reducers/authentication';
+// import { getProfile } from 'app/shared/reducers/application-profile';
+// import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
+// import { hasAnyAuthority } from 'app/shared/auth/private-route';
 
 async function resolveMessage(message) {
     const auth = window.localStorage.getItem('auth');

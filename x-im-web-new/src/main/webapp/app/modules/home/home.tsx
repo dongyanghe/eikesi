@@ -6,13 +6,13 @@ import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
 import classnames from 'classnames';
-import { IRootState } from 'app/shared/reducers';
+// import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
-import SearchBar from "app/modules/home/SearchBar";
-import Chats from "app/modules/home/Chats";
-import ChatContent from "app/modules/home/ChatContent";
-import {newChatToogle} from "app/shared/reducers/app";
-import {toggleConversation} from "app/shared/reducers/chat";
+import SearchBar from 'app/modules/home/SearchBar';
+import Chats from 'app/modules/home/Chats';
+import ChatContent from 'app/modules/home/ChatContent';
+import { newChatToogle } from 'app/shared/reducers/app';
+import { toggleConversation } from 'app/shared/reducers/chat';
 export interface IHomeProp extends StateProps, DispatchProps {}
 
 export class Home extends React.Component<IHomeProp> {

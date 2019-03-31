@@ -6,9 +6,9 @@ import classnames from 'classnames';
 
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
-import { getSession, login } from 'app/shared/reducers/authentication';
-import { getProfile } from 'app/shared/reducers/application-profile';
-import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
+// import { getSession, login } from 'app/shared/reducers/authentication';
+// import { getProfile } from 'app/shared/reducers/application-profile';
+// import { setLocale, setIsShowImWindows } from 'app/shared/reducers/locale';
 import './style.scss';
 import Avatar from 'app/shared/Avatar';
 import { Modal, ModalBody } from 'app/shared/Modal';
@@ -35,8 +35,10 @@ export class UserInfo extends React.Component<IProps, IState> {
             showEdit: false
         };
     }
-    toggleEdit(showEdit = !this.state.showEdit) {
+    toggleEdit = (showEdit = !this.state.showEdit) => () => {
+      if (showEdit) {
         this.setState({ showEdit });
+      }
     }
 
     toggle = () => console.warn('UserInfo toggle unrealized：');
@@ -51,7 +53,7 @@ export class UserInfo extends React.Component<IProps, IState> {
         console.warn('UserInfo handleEnter unrealized：', e);
     }
 
-    handleAction(user) {
+    handleAction = user => () => {
         console.warn('UserInfo handleEnter unrealized：', user);
     }
 
@@ -101,13 +103,7 @@ export class UserInfo extends React.Component<IProps, IState> {
                             ['large']: !this.state.remove,
                             ['isme']: isme
                         })}
-                        onClick={() => {
-                            const showEdit = this.state.showEdit;
-
-                            if (showEdit) {
-                                this.toggleEdit();
-                            }
-                        }} style={{
+                        onClick={this.toggleEdit()} style={{
                             background,
                             color: fontColor
                         }}>
@@ -116,7 +112,7 @@ export class UserInfo extends React.Component<IProps, IState> {
                             (!isme && isFriend) && (
                                 <div
                                     className={'edit'}
-                                    onClick={() => this.toggleEdit()}>
+                                    onClick={this.toggleEdit()}>
                                     <i className="icon-ion-edit" />
                                 </div>
                             )
@@ -151,7 +147,7 @@ export class UserInfo extends React.Component<IProps, IState> {
                             ) : (
                                 <div
                                     className={'action'}
-                                    onClick={() => this.props.removeMember(this.props.user)}
+                                    onClick={this.props.removeMember(this.props.user)}
                                     style={{
                                         color: buttonColor,
                                         opacity: .6,
@@ -165,7 +161,7 @@ export class UserInfo extends React.Component<IProps, IState> {
 
                         <div
                             className={'action'}
-                            onClick={() => this.handleAction(this.props.user)}
+                            onClick={this.handleAction(this.props.user)}
                             style={{
                                 color: buttonColor,
                                 opacity: .6
@@ -180,7 +176,7 @@ export class UserInfo extends React.Component<IProps, IState> {
                             <input
                                 autoFocus={true}
                                 defaultValue={RemarkName}
-                                onKeyPress={e => this.handleEnter(e)}
+                                onKeyPress={this.handleEnter}
                                 placeholder="Type the remark name"
                                 type="text" />
                         )
@@ -203,7 +199,7 @@ const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootSt
     chatTo: (userId: string) => {
         console.warn('UserInfo chatTo unrealized：', userId);
     },
-    removeMember: async (user: any) => {
+    removeMember: (user: any) => async () => {
         console.warn('UserInfo removeMember unrealized：', user);
     },
     refreshContacts: async (user: any) => {

@@ -7,7 +7,6 @@ import { searchToogle } from 'app/shared/reducers/app';
 import { chatTo } from 'app/shared/reducers/chat';
 import './style.scss';
 import ErrorBoundary from './../../../shared/error/error-boundary';
-
 const mapStateToProps = ({ app, applicationProfile, locale, snackbar }: IRootState) => ({
     searching: app.isSearchShow,
     result: {   //  后台检索返回
@@ -41,11 +40,13 @@ export class SearchBar extends React.Component<IProps> {
     timer;
     searchRef;
     dropdownRef;
-    filter(text = '') {
-        console.warn('SearchBar filter unrealized：', text);
+    filter = (e?: any | IHTMLInputEvent) => () => {
+      const text = e.target.value;
+      console.warn('SearchBar filter unrealized：', text);
     }
 
-    handleBlur(value) {
+    handleBlur = (e?: any | IHTMLInputEvent) => () => {
+      const value = e.target.value;
         setTimeout(() => {
             if (!value) {
                 this.props.searchToogle(false);
@@ -53,17 +54,17 @@ export class SearchBar extends React.Component<IProps> {
         }, 500);
     }
 
-    chatTo(user) {
+    chatTo = user => () => {
         this.props.chat(user);
         this.searchRef.value = '';
         (document.querySelector('#messageInput') as HTMLInputElement).focus();
     }
 
-    highlight(offset) {
+    highlight = offset => () => {
         console.warn('SearchBar filter unrealized：', offset);
     }
 
-    navigation(e) {
+    navigation = e => () => {
         const { result, getPlaceholder } = this.props;
         const searchChatHistoryListStr = localStorage.getItem('searchChatHistoryList') || '[]';
         const searchChatHistoryList = JSON.parse(searchChatHistoryListStr);
@@ -108,7 +109,7 @@ export class SearchBar extends React.Component<IProps> {
         return (
             <div
                 className={'user'}
-                onClick={e => this.chatTo(user)} data-userid={user.UserName}>
+                onClick={this.chatTo(user)} data-userid={user.UserName}>
                 <img src={user.HeadImgUrl} />
 
                 <div className={'info'}>
@@ -151,7 +152,7 @@ export class SearchBar extends React.Component<IProps> {
 
                     <a
                         href=""
-                        onClick={e => this.props.clear(e)}>
+                        onClick={this.props.clear}>
                         CLEAR
                     </a>
                 </header>
@@ -186,10 +187,10 @@ export class SearchBar extends React.Component<IProps> {
                 <i className="icon-ion-ios-search-strong" />
                 <input
                     id="search"
-                    onBlur={e => this.handleBlur(e.target.value)}
-                    onFocus={e => this.filter(e.target.value)}
-                    onInput={e => this.filter(this.searchRef.value)}
-                    onKeyUp={e => this.navigation(e)}
+                    onBlur={this.handleBlur(event)}
+                    onFocus={this.filter(event)}
+                    onInput={this.filter(this.searchRef.value)}
+                    onKeyUp={this.navigation(event)}
                     placeholder="Search ..."
                     ref={this.searchRef}
                     type="text" />
@@ -212,6 +213,9 @@ export class SearchBar extends React.Component<IProps> {
     }
 }
 
+interface IHTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
   //  用于把当前 Redux store state 映射到展示组件的 props 中
   type StateProps = ReturnType<typeof mapStateToProps>;
   type DispatchProps = typeof mapDispatchToProps;

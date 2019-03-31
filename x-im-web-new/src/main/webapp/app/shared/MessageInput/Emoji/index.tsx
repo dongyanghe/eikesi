@@ -8,12 +8,12 @@ import './style.scss';
 import { emoji } from 'app/shared/util/emoji';
 
 export interface IProps {
-    output: PropTypes.func.isRequired;
-    show: PropTypes.bool.isRequired;
-    close: PropTypes.func.isRequired;
+    output: Function;
+    show: boolean;
+    close: (event: any) => void;
   }
   export interface IState {
-    me: PropTypes.object;
+    me: any;
     showEmoji: boolean;
   }
 export default class Emoji extends Component<IProps, IState> {
@@ -22,9 +22,8 @@ export default class Emoji extends Component<IProps, IState> {
         delegate(this.containerRef, 'a.qqemoji', 'click', e => {
             e.preventDefault();
             e.stopPropagation();
-
             this.props.output(e.target.title);
-            this.props.close();
+            this.props.close(null);
         });
     }
 
@@ -54,7 +53,7 @@ export default class Emoji extends Component<IProps, IState> {
                 className={classnames('container', {
                     'show': this.props.show
                 })}
-                onBlur={e => this.props.close()}>
+                onBlur={this.props.close}>
                 <div className="row">
                     {this.renderEmoji(emoji.slice(0, 15))}
                 </div>

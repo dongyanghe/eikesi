@@ -14,9 +14,9 @@ import { getEntity, updateEntity, createEntity, reset } from 'app/entities/curre
 import { ICurrentMessage } from 'app/shared/model/current-message.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
-import { keysToValues } from 'app/shared/util/entity-utils';
+// import { keysToValues } from 'app/shared/util/entity-utils';
 
-export interface ICurrentMessageUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICurrentMessageUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export interface ICurrentMessageUpdateState {
   isNew: boolean;

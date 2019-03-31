@@ -4,11 +4,11 @@ import classnames from 'classnames';
 import './style.scss';
 
 export interface IProps {
-  max: PropTypes.number.isRequired;
-  searching: PropTypes.string.isRequired;
-  search: PropTypes.func.isRequired;
-  getList: PropTypes.func.isRequired;
-  onChange: PropTypes.func.isRequired;
+  max: number;
+  searching: string;
+  search: Function;
+  getList: Function;
+  onChange: Function;
 }
 export interface IState {
   selected: any[];
@@ -87,7 +87,8 @@ export default class UserList extends Component<IProps, IState> {
     }
   }
 
-  search(text) {
+  search() {
+    const text = this.inputRef.value;
     clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
@@ -121,7 +122,7 @@ export default class UserList extends Component<IProps, IState> {
     setTimeout(() => this.props.onChange(this.state.selected));
   }
 
-  toggleSelected(userid) {
+  toggleSelected = userid => () => {
     if (!this.state.selected.includes(userid)) {
       // Add
       this.addSelected(userid);
@@ -154,7 +155,7 @@ export default class UserList extends Component<IProps, IState> {
         })}
         data-userid={e.UserName}
         key={index}
-        onClick={ev => this.toggleSelected(e.UserName)}
+        onClick={this.toggleSelected(e.UserName)}
       >
         <img className={'avatar'} src={e.HeadImgUrl} />
         <span className={'username'} dangerouslySetInnerHTML={{ __html: e.RemarkName || e.NickName }} />
@@ -170,8 +171,8 @@ export default class UserList extends Component<IProps, IState> {
         <input
           ref={this.inputRef}
           autoFocus={true}
-          onKeyUp={e => this.navigation(e)}
-          onInput={e => this.search(this.inputRef.value)}
+          onKeyUp={this.navigation}
+          onInput={this.search}
           placeholder="Type to Search..."
           type="text"
         />

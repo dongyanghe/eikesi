@@ -14,9 +14,9 @@ import { getEntity, updateEntity, createEntity, reset } from 'app/entities/custo
 import { ICustomerRelation } from 'app/shared/model/customer-relation.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
-import { keysToValues } from 'app/shared/util/entity-utils';
+// import { keysToValues } from 'app/shared/util/entity-utils';
 
-export interface ICustomerRelationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICustomerRelationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export interface ICustomerRelationUpdateState {
   isNew: boolean;

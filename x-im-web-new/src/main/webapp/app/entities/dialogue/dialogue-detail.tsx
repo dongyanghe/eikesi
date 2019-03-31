@@ -12,7 +12,7 @@ import { IDialogue } from 'app/shared/model/dialogue.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface IDialogueDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface IDialogueDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class DialogueDetail extends React.Component<IDialogueDetailProps> {
   componentDidMount() {

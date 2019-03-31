@@ -12,7 +12,7 @@ import { ICustomerRelation } from 'app/shared/model/customer-relation.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface ICustomerRelationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICustomerRelationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class CustomerRelationDetail extends React.Component<ICustomerRelationDetailProps> {
   componentDidMount() {

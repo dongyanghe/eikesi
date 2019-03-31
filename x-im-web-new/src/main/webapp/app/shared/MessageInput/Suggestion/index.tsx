@@ -7,8 +7,8 @@ import './style.scss';
 import TransitionPortal from 'app/shared/TransitionPortal';
 export interface IProps {
     selected: any;
-    show: PropTypes.bool.isRequired;
-    list: PropTypes.array.isRequired;
+    show: boolean;
+    list: any[];
   }
 export default class Suggestion extends Component<IProps> {
 

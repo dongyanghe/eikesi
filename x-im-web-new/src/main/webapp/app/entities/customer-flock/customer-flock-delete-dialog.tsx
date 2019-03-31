@@ -9,7 +9,7 @@ import { ICustomerFlock } from 'app/shared/model/customer-flock.model';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity, deleteEntity } from 'app/entities/customer-flock/customer-flock.reducer';
 
-export interface ICustomerFlockDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
+export interface ICustomerFlockDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string}> {}
 
 export class CustomerFlockDeleteDialog extends React.Component<ICustomerFlockDeleteDialogProps> {
   componentDidMount() {
