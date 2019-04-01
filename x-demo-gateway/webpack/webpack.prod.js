@@ -42,8 +42,8 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
           },
           'css-loader',
           'postcss-loader',
-          { 
-            loader: 'sass-loader', 
+          {
+            loader: 'sass-loader',
             options: { implementation: sass }
           }
         ]

@@ -1,3 +1,4 @@
+
 const os = require('os');
 
 exports.config = {
@@ -13,15 +14,19 @@ exports.config = {
   capabilities: {
     browserName: 'chrome',
     chromeOptions: {
-        args: [ '--disable-gpu', '--window-size=800,600' ]
+        args: process.env.JHI_E2E_HEADLESS
+          ? [ '--headless', '--disable-gpu', '--window-size=800,600' ]
+          : [ '--disable-gpu', '--window-size=800,600' ]
     }
   },
 
   directConnect: true,
 
-  baseUrl: 'http://localhost:80000/',
+  baseUrl: 'http://localhost:8000/',
 
   framework: 'mocha',
+
+  SELENIUM_PROMISE_MANAGER: false,
 
   mochaOpts: {
     reporter: 'spec',
