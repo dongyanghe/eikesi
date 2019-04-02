@@ -55,7 +55,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
       target: `http${options.tls ? 's' : ''}://127.0.0.1:8010`,
       secure: false,
       changeOrigin: options.tls,
-      headers: { host: 'localhost:9000' }
+      headers: { host: 'localhost:9001' }
     }],
     watchOptions: {
       ignored: /node_modules/
@@ -71,7 +71,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     new FriendlyErrorsWebpackPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
-      port: 9000,
+      port: 9001,
       proxy: {
         target: 'http://localhost:9060'
       },

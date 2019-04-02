@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+//  import import PropTypes from 'prop-types'; from 'prop-types';
+import classNames from 'classnames/bind';
 import './style.scss';
 
 export interface IProps {
@@ -132,7 +132,7 @@ export default class UserList extends Component<IProps, IState> {
     }
 
     setTimeout(() => this.inputRef.focus());
-  }
+  };
 
   renderList() {
     const { searching, getList } = this.props;
@@ -149,7 +149,7 @@ export default class UserList extends Component<IProps, IState> {
 
     return list.map((e, index) => (
       <li
-        className={classnames({
+        className={classNames({
           selected: this.state.selected.includes(e.UserName),
           active: this.state.active === e.UserName
         })}

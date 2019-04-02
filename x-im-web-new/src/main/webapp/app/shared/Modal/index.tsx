@@ -1,143 +1,121 @@
-
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Transition from 'react-addons-css-transition-group';
-import classnames from 'classnames';
+//  import import PropTypes from 'prop-types'; from 'prop-types';
+// import Transition from 'react-addons-css-transition-group';
+import classNames from 'classnames/bind';
 
 import './style.scss';
 import TransitionPortal from 'app/shared/TransitionPortal';
 import { on, off } from 'app/shared/util/event';
 
 export interface IModalBodyProps {
-    className?: string;
-    style?: any;
+  className?: string;
+  style?: any;
 }
 class ModalBody extends Component<IModalBodyProps> {
-    render() {
-        return (
-            <Transition
-                transitionName="fade"
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}>
-                <div
-                    className={classnames('Modal-body', this.props.className)}
-                    style={this.props.style}>
-                    {this.props.children}
-                </div>
-            </Transition>
-        );
-    }
+  render() {
+    return (
+      // transitionName="fade"
+      // transitionEnterTimeout={1000}
+      // transitionLeaveTimeout={1000}
+      <div>
+        <div className={classNames('Modal-body', this.props.className)} style={this.props.style}>
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
 }
 
 export interface IModalHeaderProps {
-    className?: string;
-    style?: any;
+  className?: string;
+  style?: any;
 }
 class ModalHeader extends Component<IModalHeaderProps> {
-    render() {
-        return (
-            <div className={classnames('Modal-header', this.props.className)}>
-                {this.props.children}
-            </div>
-        );
-    }
+  render() {
+    return <div className={classNames('Modal-header', this.props.className)}>{this.props.children}</div>;
+  }
 }
 
 export interface IModalFooterProps {
-    className?: string;
-    style?: any;
+  className?: string;
+  style?: any;
 }
 class ModalFooter extends Component<IModalFooterProps> {
-    render() {
-        return (
-            <div className={classnames('Modal-footer', this.props.className)}>
-                {this.props.children}
-            </div>
-        );
-    }
+  render() {
+    return <div className={classNames('Modal-footer', this.props.className)}>{this.props.children}</div>;
+  }
 }
 
 export interface IModalProps {
-    show: boolean;
-    overlay?: boolean;
-    fullscreen?: boolean;
-    onCancel?: (event: any) => void;
-    transition4overlay?: string;
-    transition4body?: string;
-    className?: string;
+  show: boolean;
+  overlay?: boolean;
+  fullscreen?: boolean;
+  onCancel?: (event: any) => void;
+  transition4overlay?: string;
+  transition4body?: string;
+  className?: string;
 }
 
 class Modal extends React.Component<IModalProps> {
-    defaultProps = {
-        overlay: true,
-        transition4overlay: 'Modal-overlay',
-        transition4body: 'Modal-body',
-        onCancel: Function
-    };
+  defaultProps = {
+    overlay: true,
+    transition4overlay: 'Modal-overlay',
+    transition4body: 'Modal-body',
+    onCancel: Function
+  };
 
-    renderOverlay() {
-        if (!this.props.show || !this.props.overlay) {
-            return;
-        }
-
-        return (
-            <div
-                className={classnames('Modal-overlay', this.props.className)}
-                onClick={this.props.onCancel} />
-        );
+  renderOverlay() {
+    if (!this.props.show || !this.props.overlay) {
+      return;
     }
 
-    renderBody() {
-        if (!this.props.show) {
-            return;
-        }
+    return <div className={classNames('Modal-overlay', this.props.className)} onClick={this.props.onCancel} />;
+  }
 
-        return (
-            <div className={classnames('Modal-content', this.props.className)}>
-                {this.props.children}
-            </div>
-        );
+  renderBody() {
+    if (!this.props.show) {
+      return;
     }
 
-    handleEscKey(e) {
-        if (e.keyCode === 27 && this.props.show) {
-            this.props.onCancel(null);
-        }
+    return <div className={classNames('Modal-content', this.props.className)}>{this.props.children}</div>;
+  }
+
+  handleEscKey(e) {
+    if (e.keyCode === 27 && this.props.show) {
+      this.props.onCancel(null);
+    }
+  }
+
+  componentWillUnmount() {
+    off(document, 'keydown', this.handleEscKey);
+  }
+
+  componentDidMount() {
+    this.handleEscKey = this.handleEscKey.bind(this);
+    on(document, 'keydown', this.handleEscKey);
+  }
+
+  render() {
+    if (!/MSIE\s8\.0/.test(window.navigator.userAgent)) {
+      document.body.style.overflow = this.props.show ? 'hidden' : null;
     }
 
-    componentWillUnmount() {
-        off(document, 'keydown', this.handleEscKey);
-    }
-
-    componentDidMount() {
-        this.handleEscKey = this.handleEscKey.bind(this);
-        on(document, 'keydown', this.handleEscKey);
-    }
-
-    render() {
-        if (!/MSIE\s8\.0/.test(window.navigator.userAgent)) {
-            document.body.style.overflow = this.props.show ? 'hidden' : null;
-        }
-
-        return (
-            <div className="Modal">
-                <Transition
+    return (
+      <div className="Modal">
+        {/* <Transition
                     transitionName={this.props.transition4overlay}
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}
                     >
                     {this.renderOverlay()}
-                </Transition>
-
-                <TransitionPortal
-                    transitionName={this.props.transition4body}
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={140}>
-                    {this.renderBody()}
-                </TransitionPortal>
-            </div>
-        );
-    }
+                </Transition> */}
+        <div>{this.renderOverlay()}</div>
+        <TransitionPortal transitionName={this.props.transition4body} transitionEnterTimeout={200} transitionLeaveTimeout={140}>
+          {this.renderBody()}
+        </TransitionPortal>
+      </div>
+    );
+  }
 }
 
 export { Modal, ModalBody, ModalHeader, ModalFooter };

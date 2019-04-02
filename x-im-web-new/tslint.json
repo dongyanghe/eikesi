@@ -146,7 +146,7 @@
     "no-invalid-this": [true],
     "no-magic-numbers": false,
     "ban-types": [true, ["Object", "Use {} instead."]],
-    "no-submodule-imports": [true, "app", "uuid/v4", "@fortawesome", "lodash", "react-toastify"],
+    "no-submodule-imports": [true, "app", "uuid/v4", "@fortawesome", "lodash", "react-toastify", "classnames"],
 
     "ter-arrow-body-style": [true],
     "ter-no-irregular-whitespace": [true],
