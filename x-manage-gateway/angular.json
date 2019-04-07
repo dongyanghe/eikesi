@@ -7,7 +7,16 @@
             "root": "",
             "sourceRoot": "src/main/webapp",
             "projectType": "application",
-            "architect": {}
+            "architect": {
+              "builder": {
+                "builder": "@angular-devkit/build-angular:browser",
+                "options": {
+                    "assets": ["./node_modules/@ant-design/icons-angular/src/inline-svg/"],
+                    "styles": [],
+                    "scripts": []
+                 }
+                }
+            }
         }
     },
     "defaultProject": "manage-gateway",

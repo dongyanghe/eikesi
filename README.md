@@ -32,9 +32,9 @@ JHipster注册表运行后，您可以在前端页面的Configuration > Cloud Co
 - 注意修改数据库连接账号名和密码、库名
 #### 运行：
 ##### 后端各服务启动（如果您不了解系统的运作，请务必按顺序全部以管理员身份运行cmd逐一启动）：
-1. 进入项目根目录使用./mvnw（window使用mvn命令），启动jhipster-registry服务，这是启动基于eureka的服务注册中心。
+1. 进入项目根目录使用./mvnw（window使用mvnw命令），启动jhipster-registry服务，这是启动基于eureka的服务注册中心。
 1. 进入zookeeper的bin目录使用zkServer start(window使用zkServer)命令启动zookeeper，这是启动基于zookeeper的服务注册中心。
-1. 进入kafka根目录使bin/kafka-server-start.sh config/server.properties（window使用.\bin\windows\kafka-server-start.bat .\config\server.properties）启动kafka。这是启动分布式发布订阅消息服务。
+1. 进入kafka根目录使bin/kafka-server-start.sh config/server.properties（window使用bin\windows\kafka-server-start.bat .\config\server.properties）启动kafka。这是启动分布式发布订阅消息服务。
 1. 进入Redis根目录使用bin/redis-server conf/redis.conf(window使用redis-server.exe redis.windows.conf)命令启动Redis,
 这是启动数据存储和消息队列服务。
 1. 进入elasticsearch根目录使用./bin/elasticsearch (window使用./bin/elasticsearch.bat )命令启动elasticsearch,
