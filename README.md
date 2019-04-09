@@ -46,12 +46,38 @@ JHipster注册表运行后，您可以在前端页面的Configuration > Cloud Co
 1. 进入各项目根目录使用./mvnw（window使用mvn命令），先启动网关再按需启动业务服务。
 ##### 前端服务启动：
 1. angularX项目使用：
+###### 安装：
 ```cmd
-        npm run start
-        npm run start -- --p 4200   //  指定端口
+	npm cache clean # 可选，安装时报错用于清理缓存
+	npm i -g cnpm # 改成淘宝镜像无需科学上网
+	cnpm i -g @angular/cli
+	cnpm install # 安装失败的话运行cnpm i -g rimraf 后再运行rimraf node_module 删除安装包，然后使用yarn install试一试
+```
+* 如果改了package.json，且package.json和lock文件不同，那么执行`npm i`时npm会根据package中的版本号以及语义含义去下载最新的包，并更新至lock。
+* 如果之前装过旧版@angular/cli需要先卸载：npm uninstall -g @angular/cli
+
+###### 运行：
+```cmd
+        npm run start # npm run start -- --p 4200  可以指定端口
         yarn start
         ng serve
 ```
+* 打开你的浏览器，访问http://localhost:4200/
+###### 更新
+```cmd
+	git pull
+	cnpm update
+	ng serve
+```
+* 如果pull代码之后发现启动报包错误，请用rimraf把项目下的node_modules全部删掉，然后重新cnpm install。
+
+###### 发布：
+```cmd
+        npm run build
+```
+* 提示内存不足请修改package.json里面的--max_old_space_size，或者删除不必要的检查代码量
+* 如果需要把项目发布到其它类型的Server上，例如Tomcat，需要对Server进行一些简单的配置才能支持HTML5下的PushState路由模式。
+* angular-cli会在项目根目录下生成一个dist目录，里面就是编译、压缩好的文件,将其上传到服务器即可。
 
 >   各服务端口如果不一样请修改对应配置
 >

@@ -1,0 +1,26 @@
+
+.floatLayer{position:absolute;top:100px;left:15rem;width:500px;height:197px;border:1px solid red;z-index:2000;
+	border-radius: 5px;
+	-webkit-border-radius:5px;
+	background-color:#FFFFFF;
+ }
+
+
+ .floatLayer .top{background-color:#3B3A3F;height:100%;height: 47px;}
+
+ .floatLayer .title{ position:absolute;top:0px;left:23px;color: #FFFFFF;font-size: 14px;line-height: 47px; }
+
+ .floatLayer .buttonClose{position:absolute;top:16px;right:16px; background:url(../../../assets/images/sys/z_del.png) 0 0 no-repeat;width:15px;height: 16px;}
+
+
+.floatLayer .content{position: absolute;width:100%;text-align:center;  left: 0px;top:50px;}
+
+.floatLayer .content .mention{margin-top:20px;}
+
+.floatLayer .content .mention .mentionImg{display: inline-block;vertical-align: middle; width: 28px;height:28px;background:url(../img/sys/save_success.png) center center no-repeat;}
+
+ .floatLayer .bottom{position:absolute;bottom:0px;left:0px;height:60px;width: 100%;}
+
+ .floatLayer .bottom .boxButton{width: 83px;height: 36px;line-height:36px;text-align:center;float: right;margin-right: 22px;border:solid 1px #B2B2B2; border-radius: 5px;
+	-webkit-border-radius:5px;}
+ .floatLayer .bottom .boxButton:hover{color:#FFFFFF;background-color: #FFB71F;}

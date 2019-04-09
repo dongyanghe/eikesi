@@ -1,0 +1,13 @@
+.hrdashboard{position: relative;}
+
+.hrdashboard  ul{height: 141px;border-bottom: solid 1px #CCCCCC;}
+.hrdashboard  ul li{width:14.6875rem; height:141px; text-align:center; color:#666666;  float:left; position:relative;}
+
+
+.hrdashboard  ul li .aboutName{width:14.6875rem; height:71px;position: absolute;top:50px;left:0px;border-right: solid 1px #e5e5e5;}
+.hrdashboard  ul li:last-child .aboutName{border-right: solid 0px ;}
+
+.hrdashboard  ul li .nameInfor{position: absolute;left:0.9375rem;top:17px;}
+.hrdashboard  ul li .nameInfor .name{font-size: 14px;  color: rgb(102, 102, 102); text-align: left;}
+.hrdashboard  ul li .nameInfor .clickname{font-size: 12px;color: rgb(193, 193, 193); margin-top:0px; text-align:left;}
+.hrdashboard  ul li .nameNum{position: absolute;right:10px;top:19px;font-size:34px;line-height:36px;}
