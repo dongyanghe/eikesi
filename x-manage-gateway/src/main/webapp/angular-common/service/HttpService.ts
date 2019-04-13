@@ -9,7 +9,7 @@ import {DateService} from './DateService';
 import {MsgService} from './MsgService';
 import {TipService} from './TipService';
 import {UtilityService} from './UtilityService';
-import {UserService} from './UserService';
+import {AccountService} from '../../app/core/auth/account.service';
 // import {ToasterService} from 'angular2-toaster';
 /**
  * 实体类
@@ -21,7 +21,7 @@ import {Result} from '../../angular-common/entity/Result';
 import {CONFIG} from '../../data/CONFIG';
 import {CODE} from '../../data/CODE';
 import { ActivatedRoute, Router } from '@angular/router';
-import {URL as Url}  from '../../data/URL';
+// import {URL as Url} from '../../data/URL';
 //  import { GLOBAL } from '../../data/DICT';
 /**
  * http请求代理类
@@ -41,14 +41,10 @@ export class HttpService {
   constructor(public httpClient: HttpClient,
     public msgService: MsgService,
     public tipService: TipService,
-    public userService: UserService,
+    public accountService: AccountService,
 
     private router: Router) {
-    // this.msgService = new MsgService(new ToasterService());
-    // this.msgService = msgService;,
-    // public UtilityService: UtilityService
     console.log('/************************init HttpIntercept************************/');
-    // msgService
   }
 
   /**
@@ -58,54 +54,34 @@ export class HttpService {
    * @param options
    */
   requestBefore(url, options) {
-    // console.log('msgService requestBefore');
-    // this.msgService.pop({type: 'success', body: type + ' request before：' + url});
-    // let self = this;
     if (!options) {
       return;
     }
     let isUnLoading = false;
-    let len = CONFIG.unLoading.length;
-    let token = this.userService.user && this.userService.user.token ? this.userService.user.token : null;
-
-    let balance = this.userService.user ? this.userService.user.balance : null;
+    const len = CONFIG.unLoading.length;
     /*******************请求头设置***********************/
-    let headers: Headers = new Headers();
-    // if (token) {
-    //   // {'Content-Type': 'application/json'}
-    //   headers.append('token', 'Bearer ' + token);
-    // }
-    // if (type === 'post') {
-    //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    // }
+    // let headers: Headers = new Headers();
     /*******************URL设置***********************/
-    let indexInt = url.indexOf('?');
-    let timeNum = new Date().getTime();
+    const indexInt = url.indexOf('?');
+    const timeNum = new Date().getTime();
     if (indexInt < 0) {
-      url = url + '?vt=' + timeNum;
+      url = url + '?t=' + timeNum;
     } else {
       if (indexInt === (url.length - 1)) {
-        url = url + 'vt=' + timeNum;
+        url = url + 't=' + timeNum;
       } else {
-        url = url + '&vt=' + timeNum;
+        url = url + '&t=' + timeNum;
       }
     }
-    if (balance) {
-      url = url + '&balance=' + balance;
-    }
-
-
     options.body = options.body || {data: {}};
     options.body.data = options.body.data || {};
     if (typeof options.body.data !== 'string') {
       options.body.data = JSON.stringify(options.body.data);
     }
-    options.body.token = options.body.token || token;
-    options.body.op = options.body.op || null;
     // multipart/form-data
     // 排除不能显示load的请求
     for (let i = 0; i < len; i++) {
-      let unLoadingUrl = CONFIG.unLoading[i];
+      const unLoadingUrl = CONFIG.unLoading[i];
       if (url === unLoadingUrl) {
         isUnLoading = true;
         continue;
@@ -116,8 +92,7 @@ export class HttpService {
     }
     //  options.headers = headers;
     return {
-      url: url,
-      options: options
+      url, options
     };
   }
 
@@ -129,7 +104,6 @@ export class HttpService {
       let result = response.json();
       if (result.code == CONFIG.sessionDue) {
         this.router.navigate(['/login', {errorCode:  CONFIG.sessionDue}]);
-        // self.msgService.pop({type: 'error', body: CODE.againLogin});
         return true;
       }
     }
@@ -322,8 +296,8 @@ toasterUNLogin(msg) {
     if (!url) {
       return false;
     }
-    // if (this.userService.user && this.userService.user.id) {
-    //   url = url.replace(this.userService.user.url, '');
+    // if (this.accountService.userIdentity && this.accountService.userIdentity.id) {
+    //   url = url.replace(this.accountService.userIdentity.url, '');
     // }
     let u = new URL(url);
     console.log(url, CONFIG.unLoading.indexOf(u.pathname));

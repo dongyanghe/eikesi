@@ -31,7 +31,7 @@
         "quotemark": [true, "single", "avoid-escape"],
         "radix": true,
         "semicolon": [true, "always", "ignore-bound-class-methods"],
-        "triple-equals": [true, "allow-null-check"],
+        "triple-equals": [false, "allow-null-check"],
         "typedef-whitespace": [
             true,
             {

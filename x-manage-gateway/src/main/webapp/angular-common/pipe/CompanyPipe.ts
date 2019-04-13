@@ -10,15 +10,13 @@ export class CompanyPipe implements PipeTransform {
     if (!value) {
       return value;
     }
-    let companys = DICT.company;
-    for (let company of companys) {
+    const companys = DICT.company;
+    for (const company of companys) {
       if (value == company.value) {
         return company.label;
       }
     }
     return '';
-     
-     
   }
 
 }

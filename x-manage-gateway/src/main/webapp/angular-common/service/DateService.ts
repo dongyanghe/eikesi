@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 //  import { BrowserService } from '../../angular2Common/service/BrowserService';
 
 /**
- * @author chenxingwu,hedongyang
  * 分析参数类型，容错判断
  */
 @Injectable()
@@ -21,7 +20,7 @@ export class DateService {
    */
   static dateFormat(date: Date | string | number, sFormat: String = 'yyyy-MM-dd HH:mm:ss'): string {
     if (!date) {
-      return ''
+      return '';
     };
     if (typeof date === 'string') {
       //  兼容苹果系统
@@ -31,9 +30,9 @@ export class DateService {
       date = new Date(date);
     }
     if (!(date instanceof Date)) {
-      return ''
-    };
-    let time = {
+      return '';
+    }
+    const time = {
       Year: 0,
       TYear: '0',
       Month: 0,
@@ -114,18 +113,18 @@ export class DateService {
       num = 0; // 如果没有传入，默认为0
     }
     if (typeof (date) == 'string') {
-      let dateArr = date.replace(/-/g, '/');
+      const dateArr = date.replace(/-/g, '/');
       date = new Date(dateArr); // 转date对象
     } else {
       date = date.toString();
-      let dateArr = date.replace(/-/g, '/');
+      const dateArr = date.replace(/-/g, '/');
       date = new Date(dateArr);
     }
     if (typeof (date) == 'number') { // 考虑纯秒数传入情况
       date = new Date(date);
     }
     date = date.valueOf();
-    date = date + num * 24 * 60 * 60 * 1000
+    date = date + num * 24 * 60 * 60 * 1000;
     date = new Date(date);
     return date;
   }
@@ -136,12 +135,12 @@ export class DateService {
    */
   getSevenDay() {
 
-    let Arr = new Array();
-    let date = new Date()
+    const Arr = new Array();
+    const date = new Date();
     let dayAdd;
     for (let i = 0; i < 7; i++) { // 测试版的日期，后期优化
       dayAdd = this.addDate(date, i);
-      let obj = {mDd: '', label: '', date: ''};
+      const obj = {mDd: '', label: '', date: ''};
       obj.mDd = this.add_zero(dayAdd.getMonth() + 1) + '月' + this.add_zero(dayAdd.getDate()) + '日';
       obj.date = dayAdd.getFullYear() + '-' + this.add_zero(dayAdd.getMonth() + 1) + '-' + this.add_zero(dayAdd.getDate()); // 字符串类型日期
       switch (i) { // 此switch,暂时留着
