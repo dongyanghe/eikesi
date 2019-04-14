@@ -10,14 +10,14 @@ $theme-panel-bg-color: #2b3643;
     margin-right: 0px;
     z-index: 100;
     float: right;
-    position:relative;    
+    position: relative;
 
     > .toggler {
-        top:4px;
-        right:0;
-        padding:20px;
-        cursor:pointer;
-        position:absolute;
+        top: 4px;
+        right: 0;
+        padding: 20px;
+        cursor: pointer;
+        position: absolute;
         background: lighten($theme-panel-bg-color, 20%) url(#{$layout-img-path}icon-color.png) center no-repeat;
 
         @include border-radius($general-border-radius);
@@ -29,15 +29,15 @@ $theme-panel-bg-color: #2b3643;
 
     > .toggler-close {
         display: none;
-        top:4px;
-        right:0;
-        padding:20px;
+        top: 4px;
+        right: 0;
+        padding: 20px;
         z-index: 101;
-        cursor:pointer;
-        position:absolute;
+        cursor: pointer;
+        position: absolute;
         background: $theme-panel-bg-color url(#{$layout-img-path}icon-color-close.png) center no-repeat !important;
 
-        @include border-radius($general-border-radius); 
+        @include border-radius($general-border-radius);
 
         &:hover {
             background-color: darken($theme-panel-bg-color, 5%) !important;
@@ -45,68 +45,68 @@ $theme-panel-bg-color: #2b3643;
     }
 
     > .theme-options {
-        top:4px;
-        right:0;
-        display:none;
-        position:absolute;
-        z-index: 100;  
-        background:$theme-panel-bg-color;
+        top: 4px;
+        right: 0;
+        display: none;
+        position: absolute;
+        z-index: 100;
+        background: $theme-panel-bg-color;
 
         @include border-radius($general-border-radius);
-        
+
         > .theme-option {
             color: lighten($theme-panel-bg-color, 60%);
             padding: 15px;
-            border-top:1px solid lighten($theme-panel-bg-color, 5%);
+            border-top: 1px solid lighten($theme-panel-bg-color, 5%);
             margin-top: 0px;
             margin-bottom: 0px;
 
-            > span {  
-              text-transform:uppercase;
-              display: inline-block;
-              width: 145px;
-              font-size: 13px;
-              font-weight: 300;
+            > span {
+                text-transform: uppercase;
+                display: inline-block;
+                width: 145px;
+                font-size: 13px;
+                font-weight: 300;
             }
 
             > select.form-control {
-              display: inline;
-              width: 135px;
-              padding: 2px;
-              text-transform: lowercase;
+                display: inline;
+                width: 135px;
+                padding: 2px;
+                text-transform: lowercase;
             }
 
             &.theme-colors {
                 border-top: 0;
 
                 > span {
-                  display: block;
-                  width: auto;
+                    display: block;
+                    width: auto;
                 }
 
                 > ul {
-                  list-style:none;
-                  padding: 0;
-                  display: block;
-                  margin-bottom: 10px !important;
-                  margin-top: 15px;
+                    list-style: none;
+                    padding: 0;
+                    display: block;
+                    margin-bottom: 10px !important;
+                    margin-top: 15px;
 
-                  > li {
-                        width:40px;
-                        height:40px;
-                        margin:0 4px;
-                        cursor:pointer;
-                        list-style:none;
+                    > li {
+                        width: 40px;
+                        height: 40px;
+                        margin: 0 4px;
+                        cursor: pointer;
+                        list-style: none;
                         float: left;
-                        border:solid 1px #707070; 
+                        border: solid 1px #707070;
 
-                        &:first-child { 
+                        &:first-child {
                             margin-left: 0;
                         }
 
                         &:hover,
                         &.current {
-                            border:solid 2px #d64635;
+                            border: solid 2px #d64635;
                         }
 
                         /* theme colors */
@@ -119,7 +119,7 @@ $theme-panel-bg-color: #2b3643;
                         }
 
                         &.color-blue {
-                            background: #2D5F8B;       
+                            background: #2d5f8b;
                         }
 
                         &.color-grey {
@@ -127,11 +127,11 @@ $theme-panel-bg-color: #2b3643;
                         }
 
                         &.color-light {
-                            background: #F9FAFD;
+                            background: #f9fafd;
                         }
 
                         &.color-light2 {
-                            background: #F1F1F1;
+                            background: #f1f1f1;
                         }
                     }
                 }
@@ -144,22 +144,22 @@ $theme-panel-bg-color: #2b3643;
     .page-content-white &,
     .page-container-bg-solid & {
         position: absolute;
-        margin-top: 30px; 
+        margin-top: 30px;
         margin-right: 20px;
         right: 0;
 
         > .toggler1 {
-            background:#BFCAD1 url(#{$layout-img-path}icon-color.png) center no-repeat;
+            background: #bfcad1 url(#{$layout-img-path}icon-color.png) center no-repeat;
         }
     }
 
     .page-content-white.page-sidebar-reversed &,
     .page-container-bg-solid.page-sidebar-reversed & {
-        margin-right: 20px + $sidebar-width;  
+        margin-right: 20px + $sidebar-width;
     }
 
     .page-content-white.page-sidebar-reversed.page-sidebar-closed &,
     .page-container-bg-solid.page-sidebar-reversed.page-sidebar-closed & {
         margin-right: 20px + $sidebar-collapsed-width;
-    } 
+    }
 }

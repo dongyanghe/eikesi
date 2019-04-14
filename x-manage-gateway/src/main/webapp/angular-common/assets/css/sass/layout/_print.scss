@@ -1,46 +1,45 @@
 @media print {
-	body {
-    	background-color: #fff !important;
-	}
-  
-	.page-bar {
-		display: none; 
-	}
+    body {
+        background-color: #fff !important;
+    }
 
-	.page-sidebar-wrapper {
-		display: none;
-	}
+    .page-bar {
+        display: none;
+    }
 
-	.page-quick-sidebar-wrapper {
-		display: none;
-	}
+    .page-sidebar-wrapper {
+        display: none;
+    }
 
-	.theme-panel {  
-		display: none;    
-	}
+    .page-quick-sidebar-wrapper {
+        display: none;
+    }
 
-	.hidden-print {  
-		display: none;
-	}
+    .theme-panel {
+        display: none;
+    }
 
-	.page-footer {
-		display: none;
-	}
+    .hidden-print {
+        display: none;
+    }
 
-	.no-page-break {
-		page-break-after: avoid;
-	}
+    .page-footer {
+        display: none;
+    }
 
-	.page-container {
-		margin: 0px !important;
-		padding: 0px !important;
-	}
+    .no-page-break {
+        page-break-after: avoid;
+    }
 
-	.page-content {
-		padding: 0 !important;
-		min-height: 300px !important;
-		padding: 0px 20px 20px !important;
-		margin: 0 !important;
-	}
+    .page-container {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+    .page-content {
+        padding: 0 !important;
+        min-height: 300px !important;
+        padding: 0px 20px 20px !important;
+        margin: 0 !important;
+    }
 }
-

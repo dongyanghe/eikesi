@@ -13,8 +13,7 @@ export class HiddenInput extends FormControlBase<string> {
      */
     nzRows?: string;
 
-
-    constructor(key: string,value: any = '') {
+    constructor(key: string, value: any = '') {
         super('hidden', '', '', key, value);
     }
 }

@@ -11,9 +11,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 @NgModule({
     imports: [NgZorroAntdModule, NgbModule.forRoot(), InfiniteScrollModule, CookieModule.forRoot(), FontAwesomeModule],
     exports: [NgZorroAntdModule, FormsModule, CommonModule, NgbModule, NgJhipsterModule, InfiniteScrollModule, FontAwesomeModule],
-    providers: [
-        { provide: NZ_I18N, useValue: zh_CN }
-    ]
+    providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
 export class ManageGatewaySharedLibsModule {
     static forRoot() {

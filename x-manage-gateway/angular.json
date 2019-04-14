@@ -8,13 +8,13 @@
             "sourceRoot": "src/main/webapp",
             "projectType": "application",
             "architect": {
-              "builder": {
-                "builder": "@angular-devkit/build-angular:browser",
-                "options": {
-                    "assets": ["./node_modules/@ant-design/icons-angular/src/inline-svg/"],
-                    "styles": [],
-                    "scripts": []
-                 }
+                "builder": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "assets": ["./node_modules/@ant-design/icons-angular/src/inline-svg/"],
+                        "styles": [],
+                        "scripts": []
+                    }
                 }
             }
         }

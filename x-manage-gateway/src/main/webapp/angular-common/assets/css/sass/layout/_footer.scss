@@ -3,7 +3,7 @@ Page footer
 ***/
 
 .page-footer {
-    padding: 8px 20px 5px 20px; 
+    padding: 8px 20px 5px 20px;
     font-size: 13px;
     height: $page-footer-height;
 
@@ -27,7 +27,8 @@ Page footer
     }
 }
 
-@media (min-width: $screen-md-min) {  /* 992px */
+@media (min-width: $screen-md-min) {
+    /* 992px */
 
     /* Default footer */
     .page-footer {
@@ -37,11 +38,11 @@ Page footer
     /* Fixed footer */
     .page-footer-fixed {
         .page-footer {
-          position: fixed;
-          left: 0;
-          right: 0;
-          z-index: $zindex-footer-fixed;
-          bottom: 0;
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: $zindex-footer-fixed;
+            bottom: 0;
         }
     }
 
@@ -71,7 +72,7 @@ Page footer
     /* Boxed page */
     .page-boxed {
         .page-footer {
-            padding: 8px 0 5px 0; 
+            padding: 8px 0 5px 0;
         }
 
         &.page-sidebar-fixed .page-footer {
@@ -85,13 +86,13 @@ Page footer
         .page-footer {
             margin-left: 0;
             margin-right: $sidebar-width;
-            padding: 8px 20px 5px 20px; 
+            padding: 8px 20px 5px 20px;
         }
 
         &.page-footer-fixed {
             .page-footer {
                 margin-left: 0;
-                margin-right: 0; 
+                margin-right: 0;
             }
         }
 
@@ -103,9 +104,10 @@ Page footer
     }
 }
 
-@media (max-width: $screen-sm-max) { /* 991px */
+@media (max-width: $screen-sm-max) {
+    /* 991px */
 
-    /* Boxed Layout */    
+    /* Boxed Layout */
     .page-boxed {
         .page-footer {
             padding-left: 0px;
@@ -114,7 +116,8 @@ Page footer
     }
 }
 
-@media (max-width: $screen-xs-max) { /* 767px */
+@media (max-width: $screen-xs-max) {
+    /* 767px */
 
     /* Default footer & boxed footer */
     .page-footer,
@@ -138,17 +141,17 @@ Page footer
 
 .scroll-to-top {
     display: inline-block;
-    padding: 1px; 
-    text-align:center; 
-    position:fixed;
-    bottom: 10px;    
+    padding: 1px;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
     z-index: $zindex-go-to-top;
-    display:none;
+    display: none;
     right: 10px;
 
     > i {
         display: inline-block;
-        color: darken(#94A0B2, 15%);
+        color: darken(#94a0b2, 15%);
         font-size: 30px;
         @include opacity(0.6);
     }
@@ -162,16 +165,18 @@ Page footer
     }
 }
 
-@media (min-width: $screen-md-min) { /* 992px */ 
+@media (min-width: $screen-md-min) {
+    /* 992px */
     .scroll-to-top {
         right: 20px;
     }
 }
 
-@media (max-width: $screen-sm-max) { /* 991px */
+@media (max-width: $screen-sm-max) {
+    /* 991px */
     .scroll-to-top {
-        bottom: 10px;  
-        right: 10px;   
+        bottom: 10px;
+        right: 10px;
 
         > i {
             font-size: 28px;

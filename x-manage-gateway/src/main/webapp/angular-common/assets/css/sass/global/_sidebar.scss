@@ -1,19 +1,19 @@
 @charset "UTF-8";
 //Sidebar
-@import "mixins";
-@import "colors";
+@import 'mixins';
+@import 'colors';
 /*顶部导航条*/
-$navbar-bg-color:												#212b35;
-$navbar-height:												56px;
+$navbar-bg-color: #212b35;
+$navbar-height: 56px;
 
 /*侧边导航条*/
-$sidebar-width:                                                   220px !default;
-$sidebar-width-min:                                                   56px !default;
-$sidebar-height:                                                   40px !default;
-$sidebar-tab-item-padding:										15px 15px;
+$sidebar-width: 220px !default;
+$sidebar-width-min: 56px !default;
+$sidebar-height: 40px !default;
+$sidebar-tab-item-padding: 15px 15px;
 
-$sidebar-bg-color:												map-get(map-get($component-colors,blue-background),base);
-$sidebar-active-color:											#1d262f;
-$sidebar-header-color:											#2c3749;
-$sidebar-font-color:												#CCCCCC;
-$sidebar-border-color:											#343f50;
+$sidebar-bg-color: map-get(map-get($component-colors, blue-background), base);
+$sidebar-active-color: #1d262f;
+$sidebar-header-color: #2c3749;
+$sidebar-font-color: #cccccc;
+$sidebar-border-color: #343f50;

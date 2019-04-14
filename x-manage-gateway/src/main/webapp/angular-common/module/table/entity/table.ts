@@ -1,9 +1,6 @@
-
-
 export class Table {
-  controlType = 'datepicker';
-  hidden: boolean;
-  value: Date;
-  constructor() {
-    }
+    controlType = 'datepicker';
+    hidden: boolean;
+    value: Date;
+    constructor() {}
 }

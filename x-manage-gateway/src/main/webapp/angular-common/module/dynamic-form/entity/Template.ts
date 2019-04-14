@@ -1,5 +1,5 @@
-import {FormControlBase, FieldBaseOptions} from './FormControlBase';
+import { FormControlBase, FieldBaseOptions } from './FormControlBase';
 
 export class Template {
-  fields: FormControlBase<any>[] = [];
+    fields: FormControlBase<any>[] = [];
 }

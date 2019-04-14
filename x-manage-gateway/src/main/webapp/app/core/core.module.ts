@@ -4,9 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import locale from '@angular/common/locales/zh-Hans';
 @NgModule({
-    imports: [
-        HttpClientModule,
-    ],
+    imports: [HttpClientModule],
     exports: [],
     declarations: [],
     providers: [
