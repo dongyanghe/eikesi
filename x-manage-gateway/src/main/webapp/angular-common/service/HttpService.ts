@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
-  HttpClient, Response, Headers, RequestOptions, URLSearchParams, RequestOptionsArgs, RequestMethod
-} from '@angular/common/http ';
+  HttpClient, HttpResponse, HttpHeaders, HttpRequest, HttpParams
+} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs';
 import {DateService} from './DateService';
@@ -10,11 +10,6 @@ import {MsgService} from './MsgService';
 import {TipService} from './TipService';
 import {UtilityService} from './UtilityService';
 import {AccountService} from '../../app/core/auth/account.service';
-// import {ToasterService} from 'angular2-toaster';
-/**
- * 实体类
- */
-import {Result} from '../../angular-common/entity/Result';
 /**
  * 全局变量
  */
@@ -36,7 +31,7 @@ export class HttpService {
     this._isUNLoginPop = value;
   }
   // private msgService: MsgService;
-  private _isUNLoginPop: boolean = false;
+  private _isUNLoginPop = false;
 
   constructor(public httpClient: HttpClient,
     public msgService: MsgService,
@@ -60,7 +55,7 @@ export class HttpService {
     let isUnLoading = false;
     const len = CONFIG.unLoading.length;
     /*******************请求头设置***********************/
-    // let headers: Headers = new Headers();
+    // let headers: HttpHeaders = new HttpHeaders();
     /*******************URL设置***********************/
     const indexInt = url.indexOf('?');
     const timeNum = new Date().getTime();
@@ -96,12 +91,11 @@ export class HttpService {
     };
   }
 
-  requestSuccess(url, options, response: Response) {
-    // let self = this;
+  requestSuccess(url, options, response: HttpResponse<any>) {
     // nativeService.hideLoading();
     console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', response);
     if (response) {
-      let result = response.json();
+      const result = response.json();
       if (result.code == CONFIG.sessionDue) {
         this.router.navigate(['/login', {errorCode:  CONFIG.sessionDue}]);
         return true;
@@ -111,33 +105,31 @@ export class HttpService {
   }
 
   requestError(url, options, error) {
-    let self = this;
     // nativeService.hideLoading();
     console.error('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'error', error);
-    let status = error.status;
+    const status = error.status;
     if (!status || status === -1) {
-      self.msgService.pop({type: 'error', body: CODE.reqSystemError});
+      this.msgService.pop({type: 'error', body: CODE[500]});
     } else if (status === 401) {
-      let result =  error.json();
-      self.toasterUNLogin(result.submsg);
+      const result =  error.json();
+      this.toasterUNLogin(result.submsg);
     } else if (CODE[status]) {  //  如果有对应错误码提示
-      self.msgService.pop({type: 'error', body: CODE[status]});
+      this.msgService.pop({type: 'error', body: CODE[status]});
     } else {
-      self.msgService.pop({type: 'error', body: CODE.reqHttpError + status});
+      this.msgService.pop({type: 'error', body: CODE[416] + status});
     }
   }
 
-  public request(url: string, options: RequestOptionsArgs): Observable<Response> {
-    let self = this;
-    return Observable.create((observer) => {
-      if (self.isCanLaoding(url)) {
-        self.tipService.showLoading();
+  public request(url: string, options: any): Observable<HttpResponse<any>> {
+    return Observable.create((observer: any) => {
+      if (this.isCanLaoding(url)) {
+        this.tipService.showLoading();
       }
       const checkData = this.requestBefore(url, options);
       console.log('%c 请求前 %c', 'color:blue', '', 'url', checkData.url, 'options', checkData.options);
-      this.httpClient.request(checkData.url, checkData.options).subscribe((res: Response) => {
-        if (self.isCanLaoding(url)) {
-          self.tipService.hideLoading();
+      this.httpClient.request(checkData.url, checkData.options).subscribe((res: HttpResponse<any>) => {
+        if (this.isCanLaoding(url)) {
+          this.tipService.hideLoading();
         }
         if (!this.requestSuccess(url, options, res)) {
           console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
@@ -145,9 +137,9 @@ export class HttpService {
         } else {
           console.log('%c 请求异常 %c', 'color:yellow', '', 'url', url, 'options', options, 'res', res);
         }
-      }, (res: Result) => {
-        if (self.isCanLaoding(url)) {
-          self.tipService.hideLoading();
+      }, (res: any) => {
+        if (this.isCanLaoding(url)) {
+          this.tipService.hideLoading();
         }
         console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'res', res);
         this.requestError(url, options, res);
@@ -156,93 +148,96 @@ export class HttpService {
     });
   }
 
-  public get(url: string, paramMap: any = null): Observable<Response> {
+  public get(url: string, paramMap: any = null): Observable<HttpResponse<any>> {
     if (CONFIG.serviceType === 'mock') {
       // '/login?a=1'
       // '/login.json?a=1'
       // '/login'
       url = 'mock' + url;
       if (url.indexOf('?') > 0) {
-        url = UtilityService.insertFlg(url, '.json', url.indexOf('?'))
-      }else {
+        url = UtilityService.insertFlg(url, '.json', url.indexOf('?'));
+      } else {
         url += '.json';
       }
     }
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Get,
-      search: this.buildURLSearchParams(paramMap)
-    }));
+    return this.request(new HttpRequest(
+      'GET',
+      url,
+      {
+        params: this.buildURLSearchParams(paramMap)
+      }
+    ));
   }
 
-  public post(url: string, body: any = null): Observable<Response> {
+  public post(url: string, body: any = null): Observable<HttpResponse<any>> {
     if (CONFIG.serviceType === 'mock') {
       return this.get(url, body);
     }
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Post,
-      body: body,
-      headers: new Headers({
+    return this.request(url, {
+      method: 'Post',
+      body,
+      headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=UTF-8'
       })
-    }));
+    });
   }
 
-  public postFormData(url: string, paramMap: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Post,
-      search: this.buildURLSearchParams(paramMap).toString(),
-      headers: new Headers({
+  public postFormData(url: string, paramMap: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Post',
+      params: this.buildURLSearchParams(paramMap).toString(),
+      headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data; charset=UTF-8'
       })
-    }));
+    });
   }
 
-  public put(url: string, body: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Put,
-      body: body
-    }));
+  public put(url: string, body: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Put',
+      body
+    });
   }
 
-  public delete(url: string, paramMap: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Delete,
-      search: this.buildURLSearchParams(paramMap).toString()
-    }));
+  public delete(url: string, paramMap: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Delete',
+      params: this.buildURLSearchParams(paramMap).toString()
+    });
   }
 
-  public patch(url: string, body: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Patch,
-      body: body
-    }));
+  public patch(url: string, body: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Patch',
+      body
+    });
   }
 
-  public head(url: string, paramMap: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Head,
-      search: this.buildURLSearchParams(paramMap).toString()
-    }));
+  public head(url: string, paramMap: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Head',
+      params: this.buildURLSearchParams(paramMap).toString()
+    });
   }
 
-  public options(url: string, paramMap: any = null): Observable<Response> {
-    return this.request(url, new RequestOptions({
-      method: RequestMethod.Options,
-      search: this.buildURLSearchParams(paramMap).toString()
-    }));
+  public options(url: string, paramMap: any = null): Observable<HttpResponse<any>> {
+    return this.request(url, {
+      method: 'Options',
+      params: this.buildURLSearchParams(paramMap).toString()
+    };
   }
 
   /**
    * 将对象转为查询参数
    * @param paramMap
-   * @returns {URLSearchParams}
+   * @returns {HttpParams}
    */
-   buildURLSearchParams(paramMap): URLSearchParams {
-    let params = new URLSearchParams();
+   buildURLSearchParams(paramMap): HttpParams {
+    const params = new HttpParams();
     if (!paramMap) {
       return params;
     }
-    for (let key in paramMap) {
+    for (const key in paramMap) {
       if (paramMap.hasOwnProperty(key)) {
         let val = paramMap[key];
         if (val instanceof Date) {
@@ -253,8 +248,6 @@ export class HttpService {
     }
     return params;
   }
-
-
 
 /**
  * url中如果有双斜杠替换为单斜杠
@@ -270,19 +263,18 @@ replaceUrl(url) {
  * @param msg
  */
 toasterUNLogin(msg) {
-  let self = this;
-  if (!self._isUNLoginPop) {
-    self._isUNLoginPop = true;
-    self.msgService.pop(
+  if (!this._isUNLoginPop) {
+    this._isUNLoginPop = true;
+    this.msgService.pop(
       {
         type: 'info',
         timeout: 2000,
         body: msg || '',
-        onHideCallback: function () {
+        onHideCallback:  () => {
           // 跳到登录页
-          let goUrl = window.location.origin + CONFIG[CONFIG.serviceType].baseUrl + CONFIG.stateProvider.login.url;
+          const goUrl = window.location.origin + CONFIG[CONFIG.serviceType].baseUrl;
           window.location.href = goUrl;
-          self._isUNLoginPop = false;
+          this._isUNLoginPop = false;
         }
       }
     );
@@ -299,8 +291,8 @@ toasterUNLogin(msg) {
     // if (this.accountService.userIdentity && this.accountService.userIdentity.id) {
     //   url = url.replace(this.accountService.userIdentity.url, '');
     // }
-    let u = new URL(url);
-    console.log(url, CONFIG.unLoading.indexOf(u.pathname));
-    return  CONFIG.unLoading.indexOf(u.pathname.replace('/', '')) < 0
+    const laodingUrl = new URL(url);
+    console.log(url, CONFIG.unLoading.indexOf(laodingUrl.pathname));
+    return  CONFIG.unLoading.indexOf(laodingUrl.pathname.replace('/', '')) < 0;
   }
 }

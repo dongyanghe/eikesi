@@ -55,9 +55,9 @@ export class FileUploadService {
     // formData.append('orgID', upLoadFile.orgID);
     // formData.append('orgType', upLoadFile.orgType);
     // You can use any AJAX library you like
-    let httpHeaders: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'multipart/form-data;charset=UTF-8' //  application/octet-stream
-    });
+    // let httpHeaders: HttpHeaders = new HttpHeaders({
+    //   'Content-Type': 'multipart/form-data;charset=UTF-8' //  application/octet-stream
+    // });
     // {file: upLoadFile.file, reqData: reqData},
     const req = new HttpRequest('POST', url, formData, {
       // headers: httpHeaders,
