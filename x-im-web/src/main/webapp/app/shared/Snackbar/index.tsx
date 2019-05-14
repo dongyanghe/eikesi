@@ -10,6 +10,10 @@ export interface IProps {
     text: PropTypes.string.isRequired;
     close: PropTypes.func.isRequired;
   }
+
+/**
+ * 顶部消息提示
+  */
 export default class Snackbar extends Component<IProps> {
 
     renderContent() {

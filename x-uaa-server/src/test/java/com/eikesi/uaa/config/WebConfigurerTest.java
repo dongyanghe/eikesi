@@ -1,8 +1,5 @@
 package com.eikesi.uaa.config;
 
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.servlet.InstrumentedFilter;
-import com.codahale.metrics.servlets.MetricsServlet;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.undertow.Undertow;
@@ -47,8 +44,6 @@ public class WebConfigurerTest {
 
     private JHipsterProperties props;
 
-    private MetricRegistry metricRegistry;
-
     @Before
     public void setup() {
         servletContext = spy(new MockServletContext());
@@ -61,8 +56,6 @@ public class WebConfigurerTest {
         props = new JHipsterProperties();
 
         webConfigurer = new WebConfigurer(env, props);
-        metricRegistry = new MetricRegistry();
-        webConfigurer.setMetricRegistry(metricRegistry);
     }
 
     @Test
@@ -70,10 +63,6 @@ public class WebConfigurerTest {
         env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION);
         webConfigurer.onStartup(servletContext);
 
-        assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
-        assertThat(servletContext.getAttribute(MetricsServlet.METRICS_REGISTRY)).isEqualTo(metricRegistry);
-        verify(servletContext).addFilter(eq("webappMetricsFilter"), any(InstrumentedFilter.class));
-        verify(servletContext).addServlet(eq("metricsServlet"), any(MetricsServlet.class));
     }
 
     @Test
@@ -81,10 +70,6 @@ public class WebConfigurerTest {
         env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
         webConfigurer.onStartup(servletContext);
 
-        assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
-        assertThat(servletContext.getAttribute(MetricsServlet.METRICS_REGISTRY)).isEqualTo(metricRegistry);
-        verify(servletContext).addFilter(eq("webappMetricsFilter"), any(InstrumentedFilter.class));
-        verify(servletContext).addServlet(eq("metricsServlet"), any(MetricsServlet.class));
     }
 
     @Test

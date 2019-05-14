@@ -4,7 +4,7 @@
       "packageName": "com.eikesi.uaa",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "5.1.0",
+    "jhipsterVersion": "5.8.2",
     "applicationType": "uaa",
     "baseName": "uaaServer",
     "packageName": "com.eikesi.uaa",
@@ -22,23 +22,29 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "1a24723da0445d545b55d7f92c1b2f068fa3d3d7",
-    "enableTranslation": true,
+    "jwtSecretKey": "NmIwNWJkZWQ1YjIwYjRiMDJhYWIxMjQ5NGVjYTM1YzA2YmRjMjJjZjZjNmY1YjY4ODA4MTAwODU2OGE1MWM1YzZjZDZiMDNlZmI4MzE4ZDJiN2ZlMGYzYTNjYzY4YjkxNmY4ODVlOWU2ZWNiYTM4OTA3NjExMGE2YjcwZDZjY2I=",
     "testFrameworks": [
-      "gatling"
+      "gatling",
+      "cucumber"
     ],
     "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
     "otherModules": [
       {
-        "name": "generator-jhipster-nav-element",
-        "version": "2.0.2"
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
       },
       {
-        "name": "generator-jhipster-docker",
-        "version": "2.5.0"
+        "name": "generator-jhipster-spring-cloud-stream",
+        "version": "1.0.0"
       },
       {
         "name": "generator-jhipster-audit-helper",
+        "version": "1.0.3"
+      },
+      {
+        "name": "generator-jhipster-quota",
         "version": "1.0.3"
       },
       {
@@ -46,19 +52,32 @@
         "version": "1.0.1"
       },
       {
+        "name": "generator-jhipster-administration-database",
+        "version": "1.0.4"
+      },
+      {
+        "name": "generator-jhipster-database-backup",
+        "version": "1.0.7"
+      },
+      {
+        "name": "generator-jhipster-translation",
+        "version": "1.0.4"
+      },
+      {
         "name": "generator-jhipster-feign-client",
         "version": "1.0.6"
       },
       {
-        "name": "generator-jhipster-cockroachdb",
-        "version": "0.0.10"
+        "name": "generator-jhipster-aeropost",
+        "version": "1.10.0"
       },
       {
         "name": "generator-jhipster-file2url",
         "version": "0.0.0"
       }
     ],
-    "clientPackageManager": "yarn",
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
     "nativeLanguage": "zh-cn",
     "languages": [
       "zh-cn",

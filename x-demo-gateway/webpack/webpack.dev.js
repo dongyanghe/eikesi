@@ -49,27 +49,36 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         '/management',
         '/swagger-resources',
         '/v2/api-docs',
-        '/h2-console',
+        '/h2-console',        
         '/auth'
       ],
-      target: 'http://127.0.0.1:80000',
+      target: `http${options.tls ? 's' : ''}://127.0.0.1:8000`,
       secure: false,
+      changeOrigin: options.tls,
       headers: { host: 'localhost:9000' }
     }],
     watchOptions: {
       ignored: /node_modules/
     }
   },
+  stats: process.env.JHI_DISABLE_WEBPACK_LOGS ? 'none' : options.stats,
   plugins: [
-    new SimpleProgressWebpackPlugin({
-      format: options.stats === 'minimal' ? 'compact' : 'expanded'
-    }),
+    process.env.JHI_DISABLE_WEBPACK_LOGS
+      ? null
+      : new SimpleProgressWebpackPlugin({
+          format: options.stats === 'minimal' ? 'compact' : 'expanded'
+        }),
     new FriendlyErrorsWebpackPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 9000,
       proxy: {
         target: 'http://localhost:9060'
+      },
+      socket: {
+        clients: {
+          heartbeatTimeout: 60000
+        }
       }
     }, {
       reload: false
@@ -83,5 +92,5 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
       title: 'JHipster',
       contentImage: path.join(__dirname, 'logo-jhipster.png')
     })
-  ]
+  ].filter(Boolean)
 });
