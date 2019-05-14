@@ -1,0 +1,11 @@
+<div>
+    <!-- <ng-container *ngFor="let data of dateList"> -->
+    <!-- <dp-date-picker #dayPicker mode="daytime"></dp-date-picker>
+    <dp-date-picker #dayPicker1 mode="daytime"></dp-date-picker> -->
+    <!-- </ng-container> -->
+
+    <nz-datepicker style="width: 40%;"  [ngModel]="_startDate" (ngModelChange)="_startDate=$event;_startValueChange()" [nzDisabledDate]="_disabledStartDate"
+        [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'Start date'"></nz-datepicker>
+    <nz-datepicker style="width: 40%;" [ngModel]="_endDate" (ngModelChange)="_endDate=$event;_endValueChange()" [nzDisabledDate]="_disabledEndDate"
+        [nzShowTime]="_endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'End date'"></nz-datepicker>
+</div>

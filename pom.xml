@@ -7,17 +7,18 @@
     <packaging>pom</packaging>
     <modules>
         <module>jhipster-registry</module>
+        <module>uaa-server</module>
         <!--manage-->
-        <module>x-manage-gateway</module>
-        <module>x-connect-center</module>
+        <module>manage-gateway</module>
+        <module>im-gateway</module>
+        <module>customer-gateway</module>
         <!--im-->
-        <module>x-im-desktop-gateway</module>
-        <module>x-im-service</module>
-        <module>x-customer-service</module>
+        <module>im-message-server</module>
+        <module>im-customer-server</module>
         <!--demo-->
-        <module>x-demo-hybrid-gateway</module>
-        <module>x-demo-abc-service</module>
-        <module>x-demo-de-service</module>
+        <module>demo-gateway</module>
+        <module>demo-abc-service</module>
+        <module>demo-de-service</module>
         <!--mpush-->
         <module>mp-alloc</module>
         <module>mp-mpns</module>

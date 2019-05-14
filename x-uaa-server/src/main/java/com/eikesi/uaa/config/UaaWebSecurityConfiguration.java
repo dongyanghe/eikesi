@@ -1,5 +1,6 @@
 package com.eikesi.uaa.config;
 
+import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,10 +31,15 @@ public class UaaWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void init() throws Exception {
-        authenticationManagerBuilder
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+        try {
+            authenticationManagerBuilder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+        } catch (Exception e) {
+            throw new BeanInitializationException("Security configuration failed", e);
+        }
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,7 +57,6 @@ public class UaaWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/app/**/*.{js,html}")
-            .antMatchers("/bower_components/**")
             .antMatchers("/i18n/**")
             .antMatchers("/content/**")
             .antMatchers("/swagger-ui/index.html")

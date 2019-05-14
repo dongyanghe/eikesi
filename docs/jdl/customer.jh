@@ -16,6 +16,8 @@ DEFAULT_MAX_PHONE = 18
  * @version 2018-05-14
  */
 entity CustomerRelation {
+    // userIdMain String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    // userIdFrom String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
     /** 客户名备注,默认为客户昵称 */
     remarkName String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
     /** 拼音首字母 */
@@ -33,13 +35,18 @@ entity CustomerRelation {
  * @version 2018-05-18
  */
 entity FlockRelation {
+    // id String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    // fromId String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
     /** 群组备注,默认为群组昵称 */
     remarkName String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
     /** 拼音首字母 */
-    py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
+    // py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
     /** 拼音全拼 */
-    pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
-    /** 关系类型 {0: '黑名单', 1: '成员'} */
+    // pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
+    /**
+     * 关系类型 {00: '黑名单', 1: '成员'} 
+     * @defect:关系是相对的，这里没表达出来？
+     */
     type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES),  //
     /** 关系创建时间 */
     createdDate Instant required
@@ -49,7 +56,7 @@ entity FlockRelation {
  * @author hedongyang
  * @version 2018-05-14
  */
-entity CustomerFlock {
+entity Flock {
     /** 群组名称 */
     name String required minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),
     /** 拼音首字母 */
@@ -109,10 +116,10 @@ relationship OneToMany {
     /** 一个客户关联多个群组关系 */
   Customer{flockRelation(remarkName)} to FlockRelation{customer(firstName)},
     /** 一个群组关联多个群组关系 */
-  CustomerFlock{flockRelation(remarkName)} to FlockRelation{customerFlock(name)}
+  Flock{flockRelation(remarkName)} to FlockRelation{customerFlock(name)}
 }
 
-paginate Customer, CustomerFlock with pagination
+paginate Customer, Flock with pagination
 //	dto * with mapstruct
 //  service * with serviceClass
 //  skipServer *

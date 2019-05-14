@@ -130,3 +130,4 @@ Desktop.ini
 .vs/
 *.history/*
 */.history/*
+docs/jdl/*.png

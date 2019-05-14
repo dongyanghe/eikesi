@@ -1,10 +1,12 @@
 package com.eikesi.manage.security.oauth2;
 
+import com.eikesi.manage.web.rest.errors.InvalidPasswordException;
 import io.github.jhipster.security.PersistentTokenCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -70,9 +72,9 @@ public class OAuth2AuthenticationService {
                 log.debug("successfully authenticated user {}", params.get("username"));
             }
             return ResponseEntity.ok(accessToken);
-        } catch (Exception ex) {
+        } catch (HttpClientErrorException ex) {
             log.error("failed to get OAuth2 tokens from UAA", ex);
-            throw ex;
+            throw new InvalidPasswordException();
         }
     }
 

@@ -1,6 +1,5 @@
 package com.eikesi.manage.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.eikesi.manage.security.oauth2.OAuth2AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +44,6 @@ public class AuthResource {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType
         .APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
     public ResponseEntity<OAuth2AccessToken> authenticate(HttpServletRequest request, HttpServletResponse response, @RequestBody
         Map<String, String> params) {
         return authenticationService.authenticate(request, response, params);
@@ -59,7 +57,6 @@ public class AuthResource {
      * @return an empty response entity.
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    @Timed
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         log.info("logging out user {}", SecurityContextHolder.getContext().getAuthentication().getName());
         authenticationService.logout(request, response);
