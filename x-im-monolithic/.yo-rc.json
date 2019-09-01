@@ -4,7 +4,7 @@
       "packageName": "com.eikesi.im",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "6.1.1",
+    "jhipsterVersion": "6.2.0",
     "applicationType": "monolith",
     "baseName": "imMonolithic",
     "packageName": "com.eikesi.im",
@@ -67,6 +67,7 @@
       "zh-cn",
       "zh-tw",
       "en"
-    ]
+    ],
+    "blueprints": []
   }
 }
