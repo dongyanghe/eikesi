@@ -1,6 +1,7 @@
 package com.eikesi.im.web.rest;
 
 import com.eikesi.im.ImMonolithicApp;
+import com.eikesi.im.config.TestSecurityConfiguration;
 import com.eikesi.im.service.ImMonolithicKafkaProducer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @EmbeddedKafka
-@SpringBootTest(classes = ImMonolithicApp.class)
+@SpringBootTest(classes = {ImMonolithicApp.class, TestSecurityConfiguration.class})
 public class ImMonolithicKafkaResourceIT {
 
     @Autowired
