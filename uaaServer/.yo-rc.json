@@ -1,0 +1,73 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.eikesi.uaa",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "6.2.0",
+    "applicationType": "uaa",
+    "baseName": "uaaServer",
+    "packageName": "com.eikesi.uaa",
+    "packageFolder": "com/eikesi/uaa",
+    "serverPort": "9999",
+    "authenticationType": "uaa",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NGQ3OWM1YmFjZmU2YjI4NjkwYjgwNjQ3YTk5NTI3ODc1NTdiOTFkY2UyNjRmOTFiOWFlMTI0ODRkMzFkMmYxNGY3Nzg3YmZkZDg2YzM0NGZkMmRjZmJmNzQ2NDYxODI4ZGU4ZmJiM2JlMTc5OWI4OTIxYmIwMmM0Y2QxOWY5NGE=",
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-docker",
+        "version": "2.5.0"
+      },
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
+      },
+      {
+        "name": "generator-jhipster-spring-cloud-stream",
+        "version": "1.0.0"
+      },
+      {
+        "name": "generator-jhipster-audit-helper",
+        "version": "1.0.3"
+      },
+      {
+        "name": "generator-jhipster-uaa-security-authority",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-translation",
+        "version": "1.0.4"
+      },
+      {
+        "name": "generator-jhipster-feign-client",
+        "version": "1.0.6"
+      }
+    ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "zh-tw",
+      "en"
+    ],
+    "blueprints": [],
+    "skipClient": true
+  }
+}
