@@ -1,0 +1,36 @@
+
+{
+    "imWebGatewayApp": {
+        "historyMessage" : {
+            "home": {
+                "title": "History Messages",
+                "createLabel": "Create a new History Message",
+                "createOrEditLabel": "Create or edit a History Message",
+                "search": "Search for History Message"
+            },
+            "created": "A new History Message is created with identifier {{ param }}",
+            "updated": "A History Message is updated with identifier {{ param }}",
+            "deleted": "A History Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete History Message {{ id }}?"
+            },
+            "detail": {
+                "title": "History Message"
+            },
+            "content": "Content",
+            "status": "Status",
+            "createdDate": "Created Date",
+            "createdId": "Created Id",
+            "targetDate": "Target Date",
+            "targetId": "Target Id",
+            "help": {
+                "content": "消息内容",
+                "status": "消息状态,历史消息不能有未读 {0: &#39;未读&#39;, 1: &#39;已读&#39;, 2: &#39;违规&#39;}",
+                "createdDate": "消息创建时间",
+                "createdId": "发消息着id",
+                "targetDate": "接收消息时间",
+                "targetId": "接收消息着id"
+            }
+        }
+    }
+}

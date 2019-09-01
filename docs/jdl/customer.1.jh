@@ -1,0 +1,210 @@
+DEFAULT_MIN_NAME = 2
+DEFAULT_MAX_NAME = 14
+DEFAULT_MIN_BYTES = 1
+DEFAULT_MAX_BYTES = 2
+DEFAULT_MIN_TEXT = 1
+DEFAULT_MAX_TEXT = 24
+DEFAULT_MIN = 1
+DEFAULT_MAX = 255
+DEFAULT_MAX_SM = 50
+DEFAULT_MIN_PHONE = 6
+DEFAULT_MAX_PHONE = 18
+DEFAULT_MIN_NAME = 2
+DEFAULT_MAX_NAME = 14
+DEFAULT_MIN_BYTES = 1
+DEFAULT_MAX_BYTES = 2
+DEFAULT_MIN_TEXT = 1
+DEFAULT_MAX_TEXT = 24
+DEFAULT_MIN = 1
+DEFAULT_MAX = 255
+
+
+
+/**
+ * 用户历史消息
+ * 按天从CurrentMessage获取存储,定期清除 
+ * @wait [2018-05-15 21:01:51]需改为NoSql存储
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity HistoryMessage {
+    /** 消息内容 */
+    content String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 消息状态,历史消息不能有未读 {0: '未读', 1: '已读', 2: '违规'} */
+    status String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //  
+    /** 消息创建时间 */
+    createdDate Instant required ,
+    /** 发消息着id */
+    createdId Long required,
+    /** 接收消息时间 */
+    targetDate Instant required ,
+    /** 接收消息着id */
+    targetId Long required
+}
+/**
+ * 用户当天流通的消息
+ * @wait 当当日无未读消息时转入HistoryMessage
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity CurrentMessage {
+    /** 消息内容 */
+    content String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 消息状态 {0: '未读', 1: '已读', 2: '违规'} */
+    status String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //  
+    /** 数据类型 {0: '文本消息 + 表情 + 图片', 1: '纯表情', 2: '图片', 3: '文件'} */
+    type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES) ,  //
+    /** 消息创建时间 */
+    createdDate Instant required ,
+    /** 发消息着id */
+    createdId Long required,
+    /** 接收消息时间 */
+    targetDate Instant required ,
+    /** 接收消息着id */
+    targetId Long required
+}
+/**
+ * 用户对话
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity Dialogue {
+    /** 对话创建时间 */
+    createdDate Instant required ,
+    /** 对话所属用户id */
+    createdId Long required,
+    /** 会话目标id（可能是用户,可能是群组） */
+    targetId Long required,
+    /** 目标类型 {0: '用户', 1: '群组'} */
+    targetType String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES)  //  
+}
+relationship OneToMany {
+    /** 一个对话包涵多条当日流通消息 */
+  Dialogue{currentMessage(createdDate)} to CurrentMessage{dialogue(targetId)}
+}
+
+
+skipServer *
+//  skipClient *
+paginate HistoryMessage with pagination
+dto * with mapstruct
+service * with serviceClass
+
+// microservice DemoA with demoAbcService
+// microservice DemoB with demoAbcService
+// microservice DemoC with demoAbcService
+// microservice DemoD with demoDeService
+// microservice * with demoDeService except DemoA, DemoB, DemoC, UserFlock, UserRelation
+/**
+ * 客户关系（客户对多个关系，每个关系又对一个目标客户）
+ * 客户关系需两个关联客户各有一份
+ * @author hedongyang
+ * @version 2018-05-14
+ */
+entity CustomerRelation {
+    /** 客户名备注,默认为客户昵称 */
+    remarkName String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 拼音首字母 */
+    py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
+    /** 拼音全拼 */
+    pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
+    /** 关系类型 {0: '黑名单', 1: '好友'} */
+    type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES),  //
+    /** 关系创建时间 */
+    createdDate Instant required
+}
+/**
+ * 群组关系(多对多)
+ * @author hedongyang
+ * @version 2018-05-18
+ */
+entity FlockRelation {
+    /** 群组备注,默认为群组昵称 */
+    remarkName String minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),    //  
+    /** 拼音首字母 */
+    py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
+    /** 拼音全拼 */
+    pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
+    /** 关系类型 {0: '黑名单', 1: '成员'} */
+    type String required minlength(DEFAULT_MIN_BYTES) maxlength(DEFAULT_MAX_BYTES),  //
+    /** 关系创建时间 */
+    createdDate Instant required
+}
+/**
+ * 群组
+ * @author hedongyang
+ * @version 2018-05-14
+ */
+entity CustomerFlock {
+    /** 群组名称 */
+    name String required minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),
+    /** 拼音首字母 */
+    py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
+    /** 拼音全拼 */
+    pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
+    /** 头像 */
+    imageUrl String required maxlength(DEFAULT_MAX),
+    /** 群组创建时间 */
+    createdDate Instant required
+}
+/**
+ * 客戶
+ * @author hedongyang
+ * @version 2018-05-15
+ */
+entity Customer {
+    /** 手机号 */
+    mobile String required minlength(DEFAULT_MIN_PHONE) maxlength(DEFAULT_MAX_PHONE),
+    /** 昵称 */
+    firstName String required minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),
+    /** 姓名 */
+    lastName String required minlength(DEFAULT_MIN_NAME) maxlength(DEFAULT_MAX_NAME),
+    /** 拼音首字母 */
+    py String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX), 
+    /** 拼音全拼 */
+    pinYin String required minlength(DEFAULT_MIN) maxlength(DEFAULT_MAX),
+    /** hash密码 */
+    passwordHash String required minlength(DEFAULT_MIN) maxlength(60),
+    /** 邮箱 */
+    email String  minlength(DEFAULT_MIN) maxlength(100),
+    /** 头像 */
+    imageUrl String  minlength(DEFAULT_MIN) maxlength(100),
+    /** 状态 {0: '不可用', 1: '可用'} */
+    activated Boolean required,
+    /** 语言key */
+    langKey String required minlength(DEFAULT_MIN) maxlength(6),
+    /** 注册key */
+    activationKey String required minlength(DEFAULT_MIN) maxlength(20),
+    /** 重置key */
+    resetKey String required minlength(DEFAULT_MIN) maxlength(20),
+    /** 重置时间 */
+    resetDate Instant required,
+    /** 后台创建则关联后台账号login,自己注册为空 */
+    createdBy String  minlength(DEFAULT_MIN) maxlength(50),
+    /** 创建时间 */
+    createdDate Instant required
+}
+
+//  relationship OneToOne {
+    /** 一个客户关系关联一个客户 */
+//    CustomerRelation{customer(firstName)} to Customer{customerRelation(remarkName)}
+//  }
+relationship OneToMany {
+    /** 一个客户关联多个客户关系 */
+  Customer{customerRelation(remarkName)} to CustomerRelation{customer(firstName)},
+    /** 一个客户关联多个群组关系 */
+  Customer{flockRelation(remarkName)} to FlockRelation{customer(firstName)},
+    /** 一个群组关联多个群组关系 */
+  CustomerFlock{flockRelation(remarkName)} to FlockRelation{customerFlock(name)}
+}
+
+paginate Customer, CustomerFlock with pagination
+dto * with mapstruct
+service * with serviceClass
+skipServer *
+//  skipClient *
+// microservice DemoA with demoAbcService
+// microservice DemoB with demoAbcService
+// microservice DemoC with demoAbcService
+// microservice DemoD with demoDeService
+// microservice * with demoDeService except DemoA, DemoB, DemoC, CustomerFlock, Relation
