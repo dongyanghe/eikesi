@@ -4,7 +4,7 @@
       "packageName": "com.eikesi.manage",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "6.2.0",
+    "jhipsterVersion": "6.3.0",
     "applicationType": "monolith",
     "baseName": "manageMonolithic",
     "packageName": "com.eikesi.manage",
@@ -18,16 +18,20 @@
     "prodDatabaseType": "mysql",
     "searchEngine": false,
     "messageBroker": false,
-    "serviceDiscoveryType": "eureka",
+    "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "ZmZmN2NlNmExZWI5MGM2MTE4YjhkMWY3YTNjYjA2NWQ3ODNiMTY2ZjVkZDhkN2E1N2FkYTY5ODAzMzgwZjFlZDEwNjNlNDYxYTcwZjNkNTc3ZDM3MjU5OGYyODI4N2I4ZGM1YjYzZWRkMmM2NmEwODQ0OTVmYTk0ODY1ZGQ5ZTU=",
+    "jwtSecretKey": "ZjY1NmQyZmUyMjA3MDYyZDkwZjI0ZjFiNmE0ZTlhZThiNGVmM2VlMTYzYWExMGEyNTY1ZjlhY2Q1YTRmNzg3ZjM1OGU1YTdkN2E2ZDA2ZmI1NzE0YzY1ZGY5MDQzMDNiNzgwNjU5Y2JlYTk1NTg0ZTFjZTlmMzQyYTk0NDY1MjY=",
     "useSass": true,
     "clientPackageManager": "npm",
     "clientFramework": "angularX",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "testFrameworks": [
+      "gatling",
+      "cucumber",
+      "protractor"
+    ],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
@@ -55,7 +59,12 @@
     ],
     "enableTranslation": true,
     "nativeLanguage": "zh-cn",
-    "languages": ["zh-cn", "zh-tw", "en"],
-    "blueprints": []
+    "languages": [
+      "zh-cn",
+      "zh-tw",
+      "en"
+    ],
+    "blueprints": [],
+    "embeddableLaunchScript": false
   }
 }

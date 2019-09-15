@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
@@ -18,7 +17,6 @@ import static io.github.jhipster.config.logging.LoggingUtils.*;
  * Configures the console and Logstash log appenders from the app properties
  */
 @Configuration
-@RefreshScope
 public class LoggingConfiguration {
 
     public LoggingConfiguration(@Value("${spring.application.name}") String appName,

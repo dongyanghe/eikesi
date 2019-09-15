@@ -1,12 +1,11 @@
 version: '2'
 services:
   managemonolithic-mysql:
-    image: mysql:8.0.16
+    image: mysql:8.0.17
     # volumes:
     #     - ~/volumes/jhipster/manageMonolithic/mysql/:/var/lib/mysql/
     environment:
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=managemonolithic
     ports:

@@ -19,13 +19,6 @@ logging:
     com.eikesi.manage: INFO
     io.github.jhipster: INFO
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
 management:
   metrics:
     export:
@@ -42,7 +35,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/manageMonolithic?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: root
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -71,15 +64,6 @@ spring:
     password:
   thymeleaf:
     cache: true
-  sleuth:
-    sampler:
-      probability: 1 # report 100% of traces
-  zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
-    base-url: http://localhost:9411
-    enabled: false
-    locator:
-      discovery:
-        enabled: true
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
@@ -125,7 +109,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: ZmZmN2NlNmExZWI5MGM2MTE4YjhkMWY3YTNjYjA2NWQ3ODNiMTY2ZjVkZDhkN2E1N2FkYTY5ODAzMzgwZjFlZDEwNjNlNDYxYTcwZjNkNTc3ZDM3MjU5OGYyODI4N2I4ZGM1YjYzZWRkMmM2NmEwODQ0OTVmYTk0ODY1ZGQ5ZTU=
+        base64-secret: ZjY1NmQyZmUyMjA3MDYyZDkwZjI0ZjFiNmE0ZTlhZThiNGVmM2VlMTYzYWExMGEyNTY1ZjlhY2Q1YTRmNzg3ZjM1OGU1YTdkN2E2ZDA2ZmI1NzE0YzY1ZGY5MDQzMDNiNzgwNjU5Y2JlYTk1NTg0ZTFjZTlmMzQyYTk0NDY1MjY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
@@ -142,6 +126,9 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
+  audit-events:
+    retention-period: 30 # Number of days before audit events are deleted.
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

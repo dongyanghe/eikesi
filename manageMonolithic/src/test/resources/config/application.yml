@@ -13,13 +13,6 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-  client:
-    enabled: false
-  instance:
-    appname: manageMonolithic
-    instanceId: manageMonolithic:${spring.application.instance-id:${random.value}}
-
 spring:
   application:
     name: manageMonolithic
@@ -90,9 +83,8 @@ jhipster:
   logging:
     # To test json console appender
     use-json-format: true # By default, logs are in Json format
-    # To test logstash appender
     logstash:
-      enabled: true
+      enabled: false
       host: localhost
       port: 5000
       queue-size: 512
@@ -103,7 +95,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ZmZmN2NlNmExZWI5MGM2MTE4YjhkMWY3YTNjYjA2NWQ3ODNiMTY2ZjVkZDhkN2E1N2FkYTY5ODAzMzgwZjFlZDEwNjNlNDYxYTcwZjNkNTc3ZDM3MjU5OGYyODI4N2I4ZGM1YjYzZWRkMmM2NmEwODQ0OTVmYTk0ODY1ZGQ5ZTU=
+        base64-secret: ZjY1NmQyZmUyMjA3MDYyZDkwZjI0ZjFiNmE0ZTlhZThiNGVmM2VlMTYzYWExMGEyNTY1ZjlhY2Q1YTRmNzg3ZjM1OGU1YTdkN2E2ZDA2ZmI1NzE0YzY1ZGY5MDQzMDNiNzgwNjU5Y2JlYTk1NTg0ZTFjZTlmMzQyYTk0NDY1MjY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:
