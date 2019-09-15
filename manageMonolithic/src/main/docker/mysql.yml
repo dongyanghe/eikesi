@@ -6,7 +6,8 @@ services:
     #     - ~/volumes/jhipster/manageMonolithic/mysql/:/var/lib/mysql/
     environment:
       - MYSQL_USER=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_PASSWORD=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=no
       - MYSQL_DATABASE=managemonolithic
     ports:
       - 3306:3306
