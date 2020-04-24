@@ -1,15 +1,15 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.eikesi.gateway",
+      "packageName": "com.eikesi.abcd",
       "nativeLanguage": "zh-cn"
     },
     "jhipsterVersion": "6.2.0",
-    "applicationType": "gateway",
-    "baseName": "gateway",
-    "packageName": "com.eikesi.gateway",
-    "packageFolder": "com/eikesi/gateway",
-    "serverPort": "8080",
+    "applicationType": "microservice",
+    "baseName": "abcd",
+    "packageName": "com.eikesi.abcd",
+    "packageFolder": "com/eikesi/abcd",
+    "serverPort": "6000",
     "authenticationType": "uaa",
     "uaaBaseName": "uaaServer",
     "cacheProvider": "hazelcast",
@@ -23,16 +23,10 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "NmZhMzhmMTZjYWE2MzgzNmE2ZTU4NWI3YjQ4MjgxNDM1NWMzZjQ3YmU4Mjc1ZDU3ODJkNDFjNDQzNThmZGM3YWE2NDg3YWE4MzU5MzlkNDY4ZWJkNTZjOGY4ZTFmYTgzN2FjMTY5YjlmMTFmNjNhYjc0MmU2MmVhMDdkNGI4NTk=",
-    "useSass": true,
-    "clientPackageManager": "npm",
-    "clientFramework": "angularX",
-    "clientTheme": "flatly",
-    "clientThemeVariant": "light",
+    "jwtSecretKey": "OTk0MzM3M2RkOWFkZjdiMzNiYzYwYzUzZWZmN2MzYzMwOGY2NTg5ZmFjZmY3OTA4MDI0N2EzY2Y2MTU5ZjkyNDU3M2RmODIzNzk2ZjIxMmFmMDY2YmU5ZDU5MDFjYmE0Y2Q5ZTdiNTEyMWM1NjY1MDlmNjk5OGYwZjUyYzQ3YTU=",
     "testFrameworks": [
       "gatling",
-      "cucumber",
-      "protractor"
+      "cucumber"
     ],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
@@ -56,12 +50,15 @@
       }
     ],
     "enableTranslation": true,
+    "clientPackageManager": "npm",
     "nativeLanguage": "zh-cn",
     "languages": [
       "zh-cn",
       "zh-tw",
       "en"
     ],
-    "blueprints": []
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
   }
 }

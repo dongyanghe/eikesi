@@ -99,9 +99,9 @@ JHipster注册表运行后，您可以在前端页面的Configuration > Cloud Co
 注册中心
 #### x-gateway（系统网关）：
     服务端口：8000
-#### x-demoA-server(A示例服务)：
+#### x-abcd-server(A示例服务)：
     服务端口：6000
-#### x-demoO-server(O示例服务)：
+#### x-opqr-server(O示例服务)：
     服务端口：6010
 
 ### 前端系统划分
