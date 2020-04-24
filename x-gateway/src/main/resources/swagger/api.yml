@@ -1,0 +1,22 @@
+# API-first development with OpenAPI
+# This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
+openapi: '3.0.1'
+info:
+  title: 'gateway'
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080
+    description: Development server
+  - url: https://localhost:8080
+    description: Development server with TLS Profile
+paths: {}
+
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      description: JWT Authentication
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - jwt: []
