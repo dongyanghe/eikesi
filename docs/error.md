@@ -38,6 +38,10 @@ registry=https://registry.npm.taobao.org
     <property name="dynamic.classpath" value="true" />
   </component>
 ```
+## mvnw命令报zip（windows系统）
+Exception in thread "main" java.util.zip.ZipException: zip END header not found
+建议把maven改为本地的而非idea的，仓库不放在C盘
+[Spring Cloud Netflix（rest、feign、euraka）](https://www.cnblogs.com/xyyou/p/11704055.html)
 ### 
 # git错误
 ## soucetree无法提交本地仓库——pre-commit hook failed (add --no-verify to bypass)：
