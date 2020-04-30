@@ -18,7 +18,7 @@
     "expose-loader": "^0.7.5",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-withimg-loader": "^0.1.16",
-    "jquery": "1.9.1",
+    "jquery": "3.5.0",
     "lodash": "4.17.11",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0"
